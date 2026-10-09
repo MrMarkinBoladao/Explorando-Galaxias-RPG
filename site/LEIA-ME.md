@@ -36,6 +36,35 @@ mesa**. Para pôr um jogador no grupo, peça o `.json` da ficha dele e use **Imp
 - **Pela internet:** o GitHub publica o site sozinho a cada envio para a `main` (`.github/workflows/site.yml`), em `https://mrmarkinboladao.github.io/Explorando-Galaxias-RPG/`.
 - **No computador:** abra `site/index.html` no navegador. Funciona sem internet.
 
+## Backup: como não perder as fichas
+
+Tudo fica salvo **no navegador** (`localStorage`), que é apagado se você limpar os dados do site.
+Então:
+
+- **Mais → Exportar tudo** gera um arquivo `.json` com **todas as fichas e a mesa do Mestre**.
+  É o backup da mesa inteira. **Mais → Restaurar um backup** devolve tudo.
+- **Mais → Exportar esta ficha** gera o `.json` de um personagem só — é o arquivo que o jogador
+  manda para o Mestre pôr no grupo.
+- Para ver uma versão nova do site, **nunca** limpe os dados do site: isso apaga as fichas. Use
+  `Ctrl+Shift+R` (`Cmd+Shift+R` no Mac), que atualiza o site e **não** mexe no que está salvo.
+
+## Atualizações sem limpar o navegador
+
+Um site estático fica guardado no navegador e no CDN do GitHub, e isso fazia uma versão nova
+demorar a aparecer — ou aparecer pela metade, misturando arquivo novo com arquivo velho. Três
+peças resolvem isso, e `gerar_site.py` cuida das três:
+
+1. **Selo nos endereços.** O `index.html` carrega tudo com `?v=<selo>`, e o selo é o hash do
+   conteúdo desses arquivos. Versão nova = endereço novo, então o navegador é obrigado a buscar
+   de novo, e nunca mistura versões.
+2. **A casca não se guarda.** O `index.html` vai com `Cache-Control: no-cache` nas metatags.
+3. **`versao.json` + aviso.** O site lê esse arquivo direto do servidor (sem cache). Se o selo de
+   lá for diferente do que está rodando, aparece uma faixa no topo com **Atualizar agora** — que
+   rebusca tudo e recarrega **sem tocar no que está salvo**.
+
+Se algum dia o navegador servir um `dados/` velho com código novo, o site avisa na tela em vez de
+quebrar, com o mesmo botão de atualizar.
+
 ## Quando o livro mudar
 
 Os textos e as tabelas saem de `livro-v1.0/`. Depois de mudar um capítulo:
@@ -44,7 +73,11 @@ Os textos e as tabelas saem de `livro-v1.0/`. Depois de mudar um capítulo:
 python site/gerar_site.py
 ```
 
-Isso refaz `site/dados/livro.js` e `site/dados/catalogo.js`. No GitHub não precisa: o site publicado roda o script sozinho.
+Isso refaz `site/dados/livro.js` e `site/dados/catalogo.js`, e atualiza o selo de versão no
+`index.html` e no `versao.json`. No GitHub não precisa: o site publicado roda o script sozinho.
+
+Rode também depois de mexer em qualquer arquivo de `js/` ou no `estilo.css` — é o que troca o selo
+e faz a atualização chegar nos navegadores.
 
 Os **números das fórmulas** (PV, Defesa, dano, tetos...) moram em `site/js/motor.js`, que é a tradução de `build/oraculo_ficha.py` para JavaScript. Se uma regra numérica mudar, mude nos dois.
 
@@ -63,4 +96,5 @@ Os **números das fórmulas** (PV, Defesa, dano, tetos...) moram em `site/js/mot
 | `js/regras.js` | A aba Regras (pesquisa e leitura) |
 | `js/app.js` | Rolador de dados, avisos e navegação |
 | `js/vendor/marked.umd.js` | Biblioteca que transforma o texto do livro em página (licença MIT) |
-| `dados/*.js`, `img/` | Gerados por `gerar_site.py`. Não edite à mão |
+| `dados/*.js`, `img/`, `versao.json` | Gerados por `gerar_site.py`. Não edite à mão |
+| `index.html` | A casca. O `?v=<selo>` dos endereços é posto por `gerar_site.py` — rode o script depois de mexer em qualquer `.js` ou no `.css` |

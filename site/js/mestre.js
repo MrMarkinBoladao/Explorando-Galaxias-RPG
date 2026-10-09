@@ -909,6 +909,8 @@
 
   A["importar-mesa"] = () => { el("arquivo-mesa").click(); return false; };
   A["importar-ficha"] = () => { el("arquivo-ficha-mestre").click(); return false; };
+  A["exportar-tudo"] = () => { EG.exportarTudo(); return false; };
+  A["importar-tudo"] = () => { el("arquivo-backup").click(); return false; };
 
   A["zerar-mesa"] = () => {
     if (!confirm("Apagar a mesa do Mestre deste navegador? Campanha, inimigos, encontros e tesouro se " +

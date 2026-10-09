@@ -6,11 +6,20 @@
   <title>Explorando Galáxias — Ficha e Regras</title>
   <meta name="description" content="Ficha de personagem e livro de consulta de Explorando Galáxias, o RPG de mesa no universo de Honkai: Star Rail.">
   <meta name="theme-color" content="#0b1020">
+  <!-- Esta página é só a casca: ela precisa vir sempre do servidor, nunca do cache, senão
+       uma atualização do site não aparece até o cache vencer. Os arquivos de verdade levam
+       ?v=<selo> no endereço (posto por site/gerar_site.py), então cada versão nova é um
+       endereço novo e o navegador nunca mistura arquivo novo com arquivo velho. -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2l3.5 9.5L29 16l-9.5 3.5L16 30l-3.5-10.5L3 16l9.5-4.5z' fill='%23e6c36a'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="estilo.css">
+  <link rel="stylesheet" href="estilo.css?v=8ce89bf85926">
+  <script>window.EG_VERSAO = "8ce89bf85926";</script>
 </head>
 <body>
   <a class="pular" href="#app">Pular para o conteúdo</a>
+  <div id="aviso-versao" hidden></div>
   <header class="topo">
     <div class="marca-site">
       <svg class="estrela" aria-hidden="true" viewBox="0 0 32 32" width="28" height="28"><path d="M16 2l3.5 9.5L29 16l-9.5 3.5L16 30l-3.5-10.5L3 16l9.5-4.5z" fill="currentColor"/></svg>
@@ -38,20 +47,21 @@
 
   <footer class="rodape">
     Obra de fã sem fins comerciais, por MC Filhos. Honkai: Star Rail pertence aos seus detentores.
-    As fichas ficam salvas só neste navegador: use <b>Mais &gt; Exportar</b> para guardar uma cópia.
+    As fichas ficam salvas só neste navegador: use <b>Mais &gt; Exportar tudo</b> para guardar uma cópia.
+    <span id="selo-versao" class="suave"></span>
   </footer>
 
-  <script src="js/vendor/marked.umd.js"></script>
-  <script src="dados/catalogo.js"></script>
-  <script src="dados/livro.js"></script>
-  <script src="js/motor.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/regras.js"></script>
-  <script src="js/ficha-base.js"></script>
-  <script src="js/ficha-editar.js"></script>
-  <script src="js/ficha-jogar.js"></script>
-  <script src="js/mestre-base.js"></script>
-  <script src="js/mestre.js"></script>
-  <script src="js/mestre-escudo.js"></script>
+  <script src="js/vendor/marked.umd.js?v=8ce89bf85926"></script>
+  <script src="dados/catalogo.js?v=8ce89bf85926"></script>
+  <script src="dados/livro.js?v=8ce89bf85926"></script>
+  <script src="js/motor.js?v=8ce89bf85926"></script>
+  <script src="js/app.js?v=8ce89bf85926"></script>
+  <script src="js/regras.js?v=8ce89bf85926"></script>
+  <script src="js/ficha-base.js?v=8ce89bf85926"></script>
+  <script src="js/ficha-editar.js?v=8ce89bf85926"></script>
+  <script src="js/ficha-jogar.js?v=8ce89bf85926"></script>
+  <script src="js/mestre-base.js?v=8ce89bf85926"></script>
+  <script src="js/mestre.js?v=8ce89bf85926"></script>
+  <script src="js/mestre-escudo.js?v=8ce89bf85926"></script>
 </body>
 </html>

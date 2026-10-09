@@ -25,6 +25,7 @@ COMO USAR (na pasta raiz do projeto)
     publicado roda este script sozinho a cada envio (.github/workflows/site.yml).
 """
 
+import hashlib
 import json
 import re
 import shutil
@@ -36,6 +37,7 @@ RAIZ = AQUI.parent
 LIVRO = RAIZ / "livro-v1.0"
 DADOS = AQUI / "dados"
 IMG = AQUI / "img"
+INDEX = AQUI / "index.html"
 LARGURA_IMG = 900
 
 sys.path.insert(0, str(RAIZ / "build"))
@@ -43,6 +45,8 @@ import ficha_dados as fd  # noqa: E402  (precisa do sys.path acima)
 
 RE_TITULO = re.compile(r"^(#{1,3}) +(.+?)\s*$")
 RE_IMAGEM = re.compile(r"\]\(\.\./assets/imagens-v01/([^)]+)\)")
+# <script src="js/app.js?v=abc"> e <link href="estilo.css?v=abc">
+RE_ASSET = re.compile(r'(<(?:script|link)\b[^>]*?\b(?:src|href)=")([^"?]+)(\?[^"]*)?(")')
 
 
 # ---------------------------------------------------------------------------
@@ -212,6 +216,54 @@ def catalogo():
 
 # ---------------------------------------------------------------------------
 
+# ---------------------------------------------------------------------------
+# Selo de versão: o que faz uma atualização aparecer sem limpar o navegador
+# ---------------------------------------------------------------------------
+
+def arquivos_do_index(html):
+    """Os arquivos locais que o index.html carrega, na ordem em que aparecem."""
+    fora = ("http://", "https://", "//", "data:", "#")
+    return [m.group(2) for m in RE_ASSET.finditer(html) if not m.group(2).startswith(fora)]
+
+
+def selar_index():
+    """Põe `?v=<selo>` em todo arquivo que o index.html carrega e devolve (selo, arquivos).
+
+    O selo é o hash do conteúdo desses arquivos, então ele muda sozinho quando qualquer
+    um deles muda — e **só** quando muda. Como cada versão nova tem endereço novo, o
+    navegador é obrigado a buscar os arquivos de novo: nunca mais sobra arquivo velho no
+    cache, e ninguém precisa limpar os dados do site (o que apagaria as fichas).
+    """
+    html = INDEX.read_text(encoding="utf-8")
+    arquivos = arquivos_do_index(html)
+    h = hashlib.sha1()
+    for caminho in arquivos:
+        arq = AQUI / caminho
+        h.update(caminho.encode("utf-8"))
+        h.update(arq.read_bytes() if arq.exists() else b"")
+        if not arq.exists():
+            print("  aviso: o index.html carrega um arquivo que não existe:", caminho)
+    selo = h.hexdigest()[:12]
+
+    def trocar(m):
+        if m.group(2).startswith(("http://", "https://", "//", "data:", "#")):
+            return m.group(0)
+        return m.group(1) + m.group(2) + "?v=" + selo + m.group(4)
+
+    novo = RE_ASSET.sub(trocar, html)
+    novo = re.sub(r'window\.EG_VERSAO = "[^"]*"', 'window.EG_VERSAO = "%s"' % selo, novo)
+    if novo != html:
+        INDEX.write_text(novo, encoding="utf-8")
+    return selo, arquivos
+
+
+def gravar_versao(selo, arquivos):
+    """versao.json — lido pelo site com `cache: no-store` para saber se saiu versão nova."""
+    dados = {"versao": selo, "livro": versao_do_livro(), "arquivos": arquivos}
+    texto = json.dumps(dados, ensure_ascii=False, indent=1) + "\n"
+    (AQUI / "versao.json").write_text(texto, encoding="utf-8")
+
+
 def gravar(nome, variavel, dados):
     DADOS.mkdir(exist_ok=True)
     corpo = json.dumps(dados, ensure_ascii=False, separators=(",", ":"))
@@ -228,6 +280,9 @@ def main():
     gravar("catalogo.js", "CATALOGO", catalogo())
     n = sum(len(c["blocos"]) for c in L["capitulos"])
     print("  %d capítulos, %d blocos de regra · livro v%s" % (len(L["capitulos"]), n, L["versao"]))
+    selo, arquivos = selar_index()
+    gravar_versao(selo, arquivos)
+    print("  selo de versão %s em %d arquivos (index.html e versao.json)" % (selo, len(arquivos)))
 
 
 if __name__ == "__main__":
