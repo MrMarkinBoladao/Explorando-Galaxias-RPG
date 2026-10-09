@@ -839,31 +839,19 @@
   // Aviso de abertura — um clique dispensa para sempre
   // ---------------------------------------------------------------------------
   function telaAviso() {
-    const link = (n, t, r) => EG.Regras.link(n, t, r);
     G.app().innerHTML =
       "<section class='cartao aviso-mestre'>" +
       "<h1>Área do Mestre</h1>" +
-      "<p class='suave'>Explorando Galáxias · livro v" + esc(C().versao) + "</p>" +
-      "<p>Esta aba é <b>sua</b>. Ela abre o bestiário inteiro, as contas de encontro e o calendário de " +
-      "recompensas — ou seja, tem spoiler do que o grupo ainda vai encontrar. Se a mesa olha a tela " +
-      "junto com você, vale um segundo monitor.</p>" +
-      "<h3>Três coisas antes de começar</h3>" +
-      "<ul class='lista-aviso'>" +
-      "<li><b>Ela escreve nas fichas.</b> PV, PV temporário, Energia, PH do grupo, condições e " +
-      "Memoespírito que você mexer aqui aparecem na aba <b>Jogar</b> de cada ficha salva neste " +
-      "navegador. É de propósito: é o que mantém a mesa sincronizada. Só o estado do combate " +
-      "(quem participa, quem já agiu, atrasos) fica apenas aqui.</li>" +
-      "<li><b>Tudo fica neste navegador.</b> Nada sobe para a internet. Use <b>Mais &gt; Exportar a " +
-      "mesa</b> para guardar uma cópia, e peça aos jogadores o arquivo <code>.json</code> da ficha " +
-      "deles para pôr no grupo.</li>" +
-      "<li><b>O livro manda.</b> Cada número aqui tem o link da regra ao lado. E vale a Regra de " +
-      "Ouro: se uma regra estiver atrapalhando a cena, a cena ganha — só anote o que você decidiu " +
-      "(" + link("27", "27.1", "27.1") + ").</li>" +
-      "</ul>" +
+      "<p class='aviso-spoiler'>Esta página tem spoiler.</p>" +
+      "<p>Aqui ficam o bestiário inteiro, as contas de encontro e as recompensas: é o que o grupo " +
+      "ainda vai encontrar na campanha.</p>" +
+      "<p>Se você é jogador e não está mestrando, melhor não abrir. Se spoiler não te incomoda, " +
+      "fique à vontade.</p>" +
       "<div class='botoes'>" +
-      H.botao("dispensar-aviso", "Entendi — não mostrar mais", { classe: "primario" }) +
+      H.botao("dispensar-aviso", "Entendi, pode abrir", { classe: "primario" }) +
+      "<a class='botao' href='#jogar'>Voltar para a ficha</a>" +
       "</div>" +
-      "<p class='ajuda'>Depois de dispensar, o aviso não volta. Se quiser reler, há um link no fim do Painel.</p>" +
+      "<p class='ajuda'>Este aviso não aparece mais depois que você abrir.</p>" +
       "</section>";
   }
 

@@ -133,7 +133,10 @@
       "<div class='coluna'>" + cartaoPH(g) + cartaoCombate + cartaoDTdaFaixa() + "</div>" +
       "<div class='coluna'>" + cartaoRolador() + checklist + "</div>" +
       "</div>" +
-      "<p class='ajuda rodape-mestre'>" + H.botao("rever-aviso", "Rever o aviso de abertura", { classe: "pequeno" }) + "</p>";
+      "<p class='ajuda rodape-mestre'>PV, Energia, PH, condições e Memoespírito que você mexer aqui " +
+      "são gravados nas fichas salvas neste navegador, e aparecem na aba <b>Jogar</b> de cada jogador. " +
+      "Use <b>Mais &gt; Exportar tudo</b> para guardar uma cópia de tudo.<br>" +
+      H.botao("rever-aviso", "Rever o aviso de spoiler", { classe: "pequeno" }) + "</p>";
   }
 
   // ---------------------------------------------------------------------------

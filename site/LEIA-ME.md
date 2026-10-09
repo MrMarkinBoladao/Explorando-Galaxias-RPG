@@ -11,7 +11,9 @@ As fichas ficam salvas **no navegador** de cada jogador. Para backup ou para man
 
 ## A Área do Mestre
 
-Abre com um aviso que **um clique dispensa para sempre**. Sete telas:
+Abre com um **aviso de spoiler** curto — é a página que mostra o bestiário e as recompensas, então
+quem é jogador e não está mestrando é melhor não entrar. Um clique dispensa o aviso para sempre, e
+o botão **Rever o aviso de spoiler**, no fim do Painel, traz ele de volta. Sete telas:
 
 | Tela | O que tem |
 |---|---|

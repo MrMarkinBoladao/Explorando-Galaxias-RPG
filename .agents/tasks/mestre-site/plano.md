@@ -14,11 +14,13 @@ tela, e o estado do combate fica **sincronizado com as fichas dos jogadores** sa
 
 ## 2. Aviso inicial, dispensável para sempre
 
-Cartão de abertura que ocupa a tela toda quando `estado.aviso_lido` é falso: explica que a área é
-só do Mestre (tem spoiler de bestiário), que os dados ficam **neste navegador** e que a área
-**escreve nas fichas** dos jogadores salvas aqui. Um clique em *Entendi — não mostrar mais* grava
-`aviso_lido: true` e o aviso nunca volta. Fica um link discreto no rodapé do Painel para quem
-quiser reler.
+Cartão curto de abertura quando `estado.aviso_lido` é falso, com um recado só: **esta página tem
+spoiler** (bestiário, encontros e recompensas), então quem é jogador e não está mestrando é melhor
+não abrir. Dois botões: *Entendi, pode abrir* (grava `aviso_lido: true` e o aviso nunca volta) e
+*Voltar para a ficha*. O botão *Rever o aviso de spoiler*, no fim do Painel, traz ele de volta.
+
+O que a área faz com as fichas e o backup ficam explicados **no Painel**, não no aviso: o aviso é
+só o recado de spoiler.
 
 ## 3. Estado próprio, chave própria
 

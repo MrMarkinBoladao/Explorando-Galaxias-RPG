@@ -220,7 +220,34 @@
       if (ativa) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
     });
     document.body.dataset.tela = r.tela;
-    telas[r.tela](r);
+    try {
+      telas[r.tela](r);
+    } catch (e) {
+      telaComErro(r.tela, e);
+    }
+  }
+
+  /**
+   * Rede de segurança: se desenhar uma tela der erro, mostra o que aconteceu e um jeito de
+   * sair. Sem isso, um erro deixa a página sem resposta — clicar na aba não faz nada, porque
+   * o `innerHTML` nunca chega a ser trocado — e não há nada na tela dizendo o motivo.
+   */
+  function telaComErro(tela, erro) {
+    console.error("Erro ao desenhar a tela " + tela, erro);
+    const app = document.getElementById("app");
+    if (!app) return;
+    app.innerHTML = "<div class='cartao'><h2>Esta tela não abriu</h2>" +
+      "<p>Deu erro ao desenhar <b>" + esc(tela) + "</b>. O motivo mais comum é o navegador estar " +
+      "com uma versão do site pela metade. <b>Nada do que está salvo se perde</b>: as fichas e a " +
+      "mesa do Mestre continuam aí.</p>" +
+      "<div class='botoes'>" +
+      "<button type='button' class='botao primario' id='botao-recarregar'>Buscar a versão nova</button>" +
+      "<a class='botao' href='#jogar'>Ir para a ficha</a>" +
+      "<a class='botao' href='#regras'>Ir para as Regras</a></div>" +
+      "<details class='erro-tecnico'><summary>Detalhe técnico (para relatar o problema)</summary>" +
+      "<pre>" + esc(tela + "\n" + ((erro && erro.stack) || erro)) + "</pre></details></div>";
+    const b = document.getElementById("botao-recarregar");
+    if (b) b.onclick = () => atualizarAgora(null);
   }
 
   window.addEventListener("hashchange", navegar);
@@ -260,8 +287,15 @@
    * "reload"` troca a cópia guardada pela do servidor) e só então recarrega a página.
    */
   async function atualizarAgora(nova) {
-    const botao = document.getElementById("botao-atualizar");
+    const botao = document.getElementById("botao-atualizar") || document.getElementById("botao-recarregar");
     if (botao) { botao.disabled = true; botao.textContent = "Atualizando…"; }
+    if (!nova) {
+      // Chamado pela tela de erro: busca a lista de arquivos da versão publicada.
+      try {
+        const r = await fetch("versao.json?t=" + Date.now(), { cache: "no-store" });
+        if (r.ok) nova = await r.json();
+      } catch (_) { /* sem rede: recarrega do jeito que der */ }
+    }
     const selo = (nova && nova.versao) || Date.now();
     // A casca vai sem query: é esse o endereço que a navegação vai pedir.
     // Os arquivos vão com ?v=<selo novo>, que é como o index.html novo vai pedir cada um.
