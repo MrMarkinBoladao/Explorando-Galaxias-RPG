@@ -133,7 +133,10 @@
       "<div class='coluna'>" + cartaoPH(g) + cartaoCombate + cartaoDTdaFaixa() + "</div>" +
       "<div class='coluna'>" + cartaoRolador() + checklist + "</div>" +
       "</div>" +
-      "<p class='ajuda rodape-mestre'>" + H.botao("rever-aviso", "Rever o aviso de abertura", { classe: "pequeno" }) + "</p>";
+      "<p class='ajuda rodape-mestre'>PV, Energia, PH, condições e Memoespírito que você mexer aqui " +
+      "são gravados nas fichas salvas neste navegador, e aparecem na aba <b>Jogar</b> de cada jogador. " +
+      "Use <b>Mais &gt; Exportar tudo</b> para guardar uma cópia de tudo.<br>" +
+      H.botao("rever-aviso", "Rever o aviso de spoiler", { classe: "pequeno" }) + "</p>";
   }
 
   // ---------------------------------------------------------------------------
@@ -567,18 +570,11 @@
   }
 
   function porInimigosEmCena() {
-    const cat = G.catalogoDeInimigos();
     const est = G.estado();
     const encontros = est.encontros || [];
-    const porFaixa = {};
-    for (const t of cat) (porFaixa[t.faixa] = porFaixa[t.faixa] || []).push(t);
     return H.cartao("Pôr inimigo em cena",
       "<div class='linha'><label class='sr-only' for='novo-inimigo'>Inimigo</label>" +
-      "<select id='novo-inimigo'>" +
-      Object.entries(porFaixa).map(([faixa, itens]) => "<optgroup label='Faixa " + esc(faixa) + "'>" +
-        itens.map((t) => "<option value='" + esc(t.ref) + "'>" + esc(t.nome) + " · " + esc(t.tipo) +
-          " · " + t.pv + " PV</option>").join("") + "</optgroup>").join("") +
-      "</select>" +
+      "<select id='novo-inimigo'>" + G.opcoesDeInimigo(G.faixaN()) + "</select>" +
       "<input type='number' min='1' max='12' value='1' class='curto' id='qtd-inimigo' aria-label='Quantidade'>" +
       H.botao("por-inimigo", "Pôr em cena", { classe: "primario" }) + "</div>" +
       "<div class='linha'>" +
@@ -795,10 +791,38 @@
       "precisa ser <i>a</i> luta.</p>", "orcamento", link("27", "27.4"));
   }
 
+  /** Quem do grupo entra na cena. Encontro sem a lista salva conta o grupo inteiro. */
+  function participantesDo(e, g) {
+    if (!Array.isArray(e.participantes)) return g.slice();
+    return g.filter((m) => e.participantes.indexOf(m.id) >= 0);
+  }
+
+  function escolhaDeParticipantes(e, i, g, emCena) {
+    if (!g.length) {
+      return vazio("Nenhuma ficha no grupo. <a href='#mestre/grupo'>Monte o grupo</a> para a tela ajustar o " +
+        "orçamento a quem está na cena.");
+    }
+    const dentro = new Set(emCena.map((m) => m.id));
+    return "<div class='participantes'>" + g.map((m) =>
+      "<label class='marca'><input type='checkbox' data-m='toggle-participante' data-i='" + i +
+      "' data-mid='" + esc(m.id) + "'" + (dentro.has(m.id) ? " checked" : "") + "> <span>" +
+      esc(G.nome(m)) + (m.p.elemento ? " <span class='suave'>" + esc(m.p.elemento) + "</span>" : "") +
+      "</span></label>").join("") + "</div>" +
+      "<p class='ajuda'><b>" + emCena.length + " de " + g.length + "</b> na cena. " +
+      (emCena.length === G.GRUPO_DE_REFERENCIA
+        ? "É o grupo de " + G.GRUPO_DE_REFERENCIA + " para o qual o livro publica o orçamento (" +
+          link("29", "29.1", "29.1") + ")."
+        : "O orçamento do livro é para um grupo de <b>" + G.GRUPO_DE_REFERENCIA + "</b> (" +
+          link("29", "29.1", "29.1") + "), porque o dano por Ciclo é uma ação agressiva por personagem. " +
+          "Com " + emCena.length + " em cena, esta tela ajusta na mesma proporção — <b>é conta da tela, não " +
+          "tabela do livro</b>.") + "</p>";
+  }
+
   function cartaoEncontro(e, i, g) {
     const faixaN = Number(e.faixa_n) || G.faixaN();
-    const conta = G.contaDoEncontro(e.itens, faixaN);
-    const contrato = G.contratoDaFraqueza(e.itens, g);
+    const emCena = participantesDo(e, g);
+    const conta = G.contaDoEncontro(e.itens, faixaN, g.length ? emCena.length : null);
+    const contrato = G.contratoDaFraqueza(e.itens, emCena);
     const cat = G.catalogoDeInimigos();
     const linhas = (e.itens || []).map((it, j) => {
       const t = cat.find((x) => x.ref === it.ref);
@@ -819,14 +843,23 @@
       (linhas.length ? H.tabela(["Inimigo", "Tipo", "Faixa", "Qtd.", "Custo", ""], linhas)
         : vazio("Encontro vazio: ponha inimigos abaixo.")) +
       "<div class='linha'><label class='sr-only' for='add-enc-" + i + "'>Inimigo</label>" +
-      "<select id='add-enc-" + i + "'>" + cat.map((t) => "<option value='" + esc(t.ref) + "'>" +
-        esc(t.nome) + " · " + esc(t.tipo) + " · faixa " + esc(t.faixa) + " · " + t.pv + " PV</option>").join("") +
-      "</select>" + H.botao("por-no-encontro", "Adicionar", { dados: { i: i } }) + "</div>" +
+      "<select id='add-enc-" + i + "'>" + G.opcoesDeInimigo(faixaN) + "</select>" +
+      H.botao("por-no-encontro", "Adicionar", { dados: { i: i } }) + "</div>" +
+      "<h3>Quem do grupo entra nesta cena</h3>" + escolhaDeParticipantes(e, i, g, emCena) +
       "<div class='orcamento-leitura'>" +
-      "<div><span class='rotulo'>Gasto</span><b>" + conta.custo + " / " + conta.orcamento + " PV</b>" +
+      "<div><span class='rotulo'>Gasto</span><b>" + conta.custo + " / " + conta.orcamento_ajustado + " PV</b>" +
       "<div class='barra-pv'><span style='width:" + Math.min(100, conta.pct) + "%' class='" + pctClasse.trim() + "'></span></div>" +
       "<span class='sub'>" + conta.pct + "% do orçamento — " + esc(conta.leitura) + "</span></div>" +
-      "<div><span class='rotulo'>Ações agressivas por Ciclo</span><b>" + conta.acoes + "</b>" +
+      "<div><span class='rotulo'>Orçamento da faixa " + esc(C().mestre.ancoras[faixaN - 1].faixa) + "</span>" +
+      "<b>" + conta.orcamento_ajustado + " PV</b>" +
+      "<span class='sub'>" + (conta.ajustado
+        ? "ajustado de " + conta.orcamento + " para " + conta.em_cena +
+          (conta.em_cena === 1 ? " personagem" : " personagens")
+        : "o número publicado, para um grupo de " + conta.referencia) + "</span></div>" +
+      "<div><span class='rotulo'>Dano do grupo por Ciclo</span><b>" + conta.dpc_ajustado + "</b>" +
+      "<span class='sub'>" + (conta.ajustado ? "de " + conta.dpc + " com " + conta.referencia + " personagens"
+        : "o orçamento é esse dano em 4 Ciclos") + "</span></div>" +
+      "<div><span class='rotulo'>Ações agressivas do inimigo por Ciclo</span><b>" + conta.acoes + "</b>" +
       "<span class='sub'>" + conta.n + (conta.n === 1 ? " inimigo" : " inimigos") + " em cena</span></div>" +
       "</div>" +
       "<div class='contrato " + (contrato.cumprido ? "ok" : "pendente") + "'>" +
@@ -1293,6 +1326,13 @@
     cb.cc = {};
     cb.ciclo = 1;
     cb.ativo = true;
+    // Quem ficou fora do encontro já entra fora da Fila (19.3).
+    let fora = 0;
+    if (Array.isArray(e.participantes)) {
+      for (const m of G.grupo()) {
+        if (e.participantes.indexOf(m.id) < 0) { G.cc("p:" + m.id).participa = false; fora++; }
+      }
+    }
     let n = 0;
     for (const it of e.itens || []) {
       for (let k = 0; k < Math.max(1, Number(it.qtd) || 1); k++) {
@@ -1306,7 +1346,9 @@
     }
     cb.alvo = "";
     EG.toast("<b>" + esc(e.nome || "Encontro") + "</b> na mesa: " + n + (n === 1 ? " inimigo" : " inimigos") +
-      ", Ciclo 1. Confira a Surpresa antes de montar a Fila (19.3).");
+      ", Ciclo 1" + (fora ? ", e " + fora + (fora === 1 ? " personagem fora" : " personagens fora") +
+        " da Fila (quem você não marcou na cena)" : "") +
+      ". Confira a Surpresa antes de montar a Fila (19.3).");
     return true;
   }
 
@@ -1373,7 +1415,19 @@
 
   // --- Encontros -------------------------------------------------------------
   A["novo-encontro"] = () => {
-    G.estado().encontros.unshift({ nome: "", faixa_n: G.faixaN(), itens: [] });
+    G.estado().encontros.unshift({ nome: "", faixa_n: G.faixaN(), itens: [],
+      participantes: G.estado().grupo.slice() });
+  };
+
+  A["toggle-participante"] = (b) => {
+    const e = G.estado().encontros[Number(b.dataset.i)];
+    if (!e) return false;
+    const id = b.dataset.mid;
+    // Encontro antigo, sem a lista: começa do grupo inteiro e tira quem foi desmarcado.
+    if (!Array.isArray(e.participantes)) e.participantes = G.estado().grupo.slice();
+    const j = e.participantes.indexOf(id);
+    if (j >= 0) e.participantes.splice(j, 1);
+    else e.participantes.push(id);
   };
 
   A["por-no-encontro"] = (b) => {
@@ -1392,6 +1446,7 @@
 
   A["duplicar-encontro"] = (b) => {
     const est = G.estado(), e = EG.clonar(est.encontros[Number(b.dataset.i)]);
+    if (!e) return false;
     e.nome = (e.nome || "Encontro") + " (cópia)";
     est.encontros.splice(Number(b.dataset.i) + 1, 0, e);
   };

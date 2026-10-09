@@ -242,10 +242,15 @@ button.rolar:hover { background: var(--ouro); color: #1a1406; }
 .acoes-item { white-space: nowrap; }
 
 /* ---------- Área do Mestre ---------- */
-.aviso-mestre { max-width: 52rem; margin: 2rem auto; }
-.aviso-mestre h1 { color: var(--ouro); }
+.aviso-mestre { max-width: 40rem; margin: 3rem auto; }
+.aviso-mestre h1 { color: var(--ouro); margin-bottom: .2rem; }
+.aviso-spoiler { font-size: 1.1rem; font-weight: 700; color: var(--ouro); margin: 0 0 .6rem; }
+.aviso-mestre .botoes { margin-top: 1rem; }
 .lista-aviso { padding-left: 1.2rem; }
 .lista-aviso li { margin: .5rem 0; }
+.erro-tecnico { margin-top: 1rem; font-size: .85rem; }
+.erro-tecnico summary { cursor: pointer; color: var(--suave); }
+.erro-tecnico pre { overflow-x: auto; background: #0a0f1e; border: 1px solid var(--borda); border-radius: 8px; padding: .6rem; font-size: .78rem; }
 .barra-mestre { display: flex; flex-wrap: wrap; gap: .5rem 1rem; align-items: center; justify-content: space-between; margin-bottom: .6rem; }
 .sub-abas { display: flex; gap: .3rem; overflow-x: auto; padding: 0 0 .8rem; }
 .sub-aba {
@@ -357,6 +362,8 @@ button.rolar:hover { background: var(--ouro); color: #1a1406; }
 .orcamento-leitura b { font-size: 1.2rem; font-variant-numeric: tabular-nums; display: block; }
 .orcamento-leitura .sub { font-size: .8rem; color: var(--suave); }
 .orcamento-leitura .barra-pv { margin: .2rem 0; }
+.participantes { display: flex; flex-wrap: wrap; gap: .2rem 1.2rem; margin: .2rem 0 .4rem; }
+.participantes .marca span .suave { font-size: .82rem; }
 .contrato { padding: .6rem .9rem; border-radius: 8px; border: 1px solid var(--borda); margin: .6rem 0; font-size: .92rem; }
 .contrato.ok { background: var(--verde-fundo); border-color: #2b6b44; }
 .contrato.pendente { background: #2e2511; border-color: #6b5520; }

@@ -14,11 +14,13 @@ tela, e o estado do combate fica **sincronizado com as fichas dos jogadores** sa
 
 ## 2. Aviso inicial, dispensável para sempre
 
-Cartão de abertura que ocupa a tela toda quando `estado.aviso_lido` é falso: explica que a área é
-só do Mestre (tem spoiler de bestiário), que os dados ficam **neste navegador** e que a área
-**escreve nas fichas** dos jogadores salvas aqui. Um clique em *Entendi — não mostrar mais* grava
-`aviso_lido: true` e o aviso nunca volta. Fica um link discreto no rodapé do Painel para quem
-quiser reler.
+Cartão curto de abertura quando `estado.aviso_lido` é falso, com um recado só: **esta página tem
+spoiler** (bestiário, encontros e recompensas), então quem é jogador e não está mestrando é melhor
+não abrir. Dois botões: *Entendi, pode abrir* (grava `aviso_lido: true` e o aviso nunca volta) e
+*Voltar para a ficha*. O botão *Rever o aviso de spoiler*, no fim do Painel, traz ele de volta.
+
+O que a área faz com as fichas e o backup ficam explicados **no Painel**, não no aviso: o aviso é
+só o recado de spoiler.
 
 ## 3. Estado próprio, chave própria
 
@@ -66,7 +68,11 @@ próprio** (`data-mp`, `data-m`) e zera `F.P` ao entrar, para não gravar ficha 
 4. **Inimigos** — bestiário das 32 fichas com filtro e ficha completa do livro; criador pela
    tabela de âncoras (28.3) com a régua de ações de 28.4; inimigos salvos da campanha.
 5. **Encontros** — orçamento de PV (27.4) com leitura de passagem/típico/pesado, as 4 composições,
-   contrato da Fraqueza (27.5), DT para descobrir Fraqueza (27.3) e encontros salvos.
+   contrato da Fraqueza (27.5), DT para descobrir Fraqueza (27.3) e encontros salvos. Cada
+   encontro marca **quem do grupo entra na cena**: o orçamento publicado é para um grupo de 4
+   (29.1), então a tela ajusta na proporção de quem está em cena — rotulado como conta da tela,
+   não tabela do livro — e o contrato da Fraqueza passa a olhar só os Elementos presentes. Ao
+   levar o encontro para o combate, quem ficou fora já entra fora da Fila.
 6. **Recompensas** — calendário de marco (27.8), verba (24.5), conferência por PJ (o que o nível
    dele já deveria ter), tesouro do grupo e a lista do que não se deve dar.
 7. **Consulta** — o Escudo do Mestre: DT por faixa, as 5 DTs de subsistema, redução de

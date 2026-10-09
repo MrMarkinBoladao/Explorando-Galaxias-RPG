@@ -11,7 +11,9 @@ As fichas ficam salvas **no navegador** de cada jogador. Para backup ou para man
 
 ## A Área do Mestre
 
-Abre com um aviso que **um clique dispensa para sempre**. Sete telas:
+Abre com um **aviso de spoiler** curto — é a página que mostra o bestiário e as recompensas, então
+quem é jogador e não está mestrando é melhor não entrar. Um clique dispensa o aviso para sempre, e
+o botão **Rever o aviso de spoiler**, no fim do Painel, traz ele de volta. Sete telas:
 
 | Tela | O que tem |
 |---|---|
@@ -19,7 +21,7 @@ Abre com um aviso que **um clique dispensa para sempre**. Sete telas:
 | **Grupo** | Tamanho do grupo com o PH resultante (16.2); por jogador: PV com dano e cura já descontando RD, PV temporário, Energia, Defesa/Esquiva/RD/VEL/DT, condições com turnos, Memoespírito (invocar, dispensar, PV) e o painel de Morrendo; cobertura de Elementos, ordem de VEL e os descansos do grupo |
 | **Combate** | A Fila de Ação (19.3) com PJs, Memoespíritos em campo e inimigos; Ciclo com os quatro passos de avanço; Atrasar e Avançar com Firmeza e teto (19.4); Tenacidade com a calculadora de redução (20.3) e a Quebra com dano e efeito por Elemento (20.5); virada de fase de Boss (28.5); condições com turnos |
 | **Inimigos** | O bestiário das 32 fichas do capítulo 28 com filtro, o criador pela tabela de âncoras (28.3) e os inimigos da campanha |
-| **Encontros** | Orçamento de PV (27.4) com a leitura de passagem/típico/pesado, as quatro composições, o contrato da Fraqueza (27.5) e a DT para descobrir Fraqueza (27.3) |
+| **Encontros** | Orçamento de PV (27.4) com a leitura de passagem/típico/pesado, **quem do grupo entra na cena** (o orçamento e o contrato da Fraqueza se ajustam a isso), as quatro composições e a DT para descobrir Fraqueza (27.3) |
 | **Recompensas** | O calendário de marco (27.8), a verba (24.5), a conferência do que o nível de cada um já libera e o tesouro do grupo |
 | **Escudo do Mestre** | As tabelas de consulta, imprimíveis: DTs, Tenacidade e Quebra, Fila, as nove regras de inimigo, âncoras, condições e Energia |
 
