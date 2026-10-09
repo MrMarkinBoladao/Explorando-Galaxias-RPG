@@ -722,13 +722,18 @@
       "<span class='suave'>sessão " + esc(est.campanha.sessao || 1) + " · nível " + G.nivel() +
       " · faixa " + esc(G.faixaTexto()) + "</span></div>" +
       "<details class='menu'><summary class='botao'>Mais</summary><div class='menu-itens'>" +
-      "<button type='button' data-m='exportar-mesa'>Exportar a mesa (salvar arquivo)</button>" +
+      "<button type='button' data-m='exportar-tudo'>Exportar tudo (fichas + mesa)</button>" +
+      "<button type='button' data-m='importar-tudo'>Restaurar um backup</button>" +
+      "<hr>" +
+      "<button type='button' data-m='exportar-mesa'>Exportar só a mesa</button>" +
       "<button type='button' data-m='importar-mesa'>Importar mesa</button>" +
+      "<hr>" +
       "<button type='button' data-m='imprimir'>Imprimir esta tela</button>" +
       "<button type='button' class='perigo' data-m='zerar-mesa'>Apagar a mesa deste navegador</button>" +
       "</div></details>" +
       "<input type='file' id='arquivo-mesa' accept='.json,application/json' hidden>" +
       "<input type='file' id='arquivo-ficha-mestre' accept='.json,application/json' hidden>" +
+      "<input type='file' id='arquivo-backup' accept='.json,application/json' hidden>" +
       "</div>" +
       "<nav class='sub-abas' aria-label='Área do Mestre'>" + abas + "</nav>";
   };

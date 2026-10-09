@@ -65,6 +65,55 @@
   };
 
   // ---------------------------------------------------------------------------
+  // Backup completo: todas as fichas e a mesa do Mestre num arquivo só
+  // ---------------------------------------------------------------------------
+  const CHAVE_MESTRE = "explorando-galaxias:mestre";
+  const MARCA_BACKUP = "explorando-galaxias:backup";
+
+  function exportarTudo() {
+    let mestre = null;
+    try { mestre = JSON.parse(localStorage.getItem(CHAVE_MESTRE)); } catch (_) { mestre = null; }
+    const fichas = Armazem.todas();
+    const pacote = {
+      tipo: MARCA_BACKUP, versao: 1, salvo_em: new Date().toISOString(),
+      fichas: fichas, atual: Armazem.atualId(), mestre: mestre,
+    };
+    const dia = new Date().toISOString().slice(0, 10);
+    const blob = new Blob([JSON.stringify(pacote, null, 2)], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "explorando-galaxias-backup-" + dia + ".json";
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+    const n = Object.keys(fichas).length;
+    toast("Backup salvo: <b>" + n + (n === 1 ? " ficha" : " fichas") + "</b>" +
+      (mestre ? " e a mesa do Mestre" : "") + ". Guarde o arquivo.");
+  }
+
+  function importarTudo(arquivo) {
+    const leitor = new FileReader();
+    leitor.onload = () => {
+      try {
+        const p = JSON.parse(leitor.result);
+        if (!p || p.tipo !== MARCA_BACKUP || typeof p.fichas !== "object") throw new Error("formato");
+        const quantas = Object.keys(p.fichas || {}).length;
+        if (!confirm("Restaurar o backup de " + (p.salvo_em || "data desconhecida").slice(0, 10) + "?\n\n" +
+          quantas + (quantas === 1 ? " ficha" : " fichas") + (p.mestre ? " e a mesa do Mestre" : "") +
+          " vão substituir o que está neste navegador.")) return;
+        Armazem.gravarTodas(p.fichas);
+        if (p.atual && p.fichas[p.atual]) Armazem.definirAtual(p.atual);
+        if (p.mestre) localStorage.setItem(CHAVE_MESTRE, JSON.stringify(p.mestre));
+        else localStorage.removeItem(CHAVE_MESTRE);
+        location.reload();
+      } catch (_) {
+        toast("Esse arquivo não é um backup deste site. O backup se faz em <b>Mais &gt; Exportar tudo</b>.", "erro");
+      }
+    };
+    leitor.readAsText(arquivo);
+  }
+
+  // ---------------------------------------------------------------------------
   // Avisos rápidos (toast)
   // ---------------------------------------------------------------------------
   function toast(html, tipo) {
@@ -175,16 +224,101 @@
   }
 
   window.addEventListener("hashchange", navegar);
+
+  // ---------------------------------------------------------------------------
+  // Atualização do site
+  //
+  // O index.html pede os arquivos com ?v=<selo>, então um site novo já vem inteiro e
+  // coerente. Mas o navegador pode ter guardado o próprio index.html antigo — e aí nada
+  // muda nem apertando F5. Para isso existe o versao.json: ele é lido direto do servidor
+  // (sem cache) e, se o selo de lá for diferente do que está rodando, o aviso aparece.
+  // Atualizar NUNCA apaga nada: as fichas e a mesa ficam no localStorage, intactas.
+  // ---------------------------------------------------------------------------
+  const VERSAO = window.EG_VERSAO || "";
+  const CHAVES_DE_DADOS = ["racas", "caminhos", "bencaos", "pericias", "condicoes", "elementos",
+    "mestre", "bestiario"];
+  let ultimaChecagem = 0;
+  let avisando = false;
+
+  function mostrarAviso(nova) {
+    const caixa = document.getElementById("aviso-versao");
+    if (!caixa || avisando) return;
+    avisando = true;
+    caixa.hidden = false;
+    caixa.innerHTML = "<div class='faixa-versao'><div><b>Saiu uma versão nova do site.</b> " +
+      "O seu navegador ainda está com a anterior guardada. " +
+      "<span class='suave'>Atualizar não apaga nada: as fichas e a mesa do Mestre continuam salvas.</span></div>" +
+      "<div class='botoes compactos'><button type='button' class='botao primario' id='botao-atualizar'>" +
+      "Atualizar agora</button>" +
+      "<button type='button' class='botao' id='botao-depois'>Depois</button></div></div>";
+    document.getElementById("botao-depois").onclick = () => { caixa.hidden = true; };
+    document.getElementById("botao-atualizar").onclick = () => atualizarAgora(nova);
+  }
+
+  /**
+   * Busca de novo, do servidor, a casca e todos os arquivos da versão nova (`cache:
+   * "reload"` troca a cópia guardada pela do servidor) e só então recarrega a página.
+   */
+  async function atualizarAgora(nova) {
+    const botao = document.getElementById("botao-atualizar");
+    if (botao) { botao.disabled = true; botao.textContent = "Atualizando…"; }
+    const selo = (nova && nova.versao) || Date.now();
+    // A casca vai sem query: é esse o endereço que a navegação vai pedir.
+    // Os arquivos vão com ?v=<selo novo>, que é como o index.html novo vai pedir cada um.
+    const lista = ["./", "index.html", "versao.json"]
+      .concat(((nova && nova.arquivos) || []).map((u) => u + "?v=" + selo));
+    try {
+      await Promise.all(lista.map((u) => fetch(u, { cache: "reload" }).catch(() => null)));
+    } catch (_) { /* se a rede falhar, o recarregar abaixo ainda tenta */ }
+    location.reload();
+  }
+
+  async function checarAtualizacao(forcar) {
+    if (location.protocol === "file:" || !VERSAO || VERSAO === "dev") return;
+    const agora = Date.now();
+    if (!forcar && agora - ultimaChecagem < 120000) return;
+    ultimaChecagem = agora;
+    try {
+      const r = await fetch("versao.json?t=" + agora, { cache: "no-store" });
+      if (!r.ok) return;
+      const nova = await r.json();
+      if (nova && nova.versao && nova.versao !== VERSAO) mostrarAviso(nova);
+    } catch (_) { /* sem internet: a cópia que está aberta continua servindo */ }
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) checarAtualizacao(false);
+  });
+
   document.addEventListener("DOMContentLoaded", () => {
-    if (!window.CATALOGO || !window.LIVRO || !window.Motor) {
-      document.getElementById("app").innerHTML = "<div class='cartao'><h2>Faltam os dados do site</h2>" +
-        "<p>Rode <code>python site/gerar_site.py</code> na pasta do projeto e abra a página de novo.</p></div>";
+    const faltando = !window.CATALOGO || !window.LIVRO || !window.Motor ? ["tudo"]
+      : CHAVES_DE_DADOS.filter((k) => !window.CATALOGO[k]);
+    if (faltando.length) {
+      // Pode ser cópia local sem gerar_site.py, ou um dados/ velho preso no cache.
+      document.getElementById("app").innerHTML = "<div class='cartao'><h2>Os dados do site estão desatualizados</h2>" +
+        "<p>O seu navegador carregou uma mistura de arquivo novo e arquivo velho" +
+        (faltando[0] === "tudo" ? "" : " (falta <code>" + esc(faltando.join("</code>, <code>")) + "</code>)") +
+        ".</p><div class='botoes'><button type='button' class='botao primario' id='botao-recarregar'>" +
+        "Buscar a versão nova</button></div>" +
+        "<p class='ajuda'>Isso não apaga nada: as fichas e a mesa do Mestre ficam salvas. " +
+        "Se você abriu uma cópia local do site, rode <code>python site/gerar_site.py</code> na pasta do projeto.</p></div>";
+      const b = document.getElementById("botao-recarregar");
+      if (b) b.onclick = () => atualizarAgora(null);
+      checarAtualizacao(true);
       return;
     }
     document.getElementById("versao-livro").textContent = "Livro v" + window.CATALOGO.versao;
+    const selo = document.getElementById("selo-versao");
+    if (selo && VERSAO && VERSAO !== "dev") selo.textContent = "Versão do site: " + VERSAO + ".";
     navegar();
+    checarAtualizacao(true);
+  });
+
+  // Backup completo, chamado pelos menus "Mais" da ficha e da Área do Mestre
+  document.addEventListener("change", (ev) => {
+    if (ev.target.id === "arquivo-backup" && ev.target.files[0]) importarTudo(ev.target.files[0]);
   });
 
   Object.assign(EG, { esc, norm, sinal, uid, clonar, destacar, regexSemAcento, Armazem, toast, rolar, botaoRolar,
-    registrarTela, rotaAtual, navegar, historico });
+    registrarTela, rotaAtual, navegar, historico, exportarTudo, importarTudo, checarAtualizacao, VERSAO });
 })();

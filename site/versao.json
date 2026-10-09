@@ -1,0 +1,19 @@
+{
+ "versao": "8ce89bf85926",
+ "livro": "1.2",
+ "arquivos": [
+  "estilo.css",
+  "js/vendor/marked.umd.js",
+  "dados/catalogo.js",
+  "dados/livro.js",
+  "js/motor.js",
+  "js/app.js",
+  "js/regras.js",
+  "js/ficha-base.js",
+  "js/ficha-editar.js",
+  "js/ficha-jogar.js",
+  "js/mestre-base.js",
+  "js/mestre.js",
+  "js/mestre-escudo.js"
+ ]
+}

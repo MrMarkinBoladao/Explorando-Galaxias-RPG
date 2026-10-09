@@ -340,13 +340,18 @@
         "<select id='escolher-personagem'>" + opcoes + "</select>" : "") +
       "<button type='button' class='botao' data-acao='nova'>+ Nova ficha</button>" +
       "<details class='menu'><summary class='botao'>Mais</summary><div class='menu-itens'>" +
-      (F.P ? "<button type='button' data-acao='exportar'>Exportar (salvar arquivo)</button>" : "") +
+      (F.P ? "<button type='button' data-acao='exportar'>Exportar esta ficha</button>" : "") +
       "<button type='button' data-acao='importar'>Importar arquivo de ficha</button>" +
+      "<hr>" +
+      "<button type='button' data-acao='exportar-tudo'>Exportar tudo (backup)</button>" +
+      "<button type='button' data-acao='importar-tudo'>Restaurar um backup</button>" +
+      "<hr>" +
       "<button type='button' data-acao='exemplo'>Abrir o exemplo (Nadir, 29.7)</button>" +
       (F.P ? "<button type='button' data-acao='imprimir'>Imprimir</button>" : "") +
       (F.P ? "<button type='button' class='perigo' data-acao='excluir'>Excluir esta ficha</button>" : "") +
       "</div></details>" +
       "<input type='file' id='arquivo-importar' accept='.json,application/json' hidden>" +
+      "<input type='file' id='arquivo-backup' accept='.json,application/json' hidden>" +
       "</div>";
   };
 
@@ -399,6 +404,8 @@
     else if (acao === "exemplo") { F.criar(exemploNadir()); location.hash = "#jogar"; F.redesenhar(); }
     else if (acao === "exportar") exportar();
     else if (acao === "importar") document.getElementById("arquivo-importar").click();
+    else if (acao === "exportar-tudo") EG.exportarTudo();
+    else if (acao === "importar-tudo") document.getElementById("arquivo-backup").click();
     else if (acao === "imprimir") { location.hash = "#jogar"; setTimeout(() => window.print(), 300); }
     else if (acao === "excluir") {
       if (confirm("Excluir a ficha de " + (F.P.nome || "personagem sem nome") + "? Isso não tem volta (a não ser que você tenha exportado).")) {

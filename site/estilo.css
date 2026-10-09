@@ -138,6 +138,15 @@ select option { background: var(--painel); }
 .menu-itens button { display: block; width: 100%; text-align: left; font: inherit; color: var(--texto); background: none; border: 0; padding: .5rem .7rem; border-radius: 6px; cursor: pointer; }
 .menu-itens button:hover { background: var(--painel-2); }
 .menu-itens .perigo { color: var(--vermelho); }
+.menu-itens hr { border: 0; border-top: 1px solid var(--borda); margin: .3rem .2rem; }
+
+/* Aviso de versão nova do site */
+#aviso-versao { position: sticky; top: 0; z-index: 25; }
+.faixa-versao {
+  display: flex; flex-wrap: wrap; gap: .5rem 1rem; align-items: center; justify-content: space-between;
+  padding: .6rem 1rem; background: #2e2511; border-bottom: 1px solid var(--ouro-escuro); font-size: .92rem;
+}
+.faixa-versao .botoes { margin: 0; }
 
 /* ---------- Editar ---------- */
 .atalhos { position: sticky; top: 3.6rem; z-index: 10; display: flex; gap: .35rem; overflow-x: auto; padding: .4rem 0 .6rem; background: linear-gradient(var(--fundo) 80%, transparent); }
