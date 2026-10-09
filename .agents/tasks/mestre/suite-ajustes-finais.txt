@@ -1,0 +1,76 @@
+Suítes afetadas pelos ajustes finais da Planilha do Mestre (achados N1, N2 e N3 da revisão da Fase 4).
+Comando de cada bloco: $env:PYTHONUTF8="1"; python "build\testar_mestre.py" --suite <nome>
+
+====================================================================================================
+Bateria da Planilha do Mestre — suítes: origem
+Início: 2026-10-09 12:55:25
+
+=== Suíte origem: OK — 9 checagens, 0 falha(s)
+  · Planilha do Mestre - Explorando Galáxias V1.2.xlsx: 3636 validações, -0 s do mapa
+  · Planilha do Mestre - Exemplo.xlsx: 3636 validações, +5 s do mapa
+  · tempo: 0.0 s
+
+=== RESUMO ===
+  origem        OK             9 checagens, 0 falha(s)
+  total: 9 checagens, 0 falha(s), 0 s
+
+====================================================================================================
+Bateria da Planilha do Mestre — suítes: entregaveis
+Início: 2026-10-09 12:55:25
+
+=== Suíte entregaveis: OK — 4 checagens, 0 falha(s)
+  · entregável: G:\Meu Drive\DriveSyncFiles\Explorando Galáxias RPG\Mestre\Planilha do Mestre - Explorando Galáxias V1.2.xlsx
+  · entregável: G:\Meu Drive\DriveSyncFiles\Explorando Galáxias RPG\Mestre\Planilha do Mestre - Exemplo.xlsx
+  · entregável: G:\Meu Drive\DriveSyncFiles\Explorando Galáxias RPG\Mestre\COMO-USAR-PLANILHA-DO-MESTRE.md
+  · arquivo do usuário/Drive ignorado: desktop.ini
+  · registro antigo mantido (decisão do usuário, não apagado): Planilha do Mestre - Explorando Galáxias V1.1.xlsx
+  · arquivo do usuário/Drive ignorado: Planilha do Mestre - Explorando Galáxias V1.2.gsheet
+  · tempo: 0.0 s
+
+=== RESUMO ===
+  entregaveis   OK             4 checagens, 0 falha(s)
+  total: 4 checagens, 0 falha(s), 0 s
+
+====================================================================================================
+Bateria da Planilha do Mestre — suítes: lint
+Início: 2026-10-09 12:55:26
+
+=== Suíte lint: OK — 232391 checagens, 0 falha(s)
+  · 41810 fórmulas, 3636 validações, 2556 formatações condicionais, 4544 entradas; funções permitidas: 31 das 33 de ficha_funcoes_ok.json (sem ROUND, ROUNDUP)
+  · revisão 2: 1311 listas suspensas, 74489 opções conferidas (=, +, -, @, data, hora, número em texto, booleano)
+  · revisão 2: 41810 fórmulas conferidas, 0 leitura(s) direta(s) de entrada; 12657 células na camada de leitura protegida, 12744 entradas com sinal de erro em 2354 linhas; 20 células do contador da Início
+  · requisito do Google: 0 achado(s) (testar_ficha._lint_google com o mapa da Mestre)
+  · Escudo do Mestre: A4 paisagem, 5 páginas, alturas [629.5, 631.0, 574.5, 576.5, 555.5] pt (máximo 633)
+  · tempo: 29.2 s
+
+=== RESUMO ===
+  lint          OK        232391 checagens, 0 falha(s)
+  total: 232391 checagens, 0 falha(s), 29 s
+
+====================================================================================================
+Bateria da Planilha do Mestre — suítes: exemplo
+Início: 2026-10-09 12:56:07
+
+=== Suíte exemplo: OK — 47853 checagens, 0 falha(s)
+  · 522 entradas preenchidas no Exemplo, conferidas uma a uma contra exemplo.entradas_nomes()
+  · Exemplo: 41810 fórmulas recalculadas, 0 com erro; Fila do Ciclo 2: Tessaly Varonne, Eco do Construtor (de KV-12, Paciência), KV-12, Paciência, Nadir, Sargento de Trincheira, Larva Fuliginosa 2, Casco Oco 2, Shen Wanqing
+  · modelo em branco: G=100: Larva Fuliginosa; G=200: Maelune Sonata Breve; G=300: Escolta — uma fazenda de algas num oceano raso; G=400: uma chave sem fechadura conhecida; G=410: A Dança Que Prometemos; G=420: Engrenagens do Relojoeiro Cego …
+  · tempo: 455.0 s
+
+=== RESUMO ===
+  exemplo       OK         47853 checagens, 0 falha(s)
+  total: 47853 checagens, 0 falha(s), 455 s
+
+====================================================================================================
+Bateria da Planilha do Mestre — suítes: guia
+Início: 2026-10-09 13:04:38
+
+=== Suíte guia: OK — 125 checagens, 0 falha(s)
+  · 19 citação(ões) conferida(s) no Exemplo
+  · 6 citação(ões) conferida(s) no modelo em branco
+  · tempo: 388.0 s
+
+=== RESUMO ===
+  guia          OK           125 checagens, 0 falha(s)
+  total: 125 checagens, 0 falha(s), 388 s
+

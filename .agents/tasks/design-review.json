@@ -1,0 +1,188 @@
+{
+  "verdict": "CHANGES_REQUESTED",
+  "findings": [
+    {
+      "id": 1,
+      "severity": "HIGH",
+      "location": "design.md secoes 18.1 (premissas Tenacidade por tipo e Cadencia de Quebra), 18.3 (tabela de derivacao e coluna Tenacidade C/E/B), 18.2 (parcela Quebra / 2 Ciclos), 4.5",
+      "problem": "A Reducao de Tenacidade do grupo e derivada a 100% de acerto. 4.5 diz que o ataque que erra 'nao causa dano e nao reduz Tenacidade' (a v0.1 diz o mesmo: 'para retirar Tenacidade e obrigatorio que o alvo receba um ataque'), e o documento aplica essa condicao a geracao de PH e a declara como premissa - mas a derivacao de Tenacidade soma 1 + 1 (dois Ataques Basicos) + Nivel da Habilidade + 5 (Ultimate) sem taxa de acerto, chegando a 9 / 9,75 / 11 / 10,75 / 11,25 por Ciclo. Com o acerto do perfil de Boss (55%) a reducao real e 4,95 / 5,36 / 6,05 / 5,91 / 6,19, e um Boss de Tenacidade 18/20/22/22/24 sofre Quebra a cada 3,6 Ciclos, nao a cada 2. Tres consequencias: a premissa 'cadencia de Quebra 1 a cada 2 Ciclos no perfil de Boss' e falsa; a parcela de Quebra do DPC (14/18/19/21/25) esta ~45% alta e, refeita, o DPC cai para 82/111/160/209/260, o que na faixa 1-4 e 6,9% abaixo do publicado e reprova no gate de 5% de simular-combate.ps1; e a cadencia de Elite ('quase todo Ciclo') passa a ser 1 a cada 1,7 Ciclos.",
+      "fix": "Escolher uma e escrever: (a) manter a cadencia e republicar a Tenacidade como multiplicador x reducao x taxa de acerto do perfil -> Boss 10/11/12/12/13, Elite 5/6/7/6/7, Comum 3/3/4/4/4, preservando o DPC e as 15 celulas de PV de 18.3; ou (b) manter a coluna de Tenacidade e republicar a cadencia (~3,6 Ciclos contra Boss, ~1,7 contra Elite), a parcela de Quebra e o DPC (82/111/160/209/260), rederivando as 15 celulas de PV. A (a) e mais barata. Nos dois casos, acrescentar a tabela de premissas a linha: 'a Reducao de Tenacidade e condicionada ao acerto, igual a geracao de PH (4.5)'."
+    },
+    {
+      "id": 2,
+      "severity": "HIGH",
+      "location": "design.md secoes 4.5 ('Quando nao ha Teste de Ataque'), 4.2, 8.5, 10.2, 10.4 (linha Resolucao), 9.4, 18.1, 18.3 (ficha padronizada e tabela de ancoras), 22.1",
+      "problem": "O documento cria um segundo caminho de resolucao - 'Habilidades de area, de controle e de debuff podem exigir um Teste de Resistencia do alvo contra a sua DT em vez de um Teste de Ataque; cada Habilidade declara qual dos dois usa' - e nunca diz o que acontece quando o alvo PASSA no teste: dano nenhum, metade do dano, dano sem efeito secundario? Nem se o sucesso do alvo impede a Reducao de Tenacidade (9.4) ou o ganho de Energia. A linha 'Teste de Resistencia' de 22.1 trata so do PC falhando no proprio teste. Alem disso a ficha de inimigo padronizada de 18.3 lista Defesa, RD, Teste de Ataque e 'DT dos efeitos dele', e NAO tem bonus de Teste de Resistencia - nao existe numero contra o qual rolar, apesar da afirmacao de que 'todos os campos da ficha tem coluna na tabela de ancoras'. Toda Habilidade de area, controle e debuff do jogo, e qualquer Ultimate construida nesse caminho (permitido por 8.5), fica irresolvivel na mesa, e o DPC nao tem premissa para elas. E a reincidencia do defeito central da v0.1 (regra nomeada apontando para subsistema nao escrito), agora em texto novo.",
+      "fix": "Fechar em 4.5 e repetir na linha Resolucao de 10.4: 'Alvo que passa no Teste de Resistencia: Habilidade de dano causa metade do dano (arredonda para baixo, minimo 1) e nenhum efeito secundario; Habilidade sem dano (controle, debuff) nao produz efeito nenhum. A Reducao de Tenacidade so acontece se houver dano. A Energia da acao e ganha normalmente (8.3).' E publicar a coluna que falta em 18.3: Teste de Resistencia do inimigo = Eficiencia da faixa -1 (Comum) / Eficiencia (Elite) / Eficiencia +1 (Boss) -> 1/2/3, 3/4/5, 4/5/6, 5/6/7, 7/8/9. Contra a DT de Habilidade do personagem de referencia (8 + 5 + Eficiencia = 15/17/18/19/21) isso faz o inimigo falhar em 65% / 60% / 55% em todas as faixas - a mesma janela do acerto do grupo - e o campo passa a existir na ficha."
+    },
+    {
+      "id": 3,
+      "severity": "HIGH",
+      "location": "design.md secoes 18.1 (premissas 'Acoes agressivas do inimigo', 'Janelas-alvo do inimigo', 'Attrition do grupo'), 18.3 (coluna 'Dano por acerto', 'Composicao do encontro', tabela de attrition)",
+      "problem": "O encontro e dimensionado exclusivamente pelo PV do inimigo (DPC x 4, repartido em 1/7, 1/3 e 85%), e o dano que ele devolve e um numero unico por faixa aplicado igualmente a Comum, Elite e Boss. Cruzando com a premissa 'Comum 1 ataque por turno; Elite 1 mais especial a cada 2 Ciclos; Boss 2 por turno', as quatro composicoes que 18.3 declara equivalentes entregam dano muito diferente. Na faixa 17-20 (dano 48, PV do grupo 996, uma Esquiva por Ciclo): 1 Boss + 1 Comum = 67 por Ciclo (o unico caso que a attrition modela); 3 Elites ~77; 1 Elite + 4 Comuns ~134; 7 Comuns ~182. O encontro de 7 Comuns, que o proprio texto diz resolver em 2-3 Ciclos, custa 364 a 546 PV ao grupo e o deixa entre 45% e 63% dos PV, contra a janela publicada de 73% a 81%. Um Comum batendo igual a um Boss tambem contradiz o enquadramento do documento ('um Comum existe para sofrer Quebra').",
+      "fix": "Publicar 'Dano por acerto' por tipo e reverificar a attrition de cada composicao. Mantendo o Boss como esta (e ele que calibra a Defesa do PC e as 4-7 pancadas ate Morrendo): Comum = 1/3, Elite = 2/3, Boss = 1 -> faixa 1-4: 3/7/10; 5-8: 7/13/20; 9-12: 9/19/28; 13-16: 12/24/36; 17-20: 16/32/48. Com isso '1 Boss + 1 Comum' entrega ~61 por Ciclo (a janela de 73-81% sobrevive) e '7 Comuns' entrega ~61 por Ciclo em 2-3 Ciclos (~85% dos PV restantes), e as quatro composicoes passam a ser comparaveis. Acrescentar a premissa: 'o orcamento de encontro e de PV; o dano recebido e verificado por composicao, e as quatro composicoes de 18.3 ficam entre 55 e 70 por Ciclo na faixa de referencia'. Isso tambem resolve a janela unica de 3-5 Ciclos do script, que hoje reprovaria o encontro de peloto que o proprio design aprova em 2-3."
+    },
+    {
+      "id": 4,
+      "severity": "HIGH",
+      "location": "design.md secoes 16.5 (Ressonancias I, III e IV), 18.1 (premissas de PH e de Ultimate, lista de omissoes), 8.2, 8.5, 17",
+      "problem": "A Ressonancia I, a partir do nivel 5, concede '1 uso de Habilidade por combate sem custo de PH'. Em uma mesa de 4 com combate de 4 Ciclos sao ate 4 usos gratis, ou +1 Habilidade por Ciclo, sobre os 0,75 por Ciclo que a economia de PH sustenta. Na faixa 17-20 cada uso gratis de Nivel 7 vale 219 x 0,60 = 131 de DPC: o DPC vai de 271 para ~400 (+48%) e o Boss de 935 PV cai em 2,6 Ciclos, fora da janela de 3 a 5 que e o critério unico do documento. A Ressonancia IV baixa a Ultimate para 80 de Energia (+25% na maior parcela isolada do DPC, ~+26). A Ressonancia III ('uma Habilidade sua sobe 1 Nivel de efeito') nao diz se o custo em PH sobe junto - se nao subir, e um Nivel 6 pelo preco de um Nivel 5. Nenhuma das quatro aparece na tabela de premissas nem na lista de omissoes declaradas, que nomeia Memoespirito, Esforco, Vantagem, acumulos de Caminho e Efeitos Condicionais de Cone. A economia de PH e, pelas palavras do documento, 'a espinha do balanceamento'.",
+      "fix": "(i) Limitar a Ressonancia I a '1 uso por combate de uma Habilidade de Nivel 3 ou menor sem custo de PH' (~37 de DPC no grupo inteiro, dentro da margem) ou troca-la por '+1 PH no inicio de cada combate', que ja e a moeda de 8.2 e e trivial de orcar. (ii) Na Ressonancia III, escrever 'sobe 1 Nivel de efeito e passa a custar o PH do Nivel novo'. (iii) Acrescentar a Ressonancia IV a lista de omissoes de 18.1 com o numero (+25% na parcela de Ultimate a partir do nivel 20) ou embuti-la na faixa 17-20 do DPC."
+    },
+    {
+      "id": 5,
+      "severity": "MEDIUM",
+      "location": "design.md secoes 3.2 (lista de termos oficiais), 7.9 (conversao de Ritmo Acelerado), 8.1, 10.2 (Nivel 5), 10.4 (lista de proibidos)",
+      "problem": "'Acao Extra' e declarada termo oficial em 3.2, recebe conteudo em 7.9 ('um Ataque Basico, uma Habilidade de Nivel 2 ou menor, ou uma Acao de Movimento') e e autorizada como efeito de Habilidade de Nivel 5+ em 10.4 ('acao extra fora de Ritmo Acelerado ou Nivel 5+' e o que esta proibido) - mas nao e definida em 8.1, que e a secao dona da economia de acoes. Falta o essencial: quantas por criatura por Ciclo (o Avanco Total tem teto explicito de 1; esta nao tem nenhum), se a Habilidade usada nela paga PH, se recarrega a Reacao, se permite uma segunda Ultimate. Dois personagens da Harmonia, ou um deles mais uma Habilidade de Nivel 5, entregam Acao Extra todo Ciclo ao mesmo PJ: +25% de turnos em uma mesa de 4, fora de todas as premissas de 18.1.",
+      "fix": "Acrescentar a linha a tabela de 8.1 e o paragrafo abaixo dela: 'Acao Extra: concedida por Bencao, por Habilidade de Nivel 5 ou maior, ou por Ultimate. Permite um Ataque Basico, OU uma Habilidade de Nivel 2 ou menor (pagando o PH normalmente), OU uma Acao de Movimento. Nao concede Reacao nem Acao Complementar e nao permite uma segunda Ultimate no Ciclo. Maximo de 1 Acao Extra por criatura por Ciclo, somando todas as fontes.' Registrar o invariante em 19 com dono no capitulo 19, ao lado do Avanco Total."
+    },
+    {
+      "id": 6,
+      "severity": "MEDIUM",
+      "location": "design.md secoes 8.3 (tabela de fontes de Energia), 4.5, 22.1",
+      "problem": "4.5 e explicita - 'a Energia da acao e ganha normalmente: a v0.1 concede Energia pela acao e nao pelo acerto, e isso fica' - e 22.1 repete na linha de falha do Teste de Ataque. A tabela 'fechada' de 8.3, que o quadro de invariantes aponta como camada dona do assunto, diz 'Ataque Basico que acerta | +20'. A diferenca e 8 de Energia por turno a 60% de acerto, ou seja uma Ultimate a cada 3,3 turnos contra uma a cada 4,2 - e a Ultimate e a maior parcela isolada do DPC (106 de 271 na faixa 17-20). Duas camadas donas dizem coisas diferentes sobre o mesmo numero.",
+      "fix": "Em 8.3, trocar a linha por 'Ataque Basico (acerte ou nao) | +20 | nenhum limite, salvo o 1 natural (4.5)', espelhando a linha de Habilidade, que ja diz '(acerte ou nao)'."
+    },
+    {
+      "id": 7,
+      "severity": "MEDIUM",
+      "location": "design.md secoes 4.1, 4.5, 4.3, 18.2, descricao do capitulo 18 em 20",
+      "problem": "4.1 publica a 'rolagem unica' e 4.5 publica 'Teste de Ataque = d20 + Bonus do Atributo de Ataque + Eficiencia >= Defesa do alvo'. A Especializacao de Combate (+1/+2/+3 permanente em TODOS os Testes de Ataque, 4.3) e o Bonus Maior de Cone de Luz nao aparecem em nenhuma das duas formulas - e juntos sao 6 dos 19 pontos do atacante de referencia de 18.2. O capitulo 18 sera escrito a partir de 4.5 e publicaria uma formula que nao produz o numero do orcamento.",
+      "fix": "4.5 -> 'Teste de Ataque = d20 + Bonus do Atributo de Ataque + Eficiencia + Especializacao de Combate + bonus permanentes de equipamento (Cone de Luz, Reliquia) +/- bonus e penalidades temporarios dentro dos tetos de 9.6 >= Defesa do alvo'; e em 4.1 acrescentar 'mais a Especializacao de Combate, quando a rolagem for um Teste de Ataque'."
+    },
+    {
+      "id": 8,
+      "severity": "MEDIUM",
+      "location": "design.md secoes 10.2 (coluna Alvos e tabela de passivas), 10.1, 10.4",
+      "problem": "10.2 da 'grupo' como contagem de alvos para buff E debuff nos Niveis 5, 6 e 7, enquanto 10.1 e 10.4 travam a area em 3 alvos (4 nos Niveis 6-7, teto absoluto 6). 'Grupo' nao e definido: lido como grupo inimigo, um debuff de Nivel 7 aplica -5 (o teto inteiro de penalidade da faixa) a todos os inimigos da cena, que no encontro de 7 Comuns sao 7 alvos - acima do teto absoluto que o documento declara. Segundo conflito: o exemplo de passiva de Nivel 7 e 'sua Habilidade em area atinge 1 alvo adicional', enquanto 10.1 restringe alvos extras a recurso de Caminho ou texto de Bencao e 10.4 lista 'atingir mais alvos em area do que 10.1 permite' entre os efeitos proibidos.",
+      "fix": "Em 10.2, trocar 'grupo' por 'todos os aliados (ate 6), se for buff; se for debuff, os limites de area de 10.1 - 3 alvos, 4 nos Niveis 6 e 7'. E, na passiva de Nivel 7, trocar o exemplo ou acrescentar 'passiva de Nivel 7' a lista de excecoes de 10.1, mantendo o teto absoluto de 6."
+    },
+    {
+      "id": 9,
+      "severity": "MEDIUM",
+      "location": "design.md secoes 9.6 (os dois tetos e a tabela de escopo), 9.2, 9.3, 9.4, 10.2, 11.2, 11.4, 18.1 (lista de omissoes), 18.2",
+      "problem": "O documento fecha os bonus numericos em +3/+4/+5 e as penalidades em -3/-4/-5, mas nada limita DADOS adicionais, que sao a outra moeda do sistema: Fraqueza +2 (9.3), Quebrado +1 (9.4), Vulneravel +1 (9.6), Marcacao de Presa +1 (11.2), Acumulos de Calculo ate +2 (11.2), Tabela do Riso +1 (11.2), duas linhas da regua de 11.4, Avatar Forma Manifestada +2 (11.4), gatilho de passiva de Nivel 4 (10.2) e a capstone da Caca +1 no critico (4.6). Uma Caca de nivel 20 atacando alvo marcado, Quebrado e com Fraqueza rola 9d10 onde o DPC modela 7d10 (+29%); uma Habilidade de Nivel 7 chega a 23d20 contra os 20d20 modelados. Alem disso a condicao Quebrado (+1 dado de qualquer fonte e -2 de Defesa) acontece em metade dos Ciclos pela cadencia publicada e nao aparece em nenhuma parcela de 18.2 nem na lista de omissoes: e margem nao declarada em cima de um teto que nao existe.",
+      "fix": "Acrescentar o terceiro teto a 9.6, com a mesma camada dona (capitulo 26): 'Teto de dados adicionais: uma mesma rolagem nao ganha mais de +3 dados base de fontes temporarias, sem contar os +2 da Fraqueza (9.3). Os dados base ganhos por nivel (9.2) e os dados da tabela da Habilidade nao entram nesse teto.' E acrescentar Quebrado a lista de omissoes de 18.1 com o numero (+1 dado e ~+10 pontos percentuais de acerto em metade dos Ciclos) ou embuti-lo nas parcelas."
+    },
+    {
+      "id": 10,
+      "severity": "MEDIUM",
+      "location": "design.md secoes 8.2 (formula de maximo, geracao e a tabela 'Quanto isso sustenta de verdade'), 18.1 (premissa 'Nivel da Habilidade por Ciclo'), 17 (linha de recursos por faixa)",
+      "problem": "O maximo de PH sobe nos niveis 10 e 16 e a geracao sobe no nivel 10, enquanto as faixas de balanceamento quebram em 9, 13 e 17. No nivel 9 - primeiro nivel da faixa 9-12 - o grupo ainda tem maximo 5, inicio 3 e +1 por acerto, ou seja 7,8 PH por combate, mas a premissa publicada para a faixa pede 4 Habilidades de Nivel 4 (12 PH) e a tabela de 8.2 publica 13,6 PH para 'faixa 9-12'. No nivel 9 o grupo sustenta ~2,6 usos, logo o DPC e a cadencia de Quebra da faixa nao valem no primeiro nivel dela.",
+      "fix": "Mover os degraus para as fronteiras de faixa, sem mexer em nenhum numero publicado (os niveis de referencia sao 3/7/11/15/19): 'Maximo de PH = 1 + numero de PJs, +1 na faixa 9-16, +2 na faixa 17-20' e 'geracao: +1 nas faixas 1-8, +2 nas faixas 9-20'. Com esses limites as linhas de 8.2 (7,8 / 7,8 / 13,6 / 13,6 / 14,6) e a linha de recursos de 17 passam a ser verdadeiras em todos os niveis de cada faixa, e as setas de transicao saem da tabela."
+    },
+    {
+      "id": 11,
+      "severity": "MEDIUM",
+      "location": "design.md secoes 17 (cabecalho 'Nenhum nivel sobe vazio' e tabela mestra), 5.3, 10.3, 23 (checar-tabelas.ps1)",
+      "problem": "Na tabela mestra, o nivel 2 repete TODAS as colunas do nivel 1: Eficiencia +2, 1 Bencao, 1 Habilidade conhecida, Nivel maximo de Habilidade 1, sem aumento de Atributo, 1 dado de Ataque Basico, sem Especializacao, teto de RD 6. A unica entrega do nivel 2 e PV. A afirmacao 'nenhum dos 20 niveis suba vazio' aparece em 5.3 e no cabecalho de 17, e 23 especifica que checar-tabelas.ps1 verifica exatamente isso - o gate do proprio projeto reprovaria a propria tabela. O reespacamento de 10.3 criou o buraco: na v0.1, 'no Nivel 2 voce pode ter Habilidades Nivel 2'.",
+      "fix": "Devolver o desbloqueio ao nivel 2, que e DNA e e o remendo mais barato: Nivel maximo de Habilidade = 1 no nivel 1 e 2 no nivel 2, sem mexer em mais nada (o nivel 3 continua com 2 Habilidades conhecidas e o primeiro aumento de Atributo). Atualizar as tabelas de 10.3 e 17 e definir no texto de 23 o que conta como 'entrega' para o script."
+    },
+    {
+      "id": 12,
+      "severity": "MEDIUM",
+      "location": "design.md secoes 8.1, 6.3, 18.1 (janelas-alvo), 18.3 (ficha padronizada e tabela de ancoras)",
+      "problem": "8.1 diz 'toda criatura comeca o combate com a Reacao disponivel' e, logo abaixo, 'Reacoes padrao de todo personagem: Esquiva e Intervir'. A ficha de inimigo de 18.3 nao tem campo de Reacao nem de Esquiva, e as janelas de acerto do grupo (70/60/55% nas cinco faixas) sao calculadas contra Defesa crua. Se um Elite ou um Boss puder Esquivar, ele soma a Eficiencia da faixa (+8 na 17-20) a Defesa uma vez por Ciclo, o acerto do grupo naquele ataque cai de 60% para 20% e o DPC cai cerca de um sexto - e o argumento que o documento usa contra Eficacia na Esquiva ('nao e uma Reacao boa, e imunidade a um ataque por turno') vale igualmente para o Boss. A ambiguidade esta entre 'criatura' e 'personagem' na mesma secao.",
+      "fix": "Decidir em 18.3 e repetir em 8.1: 'Inimigos nao tem Esquiva nem Intervir. A Reacao de um inimigo so existe se a ficha dele declarar uma, entre as 1 a 3 acoes especiais, e ela nunca e um bonus de Defesa.' Isso preserva as janelas publicadas. Se a decisao for a oposta, a Esquiva do inimigo precisa de premissa propria em 18.1 e o DPC das cinco faixas precisa ser refeito."
+    },
+    {
+      "id": 13,
+      "severity": "MEDIUM",
+      "location": "design.md secoes 15.1 (Executado), 8.1 (Reacoes padrao)",
+      "problem": "15.1 diz que um aliado pode impedir a Execucao 'com a Reacao Intervir'. Intervir e definida em 8.1 como 'voce se joga na frente de um aliado a ate Distancia Curta e recebe o dano no lugar dele; so contra um ataque de alvo unico' - e a Execucao nao e dano, e morte automatica sem rolagem. A Reacao citada nao tem onde se aplicar. 8.1 tambem nao diz se Intervir e declarada antes ou depois da rolagem, nem se o interventor usa a propria Defesa e a propria RD contra o ataque redirecionado.",
+      "fix": "Escrever a Reacao inteira em 8.1, incluindo o caso da Execucao: 'Intervir (Reacao): declare antes da rolagem, contra um ataque de alvo unico dirigido a um aliado a ate Distancia Curta. O ataque passa a ter voce como alvo e resolve contra a SUA Defesa e a SUA RD. Contra uma Execucao (15.1), Intervir cancela a Execucao: no lugar dela, o executor pode fazer o Ataque Basico dele contra voce, resolvido normalmente.'"
+    },
+    {
+      "id": 14,
+      "severity": "MEDIUM",
+      "location": "design.md secoes 9.6 (catalogo de condicoes: Lentidao e Marcado), 8.4, 15.4, 7.9",
+      "problem": "(i) Lentidao e '-1 Distancia por Acao de Movimento', e uma Acao de Movimento cobre exatamente 1 Distancia (8.4) - a condicao zera o movimento, e a ressalva entre parenteses ('sempre consegue mover ao menos ate Pessoal/Curta gastando o turno') mistura contagem de passos com nomes de Distancia e nao diz qual acao paga isso. 15.4 usa a mesma condicao para o personagem sobrecarregado, entao a ambiguidade se propaga para o inventario. (ii) Marcado tem como efeito 'O que a fonte disser' - condicao catalogada sem conteudo mecanico, exatamente a construcao que 7.9 proibe duas paginas antes, e e o destino de Marca do Vazio na regua de 11.4.",
+      "fix": "(i) 'Lentidao: a sua Acao de Movimento nao muda a sua Distancia. Para mover 1 passo voce precisa gastar Esforco Total (8.1). Nao acumula.' (ii) Dar piso mecanico a Marcado: 'Marcado: quem aplicou a marca ganha +1 em Testes de Ataque contra o alvo marcado; a fonte pode acrescentar um efeito, dentro do teto de bonus somado. Acumula ate 3 vezes, e marcas de fontes diferentes nao somam entre si.' Alternativa igualmente valida: apagar Marcado do catalogo e mandar as Bencaos usarem Vulneravel, que ja tem efeito fechado."
+    },
+    {
+      "id": 15,
+      "severity": "MEDIUM",
+      "location": "design.md secoes 11.4 (regua de conversao e regra geral de politica), 7.9, descricao do capitulo 07 em 20",
+      "problem": "11.4 declara que a tabela cobre 'todas as construcoes fora de escala que a v0.1 produz' e que 'nenhum efeito do livro cura, concede PV ou causa dano em porcentagem do PV maximo', com o Sangramento como unica excecao. O Caminho da Destruicao inteiro e construido sobre porcentagem de PV maximo COMO CUSTO, e nenhuma dessas construcoes tem linha na regua: Pacto da Ruina (perder 5% do PV maximo por turno), Sacrificio Desesperado (perder ate 25%, 1d6 por cada 10% perdido), Cicatriz da Destruicao (1 Marca a cada 20% de PV perdido) e, acima de tudo, Avatar da Destruicao ('sacrificar seus proprios PV, o quanto quiser, para aumentar o dado de dano; se o dano ja for d20 voce ganha +d20') - troca ilimitada de PV por dados, que no nivel 20 e a linha mais exploravel da v0.1. O catch-all ('cai na linha mais proxima') nao resolve, porque nao existe linha proxima. Pacto da Ruina ainda diz que o dano extra e igual ao 'seu bonus de Eficiencia OU Eficacia', e nada no documento decide se a Eficacia pode ser bonus de dano (4.3 so governa Testes).",
+      "fix": "Tres linhas novas na regua: 'custo em % do PV maximo (Pacto da Ruina, Sacrificio Desesperado, Cicatriz da Destruicao) -> mantem-se como custo, porque e a identidade do Caminho, convertido em PV igual a 2 x nivel por ativacao ou por acumulo'; 'sacrificar PV a vontade por dados (Avatar da Destruicao) -> gaste PV igual a 5 x nivel para ganhar +1 dado base, no maximo +2 dados por Ciclo, dentro do teto de dados adicionais (achado 9)'; 'dano adicional igual a Eficiencia OU Eficacia -> sempre Eficiencia; a Eficacia nao entra em dano, como nao entra em Teste de Ataque (4.3)'."
+    },
+    {
+      "id": 16,
+      "severity": "MEDIUM",
+      "location": "design.md secoes 16.3 (Cones de Luz e Sobreposicao), 16.4 (Reliquias), 17.1, 18.2, 24 (fora de escopo)",
+      "problem": "O orcamento de 18.2 assume que cada PJ carrega o Nivel de Cone e o Tier de Reliquia da faixa dele - sao 3 dos 19 pontos de ataque e 2 dos 22 de Defesa na faixa 17-20, e as Reliquias Maos e Esfera Planar entram em todas as parcelas de dano. 17.1 diz que um personagem substituto entra 'com o equipamento do tier da faixa'. Mas nenhuma secao diz COMO um PJ adquire um Cone ou uma Reliquia, quem concede, nem com que ritmo; e a Sobreposicao de 16.3 pressupoe Cones duplicados, isto e, uma economia de drop que 24 coloca fora de escopo ('economia de creditos' e suplemento). Sem a regra, cada capitulo inventa a sua e o balanceamento depende de uma suposicao nao escrita.",
+      "fix": "Um paragrafo em 16.4, com ponteiro em 16.3 e no capitulo 27: 'Aquisicao. Cones de Luz e Reliquias sao recompensas de marco, concedidas pelo Mestre. Ao entrar em cada faixa de nivel, cada personagem recebe o Tier de Reliquia da faixa nos slots que ja possui e pode trocar o Cone de Luz pelo Nivel que o nivel dele permite. Sobreposicao e recompensa narrativa, no maximo uma por faixa. Nao existe compra de Reliquia nem economia de creditos (24).'"
+    },
+    {
+      "id": 17,
+      "severity": "NIT",
+      "location": "design.md secoes 18.1 (cabecalho e o paragrafo 'Dezesseis sao consequencia das regras'), 18.5, 21.1 (ponto 16), 23",
+      "problem": "A tabela de premissas tem 18 linhas (a 18a e 'Testes de Resistencia contra efeitos do inimigo'), e o texto diz 'as 17 premissas' em quatro lugares. O paragrafo tambem chama a Fraqueza de 'a decima setima', quando ela e a setima linha da tabela.",
+      "fix": "Trocar por 'as 18 premissas' nos quatro lugares e reescrever a frase como 'dezessete sao consequencia das regras e qualquer leitor as recalcula; a da Fraqueza e a unica que depende de uma escolha do Mestre'."
+    },
+    {
+      "id": 18,
+      "severity": "NIT",
+      "location": "design.md secao 18.3 ('Ciclos ate a resolucao')",
+      "problem": "Refazendo a conta do perfil de Boss na faixa 1-4 (acerto 55%, RD 4, Quebra a cada 2 Ciclos) o resultado e ~76 por Ciclo, nao 83 - o que da 4,0 Ciclos contra os 305 PV do Boss, e nao 3,7. O numero da faixa 17-20 (~246 contra 935, 3,8 Ciclos) reproduz a 2%. Os dois resultados ficam dentro da janela de 3 a 5, entao e precisao, nao conclusao.",
+      "fix": "Publicar 76 e 4,0 Ciclos, ou abrir a conta do perfil de Boss no apendice 29 junto com as outras quatro faixas, como ja esta previsto em 18.5."
+    },
+    {
+      "id": 19,
+      "severity": "NIT",
+      "location": "design.md secao 18.1 (linha 'Taxa de acerto usada no calculo'), 18.2",
+      "problem": "A premissa diz que as taxas de 70/60/55% ja incluem 'o efeito do suporte'. As taxas saem exatamente do bonus cru do ponto medio de 18.2 contra as Defesas de 18.3 (conferi as 15 combinacoes): nenhum buff de aliado entra na conta, e um buff dentro do teto (+3 a +5) mudaria o acerto em 15 a 25 pontos percentuais.",
+      "fix": "Apagar 'ja incluindo o efeito do suporte' da linha e, se a intencao era dizer que um dos quatro turnos e do suporte, dizer isso: 'o turno de suporte esta contado no mix de acoes, e o buff dele e margem declarada em o que as premissas deixam de fora'."
+    },
+    {
+      "id": 20,
+      "severity": "NIT",
+      "location": "design.md secao 18.3 ('o dia, nao o combate'), 15.2",
+      "problem": "Pela formula de Descanso Curto (2 x nivel + Bonus de Vigor), dois descansos devolvem 22% do PV do grupo na faixa 1-4 e 32% na 17-20, nao 'cerca de 30%'. A janela publicada de 51-64% no terceiro combate esta certa justamente porque as duas pontas usam valores diferentes; e a frase intermediaria que arredonda demais.",
+      "fix": "Trocar por 'os dois Descansos Curtos devolvem de 22% (faixa 1-4) a 32% (faixa 17-20) do PV do grupo'."
+    },
+    {
+      "id": 21,
+      "severity": "NIT",
+      "location": "design.md secao 20.2 (linha E06), 10.1",
+      "problem": "E06 cita '18/25/36/60/100 -> 21/27/39/63/105', que e a tabela de dano. A tabela de CURA da v0.1 (20/30/48/70) tem o mesmo defeito de media truncada, e 10.1 ja publica os valores certos (22/33/52/73) - mas o erro nao esta registrado no mapa de erros, que e o checklist que a escrita vai usar.",
+      "fix": "Acrescentar a celula de correcao de E06: 'e as medias de cura 20/30/48/70 -> 22/33/52/73'."
+    },
+    {
+      "id": 22,
+      "severity": "NIT",
+      "location": "design.md secao 8.5 (justificativa do Nivel equivalente), 10.3, 17",
+      "problem": "Cruzando o Nivel equivalente por faixa com o Nivel maximo de Habilidade por nivel, a Ultimate EMPATA com o topo nos niveis 9, 10, 11, 13, 14 e 17, fica ACIMA nos niveis 5 a 8 (equivalente 3 contra Nivel maximo 2 no nivel 5) e so fica abaixo nos niveis 12, 15, 16, 18, 19 e 20. A justificativa escrita ('nas faixas altas a Ultimate fica um Nivel abaixo... se empatasse, o jogador racional pararia de gastar PH') descreve 6 dos 20 niveis.",
+      "fix": "Manter a tabela, que e simples e boa, e corrigir a justificativa: a Ultimate empata com o topo em metade dos niveis de proposito, e o PH continua valendo porque a Ultimate sai 1 vez a cada 3-4 turnos e a Habilidade sai todo turno - a limitacao dela e Energia, nao PH."
+    },
+    {
+      "id": 23,
+      "severity": "NIT",
+      "location": "design.md secoes 13.1 (alvo de projeto do Memoespirito), 23 (simular-combate.ps1)",
+      "problem": "O script deve reprovar se o Memoespirito sair da janela de '15% a 25% do dano do dono', e o documento nao define o que e 'dano do dono': o DPC do grupo dividido por 4, a parcela do turno dele, ou o dano de uma Habilidade de topo. As tres leituras dao 19%, ~50% e ~10% para o mesmo Memoespirito de faixa 17-20 (recalculei os +18 de ataque e os 5d6+5 ~ 22 de dano: batem com as formulas de 13.1). Um gate de aprovacao nao pode ter denominador ambiguo.",
+      "fix": "Definir em 13.1: 'dano do dono = DPC de referencia da faixa / 4 (o dano medio de um personagem por Ciclo). Na faixa 17-20 isso e 68, e os ~13 do Memoespirito depois de RD e taxa de acerto sao 19%.'"
+    },
+    {
+      "id": 24,
+      "severity": "NIT",
+      "location": "design.md secoes 7.9 (cinco conversoes), 3.2, 8.4",
+      "problem": "Cinco linhas da tabela de normalizacao mandam a escrita usar '+1 Distancia de Movimento', termo que nao aparece na lista de nomenclatura de 3.2 nem e definido em 8.4, que fala de 'passos' na escala. A escrita vai inferir certo, mas o glossario do capitulo 30 ficara sem a entrada.",
+      "fix": "Acrescentar a 3.2 e ao glossario: 'Distancia de Movimento - quantos passos da escala de 8.4 uma Acao de Movimento cobre. Base 1; Esforco Total dobra; o maximo por turno, com todos os bonus, e 3.'"
+    },
+    {
+      "id": 25,
+      "severity": "NIT",
+      "location": "design.md secao 9.3, 21.2 (changelog)",
+      "problem": "A v0.1 fecha a regra de Fraquezas com 'a Reducao e Aumento de dados com base em Fraquezas e Resistencias pode ser aumentada ou diminuida com base na forca do causador de dano'. A v1.0 fixa +/-2 dados e, corretamente, nao implementa a clausula - mas 9.3 afirma que a regra foi 'mantida ao pe da letra' e o descarte nao esta registrado em lugar nenhum.",
+      "fix": "Trocar por 'regra da v0.1 mantida, com os +/-2 dados fixos' e acrescentar uma linha ao changelog 21.2: 'a clausula de variacao por forca do causador foi aposentada: dado extra sem teto era a porta aberta que o teto de dados adicionais (9.6) fecha'."
+    },
+    {
+      "id": 26,
+      "severity": "NIT",
+      "location": "design.md secao 18.3 (paragrafo 'Por que a VEL do inimigo e essa'), 6.5",
+      "problem": "Com os numeros do proprio paragrafo, a Caca equipada da faixa 17-20 chega a VEL 24 (25 com Armadura Leve) contra VEL 19 do Boss. Nao e 'disputa a primeira casa com o Boss', e vitoria com 5 casas de folga. Uma Caca que nao investe em Agilidade (+1) chega a 19 e ai sim empata.",
+      "fix": "Trocar por 'a Caca equipada age antes de todo Comum, Elite e Boss da faixa dela; uma Caca que nao investe em Agilidade empata com o Boss e decide o empate pelo Bonus de Agilidade (7.3)'."
+    }
+  ],
+  "reviewDoc": "g:\\Meu Drive\\DriveSyncFiles\\Explorando Galáxias RPG\\.agents\\tasks\\design-review.md"
+}

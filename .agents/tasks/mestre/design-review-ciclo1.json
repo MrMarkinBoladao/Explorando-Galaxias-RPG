@@ -1,0 +1,114 @@
+{
+  "verdict": "CHANGES_REQUESTED",
+  "findings": [
+    {
+      "id": 1,
+      "blocking": true,
+      "label": "Semente com correlação linear",
+      "confidence": "confirmed",
+      "section": "5",
+      "issue": "h é soma linear de S, G, R e C, e as três rodadas de Lehmer são multiplicações mod M, então x3 é afim em h: campos do mesmo gerador ficam a deslocamento fixo (x3(C2) = x3(C1) + const) e cada 'rolar de novo' anda passo fixo. Simulado: propriedade (f) dá 6,7% de cobertura contra meta de 60%; 10d6 do rolador sai em escada [4,4,4,5,5,5,5,6,6,6]; rumores andam sempre -6 na lista.",
+      "action": "Inserir um passo não linear (ex.: v = Lehmer3(h); w = v² mod M por partição de 16 bits; x3 = Lehmer3(w), testado com 88-91% de cobertura e intermediários < 2,9e14) e acrescentar à suíte determinismo testes de correlação serial entre rolagens e entre campos consecutivos (inclusive os dados do rolador)."
+    },
+    {
+      "id": 2,
+      "blocking": true,
+      "label": "Aceite de H1 impossível no Dano",
+      "confidence": "confirmed",
+      "section": "8 (H1), 6.7.1",
+      "issue": "Com a interpolação escrita, o Dano desvia da âncora da faixa em até 33,3% (Comum nível 4: 4 contra 3), 23,1% (Elite nível 5) e 25,0% (Boss nível 5); o critério (c) de H1 falha acima de 20%.",
+      "action": "Não interpolar o Dano (usar a âncora da faixa do nível) ou definir limiar por coluna com justificativa, para que método e aceite fiquem coerentes."
+    },
+    {
+      "id": 3,
+      "blocking": true,
+      "label": "Virada de fase pelo PV",
+      "confidence": "confirmed",
+      "section": "6.10",
+      "issue": "A fase é calculada do PV atual e alimenta Fraquezas e calculadora na hora em que a barra cruza o limiar, contrariando 28.5 regra 5 (virada no fim do turno do Boss). Também falta 28.5 regra 3: Tenacidade volta ao máximo na virada; com Tenacidade atual = MAX(0, máx - redução) a redução da fase anterior continua descontando.",
+      "action": "Separar 'fase da barra' (calculada, só aviso) de 'fase em vigor' (entrada do Mestre, aplicada no fim do turno do Boss) e fazer a virada pedir ou aplicar a volta da Tenacidade ao máximo."
+    },
+    {
+      "id": 4,
+      "blocking": true,
+      "label": "Chave da Fila sem atributo de inimigo",
+      "confidence": "likely",
+      "section": "6.10",
+      "issue": "A chave usa (Ag+20)*1000 + (Disc+20)*10 sem definir o valor para inimigos (que não têm atributos, 28.2); com 0, um PJ de Agilidade -1 perde o empate de VEL para o inimigo, ao contrário do que o design afirma.",
+      "action": "Fixar que os termos de atributo do inimigo valem 0 na chave (sem o +20) e incluir caso com Agilidade -1 no oráculo."
+    },
+    {
+      "id": 5,
+      "blocking": true,
+      "label": "Layout de Combate, Inimigos e Grupo",
+      "confidence": "likely",
+      "section": "6.3, 6.7.1, 6.10, D4",
+      "issue": "Combate lista ~40 campos por inimigo, Inimigos da campanha 33 por linha e Grupo 21 entradas por PJ, mas o design exige A:L e área <= 1360 px (fatal no ajustar_layout) sem dizer como dividir.",
+      "action": "Declarar a estratégia de layout: sub-tabelas por assunto com o rótulo do combatente repetido, ou cartão de várias linhas por combatente."
+    },
+    {
+      "id": 6,
+      "blocking": true,
+      "label": "Heurísticas sem número ou sem validação",
+      "confidence": "confirmed",
+      "section": "8, 6.2, 6.5, 6.6, 6.7.2, 6.9, 6.11, 6.12",
+      "issue": "H16 e H17 não têm validação. Heurísticas fora da tabela H escapam do registro em 'sugestoes' e da checagem de rótulo: Fraquezas sugeridas G=110 (ordem e Comum = 2), troca sugerida no encontro aleatório, 50/50 entre ganchos do livro e da tabela, 0-2 consumíveis, cadeia de fallback do antagonista, aviso 'mais de 3 missões Ativas', limites da mesa na Sessão Zero.",
+      "action": "Dar validação a H16 e H17 e registrar cada heurística solta como H# com rótulo 'Sugestão da planilha' e validação, ou absorvê-la explicitamente numa H existente."
+    },
+    {
+      "id": 7,
+      "blocking": true,
+      "label": "COUNT fora da lista branca",
+      "confidence": "confirmed",
+      "section": "6.8",
+      "issue": "IF(k>COUNT(ordem),...) usa COUNT, que não está em build\\ficha_funcoes_ok.json; o lint reprova.",
+      "action": "Trocar por SUMPRODUCT(ISNUMBER(ordem)*1)."
+    },
+    {
+      "id": 8,
+      "blocking": true,
+      "label": "Índice 0 em Minhas Tabelas",
+      "confidence": "confirmed",
+      "section": "6.17",
+      "issue": "MOD(i0 + k*passo, n) com i0 de 1 a n devolve 0 a n-1; o índice 0 faz MATCH(0, aux, 0) cair numa linha de contador zero, não numa vaga.",
+      "action": "Escrever MOD(i0 - 1 + k*passo, n) + 1."
+    },
+    {
+      "id": 9,
+      "blocking": true,
+      "label": "Contagem de bestiario_fases",
+      "confidence": "confirmed",
+      "section": "4.1",
+      "issue": "O design diz 13 linhas; o livro tem 12 fases (três Bosses de 2 fases: 305, 580, 750 PV; dois de 3 fases: 935 PV). O parser falha alto em contagem diferente.",
+      "action": "Corrigir para 12 linhas."
+    },
+    {
+      "id": 10,
+      "blocking": false,
+      "label": "Dependências implícitas de geradores",
+      "confidence": "likely",
+      "section": "5 (b), 6.6, 6.11",
+      "issue": "A recompensa da aventura usa G=400 sem dizer de onde vêm faixa e leitura de dificuldade; se forem as entradas da aba Recompensas, a propriedade (b) quebra. Os ganchos de NPC e de aventura dependem do nível do grupo, que a (b) não lista como parâmetro.",
+      "action": "Explicitar os parâmetros desses geradores na propriedade (b)."
+    },
+    {
+      "id": 11,
+      "blocking": false,
+      "label": "Impressão no Google",
+      "confidence": "likely",
+      "section": "6.15, 15",
+      "issue": "O Google Planilhas não usa a área de impressão e as quebras de página do .xlsx ao importar.",
+      "action": "Incluir na seção 11 do guia os ajustes do diálogo de impressão do Google (A4, paisagem, ajustar à largura)."
+    },
+    {
+      "id": 12,
+      "blocking": false,
+      "label": "Tique de Embaraço e Aprisionamento",
+      "confidence": "confirmed",
+      "section": "6.10",
+      "issue": "A lista de tique de dano das condições não traz Embaraço (1d6 por acúmulo) nem Aprisionamento (1d6 + Eficiência), que estão em 21.5.",
+      "action": "Acrescentar os dois ao cálculo de tique."
+    }
+  ],
+  "reviewDoc": "g:\\Meu Drive\\DriveSyncFiles\\Explorando Galáxias RPG\\.agents\\tasks\\mestre\\design-review.md"
+}

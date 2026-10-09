@@ -1,0 +1,122 @@
+﻿python : 
+No linha:1 caractere:22
++ ... ONUTF8="1"; python 
+"g:\Meu Drive\DriveSyncFiles
+\Explorando Galáxias R ...
++                 ~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          
+    : NotSpecified: (:Stri  
+  ng) [], RemoteException
+    + FullyQualifiedErrorId 
+    : NativeCommandError
+ 
+=== Su├¡te spike: OK ÔÇö 23 checagens, 0 falha(s)
+  ┬À carga do modelo: 1.37 s
+  ┬À calculate (todas as sa├¡das): 0.0290 s
+  ┬À calculate (cen├írio com 3 entradas, 8 sa├¡das): 0.0089 s
+  ┬À comportamento ÔÇö duplo menos un├írio (--): formulas=0, Google=2  (DIVERGE)
+  ┬À comportamento ÔÇö COUNTIF "?*" em intervalo com n├║mero e texto: formulas=2, Google=1  (DIVERGE)
+  ┬À comportamento ÔÇö TRIM com espa├ºo duplo interno: formulas='a  b', Google='a b'  (DIVERGE)
+  ┬À comportamento ÔÇö divis├úo por zero sem prote├º├úo: formulas='#DIV/0!', Google='#DIV/0!'
+  ┬À comportamento ÔÇö MATCH sem achado: formulas='#N/A', Google='#N/A'
+  ┬À comportamento ÔÇö texto vazio em conta (""+1): formulas='#VALUE!', Google='#VALUE!'
+  ┬À comportamento ÔÇö refer├¬ncia a c├®lula vazia (=A3): formulas=0, Google=''  (DIVERGE)
+  ┬À comportamento ÔÇö ISBLANK("") (texto vazio n├úo ├® c├®lula vazia): formulas=False, Google=False
+  ┬À revis├úo 2: 9 checagens da leitura protegida e do contador de erros
+  ┬À REPROVADA [TRIM] =TRIM("  a  b ") ÔåÆ obtido 'a  b', esperado 'a b'
+  ┬À lista efetiva (33): IF, IFERROR, AND, OR, NOT, SUM, SUMIF, SUMPRODUCT, COUNTIF, COUNTIFS, COUNTA, COUNTBLANK, INDEX, MATCH, VLOOKUP, HLOOKUP, CHOOSE, MIN, MAX, ROUNDUP, ROUND, INT, MOD, ABS, LEN, CONCATENATE, REPT, ISBLANK, ISNUMBER, ISERROR, ROWS, LARGE, SMALL + operador &
+  ┬À veredito acento em nome de aba: ok
+  ┬À gravado G:\Meu Drive\DriveSyncFiles\Explorando Gal├íxias RPG\build\ficha_funcoes_ok.json
+  ┬À tempo da su├¡te: 1.8 s
+=== Su├¡te protegidos: OK ÔÇö 76 checagens, 0 falha(s)
+  ┬À 38 arquivos conferidos
+  ┬À tempo da su├¡te: 0.2 s
+=== Su├¡te dados: OK ÔÇö 3297 checagens, 0 falha(s)
+  ┬À 49 blocos e 32 listas conferidos c├®lula a c├®lula; 51 ├óncoras; 108 B├¬n├º├úos
+  ┬À tempo da su├¡te: 0.5 s
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=== Su├¡te ouro: OK ÔÇö 533 checagens, 0 falha(s)
+  ┬À planilha carregada em 11.9 s
+  ┬À (n) cobertura: 78 campos das fichas 29.8 e 29.9, 230 c├®lulas conferidas no mapa
+  ┬À planilha: casos (a)ÔÇô(o) comparados, calculados na planilha pela biblioteca formulas
+  ┬À (p) Ficha Exemplo - Nadir: 42 entradas, 2947 c├®lulas com f├│rmula iguais ao modelo, 0 diferen├ºa(s), 0 aviso(s)
+  ┬À modo completo: or├ículo e PLANILHA (calculada pela biblioteca formulas)
+  ┬À tempo da su├¡te: 67.2 s
+=== Su├¡te oraculo: OK ÔÇö 247 checagens, 0 falha(s)
+  ┬À 126 casos da matriz, 60 da varredura (3 ├ù 20), 61 casos-limite
+  ┬À 247 casos, 43712 sa├¡das comparadas, 234 c├│digos de aviso do or├ículo conferidos na planilha; 0 diverg├¬ncia(s); 8 processo(s), 181 s
+  ┬À tempo da su├¡te: 181.5 s
+=== Su├¡te extremos: OK ÔÇö 2714 checagens, 0 falha(s)
+  ┬À 2947 c├®lulas com f├│rmula; 358 entradas; 218 c├®lulas de aviso
+  ┬À 657 cen├írios de um campo por vez
+  ┬À revis├úo 2: 366 cen├írios com valor de erro numa entrada (358 entradas: 20 decimal, 83 inteiro, 196 lista, 59 texto; mais 7 por cima da Nadir e o caso do usu├írio)
+
+  ┬À 1131 cen├írios em 8 processo(s)
+  ┬À tempo dos cen├írios: 775 s
+  ┬À tempo da su├¡te: 775.7 s
+=== Su├¡te lint: OK ÔÇö 11924 checagens, 0 falha(s)
+  ┬À revis├úo 2: 196 listas suspensas, 4098 op├º├Áes conferidas (=, +, -, @, data, hora, n├║mero em texto, booleano)
+  ┬À revis├úo 2: 2947 f├│rmulas conferidas, 0 leitura(s) direta(s) de entrada; 333 c├®lulas na camada de leitura protegida, 358 entradas com sinal de erro em 206 linhas; 12 c├®lulas do contador da In├¡cio
+  ┬À Em Jogo: A:L soma 1360 px; tela nas linhas 1-40; t├¡tulo e legenda a partir da linha 42
+  ┬À 2947 f├│rmulas, 299 valida├º├Áes, 229 regras de formata├º├úo condicional conferidas em 10 abas
+  ┬À tempo da su├¡te: 1.0 s
+=== Su├¡te texto: OK ÔÇö 1006920 checagens, 0 falha(s)
+  ┬À 7645 trechos de texto vis├¡vel extra├¡dos (valores, literais de f├│rmula, valida├º├Áes, abas)
+  ┬À (2) 2 grafia(s) fora do gloss├írio que s├úo cita├º├úo literal do livro (aceitas): 'B├┤nus de atributo' em 'Dados'!B6; 'dano cont├¡nuo' em 'Dados'!C377
+  ┬À (1) 25 strings proibidas + 18 aposentadas ├ù trechos = 328735 buscas; (2) 97 termos do gloss├írio, 2707 ocorr├¬ncias conferidas; (3) 25630 palavras, l├®xico de 4911 palavras do livro + 89 extras; (4) 85 formas sem acento, 649825 buscas
+  ┬À tempo da su├¡te: 7.7 s
+=== Su├¡te preview: OK ÔÇö 278 checagens, 0 falha(s)
+  ┬À Em Jogo, pior caso: 13 efeitos de condi├º├úo, 6 Vantagens raciais e 53 B├¬n├º├úos com frequ├¬ncia medidos (cabem numa linha)
+  ┬À 40 PNGs inteiros + 348 recortes 1:1 (Ôëñ 1800 ├ù 1800 px) em G:\Meu Drive\DriveSyncFiles\Explorando Gal├íxias RPG\.agents\tasks\ficha-preview; ├¡ndice em indice-recortes.txt; 0 texto(s) cortado(s); Em Jogo A:L ├ù 1-40 = 1360 ├ù 760 px
+  ┬À tempo da su├¡te: 149.1 s
+
+=== Su├¡te visual: OK ÔÇö 24036 checagens, 0 falha(s)
+  ┬À (1) 22625 textos medidos em 4 estados (em-branco 5262, nadir-nivel-1 5472, nivel-20-completo 5796, pior-caso 6095); 0 n├úo couberam
+  ┬À (2) 196 c├®lulas com lista suspensa conferidas (op├º├úo mais longa + 24 px)
+  ┬À (3) 552 c├®lulas com texto buscado na aba Dados e (4) 218 avisos medidos com o texto mais longo que a f├│rmula pode mostrar
+  ┬À (6) fonte >= 9 pt em todas as abas; (7) 14 combina├º├Áes de texto e fundo com contraste >= 4,5:1 (menor: 4.96:1)
+  ┬À (8) 56 tabelas fora da aba Dados: toda linha de dados a at├® 15 linhas do cabe├ºalho
+  ┬À (9) ├írea do jogador em at├® 1360 px em 9 abas (colunas auxiliares ocultas); Em Jogo A:L ├ù 1-40 = 1360 ├ù 760 px
+  ┬À (10) aviso, n├úo bloqueia: 57 coluna(s) com mais que o dobro do maior conte├║do: 'Caminho'!B (89 px, maior conte├║do 35 px); 'Caminho'!E (75 px, maior conte├║do 23 px); 'Cria├º├úo'!D (91 px, maior conte├║do 33 px); 'Cria├º├úo'!E (93 px, maior conte├║do 35 px); 'Cria├º├úo'!G (111 px, maior conte├║do 23 px); 'Cria├º├úo'!H (87 px, maior conte├║do 23 px); 'Cria├º├úo'!I (91 px, maior conte├║do 23 px); 'Cria├º├úo'!J (82 px, maior conte├║do 23 px); 'Cria├º├úo'!K (103 px, maior conte├║do 23 px); 'Cria├º├úo'!L (130 px, maior conte├║do 23 px); 'Dados'!J (103 px, maior conte├║do 33 px); 'Dados'!K (111 px, maior conte├║do 15 px)
+  ┬À tempo da su├¡te: 79.4 s
+
+
+=== Su├¡te google: OK ÔÇö 4734 checagens, 0 falha(s)
+  ┬À export do Google (C├│pia): 4 entradas preenchidas: criacao.jogador = 'MCFilhos', criacao.metodo = 'Compra de Pontos', criacao.nome = 'BF "Blake Foster"', criacao.raca = 'Haloviano'
+  ┬À (a) revis├úo 1 ├ù Google: 2363 de 2363 c├®lulas iguais; diverg├¬ncias por tipo (formulas, Google): nenhuma
+  ┬À (b) revis├úo 2 ├ù Google: 2363 de 2363 c├®lulas iguais pelo nome l├│gico, 0 diverg├¬ncia(s) aceita(s) por r├│tulo novo, 0 sem par; 584 f├│rmulas novas da revis├úo 2 (camada, sinais, contador)
+  ┬À evid├¬ncia: export com erro tem 261 f├│rmula(s) com #ERROR!; entradas diferentes da C├│pia: criacao.raca = 'Humano', criacao.raca.atributo1 = 'Poder', criacao.raca.atributo2 = 'Agilidade', criacao.raca.modo = '#ERROR!'
+  ┬À (c) Humano + Dois Atributos (+1 cada) + Poder + Agilidade: 0 erro(s), contador 0, b├┤nus racial {'Poder': 1, 'Agilidade': 1, 'Vigor': 0, 'Sincronia': 0, 'Discernimento': 0, 'Presen├ºa': 0}
+  ┬À tempo da su├¡te: 34.3 s
+=== RESUMO
+  spike       OK      23 checagens, 0 falha(s)
+  protegidos  OK      76 checagens, 0 falha(s)
+  dados       OK      3297 checagens, 0 falha(s)
+  ouro        OK      533 checagens, 0 falha(s)
+  oraculo     OK      247 checagens, 0 falha(s)
+  extremos    OK      2714 checagens, 0 falha(s)
+  lint        OK      11924 checagens, 0 falha(s)
+  texto       OK      1006920 checagens, 0 falha(s)
+  preview     OK      278 checagens, 0 falha(s)
+  visual      OK      24036 checagens, 0 falha(s)
+  google      OK      4734 checagens, 0 falha(s)
+codigo 0

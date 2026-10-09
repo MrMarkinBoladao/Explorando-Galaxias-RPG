@@ -1,0 +1,1334 @@
+Recortes 1:1 da prévia da Planilha do Mestre (≤ 1800 px). arquivo · largura × altura · intervalo
+
+[em-branco] Início: em-branco-inicio-parte-01.png · 1780 × 1798 · A1:S78
+[em-branco] Início: em-branco-inicio-parte-02.png · 708 × 1798 · T1:Z78
+[em-branco] Início: em-branco-inicio-parte-03.png · 1780 × 1795 · A79:S166
+[em-branco] Início: em-branco-inicio-parte-04.png · 708 × 1795 · T79:Z166
+[em-branco] Início: em-branco-inicio-parte-05.png · 1780 × 1800 · A167:S255
+[em-branco] Início: em-branco-inicio-parte-06.png · 708 × 1800 · T167:Z255
+[em-branco] Início: em-branco-inicio-parte-07.png · 1780 × 1800 · A256:S344
+[em-branco] Início: em-branco-inicio-parte-08.png · 708 × 1800 · T256:Z344
+[em-branco] Início: em-branco-inicio-parte-09.png · 1780 × 560 · A345:S371
+[em-branco] Início: em-branco-inicio-parte-10.png · 708 × 560 · T345:Z371
+[em-branco] Campanha: em-branco-campanha-parte-01.png · 1780 × 1761 · A1:X51
+[em-branco] Campanha: em-branco-campanha-parte-02.png · 516 × 1761 · Y1:AK51
+[em-branco] Campanha: em-branco-campanha-parte-03.png · 1780 × 1771 · A52:X70
+[em-branco] Campanha: em-branco-campanha-parte-04.png · 516 × 1771 · Y52:AK70
+[em-branco] Campanha: em-branco-campanha-parte-05.png · 1780 × 1737 · A71:X87
+[em-branco] Campanha: em-branco-campanha-parte-06.png · 516 × 1737 · Y71:AK87
+[em-branco] Campanha: em-branco-campanha-parte-07.png · 1780 × 1682 · A88:X101
+[em-branco] Campanha: em-branco-campanha-parte-08.png · 516 × 1682 · Y88:AK101
+[em-branco] Campanha: em-branco-campanha-parte-09.png · 1780 × 1775 · A102:X122
+[em-branco] Campanha: em-branco-campanha-parte-10.png · 516 × 1775 · Y102:AK122
+[em-branco] Campanha: em-branco-campanha-parte-11.png · 1780 × 1797 · A123:X159
+[em-branco] Campanha: em-branco-campanha-parte-12.png · 516 × 1797 · Y123:AK159
+[em-branco] Campanha: em-branco-campanha-parte-13.png · 1780 × 1711 · A160:X178
+[em-branco] Campanha: em-branco-campanha-parte-14.png · 516 × 1711 · Y160:AK178
+[em-branco] Campanha: em-branco-campanha-parte-15.png · 1780 × 1030 · A179:X192
+[em-branco] Campanha: em-branco-campanha-parte-16.png · 516 × 1030 · Y179:AK192
+[em-branco] Grupo: em-branco-grupo-parte-01.png · 1491 × 1768 · A1:O38
+[em-branco] Grupo: em-branco-grupo-parte-02.png · 1491 × 1725 · A39:O85
+[em-branco] Sessões: em-branco-sessoes-parte-01.png · 1492 × 1741 · A1:P45
+[em-branco] Sessões: em-branco-sessoes-parte-02.png · 1492 × 1750 · A46:P79
+[em-branco] Sessões: em-branco-sessoes-parte-03.png · 1492 × 1782 · A80:P106
+[em-branco] Sessões: em-branco-sessoes-parte-04.png · 1492 × 1800 · A107:P129
+[em-branco] Sessões: em-branco-sessoes-parte-05.png · 1492 × 67 · A130:P131
+[em-branco] Missões: em-branco-missoes-parte-01.png · 1780 × 1658 · A1:Q14
+[em-branco] Missões: em-branco-missoes-parte-02.png · 1284 × 1658 · R1:AJ14
+[em-branco] Missões: em-branco-missoes-parte-03.png · 1780 × 1669 · A15:Q23
+[em-branco] Missões: em-branco-missoes-parte-04.png · 1284 × 1669 · R15:AJ23
+[em-branco] Missões: em-branco-missoes-parte-05.png · 1780 × 1686 · A24:Q34
+[em-branco] Missões: em-branco-missoes-parte-06.png · 1284 × 1686 · R24:AJ34
+[em-branco] Missões: em-branco-missoes-parte-07.png · 1780 × 1699 · A35:Q46
+[em-branco] Missões: em-branco-missoes-parte-08.png · 1284 × 1699 · R35:AJ46
+[em-branco] Missões: em-branco-missoes-parte-09.png · 1780 × 1795 · A47:Q101
+[em-branco] Missões: em-branco-missoes-parte-10.png · 1284 × 1795 · R47:AJ101
+[em-branco] Missões: em-branco-missoes-parte-11.png · 1780 × 80 · A102:Q104
+[em-branco] Missões: em-branco-missoes-parte-12.png · 1284 × 80 · R102:AJ104
+[em-branco] NPCs: em-branco-npcs-parte-01.png · 1780 × 1757 · A1:R50
+[em-branco] NPCs: em-branco-npcs-parte-02.png · 1476 × 1757 · S1:BD50
+[em-branco] NPCs: em-branco-npcs-parte-03.png · 1780 × 1735 · A51:R73
+[em-branco] NPCs: em-branco-npcs-parte-04.png · 1476 × 1735 · S51:BD73
+[em-branco] NPCs: em-branco-npcs-parte-05.png · 1780 × 1762 · A74:R97
+[em-branco] NPCs: em-branco-npcs-parte-06.png · 1476 × 1762 · S74:BD97
+[em-branco] NPCs: em-branco-npcs-parte-07.png · 1780 × 1750 · A98:R121
+[em-branco] NPCs: em-branco-npcs-parte-08.png · 1476 × 1750 · S98:BD121
+[em-branco] NPCs: em-branco-npcs-parte-09.png · 1780 × 1800 · A122:R145
+[em-branco] NPCs: em-branco-npcs-parte-10.png · 1476 × 1800 · S122:BD145
+[em-branco] NPCs: em-branco-npcs-parte-11.png · 1780 × 1796 · A146:R169
+[em-branco] NPCs: em-branco-npcs-parte-12.png · 1476 × 1796 · S146:BD169
+[em-branco] NPCs: em-branco-npcs-parte-13.png · 1780 × 1770 · A170:R192
+[em-branco] NPCs: em-branco-npcs-parte-14.png · 1476 × 1770 · S170:BD192
+[em-branco] NPCs: em-branco-npcs-parte-15.png · 1780 × 1776 · A193:R215
+[em-branco] NPCs: em-branco-npcs-parte-16.png · 1476 × 1776 · S193:BD215
+[em-branco] NPCs: em-branco-npcs-parte-17.png · 1780 × 682 · A216:R232
+[em-branco] NPCs: em-branco-npcs-parte-18.png · 1476 × 682 · S216:BD232
+[em-branco] Inimigos: em-branco-inimigos-parte-01.png · 1684 × 1770 · A1:DP48
+[em-branco] Inimigos: em-branco-inimigos-parte-02.png · 1684 × 1745 · A49:DP94
+[em-branco] Inimigos: em-branco-inimigos-parte-03.png · 1684 × 1781 · A95:DP130
+[em-branco] Inimigos: em-branco-inimigos-parte-04.png · 1684 × 1791 · A131:DP165
+[em-branco] Inimigos: em-branco-inimigos-parte-05.png · 1684 × 1754 · A166:DP193
+[em-branco] Inimigos: em-branco-inimigos-parte-06.png · 1684 × 954 · A194:DP219
+[em-branco] Bestiário: em-branco-bestiario-parte-01.png · 1492 × 1786 · A1:Q44
+[em-branco] Bestiário: em-branco-bestiario-parte-02.png · 1492 × 1755 · A45:Q84
+[em-branco] Bestiário: em-branco-bestiario-parte-03.png · 1492 × 1392 · A85:Q121
+[em-branco] Encontros: em-branco-encontros-parte-01.png · 1780 × 1771 · A1:BF56
+[em-branco] Encontros: em-branco-encontros-parte-02.png · 1780 × 1767 · A57:BF112
+[em-branco] Encontros: em-branco-encontros-parte-03.png · 1780 × 301 · A113:BF122
+[em-branco] Combate: em-branco-combate-parte-01.png · 1780 × 1797 · A1:BZ45
+[em-branco] Combate: em-branco-combate-parte-02.png · 1780 × 1784 · A46:BZ73
+[em-branco] Combate: em-branco-combate-parte-03.png · 1780 × 1755 · A74:BZ104
+[em-branco] Combate: em-branco-combate-parte-04.png · 1780 × 1747 · A105:BZ135
+[em-branco] Combate: em-branco-combate-parte-05.png · 1780 × 1785 · A136:BZ172
+[em-branco] Combate: em-branco-combate-parte-06.png · 1780 × 1770 · A173:BZ195
+[em-branco] Combate: em-branco-combate-parte-07.png · 1780 × 1773 · A196:BZ223
+[em-branco] Combate: em-branco-combate-parte-08.png · 1780 × 1754 · A224:BZ251
+[em-branco] Combate: em-branco-combate-parte-09.png · 1780 × 1786 · A252:BZ279
+[em-branco] Combate: em-branco-combate-parte-10.png · 1780 × 1770 · A280:BZ302
+[em-branco] Combate: em-branco-combate-parte-11.png · 1780 × 386 · A303:BZ311
+[em-branco] Aventuras: em-branco-aventuras-parte-01.png · 1780 × 1795 · A1:S62
+[em-branco] Aventuras: em-branco-aventuras-parte-02.png · 1188 × 1795 · T1:AR62
+[em-branco] Aventuras: em-branco-aventuras-parte-03.png · 1780 × 1100 · A63:S116
+[em-branco] Aventuras: em-branco-aventuras-parte-04.png · 1188 × 1100 · T63:AR116
+[em-branco] Recompensas: em-branco-recompensas-parte-01.png · 1780 × 1790 · A1:S72
+[em-branco] Recompensas: em-branco-recompensas-parte-02.png · 996 × 1790 · T1:AI72
+[em-branco] Recompensas: em-branco-recompensas-parte-03.png · 1780 × 1745 · A73:S132
+[em-branco] Recompensas: em-branco-recompensas-parte-04.png · 996 × 1745 · T73:AI132
+[em-branco] Recompensas: em-branco-recompensas-parte-05.png · 1780 × 1791 · A133:S147
+[em-branco] Recompensas: em-branco-recompensas-parte-06.png · 996 × 1791 · T133:AI147
+[em-branco] Recompensas: em-branco-recompensas-parte-07.png · 1780 × 1404 · A148:S159
+[em-branco] Recompensas: em-branco-recompensas-parte-08.png · 996 × 1404 · T148:AI159
+[em-branco] Mundos: em-branco-mundos-parte-01.png · 1780 × 1785 · A1:T55
+[em-branco] Mundos: em-branco-mundos-parte-02.png · 708 × 1785 · U1:AD55
+[em-branco] Mundos: em-branco-mundos-parte-03.png · 1780 × 1489 · A56:T106
+[em-branco] Mundos: em-branco-mundos-parte-04.png · 708 × 1489 · U56:AD106
+[em-branco] Improviso: em-branco-improviso-parte-01.png · 1780 × 1766 · A1:R61
+[em-branco] Improviso: em-branco-improviso-parte-02.png · 900 × 1766 · S1:AD61
+[em-branco] Improviso: em-branco-improviso-parte-03.png · 1780 × 1453 · A62:R121
+[em-branco] Improviso: em-branco-improviso-parte-04.png · 900 × 1453 · S62:AD121
+[em-branco] Escudo do Mestre: em-branco-escudo-do-mestre-parte-01.png · 1396 × 1772 · A1:L78
+[em-branco] Escudo do Mestre: em-branco-escudo-do-mestre-parte-02.png · 1396 × 1709 · A79:L153
+[em-branco] Escudo do Mestre: em-branco-escudo-do-mestre-parte-03.png · 1396 × 537 · A154:L173
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-01.png · 1760 × 1736 · A1:X28
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-02.png · 1476 × 1736 · Y1:BA28
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-03.png · 1760 × 1786 · A29:X53
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-04.png · 1476 × 1786 · Y29:BA53
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-05.png · 1760 × 1755 · A54:X76
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-06.png · 1476 × 1755 · Y54:BA76
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-07.png · 1760 × 1735 · A77:X98
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-08.png · 1476 × 1735 · Y77:BA98
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-09.png · 1760 × 1755 · A99:X121
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-10.png · 1476 × 1755 · Y99:BA121
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-11.png · 1760 × 1787 · A122:X146
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-12.png · 1476 × 1787 · Y122:BA146
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-13.png · 1760 × 1735 · A147:X168
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-14.png · 1476 × 1735 · Y147:BA168
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-15.png · 1760 × 1740 · A169:X191
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-16.png · 1476 × 1740 · Y169:BA191
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-17.png · 1760 × 1755 · A192:X214
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-18.png · 1476 × 1755 · Y192:BA214
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-19.png · 1760 × 1800 · A215:X237
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-20.png · 1476 × 1800 · Y215:BA237
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-21.png · 1760 × 1787 · A238:X262
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-22.png · 1476 × 1787 · Y238:BA262
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-23.png · 1760 × 1755 · A263:X285
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-24.png · 1476 × 1755 · Y263:BA285
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-25.png · 1760 × 1795 · A286:X307
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-26.png · 1476 × 1795 · Y286:BA307
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-27.png · 1760 × 1740 · A308:X330
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-28.png · 1476 × 1740 · Y308:BA330
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-29.png · 1760 × 1740 · A331:X353
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-30.png · 1476 × 1740 · Y331:BA353
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-31.png · 1760 × 1723 · A354:X377
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-32.png · 1476 × 1723 · Y354:BA377
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-33.png · 1760 × 1800 · A378:X400
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-34.png · 1476 × 1800 · Y378:BA400
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-35.png · 1760 × 1740 · A401:X423
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-36.png · 1476 × 1740 · Y401:BA423
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-37.png · 1760 × 1800 · A424:X446
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-38.png · 1476 × 1800 · Y424:BA446
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-39.png · 1760 × 1740 · A447:X469
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-40.png · 1476 × 1740 · Y447:BA469
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-41.png · 1760 × 100 · A470:X470
+[em-branco] Minhas Tabelas: em-branco-minhas-tabelas-parte-42.png · 1476 × 100 · Y470:BA470
+[em-branco] Tabelas: em-branco-tabelas-parte-01.png · 1616 × 1790 · A1:H51
+[em-branco] Tabelas: em-branco-tabelas-parte-02.png · 918 × 1790 · I1:W51
+[em-branco] Tabelas: em-branco-tabelas-parte-03.png · 1616 × 1780 · A52:H103
+[em-branco] Tabelas: em-branco-tabelas-parte-04.png · 918 × 1780 · I52:W103
+[em-branco] Tabelas: em-branco-tabelas-parte-05.png · 1616 × 1797 · A104:H157
+[em-branco] Tabelas: em-branco-tabelas-parte-06.png · 918 × 1797 · I104:W157
+[em-branco] Tabelas: em-branco-tabelas-parte-07.png · 1616 × 1795 · A158:H209
+[em-branco] Tabelas: em-branco-tabelas-parte-08.png · 918 × 1795 · I158:W209
+[em-branco] Tabelas: em-branco-tabelas-parte-09.png · 1616 × 1797 · A210:H263
+[em-branco] Tabelas: em-branco-tabelas-parte-10.png · 918 × 1797 · I210:W263
+[em-branco] Tabelas: em-branco-tabelas-parte-11.png · 1616 × 1780 · A264:H315
+[em-branco] Tabelas: em-branco-tabelas-parte-12.png · 918 × 1780 · I264:W315
+[em-branco] Tabelas: em-branco-tabelas-parte-13.png · 1616 × 1770 · A316:H367
+[em-branco] Tabelas: em-branco-tabelas-parte-14.png · 918 × 1770 · I316:W367
+[em-branco] Tabelas: em-branco-tabelas-parte-15.png · 1616 × 1794 · A368:H419
+[em-branco] Tabelas: em-branco-tabelas-parte-16.png · 918 × 1794 · I368:W419
+[em-branco] Tabelas: em-branco-tabelas-parte-17.png · 1616 × 1776 · A420:H472
+[em-branco] Tabelas: em-branco-tabelas-parte-18.png · 918 × 1776 · I420:W472
+[em-branco] Tabelas: em-branco-tabelas-parte-19.png · 1616 × 1781 · A473:H516
+[em-branco] Tabelas: em-branco-tabelas-parte-20.png · 918 × 1781 · I473:W516
+[em-branco] Tabelas: em-branco-tabelas-parte-21.png · 1616 × 1795 · A517:H568
+[em-branco] Tabelas: em-branco-tabelas-parte-22.png · 918 × 1795 · I517:W568
+[em-branco] Tabelas: em-branco-tabelas-parte-23.png · 1616 × 1790 · A569:H620
+[em-branco] Tabelas: em-branco-tabelas-parte-24.png · 918 × 1790 · I569:W620
+[em-branco] Tabelas: em-branco-tabelas-parte-25.png · 1616 × 1780 · A621:H672
+[em-branco] Tabelas: em-branco-tabelas-parte-26.png · 918 × 1780 · I621:W672
+[em-branco] Tabelas: em-branco-tabelas-parte-27.png · 1616 × 1788 · A673:H718
+[em-branco] Tabelas: em-branco-tabelas-parte-28.png · 918 × 1788 · I673:W718
+[em-branco] Tabelas: em-branco-tabelas-parte-29.png · 1616 × 1791 · A719:H767
+[em-branco] Tabelas: em-branco-tabelas-parte-30.png · 918 × 1791 · I719:W767
+[em-branco] Tabelas: em-branco-tabelas-parte-31.png · 1616 × 1792 · A768:H820
+[em-branco] Tabelas: em-branco-tabelas-parte-32.png · 918 × 1792 · I768:W820
+[em-branco] Tabelas: em-branco-tabelas-parte-33.png · 1616 × 1780 · A821:H872
+[em-branco] Tabelas: em-branco-tabelas-parte-34.png · 918 × 1780 · I821:W872
+[em-branco] Tabelas: em-branco-tabelas-parte-35.png · 1616 × 1780 · A873:H924
+[em-branco] Tabelas: em-branco-tabelas-parte-36.png · 918 × 1780 · I873:W924
+[em-branco] Tabelas: em-branco-tabelas-parte-37.png · 1616 × 1796 · A925:H975
+[em-branco] Tabelas: em-branco-tabelas-parte-38.png · 918 × 1796 · I925:W975
+[em-branco] Tabelas: em-branco-tabelas-parte-39.png · 1616 × 1770 · A976:H1025
+[em-branco] Tabelas: em-branco-tabelas-parte-40.png · 918 × 1770 · I976:W1025
+[em-branco] Tabelas: em-branco-tabelas-parte-41.png · 1616 × 1766 · A1026:H1072
+[em-branco] Tabelas: em-branco-tabelas-parte-42.png · 918 × 1766 · I1026:W1072
+[em-branco] Tabelas: em-branco-tabelas-parte-43.png · 1616 × 1780 · A1073:H1124
+[em-branco] Tabelas: em-branco-tabelas-parte-44.png · 918 × 1780 · I1073:W1124
+[em-branco] Tabelas: em-branco-tabelas-parte-45.png · 1616 × 1786 · A1125:H1174
+[em-branco] Tabelas: em-branco-tabelas-parte-46.png · 918 × 1786 · I1125:W1174
+[em-branco] Tabelas: em-branco-tabelas-parte-47.png · 1616 × 1784 · A1175:H1220
+[em-branco] Tabelas: em-branco-tabelas-parte-48.png · 918 × 1784 · I1175:W1220
+[em-branco] Tabelas: em-branco-tabelas-parte-49.png · 1616 × 1700 · A1221:H1268
+[em-branco] Tabelas: em-branco-tabelas-parte-50.png · 918 × 1700 · I1221:W1268
+[em-branco] Dados: em-branco-dados-parte-01.png · 1710 × 1795 · A1:J66
+[em-branco] Dados: em-branco-dados-parte-02.png · 1785 × 1795 · K1:U66
+[em-branco] Dados: em-branco-dados-parte-03.png · 1785 × 1795 · V1:AF66
+[em-branco] Dados: em-branco-dados-parte-04.png · 1647 × 1795 · AG1:AP66
+[em-branco] Dados: em-branco-dados-parte-05.png · 1719 × 1795 · AQ1:AY66
+[em-branco] Dados: em-branco-dados-parte-06.png · 1719 × 1795 · AZ1:BH66
+[em-branco] Dados: em-branco-dados-parte-07.png · 1719 × 1795 · BI1:BQ66
+[em-branco] Dados: em-branco-dados-parte-08.png · 1719 × 1795 · BR1:BZ66
+[em-branco] Dados: em-branco-dados-parte-09.png · 1345 × 1795 · CA1:CG66
+[em-branco] Dados: em-branco-dados-parte-10.png · 1710 × 1790 · A67:J106
+[em-branco] Dados: em-branco-dados-parte-11.png · 1785 × 1790 · K67:U106
+[em-branco] Dados: em-branco-dados-parte-12.png · 1785 × 1790 · V67:AF106
+[em-branco] Dados: em-branco-dados-parte-13.png · 1647 × 1790 · AG67:AP106
+[em-branco] Dados: em-branco-dados-parte-14.png · 1719 × 1790 · AQ67:AY106
+[em-branco] Dados: em-branco-dados-parte-15.png · 1719 × 1790 · AZ67:BH106
+[em-branco] Dados: em-branco-dados-parte-16.png · 1719 × 1790 · BI67:BQ106
+[em-branco] Dados: em-branco-dados-parte-17.png · 1719 × 1790 · BR67:BZ106
+[em-branco] Dados: em-branco-dados-parte-18.png · 1345 × 1790 · CA67:CG106
+[em-branco] Dados: em-branco-dados-parte-19.png · 1710 × 1794 · A107:J131
+[em-branco] Dados: em-branco-dados-parte-20.png · 1785 × 1794 · K107:U131
+[em-branco] Dados: em-branco-dados-parte-21.png · 1785 × 1794 · V107:AF131
+[em-branco] Dados: em-branco-dados-parte-22.png · 1647 × 1794 · AG107:AP131
+[em-branco] Dados: em-branco-dados-parte-23.png · 1719 × 1794 · AQ107:AY131
+[em-branco] Dados: em-branco-dados-parte-24.png · 1719 × 1794 · AZ107:BH131
+[em-branco] Dados: em-branco-dados-parte-25.png · 1719 × 1794 · BI107:BQ131
+[em-branco] Dados: em-branco-dados-parte-26.png · 1719 × 1794 · BR107:BZ131
+[em-branco] Dados: em-branco-dados-parte-27.png · 1345 × 1794 · CA107:CG131
+[em-branco] Dados: em-branco-dados-parte-28.png · 1710 × 1651 · A132:J156
+[em-branco] Dados: em-branco-dados-parte-29.png · 1785 × 1651 · K132:U156
+[em-branco] Dados: em-branco-dados-parte-30.png · 1785 × 1651 · V132:AF156
+[em-branco] Dados: em-branco-dados-parte-31.png · 1647 × 1651 · AG132:AP156
+[em-branco] Dados: em-branco-dados-parte-32.png · 1719 × 1651 · AQ132:AY156
+[em-branco] Dados: em-branco-dados-parte-33.png · 1719 × 1651 · AZ132:BH156
+[em-branco] Dados: em-branco-dados-parte-34.png · 1719 × 1651 · BI132:BQ156
+[em-branco] Dados: em-branco-dados-parte-35.png · 1719 × 1651 · BR132:BZ156
+[em-branco] Dados: em-branco-dados-parte-36.png · 1345 × 1651 · CA132:CG156
+[em-branco] Dados: em-branco-dados-parte-37.png · 1710 × 1682 · A157:J172
+[em-branco] Dados: em-branco-dados-parte-38.png · 1785 × 1682 · K157:U172
+[em-branco] Dados: em-branco-dados-parte-39.png · 1785 × 1682 · V157:AF172
+[em-branco] Dados: em-branco-dados-parte-40.png · 1647 × 1682 · AG157:AP172
+[em-branco] Dados: em-branco-dados-parte-41.png · 1719 × 1682 · AQ157:AY172
+[em-branco] Dados: em-branco-dados-parte-42.png · 1719 × 1682 · AZ157:BH172
+[em-branco] Dados: em-branco-dados-parte-43.png · 1719 × 1682 · BI157:BQ172
+[em-branco] Dados: em-branco-dados-parte-44.png · 1719 × 1682 · BR157:BZ172
+[em-branco] Dados: em-branco-dados-parte-45.png · 1345 × 1682 · CA157:CG172
+[em-branco] Dados: em-branco-dados-parte-46.png · 1710 × 1770 · A173:J188
+[em-branco] Dados: em-branco-dados-parte-47.png · 1785 × 1770 · K173:U188
+[em-branco] Dados: em-branco-dados-parte-48.png · 1785 × 1770 · V173:AF188
+[em-branco] Dados: em-branco-dados-parte-49.png · 1647 × 1770 · AG173:AP188
+[em-branco] Dados: em-branco-dados-parte-50.png · 1719 × 1770 · AQ173:AY188
+[em-branco] Dados: em-branco-dados-parte-51.png · 1719 × 1770 · AZ173:BH188
+[em-branco] Dados: em-branco-dados-parte-52.png · 1719 × 1770 · BI173:BQ188
+[em-branco] Dados: em-branco-dados-parte-53.png · 1719 × 1770 · BR173:BZ188
+[em-branco] Dados: em-branco-dados-parte-54.png · 1345 × 1770 · CA173:CG188
+[em-branco] Dados: em-branco-dados-parte-55.png · 1710 × 1780 · A189:J203
+[em-branco] Dados: em-branco-dados-parte-56.png · 1785 × 1780 · K189:U203
+[em-branco] Dados: em-branco-dados-parte-57.png · 1785 × 1780 · V189:AF203
+[em-branco] Dados: em-branco-dados-parte-58.png · 1647 × 1780 · AG189:AP203
+[em-branco] Dados: em-branco-dados-parte-59.png · 1719 × 1780 · AQ189:AY203
+[em-branco] Dados: em-branco-dados-parte-60.png · 1719 × 1780 · AZ189:BH203
+[em-branco] Dados: em-branco-dados-parte-61.png · 1719 × 1780 · BI189:BQ203
+[em-branco] Dados: em-branco-dados-parte-62.png · 1719 × 1780 · BR189:BZ203
+[em-branco] Dados: em-branco-dados-parte-63.png · 1345 × 1780 · CA189:CG203
+[em-branco] Dados: em-branco-dados-parte-64.png · 1710 × 1707 · A204:J218
+[em-branco] Dados: em-branco-dados-parte-65.png · 1785 × 1707 · K204:U218
+[em-branco] Dados: em-branco-dados-parte-66.png · 1785 × 1707 · V204:AF218
+[em-branco] Dados: em-branco-dados-parte-67.png · 1647 × 1707 · AG204:AP218
+[em-branco] Dados: em-branco-dados-parte-68.png · 1719 × 1707 · AQ204:AY218
+[em-branco] Dados: em-branco-dados-parte-69.png · 1719 × 1707 · AZ204:BH218
+[em-branco] Dados: em-branco-dados-parte-70.png · 1719 × 1707 · BI204:BQ218
+[em-branco] Dados: em-branco-dados-parte-71.png · 1719 × 1707 · BR204:BZ218
+[em-branco] Dados: em-branco-dados-parte-72.png · 1345 × 1707 · CA204:CG218
+[em-branco] Dados: em-branco-dados-parte-73.png · 1710 × 1784 · A219:J234
+[em-branco] Dados: em-branco-dados-parte-74.png · 1785 × 1784 · K219:U234
+[em-branco] Dados: em-branco-dados-parte-75.png · 1785 × 1784 · V219:AF234
+[em-branco] Dados: em-branco-dados-parte-76.png · 1647 × 1784 · AG219:AP234
+[em-branco] Dados: em-branco-dados-parte-77.png · 1719 × 1784 · AQ219:AY234
+[em-branco] Dados: em-branco-dados-parte-78.png · 1719 × 1784 · AZ219:BH234
+[em-branco] Dados: em-branco-dados-parte-79.png · 1719 × 1784 · BI219:BQ234
+[em-branco] Dados: em-branco-dados-parte-80.png · 1719 × 1784 · BR219:BZ234
+[em-branco] Dados: em-branco-dados-parte-81.png · 1345 × 1784 · CA219:CG234
+[em-branco] Dados: em-branco-dados-parte-82.png · 1710 × 1793 · A235:J248
+[em-branco] Dados: em-branco-dados-parte-83.png · 1785 × 1793 · K235:U248
+[em-branco] Dados: em-branco-dados-parte-84.png · 1785 × 1793 · V235:AF248
+[em-branco] Dados: em-branco-dados-parte-85.png · 1647 × 1793 · AG235:AP248
+[em-branco] Dados: em-branco-dados-parte-86.png · 1719 × 1793 · AQ235:AY248
+[em-branco] Dados: em-branco-dados-parte-87.png · 1719 × 1793 · AZ235:BH248
+[em-branco] Dados: em-branco-dados-parte-88.png · 1719 × 1793 · BI235:BQ248
+[em-branco] Dados: em-branco-dados-parte-89.png · 1719 × 1793 · BR235:BZ248
+[em-branco] Dados: em-branco-dados-parte-90.png · 1345 × 1793 · CA235:CG248
+[em-branco] Dados: em-branco-dados-parte-91.png · 1710 × 1786 · A249:J274
+[em-branco] Dados: em-branco-dados-parte-92.png · 1785 × 1786 · K249:U274
+[em-branco] Dados: em-branco-dados-parte-93.png · 1785 × 1786 · V249:AF274
+[em-branco] Dados: em-branco-dados-parte-94.png · 1647 × 1786 · AG249:AP274
+[em-branco] Dados: em-branco-dados-parte-95.png · 1719 × 1786 · AQ249:AY274
+[em-branco] Dados: em-branco-dados-parte-96.png · 1719 × 1786 · AZ249:BH274
+[em-branco] Dados: em-branco-dados-parte-97.png · 1719 × 1786 · BI249:BQ274
+[em-branco] Dados: em-branco-dados-parte-98.png · 1719 × 1786 · BR249:BZ274
+[em-branco] Dados: em-branco-dados-parte-99.png · 1345 × 1786 · CA249:CG274
+[em-branco] Dados: em-branco-dados-parte-100.png · 1710 × 1770 · A275:J335
+[em-branco] Dados: em-branco-dados-parte-101.png · 1785 × 1770 · K275:U335
+[em-branco] Dados: em-branco-dados-parte-102.png · 1785 × 1770 · V275:AF335
+[em-branco] Dados: em-branco-dados-parte-103.png · 1647 × 1770 · AG275:AP335
+[em-branco] Dados: em-branco-dados-parte-104.png · 1719 × 1770 · AQ275:AY335
+[em-branco] Dados: em-branco-dados-parte-105.png · 1719 × 1770 · AZ275:BH335
+[em-branco] Dados: em-branco-dados-parte-106.png · 1719 × 1770 · BI275:BQ335
+[em-branco] Dados: em-branco-dados-parte-107.png · 1719 × 1770 · BR275:BZ335
+[em-branco] Dados: em-branco-dados-parte-108.png · 1345 × 1770 · CA275:CG335
+[em-branco] Dados: em-branco-dados-parte-109.png · 1710 × 1782 · A336:J398
+[em-branco] Dados: em-branco-dados-parte-110.png · 1785 × 1782 · K336:U398
+[em-branco] Dados: em-branco-dados-parte-111.png · 1785 × 1782 · V336:AF398
+[em-branco] Dados: em-branco-dados-parte-112.png · 1647 × 1782 · AG336:AP398
+[em-branco] Dados: em-branco-dados-parte-113.png · 1719 × 1782 · AQ336:AY398
+[em-branco] Dados: em-branco-dados-parte-114.png · 1719 × 1782 · AZ336:BH398
+[em-branco] Dados: em-branco-dados-parte-115.png · 1719 × 1782 · BI336:BQ398
+[em-branco] Dados: em-branco-dados-parte-116.png · 1719 × 1782 · BR336:BZ398
+[em-branco] Dados: em-branco-dados-parte-117.png · 1345 × 1782 · CA336:CG398
+[em-branco] Dados: em-branco-dados-parte-118.png · 1710 × 1791 · A399:J467
+[em-branco] Dados: em-branco-dados-parte-119.png · 1785 × 1791 · K399:U467
+[em-branco] Dados: em-branco-dados-parte-120.png · 1785 × 1791 · V399:AF467
+[em-branco] Dados: em-branco-dados-parte-121.png · 1647 × 1791 · AG399:AP467
+[em-branco] Dados: em-branco-dados-parte-122.png · 1719 × 1791 · AQ399:AY467
+[em-branco] Dados: em-branco-dados-parte-123.png · 1719 × 1791 · AZ399:BH467
+[em-branco] Dados: em-branco-dados-parte-124.png · 1719 × 1791 · BI399:BQ467
+[em-branco] Dados: em-branco-dados-parte-125.png · 1719 × 1791 · BR399:BZ467
+[em-branco] Dados: em-branco-dados-parte-126.png · 1345 × 1791 · CA399:CG467
+[em-branco] Dados: em-branco-dados-parte-127.png · 1710 × 1789 · A468:J520
+[em-branco] Dados: em-branco-dados-parte-128.png · 1785 × 1789 · K468:U520
+[em-branco] Dados: em-branco-dados-parte-129.png · 1785 × 1789 · V468:AF520
+[em-branco] Dados: em-branco-dados-parte-130.png · 1647 × 1789 · AG468:AP520
+[em-branco] Dados: em-branco-dados-parte-131.png · 1719 × 1789 · AQ468:AY520
+[em-branco] Dados: em-branco-dados-parte-132.png · 1719 × 1789 · AZ468:BH520
+[em-branco] Dados: em-branco-dados-parte-133.png · 1719 × 1789 · BI468:BQ520
+[em-branco] Dados: em-branco-dados-parte-134.png · 1719 × 1789 · BR468:BZ520
+[em-branco] Dados: em-branco-dados-parte-135.png · 1345 × 1789 · CA468:CG520
+[em-branco] Dados: em-branco-dados-parte-136.png · 1710 × 1764 · A521:J584
+[em-branco] Dados: em-branco-dados-parte-137.png · 1785 × 1764 · K521:U584
+[em-branco] Dados: em-branco-dados-parte-138.png · 1785 × 1764 · V521:AF584
+[em-branco] Dados: em-branco-dados-parte-139.png · 1647 × 1764 · AG521:AP584
+[em-branco] Dados: em-branco-dados-parte-140.png · 1719 × 1764 · AQ521:AY584
+[em-branco] Dados: em-branco-dados-parte-141.png · 1719 × 1764 · AZ521:BH584
+[em-branco] Dados: em-branco-dados-parte-142.png · 1719 × 1764 · BI521:BQ584
+[em-branco] Dados: em-branco-dados-parte-143.png · 1719 × 1764 · BR521:BZ584
+[em-branco] Dados: em-branco-dados-parte-144.png · 1345 × 1764 · CA521:CG584
+[em-branco] Dados: em-branco-dados-parte-145.png · 1710 × 1758 · A585:J628
+[em-branco] Dados: em-branco-dados-parte-146.png · 1785 × 1758 · K585:U628
+[em-branco] Dados: em-branco-dados-parte-147.png · 1785 × 1758 · V585:AF628
+[em-branco] Dados: em-branco-dados-parte-148.png · 1647 × 1758 · AG585:AP628
+[em-branco] Dados: em-branco-dados-parte-149.png · 1719 × 1758 · AQ585:AY628
+[em-branco] Dados: em-branco-dados-parte-150.png · 1719 × 1758 · AZ585:BH628
+[em-branco] Dados: em-branco-dados-parte-151.png · 1719 × 1758 · BI585:BQ628
+[em-branco] Dados: em-branco-dados-parte-152.png · 1719 × 1758 · BR585:BZ628
+[em-branco] Dados: em-branco-dados-parte-153.png · 1345 × 1758 · CA585:CG628
+[em-branco] Dados: em-branco-dados-parte-154.png · 1710 × 1797 · A629:J685
+[em-branco] Dados: em-branco-dados-parte-155.png · 1785 × 1797 · K629:U685
+[em-branco] Dados: em-branco-dados-parte-156.png · 1785 × 1797 · V629:AF685
+[em-branco] Dados: em-branco-dados-parte-157.png · 1647 × 1797 · AG629:AP685
+[em-branco] Dados: em-branco-dados-parte-158.png · 1719 × 1797 · AQ629:AY685
+[em-branco] Dados: em-branco-dados-parte-159.png · 1719 × 1797 · AZ629:BH685
+[em-branco] Dados: em-branco-dados-parte-160.png · 1719 × 1797 · BI629:BQ685
+[em-branco] Dados: em-branco-dados-parte-161.png · 1719 × 1797 · BR629:BZ685
+[em-branco] Dados: em-branco-dados-parte-162.png · 1345 × 1797 · CA629:CG685
+[em-branco] Dados: em-branco-dados-parte-163.png · 1710 × 1795 · A686:J726
+[em-branco] Dados: em-branco-dados-parte-164.png · 1785 × 1795 · K686:U726
+[em-branco] Dados: em-branco-dados-parte-165.png · 1785 × 1795 · V686:AF726
+[em-branco] Dados: em-branco-dados-parte-166.png · 1647 × 1795 · AG686:AP726
+[em-branco] Dados: em-branco-dados-parte-167.png · 1719 × 1795 · AQ686:AY726
+[em-branco] Dados: em-branco-dados-parte-168.png · 1719 × 1795 · AZ686:BH726
+[em-branco] Dados: em-branco-dados-parte-169.png · 1719 × 1795 · BI686:BQ726
+[em-branco] Dados: em-branco-dados-parte-170.png · 1719 × 1795 · BR686:BZ726
+[em-branco] Dados: em-branco-dados-parte-171.png · 1345 × 1795 · CA686:CG726
+[em-branco] Dados: em-branco-dados-parte-172.png · 1710 × 1722 · A727:J744
+[em-branco] Dados: em-branco-dados-parte-173.png · 1785 × 1722 · K727:U744
+[em-branco] Dados: em-branco-dados-parte-174.png · 1785 × 1722 · V727:AF744
+[em-branco] Dados: em-branco-dados-parte-175.png · 1647 × 1722 · AG727:AP744
+[em-branco] Dados: em-branco-dados-parte-176.png · 1719 × 1722 · AQ727:AY744
+[em-branco] Dados: em-branco-dados-parte-177.png · 1719 × 1722 · AZ727:BH744
+[em-branco] Dados: em-branco-dados-parte-178.png · 1719 × 1722 · BI727:BQ744
+[em-branco] Dados: em-branco-dados-parte-179.png · 1719 × 1722 · BR727:BZ744
+[em-branco] Dados: em-branco-dados-parte-180.png · 1345 × 1722 · CA727:CG744
+[em-branco] Dados: em-branco-dados-parte-181.png · 1710 × 1785 · A745:J763
+[em-branco] Dados: em-branco-dados-parte-182.png · 1785 × 1785 · K745:U763
+[em-branco] Dados: em-branco-dados-parte-183.png · 1785 × 1785 · V745:AF763
+[em-branco] Dados: em-branco-dados-parte-184.png · 1647 × 1785 · AG745:AP763
+[em-branco] Dados: em-branco-dados-parte-185.png · 1719 × 1785 · AQ745:AY763
+[em-branco] Dados: em-branco-dados-parte-186.png · 1719 × 1785 · AZ745:BH763
+[em-branco] Dados: em-branco-dados-parte-187.png · 1719 × 1785 · BI745:BQ763
+[em-branco] Dados: em-branco-dados-parte-188.png · 1719 × 1785 · BR745:BZ763
+[em-branco] Dados: em-branco-dados-parte-189.png · 1345 × 1785 · CA745:CG763
+[em-branco] Dados: em-branco-dados-parte-190.png · 1710 × 1774 · A764:J779
+[em-branco] Dados: em-branco-dados-parte-191.png · 1785 × 1774 · K764:U779
+[em-branco] Dados: em-branco-dados-parte-192.png · 1785 × 1774 · V764:AF779
+[em-branco] Dados: em-branco-dados-parte-193.png · 1647 × 1774 · AG764:AP779
+[em-branco] Dados: em-branco-dados-parte-194.png · 1719 × 1774 · AQ764:AY779
+[em-branco] Dados: em-branco-dados-parte-195.png · 1719 × 1774 · AZ764:BH779
+[em-branco] Dados: em-branco-dados-parte-196.png · 1719 × 1774 · BI764:BQ779
+[em-branco] Dados: em-branco-dados-parte-197.png · 1719 × 1774 · BR764:BZ779
+[em-branco] Dados: em-branco-dados-parte-198.png · 1345 × 1774 · CA764:CG779
+[em-branco] Dados: em-branco-dados-parte-199.png · 1710 × 1750 · A780:J794
+[em-branco] Dados: em-branco-dados-parte-200.png · 1785 × 1750 · K780:U794
+[em-branco] Dados: em-branco-dados-parte-201.png · 1785 × 1750 · V780:AF794
+[em-branco] Dados: em-branco-dados-parte-202.png · 1647 × 1750 · AG780:AP794
+[em-branco] Dados: em-branco-dados-parte-203.png · 1719 × 1750 · AQ780:AY794
+[em-branco] Dados: em-branco-dados-parte-204.png · 1719 × 1750 · AZ780:BH794
+[em-branco] Dados: em-branco-dados-parte-205.png · 1719 × 1750 · BI780:BQ794
+[em-branco] Dados: em-branco-dados-parte-206.png · 1719 × 1750 · BR780:BZ794
+[em-branco] Dados: em-branco-dados-parte-207.png · 1345 × 1750 · CA780:CG794
+[em-branco] Dados: em-branco-dados-parte-208.png · 1710 × 1713 · A795:J811
+[em-branco] Dados: em-branco-dados-parte-209.png · 1785 × 1713 · K795:U811
+[em-branco] Dados: em-branco-dados-parte-210.png · 1785 × 1713 · V795:AF811
+[em-branco] Dados: em-branco-dados-parte-211.png · 1647 × 1713 · AG795:AP811
+[em-branco] Dados: em-branco-dados-parte-212.png · 1719 × 1713 · AQ795:AY811
+[em-branco] Dados: em-branco-dados-parte-213.png · 1719 × 1713 · AZ795:BH811
+[em-branco] Dados: em-branco-dados-parte-214.png · 1719 × 1713 · BI795:BQ811
+[em-branco] Dados: em-branco-dados-parte-215.png · 1719 × 1713 · BR795:BZ811
+[em-branco] Dados: em-branco-dados-parte-216.png · 1345 × 1713 · CA795:CG811
+[em-branco] Dados: em-branco-dados-parte-217.png · 1710 × 1733 · A812:J847
+[em-branco] Dados: em-branco-dados-parte-218.png · 1785 × 1733 · K812:U847
+[em-branco] Dados: em-branco-dados-parte-219.png · 1785 × 1733 · V812:AF847
+[em-branco] Dados: em-branco-dados-parte-220.png · 1647 × 1733 · AG812:AP847
+[em-branco] Dados: em-branco-dados-parte-221.png · 1719 × 1733 · AQ812:AY847
+[em-branco] Dados: em-branco-dados-parte-222.png · 1719 × 1733 · AZ812:BH847
+[em-branco] Dados: em-branco-dados-parte-223.png · 1719 × 1733 · BI812:BQ847
+[em-branco] Dados: em-branco-dados-parte-224.png · 1719 × 1733 · BR812:BZ847
+[em-branco] Dados: em-branco-dados-parte-225.png · 1345 × 1733 · CA812:CG847
+[em-branco] Dados: em-branco-dados-parte-226.png · 1710 × 1792 · A848:J886
+[em-branco] Dados: em-branco-dados-parte-227.png · 1785 × 1792 · K848:U886
+[em-branco] Dados: em-branco-dados-parte-228.png · 1785 × 1792 · V848:AF886
+[em-branco] Dados: em-branco-dados-parte-229.png · 1647 × 1792 · AG848:AP886
+[em-branco] Dados: em-branco-dados-parte-230.png · 1719 × 1792 · AQ848:AY886
+[em-branco] Dados: em-branco-dados-parte-231.png · 1719 × 1792 · AZ848:BH886
+[em-branco] Dados: em-branco-dados-parte-232.png · 1719 × 1792 · BI848:BQ886
+[em-branco] Dados: em-branco-dados-parte-233.png · 1719 × 1792 · BR848:BZ886
+[em-branco] Dados: em-branco-dados-parte-234.png · 1345 × 1792 · CA848:CG886
+[em-branco] Dados: em-branco-dados-parte-235.png · 1710 × 885 · A887:J919
+[em-branco] Dados: em-branco-dados-parte-236.png · 1785 × 885 · K887:U919
+[em-branco] Dados: em-branco-dados-parte-237.png · 1785 × 885 · V887:AF919
+[em-branco] Dados: em-branco-dados-parte-238.png · 1647 × 885 · AG887:AP919
+[em-branco] Dados: em-branco-dados-parte-239.png · 1719 × 885 · AQ887:AY919
+[em-branco] Dados: em-branco-dados-parte-240.png · 1719 × 885 · AZ887:BH919
+[em-branco] Dados: em-branco-dados-parte-241.png · 1719 × 885 · BI887:BQ919
+[em-branco] Dados: em-branco-dados-parte-242.png · 1719 × 885 · BR887:BZ919
+[em-branco] Dados: em-branco-dados-parte-243.png · 1345 × 885 · CA887:CG919
+[exemplo] Início: exemplo-inicio-parte-01.png · 1780 × 1798 · A1:S78
+[exemplo] Início: exemplo-inicio-parte-02.png · 708 × 1798 · T1:Z78
+[exemplo] Início: exemplo-inicio-parte-03.png · 1780 × 1795 · A79:S166
+[exemplo] Início: exemplo-inicio-parte-04.png · 708 × 1795 · T79:Z166
+[exemplo] Início: exemplo-inicio-parte-05.png · 1780 × 1800 · A167:S255
+[exemplo] Início: exemplo-inicio-parte-06.png · 708 × 1800 · T167:Z255
+[exemplo] Início: exemplo-inicio-parte-07.png · 1780 × 1800 · A256:S344
+[exemplo] Início: exemplo-inicio-parte-08.png · 708 × 1800 · T256:Z344
+[exemplo] Início: exemplo-inicio-parte-09.png · 1780 × 560 · A345:S371
+[exemplo] Início: exemplo-inicio-parte-10.png · 708 × 560 · T345:Z371
+[exemplo] Campanha: exemplo-campanha-parte-01.png · 1780 × 1761 · A1:X51
+[exemplo] Campanha: exemplo-campanha-parte-02.png · 516 × 1761 · Y1:AK51
+[exemplo] Campanha: exemplo-campanha-parte-03.png · 1780 × 1771 · A52:X70
+[exemplo] Campanha: exemplo-campanha-parte-04.png · 516 × 1771 · Y52:AK70
+[exemplo] Campanha: exemplo-campanha-parte-05.png · 1780 × 1737 · A71:X87
+[exemplo] Campanha: exemplo-campanha-parte-06.png · 516 × 1737 · Y71:AK87
+[exemplo] Campanha: exemplo-campanha-parte-07.png · 1780 × 1682 · A88:X101
+[exemplo] Campanha: exemplo-campanha-parte-08.png · 516 × 1682 · Y88:AK101
+[exemplo] Campanha: exemplo-campanha-parte-09.png · 1780 × 1775 · A102:X122
+[exemplo] Campanha: exemplo-campanha-parte-10.png · 516 × 1775 · Y102:AK122
+[exemplo] Campanha: exemplo-campanha-parte-11.png · 1780 × 1797 · A123:X159
+[exemplo] Campanha: exemplo-campanha-parte-12.png · 516 × 1797 · Y123:AK159
+[exemplo] Campanha: exemplo-campanha-parte-13.png · 1780 × 1711 · A160:X178
+[exemplo] Campanha: exemplo-campanha-parte-14.png · 516 × 1711 · Y160:AK178
+[exemplo] Campanha: exemplo-campanha-parte-15.png · 1780 × 1030 · A179:X192
+[exemplo] Campanha: exemplo-campanha-parte-16.png · 516 × 1030 · Y179:AK192
+[exemplo] Grupo: exemplo-grupo-parte-01.png · 1491 × 1768 · A1:O38
+[exemplo] Grupo: exemplo-grupo-parte-02.png · 1491 × 1725 · A39:O85
+[exemplo] Sessões: exemplo-sessoes-parte-01.png · 1492 × 1741 · A1:P45
+[exemplo] Sessões: exemplo-sessoes-parte-02.png · 1492 × 1750 · A46:P79
+[exemplo] Sessões: exemplo-sessoes-parte-03.png · 1492 × 1782 · A80:P106
+[exemplo] Sessões: exemplo-sessoes-parte-04.png · 1492 × 1800 · A107:P129
+[exemplo] Sessões: exemplo-sessoes-parte-05.png · 1492 × 67 · A130:P131
+[exemplo] Missões: exemplo-missoes-parte-01.png · 1780 × 1658 · A1:Q14
+[exemplo] Missões: exemplo-missoes-parte-02.png · 1284 × 1658 · R1:AJ14
+[exemplo] Missões: exemplo-missoes-parte-03.png · 1780 × 1669 · A15:Q23
+[exemplo] Missões: exemplo-missoes-parte-04.png · 1284 × 1669 · R15:AJ23
+[exemplo] Missões: exemplo-missoes-parte-05.png · 1780 × 1686 · A24:Q34
+[exemplo] Missões: exemplo-missoes-parte-06.png · 1284 × 1686 · R24:AJ34
+[exemplo] Missões: exemplo-missoes-parte-07.png · 1780 × 1699 · A35:Q46
+[exemplo] Missões: exemplo-missoes-parte-08.png · 1284 × 1699 · R35:AJ46
+[exemplo] Missões: exemplo-missoes-parte-09.png · 1780 × 1795 · A47:Q101
+[exemplo] Missões: exemplo-missoes-parte-10.png · 1284 × 1795 · R47:AJ101
+[exemplo] Missões: exemplo-missoes-parte-11.png · 1780 × 80 · A102:Q104
+[exemplo] Missões: exemplo-missoes-parte-12.png · 1284 × 80 · R102:AJ104
+[exemplo] NPCs: exemplo-npcs-parte-01.png · 1780 × 1757 · A1:R50
+[exemplo] NPCs: exemplo-npcs-parte-02.png · 1476 × 1757 · S1:BD50
+[exemplo] NPCs: exemplo-npcs-parte-03.png · 1780 × 1735 · A51:R73
+[exemplo] NPCs: exemplo-npcs-parte-04.png · 1476 × 1735 · S51:BD73
+[exemplo] NPCs: exemplo-npcs-parte-05.png · 1780 × 1762 · A74:R97
+[exemplo] NPCs: exemplo-npcs-parte-06.png · 1476 × 1762 · S74:BD97
+[exemplo] NPCs: exemplo-npcs-parte-07.png · 1780 × 1750 · A98:R121
+[exemplo] NPCs: exemplo-npcs-parte-08.png · 1476 × 1750 · S98:BD121
+[exemplo] NPCs: exemplo-npcs-parte-09.png · 1780 × 1800 · A122:R145
+[exemplo] NPCs: exemplo-npcs-parte-10.png · 1476 × 1800 · S122:BD145
+[exemplo] NPCs: exemplo-npcs-parte-11.png · 1780 × 1796 · A146:R169
+[exemplo] NPCs: exemplo-npcs-parte-12.png · 1476 × 1796 · S146:BD169
+[exemplo] NPCs: exemplo-npcs-parte-13.png · 1780 × 1770 · A170:R192
+[exemplo] NPCs: exemplo-npcs-parte-14.png · 1476 × 1770 · S170:BD192
+[exemplo] NPCs: exemplo-npcs-parte-15.png · 1780 × 1776 · A193:R215
+[exemplo] NPCs: exemplo-npcs-parte-16.png · 1476 × 1776 · S193:BD215
+[exemplo] NPCs: exemplo-npcs-parte-17.png · 1780 × 682 · A216:R232
+[exemplo] NPCs: exemplo-npcs-parte-18.png · 1476 × 682 · S216:BD232
+[exemplo] Inimigos: exemplo-inimigos-parte-01.png · 1684 × 1770 · A1:DP48
+[exemplo] Inimigos: exemplo-inimigos-parte-02.png · 1684 × 1745 · A49:DP94
+[exemplo] Inimigos: exemplo-inimigos-parte-03.png · 1684 × 1781 · A95:DP130
+[exemplo] Inimigos: exemplo-inimigos-parte-04.png · 1684 × 1791 · A131:DP165
+[exemplo] Inimigos: exemplo-inimigos-parte-05.png · 1684 × 1754 · A166:DP193
+[exemplo] Inimigos: exemplo-inimigos-parte-06.png · 1684 × 954 · A194:DP219
+[exemplo] Bestiário: exemplo-bestiario-parte-01.png · 1492 × 1786 · A1:Q44
+[exemplo] Bestiário: exemplo-bestiario-parte-02.png · 1492 × 1755 · A45:Q84
+[exemplo] Bestiário: exemplo-bestiario-parte-03.png · 1492 × 1392 · A85:Q121
+[exemplo] Encontros: exemplo-encontros-parte-01.png · 1780 × 1771 · A1:BF56
+[exemplo] Encontros: exemplo-encontros-parte-02.png · 1780 × 1767 · A57:BF112
+[exemplo] Encontros: exemplo-encontros-parte-03.png · 1780 × 301 · A113:BF122
+[exemplo] Combate: exemplo-combate-parte-01.png · 1780 × 1797 · A1:BZ45
+[exemplo] Combate: exemplo-combate-parte-02.png · 1780 × 1784 · A46:BZ73
+[exemplo] Combate: exemplo-combate-parte-03.png · 1780 × 1755 · A74:BZ104
+[exemplo] Combate: exemplo-combate-parte-04.png · 1780 × 1747 · A105:BZ135
+[exemplo] Combate: exemplo-combate-parte-05.png · 1780 × 1785 · A136:BZ172
+[exemplo] Combate: exemplo-combate-parte-06.png · 1780 × 1770 · A173:BZ195
+[exemplo] Combate: exemplo-combate-parte-07.png · 1780 × 1773 · A196:BZ223
+[exemplo] Combate: exemplo-combate-parte-08.png · 1780 × 1754 · A224:BZ251
+[exemplo] Combate: exemplo-combate-parte-09.png · 1780 × 1786 · A252:BZ279
+[exemplo] Combate: exemplo-combate-parte-10.png · 1780 × 1770 · A280:BZ302
+[exemplo] Combate: exemplo-combate-parte-11.png · 1780 × 386 · A303:BZ311
+[exemplo] Aventuras: exemplo-aventuras-parte-01.png · 1780 × 1795 · A1:S62
+[exemplo] Aventuras: exemplo-aventuras-parte-02.png · 1188 × 1795 · T1:AR62
+[exemplo] Aventuras: exemplo-aventuras-parte-03.png · 1780 × 1100 · A63:S116
+[exemplo] Aventuras: exemplo-aventuras-parte-04.png · 1188 × 1100 · T63:AR116
+[exemplo] Recompensas: exemplo-recompensas-parte-01.png · 1780 × 1790 · A1:S72
+[exemplo] Recompensas: exemplo-recompensas-parte-02.png · 996 × 1790 · T1:AI72
+[exemplo] Recompensas: exemplo-recompensas-parte-03.png · 1780 × 1745 · A73:S132
+[exemplo] Recompensas: exemplo-recompensas-parte-04.png · 996 × 1745 · T73:AI132
+[exemplo] Recompensas: exemplo-recompensas-parte-05.png · 1780 × 1791 · A133:S147
+[exemplo] Recompensas: exemplo-recompensas-parte-06.png · 996 × 1791 · T133:AI147
+[exemplo] Recompensas: exemplo-recompensas-parte-07.png · 1780 × 1404 · A148:S159
+[exemplo] Recompensas: exemplo-recompensas-parte-08.png · 996 × 1404 · T148:AI159
+[exemplo] Mundos: exemplo-mundos-parte-01.png · 1780 × 1785 · A1:T55
+[exemplo] Mundos: exemplo-mundos-parte-02.png · 708 × 1785 · U1:AD55
+[exemplo] Mundos: exemplo-mundos-parte-03.png · 1780 × 1489 · A56:T106
+[exemplo] Mundos: exemplo-mundos-parte-04.png · 708 × 1489 · U56:AD106
+[exemplo] Improviso: exemplo-improviso-parte-01.png · 1780 × 1766 · A1:R61
+[exemplo] Improviso: exemplo-improviso-parte-02.png · 900 × 1766 · S1:AD61
+[exemplo] Improviso: exemplo-improviso-parte-03.png · 1780 × 1453 · A62:R121
+[exemplo] Improviso: exemplo-improviso-parte-04.png · 900 × 1453 · S62:AD121
+[exemplo] Escudo do Mestre: exemplo-escudo-do-mestre-parte-01.png · 1396 × 1772 · A1:L78
+[exemplo] Escudo do Mestre: exemplo-escudo-do-mestre-parte-02.png · 1396 × 1709 · A79:L153
+[exemplo] Escudo do Mestre: exemplo-escudo-do-mestre-parte-03.png · 1396 × 537 · A154:L173
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-01.png · 1760 × 1736 · A1:X28
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-02.png · 1476 × 1736 · Y1:BA28
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-03.png · 1760 × 1786 · A29:X53
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-04.png · 1476 × 1786 · Y29:BA53
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-05.png · 1760 × 1755 · A54:X76
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-06.png · 1476 × 1755 · Y54:BA76
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-07.png · 1760 × 1735 · A77:X98
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-08.png · 1476 × 1735 · Y77:BA98
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-09.png · 1760 × 1755 · A99:X121
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-10.png · 1476 × 1755 · Y99:BA121
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-11.png · 1760 × 1787 · A122:X146
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-12.png · 1476 × 1787 · Y122:BA146
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-13.png · 1760 × 1735 · A147:X168
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-14.png · 1476 × 1735 · Y147:BA168
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-15.png · 1760 × 1740 · A169:X191
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-16.png · 1476 × 1740 · Y169:BA191
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-17.png · 1760 × 1755 · A192:X214
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-18.png · 1476 × 1755 · Y192:BA214
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-19.png · 1760 × 1800 · A215:X237
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-20.png · 1476 × 1800 · Y215:BA237
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-21.png · 1760 × 1787 · A238:X262
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-22.png · 1476 × 1787 · Y238:BA262
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-23.png · 1760 × 1755 · A263:X285
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-24.png · 1476 × 1755 · Y263:BA285
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-25.png · 1760 × 1795 · A286:X307
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-26.png · 1476 × 1795 · Y286:BA307
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-27.png · 1760 × 1740 · A308:X330
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-28.png · 1476 × 1740 · Y308:BA330
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-29.png · 1760 × 1740 · A331:X353
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-30.png · 1476 × 1740 · Y331:BA353
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-31.png · 1760 × 1723 · A354:X377
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-32.png · 1476 × 1723 · Y354:BA377
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-33.png · 1760 × 1800 · A378:X400
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-34.png · 1476 × 1800 · Y378:BA400
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-35.png · 1760 × 1740 · A401:X423
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-36.png · 1476 × 1740 · Y401:BA423
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-37.png · 1760 × 1800 · A424:X446
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-38.png · 1476 × 1800 · Y424:BA446
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-39.png · 1760 × 1740 · A447:X469
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-40.png · 1476 × 1740 · Y447:BA469
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-41.png · 1760 × 100 · A470:X470
+[exemplo] Minhas Tabelas: exemplo-minhas-tabelas-parte-42.png · 1476 × 100 · Y470:BA470
+[exemplo] Tabelas: exemplo-tabelas-parte-01.png · 1616 × 1790 · A1:H51
+[exemplo] Tabelas: exemplo-tabelas-parte-02.png · 918 × 1790 · I1:W51
+[exemplo] Tabelas: exemplo-tabelas-parte-03.png · 1616 × 1780 · A52:H103
+[exemplo] Tabelas: exemplo-tabelas-parte-04.png · 918 × 1780 · I52:W103
+[exemplo] Tabelas: exemplo-tabelas-parte-05.png · 1616 × 1797 · A104:H157
+[exemplo] Tabelas: exemplo-tabelas-parte-06.png · 918 × 1797 · I104:W157
+[exemplo] Tabelas: exemplo-tabelas-parte-07.png · 1616 × 1795 · A158:H209
+[exemplo] Tabelas: exemplo-tabelas-parte-08.png · 918 × 1795 · I158:W209
+[exemplo] Tabelas: exemplo-tabelas-parte-09.png · 1616 × 1797 · A210:H263
+[exemplo] Tabelas: exemplo-tabelas-parte-10.png · 918 × 1797 · I210:W263
+[exemplo] Tabelas: exemplo-tabelas-parte-11.png · 1616 × 1780 · A264:H315
+[exemplo] Tabelas: exemplo-tabelas-parte-12.png · 918 × 1780 · I264:W315
+[exemplo] Tabelas: exemplo-tabelas-parte-13.png · 1616 × 1770 · A316:H367
+[exemplo] Tabelas: exemplo-tabelas-parte-14.png · 918 × 1770 · I316:W367
+[exemplo] Tabelas: exemplo-tabelas-parte-15.png · 1616 × 1794 · A368:H419
+[exemplo] Tabelas: exemplo-tabelas-parte-16.png · 918 × 1794 · I368:W419
+[exemplo] Tabelas: exemplo-tabelas-parte-17.png · 1616 × 1776 · A420:H472
+[exemplo] Tabelas: exemplo-tabelas-parte-18.png · 918 × 1776 · I420:W472
+[exemplo] Tabelas: exemplo-tabelas-parte-19.png · 1616 × 1781 · A473:H516
+[exemplo] Tabelas: exemplo-tabelas-parte-20.png · 918 × 1781 · I473:W516
+[exemplo] Tabelas: exemplo-tabelas-parte-21.png · 1616 × 1795 · A517:H568
+[exemplo] Tabelas: exemplo-tabelas-parte-22.png · 918 × 1795 · I517:W568
+[exemplo] Tabelas: exemplo-tabelas-parte-23.png · 1616 × 1790 · A569:H620
+[exemplo] Tabelas: exemplo-tabelas-parte-24.png · 918 × 1790 · I569:W620
+[exemplo] Tabelas: exemplo-tabelas-parte-25.png · 1616 × 1780 · A621:H672
+[exemplo] Tabelas: exemplo-tabelas-parte-26.png · 918 × 1780 · I621:W672
+[exemplo] Tabelas: exemplo-tabelas-parte-27.png · 1616 × 1788 · A673:H718
+[exemplo] Tabelas: exemplo-tabelas-parte-28.png · 918 × 1788 · I673:W718
+[exemplo] Tabelas: exemplo-tabelas-parte-29.png · 1616 × 1791 · A719:H767
+[exemplo] Tabelas: exemplo-tabelas-parte-30.png · 918 × 1791 · I719:W767
+[exemplo] Tabelas: exemplo-tabelas-parte-31.png · 1616 × 1792 · A768:H820
+[exemplo] Tabelas: exemplo-tabelas-parte-32.png · 918 × 1792 · I768:W820
+[exemplo] Tabelas: exemplo-tabelas-parte-33.png · 1616 × 1780 · A821:H872
+[exemplo] Tabelas: exemplo-tabelas-parte-34.png · 918 × 1780 · I821:W872
+[exemplo] Tabelas: exemplo-tabelas-parte-35.png · 1616 × 1780 · A873:H924
+[exemplo] Tabelas: exemplo-tabelas-parte-36.png · 918 × 1780 · I873:W924
+[exemplo] Tabelas: exemplo-tabelas-parte-37.png · 1616 × 1796 · A925:H975
+[exemplo] Tabelas: exemplo-tabelas-parte-38.png · 918 × 1796 · I925:W975
+[exemplo] Tabelas: exemplo-tabelas-parte-39.png · 1616 × 1770 · A976:H1025
+[exemplo] Tabelas: exemplo-tabelas-parte-40.png · 918 × 1770 · I976:W1025
+[exemplo] Tabelas: exemplo-tabelas-parte-41.png · 1616 × 1766 · A1026:H1072
+[exemplo] Tabelas: exemplo-tabelas-parte-42.png · 918 × 1766 · I1026:W1072
+[exemplo] Tabelas: exemplo-tabelas-parte-43.png · 1616 × 1780 · A1073:H1124
+[exemplo] Tabelas: exemplo-tabelas-parte-44.png · 918 × 1780 · I1073:W1124
+[exemplo] Tabelas: exemplo-tabelas-parte-45.png · 1616 × 1786 · A1125:H1174
+[exemplo] Tabelas: exemplo-tabelas-parte-46.png · 918 × 1786 · I1125:W1174
+[exemplo] Tabelas: exemplo-tabelas-parte-47.png · 1616 × 1784 · A1175:H1220
+[exemplo] Tabelas: exemplo-tabelas-parte-48.png · 918 × 1784 · I1175:W1220
+[exemplo] Tabelas: exemplo-tabelas-parte-49.png · 1616 × 1700 · A1221:H1268
+[exemplo] Tabelas: exemplo-tabelas-parte-50.png · 918 × 1700 · I1221:W1268
+[exemplo] Dados: exemplo-dados-parte-01.png · 1710 × 1795 · A1:J66
+[exemplo] Dados: exemplo-dados-parte-02.png · 1785 × 1795 · K1:U66
+[exemplo] Dados: exemplo-dados-parte-03.png · 1785 × 1795 · V1:AF66
+[exemplo] Dados: exemplo-dados-parte-04.png · 1647 × 1795 · AG1:AP66
+[exemplo] Dados: exemplo-dados-parte-05.png · 1719 × 1795 · AQ1:AY66
+[exemplo] Dados: exemplo-dados-parte-06.png · 1719 × 1795 · AZ1:BH66
+[exemplo] Dados: exemplo-dados-parte-07.png · 1719 × 1795 · BI1:BQ66
+[exemplo] Dados: exemplo-dados-parte-08.png · 1719 × 1795 · BR1:BZ66
+[exemplo] Dados: exemplo-dados-parte-09.png · 1345 × 1795 · CA1:CG66
+[exemplo] Dados: exemplo-dados-parte-10.png · 1710 × 1790 · A67:J106
+[exemplo] Dados: exemplo-dados-parte-11.png · 1785 × 1790 · K67:U106
+[exemplo] Dados: exemplo-dados-parte-12.png · 1785 × 1790 · V67:AF106
+[exemplo] Dados: exemplo-dados-parte-13.png · 1647 × 1790 · AG67:AP106
+[exemplo] Dados: exemplo-dados-parte-14.png · 1719 × 1790 · AQ67:AY106
+[exemplo] Dados: exemplo-dados-parte-15.png · 1719 × 1790 · AZ67:BH106
+[exemplo] Dados: exemplo-dados-parte-16.png · 1719 × 1790 · BI67:BQ106
+[exemplo] Dados: exemplo-dados-parte-17.png · 1719 × 1790 · BR67:BZ106
+[exemplo] Dados: exemplo-dados-parte-18.png · 1345 × 1790 · CA67:CG106
+[exemplo] Dados: exemplo-dados-parte-19.png · 1710 × 1794 · A107:J131
+[exemplo] Dados: exemplo-dados-parte-20.png · 1785 × 1794 · K107:U131
+[exemplo] Dados: exemplo-dados-parte-21.png · 1785 × 1794 · V107:AF131
+[exemplo] Dados: exemplo-dados-parte-22.png · 1647 × 1794 · AG107:AP131
+[exemplo] Dados: exemplo-dados-parte-23.png · 1719 × 1794 · AQ107:AY131
+[exemplo] Dados: exemplo-dados-parte-24.png · 1719 × 1794 · AZ107:BH131
+[exemplo] Dados: exemplo-dados-parte-25.png · 1719 × 1794 · BI107:BQ131
+[exemplo] Dados: exemplo-dados-parte-26.png · 1719 × 1794 · BR107:BZ131
+[exemplo] Dados: exemplo-dados-parte-27.png · 1345 × 1794 · CA107:CG131
+[exemplo] Dados: exemplo-dados-parte-28.png · 1710 × 1651 · A132:J156
+[exemplo] Dados: exemplo-dados-parte-29.png · 1785 × 1651 · K132:U156
+[exemplo] Dados: exemplo-dados-parte-30.png · 1785 × 1651 · V132:AF156
+[exemplo] Dados: exemplo-dados-parte-31.png · 1647 × 1651 · AG132:AP156
+[exemplo] Dados: exemplo-dados-parte-32.png · 1719 × 1651 · AQ132:AY156
+[exemplo] Dados: exemplo-dados-parte-33.png · 1719 × 1651 · AZ132:BH156
+[exemplo] Dados: exemplo-dados-parte-34.png · 1719 × 1651 · BI132:BQ156
+[exemplo] Dados: exemplo-dados-parte-35.png · 1719 × 1651 · BR132:BZ156
+[exemplo] Dados: exemplo-dados-parte-36.png · 1345 × 1651 · CA132:CG156
+[exemplo] Dados: exemplo-dados-parte-37.png · 1710 × 1682 · A157:J172
+[exemplo] Dados: exemplo-dados-parte-38.png · 1785 × 1682 · K157:U172
+[exemplo] Dados: exemplo-dados-parte-39.png · 1785 × 1682 · V157:AF172
+[exemplo] Dados: exemplo-dados-parte-40.png · 1647 × 1682 · AG157:AP172
+[exemplo] Dados: exemplo-dados-parte-41.png · 1719 × 1682 · AQ157:AY172
+[exemplo] Dados: exemplo-dados-parte-42.png · 1719 × 1682 · AZ157:BH172
+[exemplo] Dados: exemplo-dados-parte-43.png · 1719 × 1682 · BI157:BQ172
+[exemplo] Dados: exemplo-dados-parte-44.png · 1719 × 1682 · BR157:BZ172
+[exemplo] Dados: exemplo-dados-parte-45.png · 1345 × 1682 · CA157:CG172
+[exemplo] Dados: exemplo-dados-parte-46.png · 1710 × 1770 · A173:J188
+[exemplo] Dados: exemplo-dados-parte-47.png · 1785 × 1770 · K173:U188
+[exemplo] Dados: exemplo-dados-parte-48.png · 1785 × 1770 · V173:AF188
+[exemplo] Dados: exemplo-dados-parte-49.png · 1647 × 1770 · AG173:AP188
+[exemplo] Dados: exemplo-dados-parte-50.png · 1719 × 1770 · AQ173:AY188
+[exemplo] Dados: exemplo-dados-parte-51.png · 1719 × 1770 · AZ173:BH188
+[exemplo] Dados: exemplo-dados-parte-52.png · 1719 × 1770 · BI173:BQ188
+[exemplo] Dados: exemplo-dados-parte-53.png · 1719 × 1770 · BR173:BZ188
+[exemplo] Dados: exemplo-dados-parte-54.png · 1345 × 1770 · CA173:CG188
+[exemplo] Dados: exemplo-dados-parte-55.png · 1710 × 1780 · A189:J203
+[exemplo] Dados: exemplo-dados-parte-56.png · 1785 × 1780 · K189:U203
+[exemplo] Dados: exemplo-dados-parte-57.png · 1785 × 1780 · V189:AF203
+[exemplo] Dados: exemplo-dados-parte-58.png · 1647 × 1780 · AG189:AP203
+[exemplo] Dados: exemplo-dados-parte-59.png · 1719 × 1780 · AQ189:AY203
+[exemplo] Dados: exemplo-dados-parte-60.png · 1719 × 1780 · AZ189:BH203
+[exemplo] Dados: exemplo-dados-parte-61.png · 1719 × 1780 · BI189:BQ203
+[exemplo] Dados: exemplo-dados-parte-62.png · 1719 × 1780 · BR189:BZ203
+[exemplo] Dados: exemplo-dados-parte-63.png · 1345 × 1780 · CA189:CG203
+[exemplo] Dados: exemplo-dados-parte-64.png · 1710 × 1707 · A204:J218
+[exemplo] Dados: exemplo-dados-parte-65.png · 1785 × 1707 · K204:U218
+[exemplo] Dados: exemplo-dados-parte-66.png · 1785 × 1707 · V204:AF218
+[exemplo] Dados: exemplo-dados-parte-67.png · 1647 × 1707 · AG204:AP218
+[exemplo] Dados: exemplo-dados-parte-68.png · 1719 × 1707 · AQ204:AY218
+[exemplo] Dados: exemplo-dados-parte-69.png · 1719 × 1707 · AZ204:BH218
+[exemplo] Dados: exemplo-dados-parte-70.png · 1719 × 1707 · BI204:BQ218
+[exemplo] Dados: exemplo-dados-parte-71.png · 1719 × 1707 · BR204:BZ218
+[exemplo] Dados: exemplo-dados-parte-72.png · 1345 × 1707 · CA204:CG218
+[exemplo] Dados: exemplo-dados-parte-73.png · 1710 × 1784 · A219:J234
+[exemplo] Dados: exemplo-dados-parte-74.png · 1785 × 1784 · K219:U234
+[exemplo] Dados: exemplo-dados-parte-75.png · 1785 × 1784 · V219:AF234
+[exemplo] Dados: exemplo-dados-parte-76.png · 1647 × 1784 · AG219:AP234
+[exemplo] Dados: exemplo-dados-parte-77.png · 1719 × 1784 · AQ219:AY234
+[exemplo] Dados: exemplo-dados-parte-78.png · 1719 × 1784 · AZ219:BH234
+[exemplo] Dados: exemplo-dados-parte-79.png · 1719 × 1784 · BI219:BQ234
+[exemplo] Dados: exemplo-dados-parte-80.png · 1719 × 1784 · BR219:BZ234
+[exemplo] Dados: exemplo-dados-parte-81.png · 1345 × 1784 · CA219:CG234
+[exemplo] Dados: exemplo-dados-parte-82.png · 1710 × 1793 · A235:J248
+[exemplo] Dados: exemplo-dados-parte-83.png · 1785 × 1793 · K235:U248
+[exemplo] Dados: exemplo-dados-parte-84.png · 1785 × 1793 · V235:AF248
+[exemplo] Dados: exemplo-dados-parte-85.png · 1647 × 1793 · AG235:AP248
+[exemplo] Dados: exemplo-dados-parte-86.png · 1719 × 1793 · AQ235:AY248
+[exemplo] Dados: exemplo-dados-parte-87.png · 1719 × 1793 · AZ235:BH248
+[exemplo] Dados: exemplo-dados-parte-88.png · 1719 × 1793 · BI235:BQ248
+[exemplo] Dados: exemplo-dados-parte-89.png · 1719 × 1793 · BR235:BZ248
+[exemplo] Dados: exemplo-dados-parte-90.png · 1345 × 1793 · CA235:CG248
+[exemplo] Dados: exemplo-dados-parte-91.png · 1710 × 1786 · A249:J274
+[exemplo] Dados: exemplo-dados-parte-92.png · 1785 × 1786 · K249:U274
+[exemplo] Dados: exemplo-dados-parte-93.png · 1785 × 1786 · V249:AF274
+[exemplo] Dados: exemplo-dados-parte-94.png · 1647 × 1786 · AG249:AP274
+[exemplo] Dados: exemplo-dados-parte-95.png · 1719 × 1786 · AQ249:AY274
+[exemplo] Dados: exemplo-dados-parte-96.png · 1719 × 1786 · AZ249:BH274
+[exemplo] Dados: exemplo-dados-parte-97.png · 1719 × 1786 · BI249:BQ274
+[exemplo] Dados: exemplo-dados-parte-98.png · 1719 × 1786 · BR249:BZ274
+[exemplo] Dados: exemplo-dados-parte-99.png · 1345 × 1786 · CA249:CG274
+[exemplo] Dados: exemplo-dados-parte-100.png · 1710 × 1770 · A275:J335
+[exemplo] Dados: exemplo-dados-parte-101.png · 1785 × 1770 · K275:U335
+[exemplo] Dados: exemplo-dados-parte-102.png · 1785 × 1770 · V275:AF335
+[exemplo] Dados: exemplo-dados-parte-103.png · 1647 × 1770 · AG275:AP335
+[exemplo] Dados: exemplo-dados-parte-104.png · 1719 × 1770 · AQ275:AY335
+[exemplo] Dados: exemplo-dados-parte-105.png · 1719 × 1770 · AZ275:BH335
+[exemplo] Dados: exemplo-dados-parte-106.png · 1719 × 1770 · BI275:BQ335
+[exemplo] Dados: exemplo-dados-parte-107.png · 1719 × 1770 · BR275:BZ335
+[exemplo] Dados: exemplo-dados-parte-108.png · 1345 × 1770 · CA275:CG335
+[exemplo] Dados: exemplo-dados-parte-109.png · 1710 × 1782 · A336:J398
+[exemplo] Dados: exemplo-dados-parte-110.png · 1785 × 1782 · K336:U398
+[exemplo] Dados: exemplo-dados-parte-111.png · 1785 × 1782 · V336:AF398
+[exemplo] Dados: exemplo-dados-parte-112.png · 1647 × 1782 · AG336:AP398
+[exemplo] Dados: exemplo-dados-parte-113.png · 1719 × 1782 · AQ336:AY398
+[exemplo] Dados: exemplo-dados-parte-114.png · 1719 × 1782 · AZ336:BH398
+[exemplo] Dados: exemplo-dados-parte-115.png · 1719 × 1782 · BI336:BQ398
+[exemplo] Dados: exemplo-dados-parte-116.png · 1719 × 1782 · BR336:BZ398
+[exemplo] Dados: exemplo-dados-parte-117.png · 1345 × 1782 · CA336:CG398
+[exemplo] Dados: exemplo-dados-parte-118.png · 1710 × 1791 · A399:J467
+[exemplo] Dados: exemplo-dados-parte-119.png · 1785 × 1791 · K399:U467
+[exemplo] Dados: exemplo-dados-parte-120.png · 1785 × 1791 · V399:AF467
+[exemplo] Dados: exemplo-dados-parte-121.png · 1647 × 1791 · AG399:AP467
+[exemplo] Dados: exemplo-dados-parte-122.png · 1719 × 1791 · AQ399:AY467
+[exemplo] Dados: exemplo-dados-parte-123.png · 1719 × 1791 · AZ399:BH467
+[exemplo] Dados: exemplo-dados-parte-124.png · 1719 × 1791 · BI399:BQ467
+[exemplo] Dados: exemplo-dados-parte-125.png · 1719 × 1791 · BR399:BZ467
+[exemplo] Dados: exemplo-dados-parte-126.png · 1345 × 1791 · CA399:CG467
+[exemplo] Dados: exemplo-dados-parte-127.png · 1710 × 1789 · A468:J520
+[exemplo] Dados: exemplo-dados-parte-128.png · 1785 × 1789 · K468:U520
+[exemplo] Dados: exemplo-dados-parte-129.png · 1785 × 1789 · V468:AF520
+[exemplo] Dados: exemplo-dados-parte-130.png · 1647 × 1789 · AG468:AP520
+[exemplo] Dados: exemplo-dados-parte-131.png · 1719 × 1789 · AQ468:AY520
+[exemplo] Dados: exemplo-dados-parte-132.png · 1719 × 1789 · AZ468:BH520
+[exemplo] Dados: exemplo-dados-parte-133.png · 1719 × 1789 · BI468:BQ520
+[exemplo] Dados: exemplo-dados-parte-134.png · 1719 × 1789 · BR468:BZ520
+[exemplo] Dados: exemplo-dados-parte-135.png · 1345 × 1789 · CA468:CG520
+[exemplo] Dados: exemplo-dados-parte-136.png · 1710 × 1764 · A521:J584
+[exemplo] Dados: exemplo-dados-parte-137.png · 1785 × 1764 · K521:U584
+[exemplo] Dados: exemplo-dados-parte-138.png · 1785 × 1764 · V521:AF584
+[exemplo] Dados: exemplo-dados-parte-139.png · 1647 × 1764 · AG521:AP584
+[exemplo] Dados: exemplo-dados-parte-140.png · 1719 × 1764 · AQ521:AY584
+[exemplo] Dados: exemplo-dados-parte-141.png · 1719 × 1764 · AZ521:BH584
+[exemplo] Dados: exemplo-dados-parte-142.png · 1719 × 1764 · BI521:BQ584
+[exemplo] Dados: exemplo-dados-parte-143.png · 1719 × 1764 · BR521:BZ584
+[exemplo] Dados: exemplo-dados-parte-144.png · 1345 × 1764 · CA521:CG584
+[exemplo] Dados: exemplo-dados-parte-145.png · 1710 × 1758 · A585:J628
+[exemplo] Dados: exemplo-dados-parte-146.png · 1785 × 1758 · K585:U628
+[exemplo] Dados: exemplo-dados-parte-147.png · 1785 × 1758 · V585:AF628
+[exemplo] Dados: exemplo-dados-parte-148.png · 1647 × 1758 · AG585:AP628
+[exemplo] Dados: exemplo-dados-parte-149.png · 1719 × 1758 · AQ585:AY628
+[exemplo] Dados: exemplo-dados-parte-150.png · 1719 × 1758 · AZ585:BH628
+[exemplo] Dados: exemplo-dados-parte-151.png · 1719 × 1758 · BI585:BQ628
+[exemplo] Dados: exemplo-dados-parte-152.png · 1719 × 1758 · BR585:BZ628
+[exemplo] Dados: exemplo-dados-parte-153.png · 1345 × 1758 · CA585:CG628
+[exemplo] Dados: exemplo-dados-parte-154.png · 1710 × 1797 · A629:J685
+[exemplo] Dados: exemplo-dados-parte-155.png · 1785 × 1797 · K629:U685
+[exemplo] Dados: exemplo-dados-parte-156.png · 1785 × 1797 · V629:AF685
+[exemplo] Dados: exemplo-dados-parte-157.png · 1647 × 1797 · AG629:AP685
+[exemplo] Dados: exemplo-dados-parte-158.png · 1719 × 1797 · AQ629:AY685
+[exemplo] Dados: exemplo-dados-parte-159.png · 1719 × 1797 · AZ629:BH685
+[exemplo] Dados: exemplo-dados-parte-160.png · 1719 × 1797 · BI629:BQ685
+[exemplo] Dados: exemplo-dados-parte-161.png · 1719 × 1797 · BR629:BZ685
+[exemplo] Dados: exemplo-dados-parte-162.png · 1345 × 1797 · CA629:CG685
+[exemplo] Dados: exemplo-dados-parte-163.png · 1710 × 1795 · A686:J726
+[exemplo] Dados: exemplo-dados-parte-164.png · 1785 × 1795 · K686:U726
+[exemplo] Dados: exemplo-dados-parte-165.png · 1785 × 1795 · V686:AF726
+[exemplo] Dados: exemplo-dados-parte-166.png · 1647 × 1795 · AG686:AP726
+[exemplo] Dados: exemplo-dados-parte-167.png · 1719 × 1795 · AQ686:AY726
+[exemplo] Dados: exemplo-dados-parte-168.png · 1719 × 1795 · AZ686:BH726
+[exemplo] Dados: exemplo-dados-parte-169.png · 1719 × 1795 · BI686:BQ726
+[exemplo] Dados: exemplo-dados-parte-170.png · 1719 × 1795 · BR686:BZ726
+[exemplo] Dados: exemplo-dados-parte-171.png · 1345 × 1795 · CA686:CG726
+[exemplo] Dados: exemplo-dados-parte-172.png · 1710 × 1722 · A727:J744
+[exemplo] Dados: exemplo-dados-parte-173.png · 1785 × 1722 · K727:U744
+[exemplo] Dados: exemplo-dados-parte-174.png · 1785 × 1722 · V727:AF744
+[exemplo] Dados: exemplo-dados-parte-175.png · 1647 × 1722 · AG727:AP744
+[exemplo] Dados: exemplo-dados-parte-176.png · 1719 × 1722 · AQ727:AY744
+[exemplo] Dados: exemplo-dados-parte-177.png · 1719 × 1722 · AZ727:BH744
+[exemplo] Dados: exemplo-dados-parte-178.png · 1719 × 1722 · BI727:BQ744
+[exemplo] Dados: exemplo-dados-parte-179.png · 1719 × 1722 · BR727:BZ744
+[exemplo] Dados: exemplo-dados-parte-180.png · 1345 × 1722 · CA727:CG744
+[exemplo] Dados: exemplo-dados-parte-181.png · 1710 × 1785 · A745:J763
+[exemplo] Dados: exemplo-dados-parte-182.png · 1785 × 1785 · K745:U763
+[exemplo] Dados: exemplo-dados-parte-183.png · 1785 × 1785 · V745:AF763
+[exemplo] Dados: exemplo-dados-parte-184.png · 1647 × 1785 · AG745:AP763
+[exemplo] Dados: exemplo-dados-parte-185.png · 1719 × 1785 · AQ745:AY763
+[exemplo] Dados: exemplo-dados-parte-186.png · 1719 × 1785 · AZ745:BH763
+[exemplo] Dados: exemplo-dados-parte-187.png · 1719 × 1785 · BI745:BQ763
+[exemplo] Dados: exemplo-dados-parte-188.png · 1719 × 1785 · BR745:BZ763
+[exemplo] Dados: exemplo-dados-parte-189.png · 1345 × 1785 · CA745:CG763
+[exemplo] Dados: exemplo-dados-parte-190.png · 1710 × 1774 · A764:J779
+[exemplo] Dados: exemplo-dados-parte-191.png · 1785 × 1774 · K764:U779
+[exemplo] Dados: exemplo-dados-parte-192.png · 1785 × 1774 · V764:AF779
+[exemplo] Dados: exemplo-dados-parte-193.png · 1647 × 1774 · AG764:AP779
+[exemplo] Dados: exemplo-dados-parte-194.png · 1719 × 1774 · AQ764:AY779
+[exemplo] Dados: exemplo-dados-parte-195.png · 1719 × 1774 · AZ764:BH779
+[exemplo] Dados: exemplo-dados-parte-196.png · 1719 × 1774 · BI764:BQ779
+[exemplo] Dados: exemplo-dados-parte-197.png · 1719 × 1774 · BR764:BZ779
+[exemplo] Dados: exemplo-dados-parte-198.png · 1345 × 1774 · CA764:CG779
+[exemplo] Dados: exemplo-dados-parte-199.png · 1710 × 1750 · A780:J794
+[exemplo] Dados: exemplo-dados-parte-200.png · 1785 × 1750 · K780:U794
+[exemplo] Dados: exemplo-dados-parte-201.png · 1785 × 1750 · V780:AF794
+[exemplo] Dados: exemplo-dados-parte-202.png · 1647 × 1750 · AG780:AP794
+[exemplo] Dados: exemplo-dados-parte-203.png · 1719 × 1750 · AQ780:AY794
+[exemplo] Dados: exemplo-dados-parte-204.png · 1719 × 1750 · AZ780:BH794
+[exemplo] Dados: exemplo-dados-parte-205.png · 1719 × 1750 · BI780:BQ794
+[exemplo] Dados: exemplo-dados-parte-206.png · 1719 × 1750 · BR780:BZ794
+[exemplo] Dados: exemplo-dados-parte-207.png · 1345 × 1750 · CA780:CG794
+[exemplo] Dados: exemplo-dados-parte-208.png · 1710 × 1713 · A795:J811
+[exemplo] Dados: exemplo-dados-parte-209.png · 1785 × 1713 · K795:U811
+[exemplo] Dados: exemplo-dados-parte-210.png · 1785 × 1713 · V795:AF811
+[exemplo] Dados: exemplo-dados-parte-211.png · 1647 × 1713 · AG795:AP811
+[exemplo] Dados: exemplo-dados-parte-212.png · 1719 × 1713 · AQ795:AY811
+[exemplo] Dados: exemplo-dados-parte-213.png · 1719 × 1713 · AZ795:BH811
+[exemplo] Dados: exemplo-dados-parte-214.png · 1719 × 1713 · BI795:BQ811
+[exemplo] Dados: exemplo-dados-parte-215.png · 1719 × 1713 · BR795:BZ811
+[exemplo] Dados: exemplo-dados-parte-216.png · 1345 × 1713 · CA795:CG811
+[exemplo] Dados: exemplo-dados-parte-217.png · 1710 × 1733 · A812:J847
+[exemplo] Dados: exemplo-dados-parte-218.png · 1785 × 1733 · K812:U847
+[exemplo] Dados: exemplo-dados-parte-219.png · 1785 × 1733 · V812:AF847
+[exemplo] Dados: exemplo-dados-parte-220.png · 1647 × 1733 · AG812:AP847
+[exemplo] Dados: exemplo-dados-parte-221.png · 1719 × 1733 · AQ812:AY847
+[exemplo] Dados: exemplo-dados-parte-222.png · 1719 × 1733 · AZ812:BH847
+[exemplo] Dados: exemplo-dados-parte-223.png · 1719 × 1733 · BI812:BQ847
+[exemplo] Dados: exemplo-dados-parte-224.png · 1719 × 1733 · BR812:BZ847
+[exemplo] Dados: exemplo-dados-parte-225.png · 1345 × 1733 · CA812:CG847
+[exemplo] Dados: exemplo-dados-parte-226.png · 1710 × 1792 · A848:J886
+[exemplo] Dados: exemplo-dados-parte-227.png · 1785 × 1792 · K848:U886
+[exemplo] Dados: exemplo-dados-parte-228.png · 1785 × 1792 · V848:AF886
+[exemplo] Dados: exemplo-dados-parte-229.png · 1647 × 1792 · AG848:AP886
+[exemplo] Dados: exemplo-dados-parte-230.png · 1719 × 1792 · AQ848:AY886
+[exemplo] Dados: exemplo-dados-parte-231.png · 1719 × 1792 · AZ848:BH886
+[exemplo] Dados: exemplo-dados-parte-232.png · 1719 × 1792 · BI848:BQ886
+[exemplo] Dados: exemplo-dados-parte-233.png · 1719 × 1792 · BR848:BZ886
+[exemplo] Dados: exemplo-dados-parte-234.png · 1345 × 1792 · CA848:CG886
+[exemplo] Dados: exemplo-dados-parte-235.png · 1710 × 885 · A887:J919
+[exemplo] Dados: exemplo-dados-parte-236.png · 1785 × 885 · K887:U919
+[exemplo] Dados: exemplo-dados-parte-237.png · 1785 × 885 · V887:AF919
+[exemplo] Dados: exemplo-dados-parte-238.png · 1647 × 885 · AG887:AP919
+[exemplo] Dados: exemplo-dados-parte-239.png · 1719 × 885 · AQ887:AY919
+[exemplo] Dados: exemplo-dados-parte-240.png · 1719 × 885 · AZ887:BH919
+[exemplo] Dados: exemplo-dados-parte-241.png · 1719 × 885 · BI887:BQ919
+[exemplo] Dados: exemplo-dados-parte-242.png · 1719 × 885 · BR887:BZ919
+[exemplo] Dados: exemplo-dados-parte-243.png · 1345 × 885 · CA887:CG919
+[pior-caso] Início: pior-caso-inicio-parte-01.png · 1780 × 1798 · A1:S78
+[pior-caso] Início: pior-caso-inicio-parte-02.png · 708 × 1798 · T1:Z78
+[pior-caso] Início: pior-caso-inicio-parte-03.png · 1780 × 1795 · A79:S166
+[pior-caso] Início: pior-caso-inicio-parte-04.png · 708 × 1795 · T79:Z166
+[pior-caso] Início: pior-caso-inicio-parte-05.png · 1780 × 1800 · A167:S255
+[pior-caso] Início: pior-caso-inicio-parte-06.png · 708 × 1800 · T167:Z255
+[pior-caso] Início: pior-caso-inicio-parte-07.png · 1780 × 1800 · A256:S344
+[pior-caso] Início: pior-caso-inicio-parte-08.png · 708 × 1800 · T256:Z344
+[pior-caso] Início: pior-caso-inicio-parte-09.png · 1780 × 560 · A345:S371
+[pior-caso] Início: pior-caso-inicio-parte-10.png · 708 × 560 · T345:Z371
+[pior-caso] Campanha: pior-caso-campanha-parte-01.png · 1780 × 1761 · A1:X51
+[pior-caso] Campanha: pior-caso-campanha-parte-02.png · 516 × 1761 · Y1:AK51
+[pior-caso] Campanha: pior-caso-campanha-parte-03.png · 1780 × 1771 · A52:X70
+[pior-caso] Campanha: pior-caso-campanha-parte-04.png · 516 × 1771 · Y52:AK70
+[pior-caso] Campanha: pior-caso-campanha-parte-05.png · 1780 × 1737 · A71:X87
+[pior-caso] Campanha: pior-caso-campanha-parte-06.png · 516 × 1737 · Y71:AK87
+[pior-caso] Campanha: pior-caso-campanha-parte-07.png · 1780 × 1682 · A88:X101
+[pior-caso] Campanha: pior-caso-campanha-parte-08.png · 516 × 1682 · Y88:AK101
+[pior-caso] Campanha: pior-caso-campanha-parte-09.png · 1780 × 1775 · A102:X122
+[pior-caso] Campanha: pior-caso-campanha-parte-10.png · 516 × 1775 · Y102:AK122
+[pior-caso] Campanha: pior-caso-campanha-parte-11.png · 1780 × 1797 · A123:X159
+[pior-caso] Campanha: pior-caso-campanha-parte-12.png · 516 × 1797 · Y123:AK159
+[pior-caso] Campanha: pior-caso-campanha-parte-13.png · 1780 × 1711 · A160:X178
+[pior-caso] Campanha: pior-caso-campanha-parte-14.png · 516 × 1711 · Y160:AK178
+[pior-caso] Campanha: pior-caso-campanha-parte-15.png · 1780 × 1030 · A179:X192
+[pior-caso] Campanha: pior-caso-campanha-parte-16.png · 516 × 1030 · Y179:AK192
+[pior-caso] Grupo: pior-caso-grupo-parte-01.png · 1491 × 1768 · A1:O38
+[pior-caso] Grupo: pior-caso-grupo-parte-02.png · 1491 × 1725 · A39:O85
+[pior-caso] Sessões: pior-caso-sessoes-parte-01.png · 1492 × 1741 · A1:P45
+[pior-caso] Sessões: pior-caso-sessoes-parte-02.png · 1492 × 1750 · A46:P79
+[pior-caso] Sessões: pior-caso-sessoes-parte-03.png · 1492 × 1782 · A80:P106
+[pior-caso] Sessões: pior-caso-sessoes-parte-04.png · 1492 × 1800 · A107:P129
+[pior-caso] Sessões: pior-caso-sessoes-parte-05.png · 1492 × 67 · A130:P131
+[pior-caso] Missões: pior-caso-missoes-parte-01.png · 1780 × 1658 · A1:Q14
+[pior-caso] Missões: pior-caso-missoes-parte-02.png · 1284 × 1658 · R1:AJ14
+[pior-caso] Missões: pior-caso-missoes-parte-03.png · 1780 × 1669 · A15:Q23
+[pior-caso] Missões: pior-caso-missoes-parte-04.png · 1284 × 1669 · R15:AJ23
+[pior-caso] Missões: pior-caso-missoes-parte-05.png · 1780 × 1686 · A24:Q34
+[pior-caso] Missões: pior-caso-missoes-parte-06.png · 1284 × 1686 · R24:AJ34
+[pior-caso] Missões: pior-caso-missoes-parte-07.png · 1780 × 1699 · A35:Q46
+[pior-caso] Missões: pior-caso-missoes-parte-08.png · 1284 × 1699 · R35:AJ46
+[pior-caso] Missões: pior-caso-missoes-parte-09.png · 1780 × 1795 · A47:Q101
+[pior-caso] Missões: pior-caso-missoes-parte-10.png · 1284 × 1795 · R47:AJ101
+[pior-caso] Missões: pior-caso-missoes-parte-11.png · 1780 × 80 · A102:Q104
+[pior-caso] Missões: pior-caso-missoes-parte-12.png · 1284 × 80 · R102:AJ104
+[pior-caso] NPCs: pior-caso-npcs-parte-01.png · 1780 × 1757 · A1:R50
+[pior-caso] NPCs: pior-caso-npcs-parte-02.png · 1476 × 1757 · S1:BD50
+[pior-caso] NPCs: pior-caso-npcs-parte-03.png · 1780 × 1735 · A51:R73
+[pior-caso] NPCs: pior-caso-npcs-parte-04.png · 1476 × 1735 · S51:BD73
+[pior-caso] NPCs: pior-caso-npcs-parte-05.png · 1780 × 1762 · A74:R97
+[pior-caso] NPCs: pior-caso-npcs-parte-06.png · 1476 × 1762 · S74:BD97
+[pior-caso] NPCs: pior-caso-npcs-parte-07.png · 1780 × 1750 · A98:R121
+[pior-caso] NPCs: pior-caso-npcs-parte-08.png · 1476 × 1750 · S98:BD121
+[pior-caso] NPCs: pior-caso-npcs-parte-09.png · 1780 × 1800 · A122:R145
+[pior-caso] NPCs: pior-caso-npcs-parte-10.png · 1476 × 1800 · S122:BD145
+[pior-caso] NPCs: pior-caso-npcs-parte-11.png · 1780 × 1796 · A146:R169
+[pior-caso] NPCs: pior-caso-npcs-parte-12.png · 1476 × 1796 · S146:BD169
+[pior-caso] NPCs: pior-caso-npcs-parte-13.png · 1780 × 1770 · A170:R192
+[pior-caso] NPCs: pior-caso-npcs-parte-14.png · 1476 × 1770 · S170:BD192
+[pior-caso] NPCs: pior-caso-npcs-parte-15.png · 1780 × 1776 · A193:R215
+[pior-caso] NPCs: pior-caso-npcs-parte-16.png · 1476 × 1776 · S193:BD215
+[pior-caso] NPCs: pior-caso-npcs-parte-17.png · 1780 × 682 · A216:R232
+[pior-caso] NPCs: pior-caso-npcs-parte-18.png · 1476 × 682 · S216:BD232
+[pior-caso] Inimigos: pior-caso-inimigos-parte-01.png · 1684 × 1770 · A1:DP48
+[pior-caso] Inimigos: pior-caso-inimigos-parte-02.png · 1684 × 1745 · A49:DP94
+[pior-caso] Inimigos: pior-caso-inimigos-parte-03.png · 1684 × 1781 · A95:DP130
+[pior-caso] Inimigos: pior-caso-inimigos-parte-04.png · 1684 × 1791 · A131:DP165
+[pior-caso] Inimigos: pior-caso-inimigos-parte-05.png · 1684 × 1754 · A166:DP193
+[pior-caso] Inimigos: pior-caso-inimigos-parte-06.png · 1684 × 954 · A194:DP219
+[pior-caso] Bestiário: pior-caso-bestiario-parte-01.png · 1492 × 1786 · A1:Q44
+[pior-caso] Bestiário: pior-caso-bestiario-parte-02.png · 1492 × 1755 · A45:Q84
+[pior-caso] Bestiário: pior-caso-bestiario-parte-03.png · 1492 × 1392 · A85:Q121
+[pior-caso] Encontros: pior-caso-encontros-parte-01.png · 1780 × 1771 · A1:BF56
+[pior-caso] Encontros: pior-caso-encontros-parte-02.png · 1780 × 1767 · A57:BF112
+[pior-caso] Encontros: pior-caso-encontros-parte-03.png · 1780 × 301 · A113:BF122
+[pior-caso] Combate: pior-caso-combate-parte-01.png · 1780 × 1797 · A1:BZ45
+[pior-caso] Combate: pior-caso-combate-parte-02.png · 1780 × 1784 · A46:BZ73
+[pior-caso] Combate: pior-caso-combate-parte-03.png · 1780 × 1755 · A74:BZ104
+[pior-caso] Combate: pior-caso-combate-parte-04.png · 1780 × 1747 · A105:BZ135
+[pior-caso] Combate: pior-caso-combate-parte-05.png · 1780 × 1785 · A136:BZ172
+[pior-caso] Combate: pior-caso-combate-parte-06.png · 1780 × 1770 · A173:BZ195
+[pior-caso] Combate: pior-caso-combate-parte-07.png · 1780 × 1773 · A196:BZ223
+[pior-caso] Combate: pior-caso-combate-parte-08.png · 1780 × 1754 · A224:BZ251
+[pior-caso] Combate: pior-caso-combate-parte-09.png · 1780 × 1786 · A252:BZ279
+[pior-caso] Combate: pior-caso-combate-parte-10.png · 1780 × 1770 · A280:BZ302
+[pior-caso] Combate: pior-caso-combate-parte-11.png · 1780 × 386 · A303:BZ311
+[pior-caso] Aventuras: pior-caso-aventuras-parte-01.png · 1780 × 1795 · A1:S62
+[pior-caso] Aventuras: pior-caso-aventuras-parte-02.png · 1188 × 1795 · T1:AR62
+[pior-caso] Aventuras: pior-caso-aventuras-parte-03.png · 1780 × 1100 · A63:S116
+[pior-caso] Aventuras: pior-caso-aventuras-parte-04.png · 1188 × 1100 · T63:AR116
+[pior-caso] Recompensas: pior-caso-recompensas-parte-01.png · 1780 × 1790 · A1:S72
+[pior-caso] Recompensas: pior-caso-recompensas-parte-02.png · 996 × 1790 · T1:AI72
+[pior-caso] Recompensas: pior-caso-recompensas-parte-03.png · 1780 × 1745 · A73:S132
+[pior-caso] Recompensas: pior-caso-recompensas-parte-04.png · 996 × 1745 · T73:AI132
+[pior-caso] Recompensas: pior-caso-recompensas-parte-05.png · 1780 × 1791 · A133:S147
+[pior-caso] Recompensas: pior-caso-recompensas-parte-06.png · 996 × 1791 · T133:AI147
+[pior-caso] Recompensas: pior-caso-recompensas-parte-07.png · 1780 × 1404 · A148:S159
+[pior-caso] Recompensas: pior-caso-recompensas-parte-08.png · 996 × 1404 · T148:AI159
+[pior-caso] Mundos: pior-caso-mundos-parte-01.png · 1780 × 1785 · A1:T55
+[pior-caso] Mundos: pior-caso-mundos-parte-02.png · 708 × 1785 · U1:AD55
+[pior-caso] Mundos: pior-caso-mundos-parte-03.png · 1780 × 1489 · A56:T106
+[pior-caso] Mundos: pior-caso-mundos-parte-04.png · 708 × 1489 · U56:AD106
+[pior-caso] Improviso: pior-caso-improviso-parte-01.png · 1780 × 1766 · A1:R61
+[pior-caso] Improviso: pior-caso-improviso-parte-02.png · 900 × 1766 · S1:AD61
+[pior-caso] Improviso: pior-caso-improviso-parte-03.png · 1780 × 1453 · A62:R121
+[pior-caso] Improviso: pior-caso-improviso-parte-04.png · 900 × 1453 · S62:AD121
+[pior-caso] Escudo do Mestre: pior-caso-escudo-do-mestre-parte-01.png · 1396 × 1772 · A1:L78
+[pior-caso] Escudo do Mestre: pior-caso-escudo-do-mestre-parte-02.png · 1396 × 1709 · A79:L153
+[pior-caso] Escudo do Mestre: pior-caso-escudo-do-mestre-parte-03.png · 1396 × 537 · A154:L173
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-01.png · 1760 × 1736 · A1:X28
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-02.png · 1476 × 1736 · Y1:BA28
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-03.png · 1760 × 1786 · A29:X53
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-04.png · 1476 × 1786 · Y29:BA53
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-05.png · 1760 × 1755 · A54:X76
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-06.png · 1476 × 1755 · Y54:BA76
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-07.png · 1760 × 1735 · A77:X98
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-08.png · 1476 × 1735 · Y77:BA98
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-09.png · 1760 × 1755 · A99:X121
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-10.png · 1476 × 1755 · Y99:BA121
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-11.png · 1760 × 1787 · A122:X146
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-12.png · 1476 × 1787 · Y122:BA146
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-13.png · 1760 × 1735 · A147:X168
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-14.png · 1476 × 1735 · Y147:BA168
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-15.png · 1760 × 1740 · A169:X191
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-16.png · 1476 × 1740 · Y169:BA191
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-17.png · 1760 × 1755 · A192:X214
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-18.png · 1476 × 1755 · Y192:BA214
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-19.png · 1760 × 1800 · A215:X237
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-20.png · 1476 × 1800 · Y215:BA237
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-21.png · 1760 × 1787 · A238:X262
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-22.png · 1476 × 1787 · Y238:BA262
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-23.png · 1760 × 1755 · A263:X285
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-24.png · 1476 × 1755 · Y263:BA285
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-25.png · 1760 × 1795 · A286:X307
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-26.png · 1476 × 1795 · Y286:BA307
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-27.png · 1760 × 1740 · A308:X330
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-28.png · 1476 × 1740 · Y308:BA330
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-29.png · 1760 × 1740 · A331:X353
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-30.png · 1476 × 1740 · Y331:BA353
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-31.png · 1760 × 1723 · A354:X377
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-32.png · 1476 × 1723 · Y354:BA377
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-33.png · 1760 × 1800 · A378:X400
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-34.png · 1476 × 1800 · Y378:BA400
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-35.png · 1760 × 1740 · A401:X423
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-36.png · 1476 × 1740 · Y401:BA423
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-37.png · 1760 × 1800 · A424:X446
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-38.png · 1476 × 1800 · Y424:BA446
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-39.png · 1760 × 1740 · A447:X469
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-40.png · 1476 × 1740 · Y447:BA469
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-41.png · 1760 × 100 · A470:X470
+[pior-caso] Minhas Tabelas: pior-caso-minhas-tabelas-parte-42.png · 1476 × 100 · Y470:BA470
+[pior-caso] Tabelas: pior-caso-tabelas-parte-01.png · 1616 × 1790 · A1:H51
+[pior-caso] Tabelas: pior-caso-tabelas-parte-02.png · 918 × 1790 · I1:W51
+[pior-caso] Tabelas: pior-caso-tabelas-parte-03.png · 1616 × 1780 · A52:H103
+[pior-caso] Tabelas: pior-caso-tabelas-parte-04.png · 918 × 1780 · I52:W103
+[pior-caso] Tabelas: pior-caso-tabelas-parte-05.png · 1616 × 1797 · A104:H157
+[pior-caso] Tabelas: pior-caso-tabelas-parte-06.png · 918 × 1797 · I104:W157
+[pior-caso] Tabelas: pior-caso-tabelas-parte-07.png · 1616 × 1795 · A158:H209
+[pior-caso] Tabelas: pior-caso-tabelas-parte-08.png · 918 × 1795 · I158:W209
+[pior-caso] Tabelas: pior-caso-tabelas-parte-09.png · 1616 × 1797 · A210:H263
+[pior-caso] Tabelas: pior-caso-tabelas-parte-10.png · 918 × 1797 · I210:W263
+[pior-caso] Tabelas: pior-caso-tabelas-parte-11.png · 1616 × 1780 · A264:H315
+[pior-caso] Tabelas: pior-caso-tabelas-parte-12.png · 918 × 1780 · I264:W315
+[pior-caso] Tabelas: pior-caso-tabelas-parte-13.png · 1616 × 1770 · A316:H367
+[pior-caso] Tabelas: pior-caso-tabelas-parte-14.png · 918 × 1770 · I316:W367
+[pior-caso] Tabelas: pior-caso-tabelas-parte-15.png · 1616 × 1794 · A368:H419
+[pior-caso] Tabelas: pior-caso-tabelas-parte-16.png · 918 × 1794 · I368:W419
+[pior-caso] Tabelas: pior-caso-tabelas-parte-17.png · 1616 × 1776 · A420:H472
+[pior-caso] Tabelas: pior-caso-tabelas-parte-18.png · 918 × 1776 · I420:W472
+[pior-caso] Tabelas: pior-caso-tabelas-parte-19.png · 1616 × 1781 · A473:H516
+[pior-caso] Tabelas: pior-caso-tabelas-parte-20.png · 918 × 1781 · I473:W516
+[pior-caso] Tabelas: pior-caso-tabelas-parte-21.png · 1616 × 1795 · A517:H568
+[pior-caso] Tabelas: pior-caso-tabelas-parte-22.png · 918 × 1795 · I517:W568
+[pior-caso] Tabelas: pior-caso-tabelas-parte-23.png · 1616 × 1790 · A569:H620
+[pior-caso] Tabelas: pior-caso-tabelas-parte-24.png · 918 × 1790 · I569:W620
+[pior-caso] Tabelas: pior-caso-tabelas-parte-25.png · 1616 × 1780 · A621:H672
+[pior-caso] Tabelas: pior-caso-tabelas-parte-26.png · 918 × 1780 · I621:W672
+[pior-caso] Tabelas: pior-caso-tabelas-parte-27.png · 1616 × 1788 · A673:H718
+[pior-caso] Tabelas: pior-caso-tabelas-parte-28.png · 918 × 1788 · I673:W718
+[pior-caso] Tabelas: pior-caso-tabelas-parte-29.png · 1616 × 1791 · A719:H767
+[pior-caso] Tabelas: pior-caso-tabelas-parte-30.png · 918 × 1791 · I719:W767
+[pior-caso] Tabelas: pior-caso-tabelas-parte-31.png · 1616 × 1792 · A768:H820
+[pior-caso] Tabelas: pior-caso-tabelas-parte-32.png · 918 × 1792 · I768:W820
+[pior-caso] Tabelas: pior-caso-tabelas-parte-33.png · 1616 × 1780 · A821:H872
+[pior-caso] Tabelas: pior-caso-tabelas-parte-34.png · 918 × 1780 · I821:W872
+[pior-caso] Tabelas: pior-caso-tabelas-parte-35.png · 1616 × 1780 · A873:H924
+[pior-caso] Tabelas: pior-caso-tabelas-parte-36.png · 918 × 1780 · I873:W924
+[pior-caso] Tabelas: pior-caso-tabelas-parte-37.png · 1616 × 1796 · A925:H975
+[pior-caso] Tabelas: pior-caso-tabelas-parte-38.png · 918 × 1796 · I925:W975
+[pior-caso] Tabelas: pior-caso-tabelas-parte-39.png · 1616 × 1770 · A976:H1025
+[pior-caso] Tabelas: pior-caso-tabelas-parte-40.png · 918 × 1770 · I976:W1025
+[pior-caso] Tabelas: pior-caso-tabelas-parte-41.png · 1616 × 1766 · A1026:H1072
+[pior-caso] Tabelas: pior-caso-tabelas-parte-42.png · 918 × 1766 · I1026:W1072
+[pior-caso] Tabelas: pior-caso-tabelas-parte-43.png · 1616 × 1780 · A1073:H1124
+[pior-caso] Tabelas: pior-caso-tabelas-parte-44.png · 918 × 1780 · I1073:W1124
+[pior-caso] Tabelas: pior-caso-tabelas-parte-45.png · 1616 × 1786 · A1125:H1174
+[pior-caso] Tabelas: pior-caso-tabelas-parte-46.png · 918 × 1786 · I1125:W1174
+[pior-caso] Tabelas: pior-caso-tabelas-parte-47.png · 1616 × 1784 · A1175:H1220
+[pior-caso] Tabelas: pior-caso-tabelas-parte-48.png · 918 × 1784 · I1175:W1220
+[pior-caso] Tabelas: pior-caso-tabelas-parte-49.png · 1616 × 1700 · A1221:H1268
+[pior-caso] Tabelas: pior-caso-tabelas-parte-50.png · 918 × 1700 · I1221:W1268
+[pior-caso] Dados: pior-caso-dados-parte-01.png · 1710 × 1795 · A1:J66
+[pior-caso] Dados: pior-caso-dados-parte-02.png · 1785 × 1795 · K1:U66
+[pior-caso] Dados: pior-caso-dados-parte-03.png · 1785 × 1795 · V1:AF66
+[pior-caso] Dados: pior-caso-dados-parte-04.png · 1647 × 1795 · AG1:AP66
+[pior-caso] Dados: pior-caso-dados-parte-05.png · 1719 × 1795 · AQ1:AY66
+[pior-caso] Dados: pior-caso-dados-parte-06.png · 1719 × 1795 · AZ1:BH66
+[pior-caso] Dados: pior-caso-dados-parte-07.png · 1719 × 1795 · BI1:BQ66
+[pior-caso] Dados: pior-caso-dados-parte-08.png · 1719 × 1795 · BR1:BZ66
+[pior-caso] Dados: pior-caso-dados-parte-09.png · 1345 × 1795 · CA1:CG66
+[pior-caso] Dados: pior-caso-dados-parte-10.png · 1710 × 1790 · A67:J106
+[pior-caso] Dados: pior-caso-dados-parte-11.png · 1785 × 1790 · K67:U106
+[pior-caso] Dados: pior-caso-dados-parte-12.png · 1785 × 1790 · V67:AF106
+[pior-caso] Dados: pior-caso-dados-parte-13.png · 1647 × 1790 · AG67:AP106
+[pior-caso] Dados: pior-caso-dados-parte-14.png · 1719 × 1790 · AQ67:AY106
+[pior-caso] Dados: pior-caso-dados-parte-15.png · 1719 × 1790 · AZ67:BH106
+[pior-caso] Dados: pior-caso-dados-parte-16.png · 1719 × 1790 · BI67:BQ106
+[pior-caso] Dados: pior-caso-dados-parte-17.png · 1719 × 1790 · BR67:BZ106
+[pior-caso] Dados: pior-caso-dados-parte-18.png · 1345 × 1790 · CA67:CG106
+[pior-caso] Dados: pior-caso-dados-parte-19.png · 1710 × 1794 · A107:J131
+[pior-caso] Dados: pior-caso-dados-parte-20.png · 1785 × 1794 · K107:U131
+[pior-caso] Dados: pior-caso-dados-parte-21.png · 1785 × 1794 · V107:AF131
+[pior-caso] Dados: pior-caso-dados-parte-22.png · 1647 × 1794 · AG107:AP131
+[pior-caso] Dados: pior-caso-dados-parte-23.png · 1719 × 1794 · AQ107:AY131
+[pior-caso] Dados: pior-caso-dados-parte-24.png · 1719 × 1794 · AZ107:BH131
+[pior-caso] Dados: pior-caso-dados-parte-25.png · 1719 × 1794 · BI107:BQ131
+[pior-caso] Dados: pior-caso-dados-parte-26.png · 1719 × 1794 · BR107:BZ131
+[pior-caso] Dados: pior-caso-dados-parte-27.png · 1345 × 1794 · CA107:CG131
+[pior-caso] Dados: pior-caso-dados-parte-28.png · 1710 × 1651 · A132:J156
+[pior-caso] Dados: pior-caso-dados-parte-29.png · 1785 × 1651 · K132:U156
+[pior-caso] Dados: pior-caso-dados-parte-30.png · 1785 × 1651 · V132:AF156
+[pior-caso] Dados: pior-caso-dados-parte-31.png · 1647 × 1651 · AG132:AP156
+[pior-caso] Dados: pior-caso-dados-parte-32.png · 1719 × 1651 · AQ132:AY156
+[pior-caso] Dados: pior-caso-dados-parte-33.png · 1719 × 1651 · AZ132:BH156
+[pior-caso] Dados: pior-caso-dados-parte-34.png · 1719 × 1651 · BI132:BQ156
+[pior-caso] Dados: pior-caso-dados-parte-35.png · 1719 × 1651 · BR132:BZ156
+[pior-caso] Dados: pior-caso-dados-parte-36.png · 1345 × 1651 · CA132:CG156
+[pior-caso] Dados: pior-caso-dados-parte-37.png · 1710 × 1682 · A157:J172
+[pior-caso] Dados: pior-caso-dados-parte-38.png · 1785 × 1682 · K157:U172
+[pior-caso] Dados: pior-caso-dados-parte-39.png · 1785 × 1682 · V157:AF172
+[pior-caso] Dados: pior-caso-dados-parte-40.png · 1647 × 1682 · AG157:AP172
+[pior-caso] Dados: pior-caso-dados-parte-41.png · 1719 × 1682 · AQ157:AY172
+[pior-caso] Dados: pior-caso-dados-parte-42.png · 1719 × 1682 · AZ157:BH172
+[pior-caso] Dados: pior-caso-dados-parte-43.png · 1719 × 1682 · BI157:BQ172
+[pior-caso] Dados: pior-caso-dados-parte-44.png · 1719 × 1682 · BR157:BZ172
+[pior-caso] Dados: pior-caso-dados-parte-45.png · 1345 × 1682 · CA157:CG172
+[pior-caso] Dados: pior-caso-dados-parte-46.png · 1710 × 1770 · A173:J188
+[pior-caso] Dados: pior-caso-dados-parte-47.png · 1785 × 1770 · K173:U188
+[pior-caso] Dados: pior-caso-dados-parte-48.png · 1785 × 1770 · V173:AF188
+[pior-caso] Dados: pior-caso-dados-parte-49.png · 1647 × 1770 · AG173:AP188
+[pior-caso] Dados: pior-caso-dados-parte-50.png · 1719 × 1770 · AQ173:AY188
+[pior-caso] Dados: pior-caso-dados-parte-51.png · 1719 × 1770 · AZ173:BH188
+[pior-caso] Dados: pior-caso-dados-parte-52.png · 1719 × 1770 · BI173:BQ188
+[pior-caso] Dados: pior-caso-dados-parte-53.png · 1719 × 1770 · BR173:BZ188
+[pior-caso] Dados: pior-caso-dados-parte-54.png · 1345 × 1770 · CA173:CG188
+[pior-caso] Dados: pior-caso-dados-parte-55.png · 1710 × 1780 · A189:J203
+[pior-caso] Dados: pior-caso-dados-parte-56.png · 1785 × 1780 · K189:U203
+[pior-caso] Dados: pior-caso-dados-parte-57.png · 1785 × 1780 · V189:AF203
+[pior-caso] Dados: pior-caso-dados-parte-58.png · 1647 × 1780 · AG189:AP203
+[pior-caso] Dados: pior-caso-dados-parte-59.png · 1719 × 1780 · AQ189:AY203
+[pior-caso] Dados: pior-caso-dados-parte-60.png · 1719 × 1780 · AZ189:BH203
+[pior-caso] Dados: pior-caso-dados-parte-61.png · 1719 × 1780 · BI189:BQ203
+[pior-caso] Dados: pior-caso-dados-parte-62.png · 1719 × 1780 · BR189:BZ203
+[pior-caso] Dados: pior-caso-dados-parte-63.png · 1345 × 1780 · CA189:CG203
+[pior-caso] Dados: pior-caso-dados-parte-64.png · 1710 × 1707 · A204:J218
+[pior-caso] Dados: pior-caso-dados-parte-65.png · 1785 × 1707 · K204:U218
+[pior-caso] Dados: pior-caso-dados-parte-66.png · 1785 × 1707 · V204:AF218
+[pior-caso] Dados: pior-caso-dados-parte-67.png · 1647 × 1707 · AG204:AP218
+[pior-caso] Dados: pior-caso-dados-parte-68.png · 1719 × 1707 · AQ204:AY218
+[pior-caso] Dados: pior-caso-dados-parte-69.png · 1719 × 1707 · AZ204:BH218
+[pior-caso] Dados: pior-caso-dados-parte-70.png · 1719 × 1707 · BI204:BQ218
+[pior-caso] Dados: pior-caso-dados-parte-71.png · 1719 × 1707 · BR204:BZ218
+[pior-caso] Dados: pior-caso-dados-parte-72.png · 1345 × 1707 · CA204:CG218
+[pior-caso] Dados: pior-caso-dados-parte-73.png · 1710 × 1784 · A219:J234
+[pior-caso] Dados: pior-caso-dados-parte-74.png · 1785 × 1784 · K219:U234
+[pior-caso] Dados: pior-caso-dados-parte-75.png · 1785 × 1784 · V219:AF234
+[pior-caso] Dados: pior-caso-dados-parte-76.png · 1647 × 1784 · AG219:AP234
+[pior-caso] Dados: pior-caso-dados-parte-77.png · 1719 × 1784 · AQ219:AY234
+[pior-caso] Dados: pior-caso-dados-parte-78.png · 1719 × 1784 · AZ219:BH234
+[pior-caso] Dados: pior-caso-dados-parte-79.png · 1719 × 1784 · BI219:BQ234
+[pior-caso] Dados: pior-caso-dados-parte-80.png · 1719 × 1784 · BR219:BZ234
+[pior-caso] Dados: pior-caso-dados-parte-81.png · 1345 × 1784 · CA219:CG234
+[pior-caso] Dados: pior-caso-dados-parte-82.png · 1710 × 1793 · A235:J248
+[pior-caso] Dados: pior-caso-dados-parte-83.png · 1785 × 1793 · K235:U248
+[pior-caso] Dados: pior-caso-dados-parte-84.png · 1785 × 1793 · V235:AF248
+[pior-caso] Dados: pior-caso-dados-parte-85.png · 1647 × 1793 · AG235:AP248
+[pior-caso] Dados: pior-caso-dados-parte-86.png · 1719 × 1793 · AQ235:AY248
+[pior-caso] Dados: pior-caso-dados-parte-87.png · 1719 × 1793 · AZ235:BH248
+[pior-caso] Dados: pior-caso-dados-parte-88.png · 1719 × 1793 · BI235:BQ248
+[pior-caso] Dados: pior-caso-dados-parte-89.png · 1719 × 1793 · BR235:BZ248
+[pior-caso] Dados: pior-caso-dados-parte-90.png · 1345 × 1793 · CA235:CG248
+[pior-caso] Dados: pior-caso-dados-parte-91.png · 1710 × 1786 · A249:J274
+[pior-caso] Dados: pior-caso-dados-parte-92.png · 1785 × 1786 · K249:U274
+[pior-caso] Dados: pior-caso-dados-parte-93.png · 1785 × 1786 · V249:AF274
+[pior-caso] Dados: pior-caso-dados-parte-94.png · 1647 × 1786 · AG249:AP274
+[pior-caso] Dados: pior-caso-dados-parte-95.png · 1719 × 1786 · AQ249:AY274
+[pior-caso] Dados: pior-caso-dados-parte-96.png · 1719 × 1786 · AZ249:BH274
+[pior-caso] Dados: pior-caso-dados-parte-97.png · 1719 × 1786 · BI249:BQ274
+[pior-caso] Dados: pior-caso-dados-parte-98.png · 1719 × 1786 · BR249:BZ274
+[pior-caso] Dados: pior-caso-dados-parte-99.png · 1345 × 1786 · CA249:CG274
+[pior-caso] Dados: pior-caso-dados-parte-100.png · 1710 × 1770 · A275:J335
+[pior-caso] Dados: pior-caso-dados-parte-101.png · 1785 × 1770 · K275:U335
+[pior-caso] Dados: pior-caso-dados-parte-102.png · 1785 × 1770 · V275:AF335
+[pior-caso] Dados: pior-caso-dados-parte-103.png · 1647 × 1770 · AG275:AP335
+[pior-caso] Dados: pior-caso-dados-parte-104.png · 1719 × 1770 · AQ275:AY335
+[pior-caso] Dados: pior-caso-dados-parte-105.png · 1719 × 1770 · AZ275:BH335
+[pior-caso] Dados: pior-caso-dados-parte-106.png · 1719 × 1770 · BI275:BQ335
+[pior-caso] Dados: pior-caso-dados-parte-107.png · 1719 × 1770 · BR275:BZ335
+[pior-caso] Dados: pior-caso-dados-parte-108.png · 1345 × 1770 · CA275:CG335
+[pior-caso] Dados: pior-caso-dados-parte-109.png · 1710 × 1782 · A336:J398
+[pior-caso] Dados: pior-caso-dados-parte-110.png · 1785 × 1782 · K336:U398
+[pior-caso] Dados: pior-caso-dados-parte-111.png · 1785 × 1782 · V336:AF398
+[pior-caso] Dados: pior-caso-dados-parte-112.png · 1647 × 1782 · AG336:AP398
+[pior-caso] Dados: pior-caso-dados-parte-113.png · 1719 × 1782 · AQ336:AY398
+[pior-caso] Dados: pior-caso-dados-parte-114.png · 1719 × 1782 · AZ336:BH398
+[pior-caso] Dados: pior-caso-dados-parte-115.png · 1719 × 1782 · BI336:BQ398
+[pior-caso] Dados: pior-caso-dados-parte-116.png · 1719 × 1782 · BR336:BZ398
+[pior-caso] Dados: pior-caso-dados-parte-117.png · 1345 × 1782 · CA336:CG398
+[pior-caso] Dados: pior-caso-dados-parte-118.png · 1710 × 1791 · A399:J467
+[pior-caso] Dados: pior-caso-dados-parte-119.png · 1785 × 1791 · K399:U467
+[pior-caso] Dados: pior-caso-dados-parte-120.png · 1785 × 1791 · V399:AF467
+[pior-caso] Dados: pior-caso-dados-parte-121.png · 1647 × 1791 · AG399:AP467
+[pior-caso] Dados: pior-caso-dados-parte-122.png · 1719 × 1791 · AQ399:AY467
+[pior-caso] Dados: pior-caso-dados-parte-123.png · 1719 × 1791 · AZ399:BH467
+[pior-caso] Dados: pior-caso-dados-parte-124.png · 1719 × 1791 · BI399:BQ467
+[pior-caso] Dados: pior-caso-dados-parte-125.png · 1719 × 1791 · BR399:BZ467
+[pior-caso] Dados: pior-caso-dados-parte-126.png · 1345 × 1791 · CA399:CG467
+[pior-caso] Dados: pior-caso-dados-parte-127.png · 1710 × 1789 · A468:J520
+[pior-caso] Dados: pior-caso-dados-parte-128.png · 1785 × 1789 · K468:U520
+[pior-caso] Dados: pior-caso-dados-parte-129.png · 1785 × 1789 · V468:AF520
+[pior-caso] Dados: pior-caso-dados-parte-130.png · 1647 × 1789 · AG468:AP520
+[pior-caso] Dados: pior-caso-dados-parte-131.png · 1719 × 1789 · AQ468:AY520
+[pior-caso] Dados: pior-caso-dados-parte-132.png · 1719 × 1789 · AZ468:BH520
+[pior-caso] Dados: pior-caso-dados-parte-133.png · 1719 × 1789 · BI468:BQ520
+[pior-caso] Dados: pior-caso-dados-parte-134.png · 1719 × 1789 · BR468:BZ520
+[pior-caso] Dados: pior-caso-dados-parte-135.png · 1345 × 1789 · CA468:CG520
+[pior-caso] Dados: pior-caso-dados-parte-136.png · 1710 × 1764 · A521:J584
+[pior-caso] Dados: pior-caso-dados-parte-137.png · 1785 × 1764 · K521:U584
+[pior-caso] Dados: pior-caso-dados-parte-138.png · 1785 × 1764 · V521:AF584
+[pior-caso] Dados: pior-caso-dados-parte-139.png · 1647 × 1764 · AG521:AP584
+[pior-caso] Dados: pior-caso-dados-parte-140.png · 1719 × 1764 · AQ521:AY584
+[pior-caso] Dados: pior-caso-dados-parte-141.png · 1719 × 1764 · AZ521:BH584
+[pior-caso] Dados: pior-caso-dados-parte-142.png · 1719 × 1764 · BI521:BQ584
+[pior-caso] Dados: pior-caso-dados-parte-143.png · 1719 × 1764 · BR521:BZ584
+[pior-caso] Dados: pior-caso-dados-parte-144.png · 1345 × 1764 · CA521:CG584
+[pior-caso] Dados: pior-caso-dados-parte-145.png · 1710 × 1758 · A585:J628
+[pior-caso] Dados: pior-caso-dados-parte-146.png · 1785 × 1758 · K585:U628
+[pior-caso] Dados: pior-caso-dados-parte-147.png · 1785 × 1758 · V585:AF628
+[pior-caso] Dados: pior-caso-dados-parte-148.png · 1647 × 1758 · AG585:AP628
+[pior-caso] Dados: pior-caso-dados-parte-149.png · 1719 × 1758 · AQ585:AY628
+[pior-caso] Dados: pior-caso-dados-parte-150.png · 1719 × 1758 · AZ585:BH628
+[pior-caso] Dados: pior-caso-dados-parte-151.png · 1719 × 1758 · BI585:BQ628
+[pior-caso] Dados: pior-caso-dados-parte-152.png · 1719 × 1758 · BR585:BZ628
+[pior-caso] Dados: pior-caso-dados-parte-153.png · 1345 × 1758 · CA585:CG628
+[pior-caso] Dados: pior-caso-dados-parte-154.png · 1710 × 1797 · A629:J685
+[pior-caso] Dados: pior-caso-dados-parte-155.png · 1785 × 1797 · K629:U685
+[pior-caso] Dados: pior-caso-dados-parte-156.png · 1785 × 1797 · V629:AF685
+[pior-caso] Dados: pior-caso-dados-parte-157.png · 1647 × 1797 · AG629:AP685
+[pior-caso] Dados: pior-caso-dados-parte-158.png · 1719 × 1797 · AQ629:AY685
+[pior-caso] Dados: pior-caso-dados-parte-159.png · 1719 × 1797 · AZ629:BH685
+[pior-caso] Dados: pior-caso-dados-parte-160.png · 1719 × 1797 · BI629:BQ685
+[pior-caso] Dados: pior-caso-dados-parte-161.png · 1719 × 1797 · BR629:BZ685
+[pior-caso] Dados: pior-caso-dados-parte-162.png · 1345 × 1797 · CA629:CG685
+[pior-caso] Dados: pior-caso-dados-parte-163.png · 1710 × 1795 · A686:J726
+[pior-caso] Dados: pior-caso-dados-parte-164.png · 1785 × 1795 · K686:U726
+[pior-caso] Dados: pior-caso-dados-parte-165.png · 1785 × 1795 · V686:AF726
+[pior-caso] Dados: pior-caso-dados-parte-166.png · 1647 × 1795 · AG686:AP726
+[pior-caso] Dados: pior-caso-dados-parte-167.png · 1719 × 1795 · AQ686:AY726
+[pior-caso] Dados: pior-caso-dados-parte-168.png · 1719 × 1795 · AZ686:BH726
+[pior-caso] Dados: pior-caso-dados-parte-169.png · 1719 × 1795 · BI686:BQ726
+[pior-caso] Dados: pior-caso-dados-parte-170.png · 1719 × 1795 · BR686:BZ726
+[pior-caso] Dados: pior-caso-dados-parte-171.png · 1345 × 1795 · CA686:CG726
+[pior-caso] Dados: pior-caso-dados-parte-172.png · 1710 × 1722 · A727:J744
+[pior-caso] Dados: pior-caso-dados-parte-173.png · 1785 × 1722 · K727:U744
+[pior-caso] Dados: pior-caso-dados-parte-174.png · 1785 × 1722 · V727:AF744
+[pior-caso] Dados: pior-caso-dados-parte-175.png · 1647 × 1722 · AG727:AP744
+[pior-caso] Dados: pior-caso-dados-parte-176.png · 1719 × 1722 · AQ727:AY744
+[pior-caso] Dados: pior-caso-dados-parte-177.png · 1719 × 1722 · AZ727:BH744
+[pior-caso] Dados: pior-caso-dados-parte-178.png · 1719 × 1722 · BI727:BQ744
+[pior-caso] Dados: pior-caso-dados-parte-179.png · 1719 × 1722 · BR727:BZ744
+[pior-caso] Dados: pior-caso-dados-parte-180.png · 1345 × 1722 · CA727:CG744
+[pior-caso] Dados: pior-caso-dados-parte-181.png · 1710 × 1785 · A745:J763
+[pior-caso] Dados: pior-caso-dados-parte-182.png · 1785 × 1785 · K745:U763
+[pior-caso] Dados: pior-caso-dados-parte-183.png · 1785 × 1785 · V745:AF763
+[pior-caso] Dados: pior-caso-dados-parte-184.png · 1647 × 1785 · AG745:AP763
+[pior-caso] Dados: pior-caso-dados-parte-185.png · 1719 × 1785 · AQ745:AY763
+[pior-caso] Dados: pior-caso-dados-parte-186.png · 1719 × 1785 · AZ745:BH763
+[pior-caso] Dados: pior-caso-dados-parte-187.png · 1719 × 1785 · BI745:BQ763
+[pior-caso] Dados: pior-caso-dados-parte-188.png · 1719 × 1785 · BR745:BZ763
+[pior-caso] Dados: pior-caso-dados-parte-189.png · 1345 × 1785 · CA745:CG763
+[pior-caso] Dados: pior-caso-dados-parte-190.png · 1710 × 1774 · A764:J779
+[pior-caso] Dados: pior-caso-dados-parte-191.png · 1785 × 1774 · K764:U779
+[pior-caso] Dados: pior-caso-dados-parte-192.png · 1785 × 1774 · V764:AF779
+[pior-caso] Dados: pior-caso-dados-parte-193.png · 1647 × 1774 · AG764:AP779
+[pior-caso] Dados: pior-caso-dados-parte-194.png · 1719 × 1774 · AQ764:AY779
+[pior-caso] Dados: pior-caso-dados-parte-195.png · 1719 × 1774 · AZ764:BH779
+[pior-caso] Dados: pior-caso-dados-parte-196.png · 1719 × 1774 · BI764:BQ779
+[pior-caso] Dados: pior-caso-dados-parte-197.png · 1719 × 1774 · BR764:BZ779
+[pior-caso] Dados: pior-caso-dados-parte-198.png · 1345 × 1774 · CA764:CG779
+[pior-caso] Dados: pior-caso-dados-parte-199.png · 1710 × 1750 · A780:J794
+[pior-caso] Dados: pior-caso-dados-parte-200.png · 1785 × 1750 · K780:U794
+[pior-caso] Dados: pior-caso-dados-parte-201.png · 1785 × 1750 · V780:AF794
+[pior-caso] Dados: pior-caso-dados-parte-202.png · 1647 × 1750 · AG780:AP794
+[pior-caso] Dados: pior-caso-dados-parte-203.png · 1719 × 1750 · AQ780:AY794
+[pior-caso] Dados: pior-caso-dados-parte-204.png · 1719 × 1750 · AZ780:BH794
+[pior-caso] Dados: pior-caso-dados-parte-205.png · 1719 × 1750 · BI780:BQ794
+[pior-caso] Dados: pior-caso-dados-parte-206.png · 1719 × 1750 · BR780:BZ794
+[pior-caso] Dados: pior-caso-dados-parte-207.png · 1345 × 1750 · CA780:CG794
+[pior-caso] Dados: pior-caso-dados-parte-208.png · 1710 × 1713 · A795:J811
+[pior-caso] Dados: pior-caso-dados-parte-209.png · 1785 × 1713 · K795:U811
+[pior-caso] Dados: pior-caso-dados-parte-210.png · 1785 × 1713 · V795:AF811
+[pior-caso] Dados: pior-caso-dados-parte-211.png · 1647 × 1713 · AG795:AP811
+[pior-caso] Dados: pior-caso-dados-parte-212.png · 1719 × 1713 · AQ795:AY811
+[pior-caso] Dados: pior-caso-dados-parte-213.png · 1719 × 1713 · AZ795:BH811
+[pior-caso] Dados: pior-caso-dados-parte-214.png · 1719 × 1713 · BI795:BQ811
+[pior-caso] Dados: pior-caso-dados-parte-215.png · 1719 × 1713 · BR795:BZ811
+[pior-caso] Dados: pior-caso-dados-parte-216.png · 1345 × 1713 · CA795:CG811
+[pior-caso] Dados: pior-caso-dados-parte-217.png · 1710 × 1733 · A812:J847
+[pior-caso] Dados: pior-caso-dados-parte-218.png · 1785 × 1733 · K812:U847
+[pior-caso] Dados: pior-caso-dados-parte-219.png · 1785 × 1733 · V812:AF847
+[pior-caso] Dados: pior-caso-dados-parte-220.png · 1647 × 1733 · AG812:AP847
+[pior-caso] Dados: pior-caso-dados-parte-221.png · 1719 × 1733 · AQ812:AY847
+[pior-caso] Dados: pior-caso-dados-parte-222.png · 1719 × 1733 · AZ812:BH847
+[pior-caso] Dados: pior-caso-dados-parte-223.png · 1719 × 1733 · BI812:BQ847
+[pior-caso] Dados: pior-caso-dados-parte-224.png · 1719 × 1733 · BR812:BZ847
+[pior-caso] Dados: pior-caso-dados-parte-225.png · 1345 × 1733 · CA812:CG847
+[pior-caso] Dados: pior-caso-dados-parte-226.png · 1710 × 1792 · A848:J886
+[pior-caso] Dados: pior-caso-dados-parte-227.png · 1785 × 1792 · K848:U886
+[pior-caso] Dados: pior-caso-dados-parte-228.png · 1785 × 1792 · V848:AF886
+[pior-caso] Dados: pior-caso-dados-parte-229.png · 1647 × 1792 · AG848:AP886
+[pior-caso] Dados: pior-caso-dados-parte-230.png · 1719 × 1792 · AQ848:AY886
+[pior-caso] Dados: pior-caso-dados-parte-231.png · 1719 × 1792 · AZ848:BH886
+[pior-caso] Dados: pior-caso-dados-parte-232.png · 1719 × 1792 · BI848:BQ886
+[pior-caso] Dados: pior-caso-dados-parte-233.png · 1719 × 1792 · BR848:BZ886
+[pior-caso] Dados: pior-caso-dados-parte-234.png · 1345 × 1792 · CA848:CG886
+[pior-caso] Dados: pior-caso-dados-parte-235.png · 1710 × 885 · A887:J919
+[pior-caso] Dados: pior-caso-dados-parte-236.png · 1785 × 885 · K887:U919
+[pior-caso] Dados: pior-caso-dados-parte-237.png · 1785 × 885 · V887:AF919
+[pior-caso] Dados: pior-caso-dados-parte-238.png · 1647 × 885 · AG887:AP919
+[pior-caso] Dados: pior-caso-dados-parte-239.png · 1719 × 885 · AQ887:AY919
+[pior-caso] Dados: pior-caso-dados-parte-240.png · 1719 × 885 · AZ887:BH919
+[pior-caso] Dados: pior-caso-dados-parte-241.png · 1719 × 885 · BI887:BQ919
+[pior-caso] Dados: pior-caso-dados-parte-242.png · 1719 × 885 · BR887:BZ919
+[pior-caso] Dados: pior-caso-dados-parte-243.png · 1345 × 885 · CA887:CG919

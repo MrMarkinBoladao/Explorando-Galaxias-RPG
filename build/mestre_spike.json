@@ -1,0 +1,24 @@
+{
+  "gerado_por": "build/testar_mestre.py --suite spike",
+  "biblioteca": "formulas 1.3.4",
+  "casos": 141,
+  "divergencias": [],
+  "maior_intermediario": 281468534128644,
+  "padroes": [
+    "MOD 2^31·16807",
+    "L3",
+    "Q",
+    "X",
+    "u/y/x nos extremos",
+    "INT(x·n/M)",
+    "INDEX(MATCH(k, contador corrido))",
+    "SMALL+MATCH chaves fracionárias",
+    "SUMPRODUCT(ISNUMBER()*1)",
+    "COUNTIF \"<\"&",
+    "MIN com \"\"",
+    "CHOOSE(MATCH()) 7 intervalos",
+    "REPT ●○",
+    "COUNTIFS",
+    "validação de lista em outra aba"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "task_id": "v12",
+  "task_description": "Auditar todo o livro 'Explorando Galaxias' procurando opcoes-armadilha (escolha que so impoe custo, ou dominada por outra da mesma lista) e contradicoes de obrigatoriedade/limite; decidir e propagar a remocao da propriedade de arma 'Recarga'; subir os entregaveis para a versao 1.2 e regerar PDF, DOCX, Ficha Automatizada do jogador E Planilha do Mestre, mantendo os arquivos V1.1 intactos. ESCOPO AMPLIADO PELO AUTOR na resposta ao FEAT-001: (a) a auditoria passa a ser uma analise de DOMINANCIA COMPLETA de toda lista de opcoes do jogador — Racas, Caminhos, Bencaos, Memoespirito, Habilidades e as linhas de 16.5, Ultimate, Elementos, categorias e propriedades de arma, armaduras, itens, pocoes, Cones de Luz, Reliquias e Ressonancias — com autoridade para alterar numeros sem pausar, desde que a MUDANCA SEJA MINIMA e a ECONOMIA CENTRAL NAO SEJA TOCADA (dados base de arma, progressao, PV por nivel, totais de PH e Energia, orcamento de encontro, DTs, numeros do bestiario e os Danos de Quebra de 20.5); achado que so se resolva mexendo na economia central NAO se aplica, fica registrado em achados-v12.md com a recomendacao; (b) a Planilha do Mestre tambem vai para V1.2, com testar_mestre.py passando. Nada em 'Explorando Galaxias RPG - Players' nem em 'versoes antigas' pode ser tocado. O projeto NAO e um repositorio git. Relatorio final em .agents/tasks/v12/RELATORIO-V1.2.md.",
+  "status": "in_progress",
+  "feature_order": ["FEAT-001", "FEAT-002", "FEAT-003"],
+  "blocked_reason": null
+}

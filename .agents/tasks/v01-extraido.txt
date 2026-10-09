@@ -1,0 +1,1163 @@
+﻿“Bem vindo a Primeira Versão de Explorando Galáxias(provavelmente vou mudar o nome)”
+Para criar seu personagem você deverá escolher em quais atributos você irá colocar esses valores: 
+“15, 14, 13, 12, 10, 8”. (futuramente outras opções de valores poderão ser usadas como por exemplo a compra de pontos.)
+Os valores que irão ser usados para somar com suas perícias será o bônus de cada atributo, que funciona dessa forma:
+Valor de Atributo:
+Bônus de Atributo:
+8
+-1
+10
++0
+12
++1
+13
++2
+14
++2
+15
++3
+
+Os atributos são:
+Poder: Força física, impacto, capacidade de levantar peso e ataques corpo a corpo. 
+
+Agilidade: Reflexos, velocidade, precisão, esquiva e coordenação.
+
+Vigor: Resistência física, HP, fôlego e capacidade de suportar danos.
+
+Sincronia: Conhecimento, domínio de tecnologia, ciência e manipulação da energia dos Caminhos.
+
+Discernimento: Instinto, atenção, intuição e força mental contra ilusões e manipulações. 
+
+Presença: Liderança, influência, determinação e capacidade de convencer ou intimidar.
+
+
+
+
+
+
+
+
+
+
+Eficiência:
+É um bônus usado para somar seu Teste de Ataque e Teste de Resistência, e outros, caso esteja escrito em alguma habilidade.
+
+Ele funciona da maneira descrita abaixo e aumenta com base em seu nível de personagem:
+Nível:
+Eficiência:
+1
++2
+2
++2
+3
++2
+4
++3
+5
++3
+6
++3
+7
++4
+8
++4
+9
++5
+10
++6
+Também existe a Eficácia que nada mais é do que você dobrar o seu bônus de Eficiência que vai ser desbloqueado no Nível 5.
+
+Perícias:
+Você deve pegar Eficiência nas perícias listadas no seu caminho e também 2+(seu bônus de Sincronia) dessas abaixo:
+
+Atletismo(+Poder) — Escalar, nadar, saltar, empurrar, quebrar objetos e feitos de força. 
+Acrobacia(+Agilidade) — Equilíbrio, rolamentos, parkour e escapar de agarrões.
+Furtividade(+Agilidade) — Passar despercebido.
+Resistência(+Vigor) — Suportar venenos, frio, calor, fadiga, fome e longas marchas.
+Tecnologia(+Sincronia) — Hackear, consertar máquinas, usar computadores e dispositivos.
+Pesquisa(+Sincronia) — Encontrar informações, consultar arquivos e lembrar conhecimentos.
+Ciência(+Sincronia) — Física, química, medicina, astronomia e biologia entre outras.
+Percepção(+Discernimento) — Notar armadilhas, inimigos escondidos e detalhes.
+Sobrevivência(+Discernimento) — Rastrear, encontrar recursos e orientar-se em ambientes hostis.
+Intuição(+Discernimento) — Perceber mentiras, intenções e emoções.
+Persuasão(+Presença) — Convencer e negociar.
+Intimidação(+Presença) — Ameaçar e impor respeito.
+Enganação(+Presença) — Mentir, blefar e criar disfarces.
+Liderança(+Presença) — Coordenar aliados, motivar equipes e comandar grupos.
+Sintonia(+Discernimento ou +Sincronia) — Usar ou compreender fenômenos relacionados aos Caminhos, Stellaron, Fragmentum e outras energias sobrenaturais.
+Mecânica(+Sincronia) — Construir, modificar ou reparar armas, robôs e veículos.
+Pilotagem(+Agilidade) — Conduzir naves, mechas, motos voadoras ou outros veículos.
+Investigação(+Discernimento) — Reconstruir cenas, encontrar pistas e resolver mistérios. 
+
+Como funciona um Teste de Perícia?
+Para realizar um Teste de Perícia você deve jogar um D20 + Bônus de Atributo(depende da Perícia) + Bônus de *Eficiência ou *Eficácia da Perícia(se tiver) e o resultado dessa soma será o seu Teste que deve ser igual ou maior que a DT(Dificuldade do Teste) para que você consiga fazer a ação que queira.
+*Eficiência: é o bônus dado pelo seu nível.
+*Eficácia: é o bônus dado pelo seu nível só que dobrado. Ex: No Nível 1 você possui +2 de bônus pela Eficiência mas caso você tenha Eficácia em sua perícia ao invés de +2 no teste você terá +4.
+
+Vida, Defesa e Esquiva [sujeito a mudanças em game(você foi avisado)]:
+Neste Rpg você calcula sua vida desta forma, cada caminho terá seu dado de vida para o nível 1(descritos abaixo) e os níveis subsequentes rodará 1d20 ao invés dos dados de vida do nível 1.
+Dados de Vida do Nível 1:
+
+A Destruição = 6d20
+A Inexistência = 4d20
+A Harmonia = 3d20
+A Erudição = 3d20
+A Abundância = 5d20
+A Euforia = 3d20
+A Caça = 2d20
+A Preservação = 5d20
+A Recordação = 3d20
+
+Defesa:
+A defesa é calculada desta forma: 10 + Bônus de Agilidade + Bônus de Armadura ou Vestimenta + outros bônus aplicáveis.
+
+
+Esquiva:
+A esquiva é considerada uma reação e só pode ser usada em uma cena de combate, para usar a Esquiva você deve declará-la antes do ataque inimigo e ela funciona somando sua Defesa + Bônus de Agilidade + outros bônus aplicáveis.
+
+Raças:
+
+
+Humano:
+
+Skott.
+
+"A raça mais comum entre as estrelas."
+Humanos são uma das espécies mais numerosas da galáxia. Adaptáveis e ambiciosos, eles podem ser encontrados em praticamente todos os planetas e organizações, desde a Aliança Xianzhou até a Corporação da Paz Interastral.
+Características:
+Grande capacidade de adaptação.
+Sem limitações naturais, podendo seguir qualquer caminho.
+Conhecidos pela criatividade e determinação.
+
+Benefícios:
+Você ganha +2 em algum atributo de sua escolha(pode ser +1 em um atributo e +1 em outro).
+
+Força de Vontade:
+Se você seguir o que acredita, ganha 1 ponto de Esforço.(O ponto de esforço pode ser usado para re-rolar qualquer tipo de dado, você só pode ter um, então caso ganhe outro sem ter gasto o antigo você perderá o ponto excedente.)
+O que você acredita não pode ser algo vago e as ações para ativar essa passiva tem que ser aceita pelo mestre, esteja ciente disso.
+
+
+
+Xianzhouítas:
+
+Sushang e Jing Yuan.
+"Aqueles que desafiaram o ciclo da vida."
+Descendentes dos antigos habitantes de Xianzhou, esses seres receberam a bênção da longevidade após o contato com o Aeon da Abundância. Possuem vidas extremamente longas, mas carregam o peso de séculos de memórias.
+Características:
+Corpo resistente e envelhecimento extremamente lento.
+Grande conhecimento acumulado.
+Cultura baseada em disciplina e tradição.
+Benefícios:
+Você ganha +2 em Vigor ou Sincronia.
+
+Ad Vitam Aeternam:
+Você não pode ser Executado por ninguém e ao fazer qualquer tipo de Teste de Resistência você tem Vantagem.
+
+Executado: ao ficar com 0 pontos de vida você cai morrendo e terá que fazer um Teste de Resistência para não perder seu personagem permanentemente, você terá que vencer 3 vezes o teste antes de perder 3 vezes, e ao estar nesse estado você pode ser executado por qualquer ser racional(bestas, monstros que não possuem a capacidade de pensar, tomar decisões entre outras coisas não poderam executar alvos).
+
+
+Vidyadhara:
+
+"Dragões que renascem através dos ciclos."
+Uma antiga raça de dragões humanóides de Xianzhou. Quando morrem, renascem em um novo corpo, porém suas memórias não são completamente preservadas.
+Características:
+Forte conexão com água e energia espiritual.
+Capacidade de regeneração e renascimento.
+Grande afinidade com poderes ancestrais.
+Benefícios:
+Você ganha +2 em Vigor.
+Reencarnação Ancestral:
+Você não morre permanentemente ao invés disso você reencarna em outro corpo podendo voltar ao grupo ou a interpretar o personagem um dia depois de sua morte em jogo, sua aparência será do corpo da pessoa que você reencarnou e ela obrigatoriamente tem de ser um Vidyadhara, após a reencarnação você deverá rodar um d20, resultados de 16 - 20 fará você se lembrar de 2 coisas importantes do seu passado e nada do dia da morte, caso não alcance esse resultado você só lembrará seu nome, raça e Propósito de vida(no sucesso do teste você também se lembrará dessas coisas).
+
+Propósito de vida: ao criar um personagem você vai decidir o propósito de vida dele, será um objetivo de longo prazo.
+
+
+Vulpes:
+
+Fugue.
+
+"A beleza e astúcia das raposas celestiais."
+
+Uma raça de aparência humana com características de raposa, como caudas e sentidos aguçados. São conhecidos pela inteligência, comércio e habilidades sociais.
+
+Características:
+Grande agilidade e percepção.
+Vida longa, porém inferior aos Xianzhouítas.
+Facilidade para diplomacia e manipulação.
+Benefícios:
+Você ganha +2 em Discernimento ou Presença.
+Você possui Vantagem em Testes baseados no Atributo Presença.
+
+Raposa Astuta:
+É mais difícil de te surpreender, ao ser surpreendido você fará um Teste de Atenção(único dos vulpes) que se baseia em rodar um d20 + Bônus de Discernimento e a DT será 8, se alcançada você não será surpreendido e não poderá ser surpreendido pelo resto da cena.
+
+
+
+
+
+
+
+
+Halovianos:
+
+Robin e Sunday.
+
+"Seres conectados ao mundo dos sonhos."
+
+Uma raça rara conhecida por suas asas luminosas semelhantes a halos. Possuem uma ligação natural com emoções, sonhos e o mundo mental.
+
+Características:
+Grande sensibilidade emocional.
+Poderes relacionados à mente e sonhos.
+Forte conexão espiritual.
+Benefícios:
+Você ganha +2 em Sincronia ou Presença.
+
+To na sua mente:
+Se você for um Haloviano que segue o Caminho da Harmonia poderá fazer um Teste de Persuasão(+Presença) contra Intuição(+Discernimento) do alvo, se vencer no Teste Oposto você poderá controlar o alvo por 2 turnos em um combate ou por 30 minutos em uma cena que não for de combate. Caso você não siga o Caminho da Harmonia você deve fazer um teste de d20 puro sendo 
+1 - 10 no resultado uma falha e 11 - 20 um sucesso e se você tiver sucesso conseguirá utilizar essa habilidade se falhar não poderá usar essa habilidade por 1 dia. Esta habilidade pode ser usada 2 vezes ao dia.
+
+
+
+
+
+Avginianos:
+
+Aventurine.
+
+"Um povo marcado pelo destino."
+
+Uma raça rara conhecida principalmente por sua conexão com comércio, sobrevivência e adaptação. Muitos sofreram perseguições, escravização e tiveram suas culturas destruídas.
+
+Características:
+Grande resistência psicológica.
+Instinto de sobrevivência elevado.
+Facilidade para negociação.
+Benefícios:
+Você ganha +2 em Discernimento.
+
+Mente de Ferro:
+Por tudo que você e seu povo já passaram, te fez criar uma resistência enorme contra efeitos mentais, medo, ansiedade entre outros, você ganha Vantagem em rolagens de Testes Mentais e Testes de Resistência de Vontade.
+
+
+
+
+
+
+
+
+
+Intellitrons:
+
+Screwllum.
+
+"Máquinas que alcançaram a consciência."
+
+Seres artificiais criados através de tecnologia avançada que desenvolveram inteligência própria. Muitos questionam se são máquinas ou formas de vida.
+
+Características:
+Corpo mecânico ou sintético.
+Não sofrem com doenças naturais.
+Grande capacidade de processamento.
+Benefícios:
+Você ganha +2 em Sincronia.
+
+Sabedoria de Intellitron:
+Você tem Vantagem em Testes de Perícias de Tecnologia e Mecânica.
+E caso você esteja em combate pode fazer um Teste de Pesquisa com DT 12 para descobrir uma fraqueza do inimigo ou se estiver numa cena que não seja de combate pode fazer esse mesmo teste para descobrir uma pista sobre algo que você queira saber.
+
+
+
+
+
+
+
+Princípios do combate:
+
+Elementos, Fraquezas e Tenacidade: 
+Em Explorando Galáxias existem 7 elementos que são: Físico, Fogo, Gelo, Raio, Vento, Quântico e Imaginário.
+Os elementos são importantes pois a todo momento que você estiver causando dano ou recebendo dano será de algum elemento, e ao Quebrar a Tenacidade de um inimigo você irá ativar um efeito especial de algum elemento, esses efeitos são:
+
+Físico:
+Causa Sangramento por 2 turnos o dano é baseado na vida máxima do alvo.
+Dano de quebra: 6d4
+
+Fogo:
+Causa Queimadura por 2 turnos o dano é 6d4 e é considerado dano de Fogo.
+Dano de quebra: 6d4
+
+Gelo:
+Causa Congelamento por 1 turno fazendo com que o alvo perca seu turno neste Ciclo.
+Dano de quebra: 1d2
+
+Raio:
+Causa Choque por 2 turnos o dano é 3d4 e é considerado dano de Raio.
+Dano de quebra: 2d2
+
+Vento:
+Causa Cisalhamento de Vento por 2 turnos o dano é 1d4 e pode ser stackado até 5 vezes no mesmo alvo, o dano é considerado como dano de Vento.
+Dano de quebra: 3d2
+
+Quântico:
+Causa Embaraço por 1 turno que causa dano e derruba o turno do alvo em 1 casa, pode ser stackado até 5 vezes causando 1d4 por stack, mas só é stackado com ataques, e eles devem ocorrer antes do próximo turno do alvo, o dano é considerado dano de Quântico.
+Dano de quebra: 1d2
+
+Imaginário:
+Causa Aprisionamento por 1 turno que causa 1d4 de dano de Imaginário, e também faz com que o alvo tenha seu turno derrubado em 2 casas.
+Dano de quebra: 1d2
+
+
+Fraquezas e Resistências [sujeito a mudanças em game(você foi avisado)]:
+Todo inimigo possui fraquezas, normalmente um Inimigo Comum terá 1 - 2 fraquezas, um Elite terá 3, e um Boss terá 4.
+Um ataque de elemento que corresponde a fraqueza do alvo da +2 dados de dano do mesmo tipo do ataque e caso esteja batendo em um alvo sem fraqueza ao elemento porém sem resistência ao elemento, causará dano normalmente, se o elemento causar dano em um alvo que tenha resistência a tal elemento o dano será reduzido em -2 dados do mesmo tipo do ataque. O aumento de dados advindo da Fraqueza Inimiga não pode critar.
+A Redução e Aumento de dados com base em Fraquezas e Resistências pode ser aumentada ou diminuída com base na força do causador de dano.
+
+
+Tenacidade:
+Todo inimigo encontrado possui uma barra de tenacidade que varia de inimigo para inimigo, o quão menor ou maior será decidido pela força do inimigo, ao causar dano com Ataque Básico ou Habilidades você irá retirar uma certa quantia de Tenacidade do inimigo alvo, sendo o Ataque Básico o menor dano na barra de Tenacidade e para Habilidades o quão maior for o Nível delas mais Tenacidade será retirada do inimigo alvo, ao Sofrer Quebra sua Tenacidade chegar a 0, o alvo terá seu turno derrubado por 1 casa e irá tomar um dano específico chamado Dano de Quebra que varia conforme o elemento usado ao quebrar o alvo, sendo Físico e Fogo os maiores causadores de Dano de Quebra. Você não pode reduzir a Tenacidade de um Inimigo que não possua Fraqueza ao seu elemento.
+Para retirar Tenacidade é obrigatório que o alvo receba um ataque.
+
+
+Como funciona o Combate ?
+Em Explorando Galáxias você tem ações comuns como de outros RPGs, podendo bater, se mover, ter reações, etc.
+
+Tipos de dano:
+
+Ataque Básico:
+Uma ação agressiva de bater em um alvo, que não seja uma Habilidade ou Ultimate, conta como Ataque Básico.
+
+Dano de Habilidade:
+Uma Habilidade Agressiva(que vai causar dano ao alvo) conta como Dano de Habilidade.
+
+Dano de Ultimate:
+Todos os jogadores possuem uma Ultimate que pode ser mais fraca ou mais forte dependendo do seu Nível ou afins, uma Ultimate que dá dano conta como Dano de Ultimate.
+
+
+
+
+Tipos de Ações em Combate:
+Cada jogador pode efetuar 4 ações elas sendo:
+
+Ataque Básico: Toda e qualquer ação agressiva que cause dano e não seja uma Habilidade ou Ultimate é considerado um ataque básico. Pode ser feita uma vez por turno a não ser que você tenha algo que mude isso.
+
+Ação Complementar: Toda ação que não for um ataque ou uma ação menor como pegar, guardar um objeto ou até recarregar uma arma conta como uma Ação Complementar. Pode ser feita uma vez por turno a não ser que você tenha algo que mude isso.
+
+Ativar Ultimate: Para ativar a ultimate você deve ter sua energia no máximo, por exemplo se sua Ultimate precisa de 100 de energia para ser ativada você obrigatoriamente precisa ter 100 de energia para ativá-la, e você pode ativar sua Ultimate em qualquer turno ou momento, você só precisa declarar dizendo o nome de sua Ultimate em voz alta, se mais de uma pessoa declarar ao mesmo tempo quem falou primeiro usará a Ultimate primeiro, a pessoa que decide quem foi o primeiro é o mestre com base no que ele ouviu primeiro, não os jogadores.
+
+Ação de Movimento: Você pode se movimentar em uma distância, caso use uma ação completa ou seja gaste seu turno só para se mover você pode se mover até 2 distâncias. Pode ser feita uma vez por turno a não ser que você tenha algo que mude isso.
+
+Distâncias: 
+Será usado um método simplificado de distâncias, desta forma:
+Existem as distâncias: Pessoal, Curta, Média, Longa, Extrema.
+
+Reações:
+Todos os jogadores tem 1 reação por turno, que recarrega no começo de seu turno, você não pode stackar mais de 1 reação a não ser que tenha uma Habilidade que faça isso.
+
+
+Equipamentos:
+Todos jogadores podem pegar uma Armadura ou Vestimenta para ajudar em sua Defesa, a não ser que você tenha algo que diga o contrário.
+
+Armaduras ou Vestimentas:
+Armadura ou Vestimenta Leve: +3 de Defesa, +1 de Bônus de Agilidade.
+Armadura ou Vestimenta Média: +5 de Defesa.
+Armadura ou Vestimenta Pesada: +6 de Defesa e 10 de RD, -5 em Testes de Agilidade.
+Aparência será feita pelo jogador.
+
+Itens:
+
+Poção de Vida Pequena/Média/Grande: Cura 1d20,2d20,3d20.
+Uma poção Pequena consome 0.5 de Espaço do Inventário, Média consome 1 e Grande consome 2.
+
+Itens Comuns e Armas serão criadas com os jogadores e se as criações forem condizentes com o universo entrarão na lista de Armas e Itens Oficiais do Livro.
+
+Habilidades:
+
+Todos os jogadores terão habilidades que serão feitas por eles mesmos com o auxílio de algumas tabelas, caso você queira algo que não esteja descrito aqui, converse com o mestre para ver se é possível fazer.
+O Número de Habilidades que você pode ter e o Nível delas será esse:
+No Nível de Personagem 1 você pode ter 1 Habilidade de até Nível 1.
+e em cada Nível de Personagem Par você pode ter uma Habilidade de Nível maior ou seja no Nível 2 você pode ter Habilidades Nível 2 depois no Nível 4,6,8,10, até no Máximo Habilidades de Nível 5.
+
+O Número de Habilidades que você pode ter por nível é igual ao seu nível, então se você estiver no nível de personagem 1 você pode ter um habilidade e tem de ser nível 1, já no nível 2 você pode ter 2 habilidades podendo ser de até nível 2.
+
+Habilidades de dano:
+
+Nível da Habilidade:
+Dano:
+1
+6d6/Média: 18
+2
+5d10/Média: 25
+3
+6d12/Média: 36
+4
+6d20/Média: 60
+5
+10d20/Média: 100
+
+
+
+
+
+
+
+Habilidades de Cura:
+
+
+Nível da Habilidade:
+Cura:
+1
+5d8/Média: 20
+2
+6d10/Média: 30
+3
+8d12/Média: 48
+4
+7d20/Média: 70
+5
+Cura toda a Vida.
+
+
+Habilidades de Buff e Debuff:
+O jogador fará juntamente do mestre podendo usar a criação dele como exemplo para novas tabelas.
+
+Habilidades Passivas:
+O jogador fará juntamente do mestre podendo usar a criação dele como exemplo para novas tabelas.
+
+Alcance de Habilidades:
+
+Nível da Habilidade:
+Alcance:
+1
+Pessoal, Curto
+2
+Médio
+3
+Longo
+4
+Extremo
+5
+Extremo
+O alcance se soma ou seja uma habilidade de nível 4 pode ser de alcance: Pessoal, Curto, Médio, Longo ou Extremo.
+
+
+Ultimate:
+Todo jogador possui uma Ultimate que pode ter qualquer efeito na medida do possível, agora no começo todas as ultimates serão ativas com 100 de energia para facilitar para o jogador e para o mestre, mas no futuro isso pode ser diferente aumentando ou diminuindo e criando efeitos ao chegar a tal pontos de energia, mas em resumo crie sua ultimate com o mestre, ela nos níveis iniciais será fraca e você pode considerar mantê-la visualmente e só aumentar seu efeito ao passar de nível ou mudar seu visual também.
+Ganhando Energia para Ultimate:
+Para ganhar energia você deve fazer ações, cada ação te dará uma certa quantidade de energia.
+Ataque Básico: 20 de energia.
+Habilidades: 30 de energia.
+Ultimate: ao Ultar você gasta 100 de energia.
+
+A energia excedente a 100 será perdida.
+
+Caminhos:
+
+A Destruição:
+
+Símbolo.               Aeon: Nanook.
+
+Os seguidores do Caminho da Destruição acreditam que toda criação nasce do caos e que a ruína é uma força inevitável do universo. Guiados pelo desejo de superar limites, eles carregam dentro de si a chama da destruição, usando sua própria força, fúria e determinação para enfrentar inimigos e desafiar destinos impostos. Aqueles que seguem esse Caminho não buscam apenas destruir, mas também abrir espaço para algo novo surgir das cinzas, tornando-se guerreiros capazes de suportar grandes perdas e continuar avançando mesmo quando tudo parece perdido.
+
+Perícias Ganhas: Atletismo, Sobrevivência e Resistência.
+
+Bênçãos do Caminho:
+
+Pacto da Ruína:
+Você aprendeu que sua própria vida é apenas combustível para a destruição.
+  
+  Efeito:
+Uma vez por turno, você pode perder uma quantidade de PV igual a 5% do seu máximo para causar dano adicional igual ao seu bônus de Eficiência ou Eficácia em um ataque. 
+Esse dano dobra quando você está com menos da metade dos seus PV.
+
+
+
+
+Corpo Forjado na Dor:
+Seu corpo se fortaleceu através de incontáveis ferimentos.
+  
+ Efeito:
+Enquanto estiver com 50% ou menos dos seus PV, você recebe resistência a um tipo de dano à sua escolha.
+Quando sofrer dano que reduziria você a 0 PV, você pode realizar um teste de resistência para permanecer com 1 PV.
+
+Quebrador de Mundos:
+Você se especializou em destruir defesas inimigas.
+  
+Efeito:
+Seus ataques causam dano normal contra criaturas com Resistência ao seu elemento ou algum tipo de Armadura. 
+Ao atingir uma criatura com fraqueza ao seu tipo de elemento, você reduz a Defesa dela em -3 por 1 turno.
+Sacrifício Desesperado:
+Você transforma ferimentos em poder.
+  
+Efeito:
+Como ação complementar, você pode perder até 25% dos seus PV máximos.
+Para cada 10% de PV perdido, recebe um bônus acumulativo de 1d6(dano do seu elemento) até o fim do combate.
+O bônus termina se você recuperar PV acima de 50%.
+
+Instinto de Sobrevivência:
+A proximidade da morte desperta seu verdadeiro poder. 
+
+Efeito:
+Enquanto estiver com menos de 30% dos PV:
+Você recebe +2 em ataques.
+Seu deslocamento aumenta em +1 Distância.
+
+Impacto Devastador:
+Seus ataques não buscam ferir, mas destruir completamente.
+
+Efeito: 
+Quando causar um acerto crítico ou reduzir um inimigo a 0 PV:
+Você pode realizar outro ataque.
+Ou mover-se metade da sua Distância total.
+
+Cicatriz da Destruição:
+Cada batalha deixa marcas que fortalecem você.
+
+Efeito:
+Sempre que perder PV equivalente a 20% do seu máximo em um combate, recebe 1 Marca da Ruína.
+Cada Marca concede: 
++1 dano nos ataques.
++1 em testes de resistência contra medo ou controle.
+Máximo: 5 marcas. 
+
+Aniquilador de Resistências:
+Você sabe exatamente onde quebrar um inimigo.
+
+Efeito:
+Quando acertar um inimigo duas vezes seguidas, você pode tentar romper(-5 na defesa) sua defesa, o inimigo terá de fazer um Teste de Resistência de Resistência Física o DT será o acerto do seu Ataque -8(o resultado do Teste de Ataque que ativou esta habilidade).
+O próximo ataque contra ele recebe bônus para causar o dobro de Redução de Tenacidade.
+Inimigos Elites ou Bosses sofrem menos efeito, mas ainda podem ser enfraquecidos.
+
+Último Fragmento de Vida:
+Sua força cresce quando tudo parece perdido.
+
+Efeito:
+Uma vez por descanso:
+Ao cair para 0 PV, você permanece consciente por 1 turno.
+Durante essa rodada: 
+  Seus ataques têm vantagem.
+  Você causa dano adicional(+1d6).
+  Seus ataques ignoram a Resistência.
+
+Avatar da Destruição:
+Você se tornou uma manifestação viva do Caminho. 
+
+Requisito: Nível de Personagem 5
+
+Efeito:
+Você pode sacrificar seus próprios PV(o quanto quiser) para aumentar o dado de dano de qualquer habilidade, se o dano já for d20 você ganha +d20.
+Quando estiver abaixo de 50% dos PV:
+  Seus ataques causam dano reduzido em área.
+  Inimigos próximos sofrem o dobro de Redução de Tenacidade por todas as fontes.
+Uma vez por combate, ao derrotar um inimigo, recupera metade dos PV perdidos.
+
+A Inexistência:
+
+Símbolo.                  Aeon: Ix.      
+
+Os seguidores do Caminho da Inexistência acreditam que o universo é repleto de ilusões, desejos e certezas que devem ser apagadas. Eles caminham entre as sombras da realidade, enfraquecendo seus inimigos ao destruir suas convicções, poderes e esperanças. Diferente daqueles que buscam a destruição direta, os adeptos da Inexistência vencem através da negação, manipulando fraquezas, impondo limitações e reduzindo seus adversários até que nada reste além do vazio. Para eles, o verdadeiro poder não está em criar ou destruir, mas em provar que tudo pode desaparecer.
+
+Perícias Ganhas: Percepção, Pesquisa e Furtividade.
+
+Bênçãos do Caminho:
+
+Marca do Vazio:
+Você aprendeu a deixar uma parte da inexistência dentro de seus inimigos. 
+
+Efeito:
+Ao acertar um ataque, você pode marcar uma criatura por 3 turnos.
+Criaturas marcadas recebem:
+  -1 em testes de resistência.
+  O Alvo se move com -1 de distância de deslocamento não podendo a distância do alvo ser diminuída para menos que Curta.
+  Sofrem dano contínuo(do seu elemento +1d6) no início de cada turno.
+A marca pode acumular até 3 vezes.
+
+Corrupção Progressiva:
+O vazio se espalha lentamente pelo corpo do inimigo.
+
+Efeito:
+Sempre que aplicar um efeito negativo em uma criatura, ela recebe 1 acúmulo de Corrupção.
+Cada acúmulo aumenta o dano de seus efeitos de DoT em +1.
+Ao chegar em 5 acúmulos, a criatura sofre uma explosão de dano que vai causar o dobro de dano do DoT acumulado 2 vezes(DoT causa 1d6 vira 2d6 roda os dados e dobra o dano), perde todos os bônus positivos(que não sejam irremovíveis).
+
+Olhar da Ausência:
+Você enxerga as falhas escondidas na existência dos seus inimigos.
+
+Efeito:
+Como ação bônus, escolha uma criatura.
+Até o fim do combate contra ela:
+  Ela recebe -2 na Defesa.
+  Tem desvantagem no primeiro ataque de cada turno.
+  Seus efeitos de cura são reduzidos.
+
+Veneno do Nada:
+Você transforma energia vital em uma praga impossível de remover.
+
+Efeito:
+Seus ataques podem aplicar um efeito de DoT(Do elemento a sua escolha, não precisa ser do elemento que você usar como principal).
+No início do turno do inimigo, ele sofre dano baseado no seu modificador de atributo(escolha qual atributo).
+O dano aumenta a cada turno que o efeito permanece ativo.
+
+Silêncio da Existência:
+Você apaga a força dos seus adversários.
+
+Efeito:
+Quando uma criatura sofrer seu debuff:
+  Ela recebe -1 em ataques(chegando no máximo em -10).
+  Tem dificuldade para conjurar habilidades poderosas(o alvo demorará mais um turno).
+Dura 2 turnos.
+
+Mestre das Aflições:
+Você domina todas as formas de enfraquecimento.
+
+Efeito:
+Quando aplicar um debuff em uma criatura que já possui outro:
+  O novo efeito recebe duração aumentada.
+  O inimigo sofre dano adicional(+1 dado do ataque).
+Além disso, você pode manter um efeito de DoT mesmo após trocar de alvo.
+
+
+
+Erosão Mental:
+Você destrói a vontade antes do corpo.
+
+Efeito:
+Uma vez por turno, quando uma criatura sofrer seu DoT:
+Ela deve realizar um teste de resistência de Vontade.
+Em caso de falha: 
+  Não pode realizar reações.
+  Sofre penalidade em ataques.
+  Fica vulnerável a efeitos negativos de outro jogador.
+
+Névoa da Inexistência:
+Você espalha o vazio ao seu redor.
+
+Efeito:
+Como ação comum: 
+  Cria uma área de energia negativa por 3 turnos.
+    Inimigos dentro dela:
+Podem sofrer mais um DoT do mesmo elemento.
+Possuem redução de Defesa(-3).
+Recebem menos cura(metade).
+Aliados não são afetados.
+
+Colapso das Defesas:
+Você enfraquece o inimigo até ele perder sua capacidade de lutar.
+
+Efeito:
+Quando uma criatura possuir 3 ou mais debuffs: 
+  Seus ataques contra ela ignoram parte da Defesa(você ignora 5 de defesa).
+  Seus DoTs causam dano aumentado(+1 dado do mesmo tipo do DoT). 
+  A criatura tem Desvantagem para fazer Testes de Resistência.
+
+Avatar do Vazio:
+Você se torna uma manifestação da inexistência.
+
+Requisito: Nível de Personagem 5
+
+Efeito:
+Seus efeitos negativos não podem ser removidos facilmente.
+Ao aplicar um novo debuff, você pode espalhá-lo para uma criatura próxima.
+Inimigos afetados por seus efeitos sofrem:
+  Redução de dano causado(-3 dados).
+  Redução de cura recebida(corta metade da cura).
+  Dano contínuo aumentado(+2 dados do Elemento).
+Uma vez por combate, quando uma criatura afetada cair abaixo de 10% dos PV, ela sofre uma ruptura do vazio e recebe dano massivo.
+
+A Harmonia:
+ 
+  Símbolo.                  Aeon: Xipe.
+
+Os seguidores do Caminho da Harmonia acreditam que o universo alcança sua verdadeira força através da união e da cooperação entre todas as coisas. Eles buscam criar conexões entre indivíduos, fortalecendo aliados e equilibrando diferentes forças para alcançar um objetivo maior. Ao invés de conquistar através da destruição ou do enfraquecimento, os adeptos da Harmonia elevam aqueles ao seu redor, compartilhando sua energia e permitindo que cada membro de um grupo alcance seu potencial máximo. Para eles, a verdadeira vitória não pertence a um único indivíduo, mas a todos que caminham juntos. 
+
+Perícias Ganhas: Liderança, Sintonia e Persuasão.
+
+Bênçãos do Caminho:
+Melodia da União:
+Você conecta sua energia com seus aliados, criando uma força compartilhada.
+Efeito:
+Ao entrar em combate, escolha até 3 aliados.
+Eles recebem:
+  +1 em ataques.
+  +1 em testes de resistência.
+  +1 distância de deslocamento.
+O efeito permanece enquanto você estiver consciente.
+
+
+
+Harmonia Interior:
+Você encontrou equilíbrio dentro de si mesmo, tornando-se mais poderoso.
+Efeito:
+Você recebe bônus em seus próprios atributos:
+  +2 em qualquer tipo de Teste à escolha(precisa escolher um).
+  Vantagem em Testes de Resistência contra efeitos de medo e controle.
+Quando um aliado recebe um bônus seu, você também recebe metade desse bônus.
+Cântico Inspirador:
+Sua voz e presença despertam o potencial daqueles ao seu redor.
+
+Efeito:
+Como ação complementar, escolha um aliado:
+  Ele recebe vantagem no próximo ataque.
+  Causa dano adicional igual ao seu modificador de atributo( modificador do indivíduo que está bufando).
+  Recebe pontos de vida temporários(+20).
+
+Ressonância Perfeita:
+Você cria uma ligação entre todos os membros do grupo.
+
+Efeito:
+Quando um aliado recebe um bônus, outro aliado recebe metade dele.
+Quando um aliado realiza um acerto crítico, você pode conceder vantagem ao próximo ataque de outro aliado.
+
+Sinfonia de Poder:
+Você transforma a força coletiva em energia ofensiva.
+
+Efeito:
+ Enquanto houver pelo menos 2 aliados próximos:
+Todos recebem:
+  +2 de dano.
+  +1 Defesa.
+Vantagem contra efeitos negativos.
+O bônus aumenta conforme mais aliados estiverem presentes(a cada +2 aumenta).
+
+
+
+
+Bênção da Harmonia(Reação):
+Você protege seus aliados através da conexão criada.
+
+Efeito:
+Quando um aliado sofrer dano que o deixaria inconsciente:
+  Você pode transferir parte do dano para você.
+  O aliado recebe um bônus temporário de Defesa(+5).
+  Pode ser usado uma vez por descanso.
+
+Ritmo Acelerado:
+Você controla o fluxo da batalha e permite que seus aliados ultrapassem seus limites.
+
+Efeito:
+Como ação:
+  Um aliado recebe uma ação adicional limitada:
+  Fazer um ataque básico.
+  Usar uma habilidade.
+  Mover-se.
+Após isso, ele recebe uma pequena penalidade até o próximo turno(causa -10 de dano).
+
+Eco da Vitória
+Cada conquista fortalece todo o grupo.
+
+Efeito:
+Quando um aliado:
+  Derrotar um inimigo.
+  Causar um acerto crítico.
+  Quebrar a barra de tenacidade inimiga.
+Todos os aliados recebem:
+  +1 dano.
+  +1 em testes de ataque.
+O bônus acumula até 3 vezes.
+
+Campo da Harmonia Universal
+Sua energia cria uma zona onde aliados alcançam seu potencial máximo.
+
+Efeito:
+Como ação comum:
+Cria uma área por 3 turnos.
+Aliados dentro dela recebem:
+  Cura gradual(1d10 por turno).
+  Resistência a dano(15 de RD).
+  Aumento na velocidade(+1 de distância ).
+  Bônus em ataques(+2).
+Avatar da Harmonia
+Você se torna o elo que conecta todas as forças ao seu redor.
+
+Requisito: Nível de Personagem 5
+
+Efeito:
+Seus bônus afetam todos os aliados próximos.
+Sempre que você concede um bônus, ele é dobrado.
+Uma vez por combate, quando um aliado cair a 0 PV:
+  Ele permanece com 1 PV.
+  Recebe um grande aumento de dano e Defesa(+10) por 1 rodada.
+
+A Abundância:
+
+ 
+  Símbolo.                       Aeon: Yaoshi.
+
+Os seguidores do Caminho da Abundância acreditam que a vida é a maior dádiva do universo e que seu propósito é preservar, restaurar e expandir toda forma de existência. Eles dominam forças capazes de curar feridas, fortalecer corpos e desafiar os limites naturais da mortalidade. Para os adeptos desse Caminho, nenhum ser deve ser perdido enquanto houver energia para sustentar sua vida, tornando-se protetores que mantêm seus aliados de pé mesmo diante das maiores adversidades. Entretanto, alguns seguidores levam essa crença ao extremo, buscando uma existência eterna onde a própria vida se torna uma força impossível de controlar. 
+
+Perícias Ganhas: Liderança, Intuição e Sobrevivência.
+
+Bênçãos do Caminho:
+
+
+
+
+
+Fonte da Vida Eterna
+A energia vital flui através de você, tornando sua presença uma bênção para aqueles ao seu redor.
+
+Efeito:
+Sempre que você curar um aliado, ele recebe pontos de vida temporários iguais ao seu modificador de atributo(você escolhe).
+Você recupera uma pequena quantidade de PV sempre que realizar uma cura.
+Regeneração Celestial
+Seu corpo se regenera constantemente através da energia da Abundância.
+
+Efeito:
+No início de cada um dos seus turnos, você recupera uma quantidade de PV(1d8).
+Caso esteja abaixo de 50% dos PV, a cura recebida aumenta(2d8).
+Você possui vantagem contra efeitos de veneno e doenças.
+Bênção Revitalizante
+Sua energia pode restaurar até aqueles próximos da morte.
+Efeito:
+Como ação comum:
+  Escolha um aliado.
+  Ele recupera uma grande quantidade de PV(Metade da Vida Máxima do Alvo).
+  Remove uma condição negativa menor.
+  Recebe resistência(10 RD) a dano por 1 turno.
+  Consegue tirar o aliado de morrendo.
+Vitalidade Compartilhada
+Sua vida está conectada àqueles que você protege.
+Efeito:
+Quando um aliado próximo sofrer dano, você pode transferir parte desse dano para si(metade do dano).
+O aliado recebe uma cura equivalente a uma parte do dano transferido(metade do dano recebido por você é curado para o aliado).
+Pode ser usado uma vez por turno.
+
+
+
+
+
+
+Florescimento da Alma
+Quanto mais você cura, mais forte sua energia vital se torna.
+Efeito:
+Sempre que recuperar PV de um aliado:
+Você recebe 1 acúmulo de Florescimento.
+Cada acúmulo concede:
+  +1 em testes de resistência.
+  +1 Defesa.
+Pequena regeneração de PV(1d4).
+Máximo de 5 acúmulos.
+
+Corpo Imortal
+Seu corpo ultrapassou os limites naturais da sobrevivência.
+Efeito:
+Aumenta seus PV máximos(+20).
+Você recebe redução de dano(10 RD).
+Quando cair abaixo de 25% dos PV:
+Recebe resistência contra todos os danos(+10 RD) por 1 turno.
+
+Raízes da Abundância
+Você espalha energia vital pelo campo de batalha.
+Efeito:
+Como ação comum:
+Cria uma área de cura por 3 turnos.
+Aliados dentro da área:
+  Recuperam PV no início do turno(1d12).
+  Recebem Vantagem contra condições negativas.
+  Ganham resistência a dano(10 RD).
+
+Renascimento Natural
+A vida sempre encontra um caminho para continuar.
+Efeito:
+Uma vez por descanso:
+Quando um aliado cair a 0 PV:
+  Ele permanece com 1 PV.
+  Recupera uma porcentagem dos PV máximos(metade dos PV).
+  Recebe bônus de Defesa(+10) por 1 rodada.
+
+Excesso de Vida
+Você acumula energia vital além do limite normal.
+Efeito:
+Toda cura recebida acima do seu máximo de PV vira uma barreira temporária.
+Enquanto possuir essa barreira:
+  Você recebe bônus de dano com base no atributo escolhido.
+  Seus efeitos de cura são aumentados(+1 dado de cura).
+  Sua resistência física melhora(+5 RD).
+
+Avatar da Abundância
+Você se torna uma manifestação viva da força da vida.
+Requisito: Nível de Personagem 5
+
+Efeito:
+Todas as suas curas afetam um alvo adicional.
+Aliados curados por você recebem:
+  Aumento de Defesa(+3).
+  Resistência contra dano.
+  Regeneração gradual.
+Uma vez por combate:
+Quando você ou um aliado cair a 0 PV, a energia da Abundância explode:
+  Todos os aliados recuperam PV(Metade dos PV).
+  Condições negativas são removidas.
+  Todos recebem um bônus temporário em rolagens de Testes baseado no bônus de atributo escolhido.
+
+
+
+
+
+
+
+
+
+
+
+
+
+A Recordação:
+ 
+ Símbolo.                       Aeon: Fuli.
+
+Os seguidores do Caminho da Recordação acreditam que a memória é a essência que mantém a existência viva, pois cada momento, emoção e experiência deixada para trás molda aquilo que alguém realmente é. Eles buscam preservar histórias, recuperar lembranças perdidas e manifestar ecos do passado para influenciar o presente. Aqueles que seguem esse Caminho possuem uma profunda conexão com memórias, espíritos e fragmentos de consciência, podendo trazer à realidade antigos poderes ou aliados esquecidos. Para eles, enquanto algo puder ser lembrado, nunca estará verdadeiramente perdido.
+
+Perícias Ganhas: Intimidação, Investigação e Ciência.
+
+Bênçãos do Caminho:
+
+Ecos do Passado
+Seu vínculo com seu Memoespírito permite que ele manifeste fragmentos mais fortes de sua memória.
+Efeito:
+O Memoespírito recebe aumento de PV máximo igual a uma porcentagem dos seus PV(Metade de sua vida).
+Os ataques do Memoespírito passam a causar dano adicional baseado no seu modificador de atributo.
+O Memoespírito recebe Vantagem em testes de resistência.
+Laço Inquebrável
+A conexão entre você e seu Memoespírito ultrapassa uma simples invocação.
+Efeito:
+Quando você sofrer dano, pode transferir metade dele para o Memoespírito.
+Quando o Memoespírito sofrer dano, você recebe vantagem no próximo ataque.
+Enquanto ambos estiverem vivos, vocês recebem bônus contra efeitos de medo e controle mental.
+
+Memória Devastadora
+O Memoespírito libera uma lembrança carregada de poder destrutivo.
+Efeito:
+Uma vez por turno, quando o Memoespírito acertar um ataque, ele acumula 1 Fragmento de Memória.
+Cada Fragmento aumenta o dano dos próximos ataques em +1.
+Ao atingir o limite de Fragmentos(5), o próximo ataque causa dano adicional em área ao redor do Memoespírito.
+
+Sincronia de Memórias
+Você e seu Memoespírito agem como uma única consciência.
+Efeito:
+Quando você acertar um ataque contra uma criatura:
+  O Memoespírito pode realizar um ataque contra o mesmo alvo como reação.
+Caso ambos acertem:
+  O alvo sofre dano adicional(+2 dados do mesmo tipo do ataque do Memoespírito).
+  O próximo ataque contra ele recebe bônus(+5 no teste de ataque).
+
+Fragmentos do Eu Perdido
+Seu Memoespírito revela aspectos esquecidos de sua própria existência.
+Efeito:
+Escolha uma especialização:
+
+Memória da Fúria
+O Memoespírito causa mais dano(+1d8).
+Seus ataques podem causar dano adicional(+1d8).
+
+Memória da Guarda
+O Memoespírito concede bônus de Defesa(+4).
+Pode proteger aliados próximos usando sua Reação ou Ação Comum(+10 de RD).
+
+Memória da Sabedoria
+O Memoespírito aumenta a eficácia das suas Perícias, você ganha +10 em qualquer teste de Perícia 2 vezes ao dia.
+Seu Memoespírito ganha 50% mais de dano enquanto estiver a 1 distância de você.
+
+Persistência da Memória
+Uma memória verdadeira nunca desaparece completamente.
+Efeito:
+Quando o Memoespírito cair a 0 PV, ele permanece ativo por mais 1 rodada antes de desaparecer.
+Durante esse tempo:
+  Causa dano aumentado(+2 dados do mesmo tipo).
+  Não pode ser impedido por efeitos de controle.
+
+Ataque Espiritual
+O Memoespírito atinge o inimigo através de memórias e não apenas pela força física.
+Efeito:
+Os ataques do Memoespírito ignoram parte das resistências inimigas, a defesa inimiga conta como -10 para seu Memoespírito.
+Seus ataques podem afetar criaturas incorpóreas ou protegidas.
+Inimigos atingidos recebem um DoT próprio do Memoespírito chamado Lembranças Passadas, esse DoT pode ser stackado 3 vezes e causa 1d10 por stack, o dano conta como Dano de um elemento escolhido por você.
+
+Memória Compartilhada
+A força do Memoespírito flui constantemente para seu mestre.
+Efeito:
+Enquanto o Memoespírito estiver ativo:
+Você recebe:
+  Bônus em ataques(+3).
+  Aumento de dano(+1d6).
++ 1 de distância.
+O bônus depende da característica principal do Memoespírito.
+
+Recordação Absoluta
+Você permite que o Memoespírito revele sua verdadeira forma.
+Efeito:
+Como ação complementar:
+Por 3 turnos:
+O Memoespírito recebe:
+  Aumento de dano(+1 dado do mesmo tipo) .
+  + 1 de distância.
+  Um efeito adicional em seus ataques.
+Após o término:
+O Memoespírito fica enfraquecido(-2 no ataque e -3 de defesa) por 1 turno.
+
+Avatar da Recordação
+Você alcançou a união perfeita entre memória e existência.
+Requisito: Nível de Personagem 5
+
+Efeito:
+O Memoespírito recebe uma evolução permanente.
+Seus ataques ganham novos efeitos.
+
+Você pode escolher uma das formas:
+
+Forma Manifestada
+O Memoespírito recebe mais dano e alcance(+1 de distância e +2 dados do mesmo tipo).
+
+Forma Sincronizada
+Você recebe parte dos atributos do Memoespírito(20% de Vida/10% de Defesa/15% de Ataque).
+Seus ataques recebem efeitos adicionais como se você atacasse em conjunto com o Memoespírito.
+Uma vez por combate:
+Quando você ou o Memoespírito causar um acerto crítico, ambos recebem uma ação adicional.
+
+
+Guia de Criação de Memoespírito — Caminho da Recordação
+O Memoespírito é uma manifestação da memória do personagem, uma entidade ligada à sua história, emoções ou experiências. Ele não é apenas uma invocação, mas um companheiro de batalha que luta ao lado do usuário e evolui junto com ele.
+Cada jogador deve criar um Memoespírito seguindo as etapas abaixo.
+Atributos do Memoespírito:
+Escolha onde vai esses bônus e qual atributo ele usa para atacar:
+Poder, Agilidade, Vigor, Sincronia, Discernimento, Presença.
+Você tem 12 pontos para distribuir e um atributo só pode ter no máximo 5 pontos, você ganha +1 ponto a cada 2 níveis do seu personagem.
+
+1.1 Conceito do Memoespírito
+Primeiro escolha a natureza da sua memória.
+Exemplos:
+Memória de Guerra
+Um espírito criado pelas lembranças de batalhas passadas, focado em força e combate.
+Memória Perdida
+Uma pessoa ou momento esquecido que voltou como uma manifestação espiritual.
+Memória Animal
+Uma criatura ligada a uma lembrança de infância ou um vínculo profundo.
+Memória Artificial
+Uma consciência criada através de tecnologia ou conhecimento acumulado.
+Memória Celestial
+Um fragmento de uma entidade antiga ou força cósmica.
+Escolha a Função do Memoespírito
+O jogador escolhe qual papel seu Memoespírito exerce:
+Predador
+Focado em causar dano.
+Bônus:
++1d8 de dano causado.
+Seus ataques causam dano adicional(+1d6) uma vez por turno.
+Guardião
+Focado em proteger o usuário e aliados.
+Bônus:
++30 de PV máximo.
+Pode proteger(+10 RD) um aliado próximo uma vez por turno usando uma reação ou ação comum.
+Catalisador
+Focado em melhorar o usuário.
+Bônus:
+Concede +2 em ataques ou habilidades do usuário.
+Aumenta os efeitos causados pelo jogador.
+Controlador
+Focado em enfraquecer inimigos.
+Bônus:
+Seus ataques podem aplicar condições.
+Inimigos atingidos recebem penalidades.
+Escolha os Bônus do Memoespírito
+O Memoespírito recebe 3 bônus menores.
+Escolha entre:
+Força Espiritual
+Aumenta o dano causado pelo Memoespírito.
+Resistência Espiritual
+Aumenta a vida e a resistência do Memoespírito.
+Velocidade Espiritual
+Permite que o Memoespírito aja mais vezes ou tenha maior mobilidade.
+Memória Afiada
+Melhora ataques especiais e habilidades.
+Vínculo Profundo
+Melhora efeitos quando usuário e Memoespírito atacam juntos.
+Forma Mutável
+Permite alterar aparência ou adaptar habilidades.
+Criação das Habilidades do Memoespírito
+Todo Memoespírito possui 2 habilidades próprias.
+Uma habilidade deve ser ofensiva ou de impacto.
+A outra deve ser uma habilidade de suporte, controle ou utilidade.
+Habilidade 1 — Técnica Principal
+Escolha um modelo:
+Golpe Ancestral
+O Memoespírito libera um ataque poderoso.
+Efeito:
+ Causa dano aumentado contra um alvo.
+
+Explosão de Memória
+O Memoespírito libera um ataque em área.
+Efeito:
+ Causa dano em área.
+
+Marca do Passado
+O Memoespírito grava sua presença no inimigo.
+Efeito:
+ O alvo recebe uma penalidade e sofre mais dano dos próximos ataques.
+
+Ataque Evolutivo
+O Memoespírito aprende durante a batalha.
+Efeito:
+ Cada vez que usa, fica mais forte.
+
+Habilidade 2 — Técnica Auxiliar
+Escolha um modelo:
+Proteção da Memória
+O Memoespírito protege seu mestre.
+Efeito:
+ Concede redução de dano ou escudo.
+
+Eco Inspirador
+O Memoespírito fortalece o usuário.
+Efeito:
+ Aumenta dano, velocidade ou chance de acerto.
+
+Fragmento Restaurador
+O Memoespírito recupera energia.
+Efeito:
+ Cura PV ou remove uma condição negativa.
+
+Presença Assombrosa
+A memória do espírito afeta os inimigos.
+Efeito:
+ Aplica medo, lentidão ou enfraquecimento.
+
+5. Evolução do Memoespírito
+Quando o personagem alcançar os níveis 5 e 10, o Memoespírito pode evoluir.
+Escolha uma evolução:
+Forma Completa
+A memória recupera todo seu poder.
+Aumenta o dano.
+Melhora suas habilidades.
+
+Fusão de Memórias
+O usuário e o Memoespírito entram em sincronia.
+O usuário recebe parte dos bônus do espírito.
+Ataques ganham efeitos extras.
+
+Memória Desperta
+O Memoespírito muda sua própria existência.
+Ganha uma nova habilidade.
+Altera sua aparência.
+Recebe uma característica única.
+
+Testes de Resistência:
+
+Esses testes são baseados em seus atributos e são usados para resistir a certas coisas da realidade. Eles podem ser requisitados pelo Mestre em momentos específicos, não estando tão presente quando o Teste de Perícia.
+
+Teste de Potência Física
+Mede a capacidade de suportar ou superar desafios que exigem força bruta, como resistir a empurrões, romper obstáculos ou manter-se firme contra grandes impactos. 
+
+Teste de Reflexos
+Mede a rapidez e a precisão dos movimentos para desviar de ataques, evitar armadilhas ou reagir a perigos repentinos. 
+
+Teste de Resistência Física
+Mede a capacidade do corpo de suportar venenos, doenças, fadiga, temperaturas extremas e outros efeitos que afetam a vitalidade. 
+
+Teste de Resistência Mental
+Mede a capacidade da mente de resistir a ilusões, manipulações cognitivas, ataques psíquicos e confusão mental. 
+
+Teste de Percepção Mental
+Mede a clareza da mente para reconhecer ameaças, perceber ilusões, manter a concentração e evitar influências que afetem os sentidos ou o julgamento. 
+
+Teste de Força de Vontade
+Mede a determinação do personagem para resistir ao medo, à intimidação, ao controle mental, à possessão e a qualquer efeito que tente dominar sua vontade ou identidade. 
+

@@ -1,0 +1,139 @@
+{
+  "gerado_por": "build/testar_ficha.py --suite spike",
+  "biblioteca": "formulas 1.3.4",
+  "funcoes": [
+    "IF",
+    "IFERROR",
+    "AND",
+    "OR",
+    "NOT",
+    "SUM",
+    "SUMIF",
+    "SUMPRODUCT",
+    "COUNTIF",
+    "COUNTIFS",
+    "COUNTA",
+    "COUNTBLANK",
+    "INDEX",
+    "MATCH",
+    "VLOOKUP",
+    "HLOOKUP",
+    "CHOOSE",
+    "MIN",
+    "MAX",
+    "ROUNDUP",
+    "ROUND",
+    "INT",
+    "MOD",
+    "ABS",
+    "LEN",
+    "CONCATENATE",
+    "REPT",
+    "ISBLANK",
+    "ISNUMBER",
+    "ISERROR",
+    "ROWS",
+    "LARGE",
+    "SMALL"
+  ],
+  "operadores": [
+    "&",
+    "+",
+    "-",
+    "*",
+    "/",
+    "=",
+    "<>",
+    "<",
+    ">",
+    "<=",
+    ">="
+  ],
+  "operadores_proibidos": [
+    "--"
+  ],
+  "reprovadas": {
+    "TRIM": [
+      "=TRIM(\"  a  b \") → obtido 'a  b', esperado 'a b'"
+    ]
+  },
+  "comportamentos": [
+    {
+      "caso": "duplo menos unário (--)",
+      "formula": "=SUMPRODUCT(--(LEN('Criação'!A1:A3)>0))",
+      "google": 2,
+      "formulas_1_3_4": 0,
+      "igual_ao_google": false
+    },
+    {
+      "caso": "COUNTIF \"?*\" em intervalo com número e texto",
+      "formula": "=COUNTIF('Criação'!A1:A3,\"?*\")",
+      "google": 1,
+      "formulas_1_3_4": 2,
+      "igual_ao_google": false
+    },
+    {
+      "caso": "TRIM com espaço duplo interno",
+      "formula": "=TRIM(\"a  b\")",
+      "google": "a b",
+      "formulas_1_3_4": "a  b",
+      "igual_ao_google": false
+    },
+    {
+      "caso": "divisão por zero sem proteção",
+      "formula": "=1/0",
+      "google": "#DIV/0!",
+      "formulas_1_3_4": "#DIV/0!",
+      "igual_ao_google": true
+    },
+    {
+      "caso": "MATCH sem achado",
+      "formula": "=MATCH(\"Zé\",Dados!A1:A3,0)",
+      "google": "#N/A",
+      "formulas_1_3_4": "#N/A",
+      "igual_ao_google": true
+    },
+    {
+      "caso": "texto vazio em conta (\"\"+1)",
+      "formula": "=\"\"+1",
+      "google": "#VALUE!",
+      "formulas_1_3_4": "#VALUE!",
+      "igual_ao_google": true
+    },
+    {
+      "caso": "referência a célula vazia (=A3)",
+      "formula": "='Criação'!A3",
+      "google": "",
+      "formulas_1_3_4": 0,
+      "igual_ao_google": false
+    },
+    {
+      "caso": "ISBLANK(\"\") (texto vazio não é célula vazia)",
+      "formula": "=ISBLANK(\"\")",
+      "google": false,
+      "formulas_1_3_4": false,
+      "igual_ao_google": true
+    }
+  ],
+  "acento_em_nome_de_aba": "ok",
+  "abas_testadas": [
+    "Criação",
+    "Em Jogo",
+    "Regras Rápidas",
+    "Dados"
+  ],
+  "tempo_carga_s": 1.477,
+  "tempo_calculate_s": 0.0309,
+  "tempo_calculate_cenario_s": 0.0091,
+  "observacoes": [
+    "Duplo menos unário (--) devolve 0 na formulas 1.3.4: contar condição com SUMPRODUCT((condição)*1); o lint proíbe '--'.",
+    "COUNTIF(intervalo,\"?*\") na formulas 1.3.4 conta também NÚMEROS (o Google conta só texto): usar \"?*\" só em intervalo de texto, ou SUMPRODUCT((LEN(intervalo)>0)*1).",
+    "TRIM da formulas 1.3.4 não reduz espaço duplo interno: TRIM sai da lista efetiva (não é necessário na ficha).",
+    "Entrada em cenário: só VALOR. 'Deixar vazia' = omitir a entrada (Modelo.calcular trata None assim); por isso TODA célula de entrada deve sair VAZIA no .xlsx gerado. schedula.EMPTY como input não reproduz célula vazia.",
+    "Célula vazia que nenhuma fórmula referencia isoladamente não vira nó em model.cells, mas aceita input normalmente (o utilitário não filtra).",
+    "Chave da formulas: \"'[Nome Do Arquivo.xlsx]ABA'!A1\" — o nome do arquivo mantém a caixa original e só a aba vai em maiúsculas; Modelo.chave() resolve sem diferenciar caixa.",
+    "Número concatenado com & sai sem '.0' (\"d20+\"&(A1+1) = \"d20+6\").",
+    "Revisão 2: referência a célula vazia (=A3) devolve vazio no Google e 0 no Excel e na formulas. A ficha não depende disso: toda entrada é lida pela camada de leitura protegida (IF(ISERROR(X),\"\",IF(ISBLANK(X),\"\",X))) e o lint proíbe ler uma entrada fora dela.",
+    "Revisão 2: \"\"+1 dá #VALUE! (Google e formulas): o vazio da camada só entra em conta depois de ISNUMBER/LEN."
+  ]
+}

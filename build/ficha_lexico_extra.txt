@@ -1,0 +1,104 @@
+# ficha_lexico_extra.txt — palavras PT-BR permitidas na ficha automatizada que não aparecem
+# nos capítulos do livro (livro-v1.0\*.md). Uma por linha, sem distinção de caixa.
+# A suíte `texto` de build\testar_ficha.py usa este arquivo junto com o vocabulário do livro
+# e falha se uma palavra daqui já estiver no livro ou não for usada na planilha.
+
+# --- planilha, Google Planilhas e o guia da aba Início
+# "aba" e "abas" saíram na v1.2: o changelog do livro passou a citar a aba Criação da ficha
+# (E35), então o próprio livro já ensina as duas palavras e repetir aqui é redundância
+abra
+adicionar
+apague
+auxiliares
+borda
+clique
+concluído
+convenção
+cores
+direito
+drive
+editar
+edite
+envie
+gerador
+google
+importar
+intervalo
+intervalos
+legenda
+macro
+mostrar
+nativa
+ocultar
+painel
+permissões
+planilhas
+preencha
+script
+senha
+sinal
+tela
+título
+transcrito
+
+# --- cores da legenda
+amarelas
+amarelo
+amarelos
+azul
+escura
+rosa
+vermelho
+
+# --- rótulos e mensagens da ficha
+alcançada
+avisos
+bloqueada
+cabem
+comprado
+contou
+desperdiçado
+destacada
+empunhado
+exceto
+físicos
+lançamento
+liberada
+liberado
+liberados
+ligações
+ocupado
+ok
+pague
+permitidas
+possuídas
+raciais
+recebida
+reescreva
+rápidas
+sobem
+usados
+vantagens
+vazias
+vestido
+# --- revisão 2: dica do Google (texto que começa com +, - ou =)
+apóstrofo
+digite
+# --- legenda de estilos (v1.1, ajustes pedidos pelo usuário)
+rótulo
+alternada
+
+# --- v1.2: 'aba' continua aqui, mas 'cabeçalho', 'conferida', 'listas', 'secundária',
+# 'totais' e 'xlsx' saíram — o changelog v1.1 → v1.2 e a capa trouxeram as seis para o
+# livro, e esta suíte cobra palavra repetida entre o léxico do livro e este arquivo.
+
+# --- abreviações usadas onde a coluna é estreita
+# cap. = capítulo; RT = Redução de Tenacidade (cabeçalhos da Em Jogo);
+# Ef = Eficiência (fórmula do tique de condição); temp. = temporários; Ress. = Ressonância;
+# Desc. Longo = Descanso Longo (frequência curta dos Usos na Em Jogo)
+cap
+desc
+rt
+ef
+temp
+ress

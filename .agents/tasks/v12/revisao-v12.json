@@ -1,0 +1,37 @@
+{
+  "verdict": "APPROVED",
+  "findings": [
+    {
+      "severity": "low",
+      "file": ".agents/tasks/v12/achados-v12.md",
+      "issue": "A secao 7 ficou desatualizada: diz que o changelog tem 16 correcoes (E1 a E16) e que 28-bestiario.md e os demais .md estao 'byte a byte' como estavam, quando E17, E18 e E19 editaram 11-caminho-recordacao.md e 28-bestiario.md e a tabela do changelog tem 19 linhas. O RELATORIO-V1.2.md secao 4 esta correto.",
+      "fix": "Atualizar a secao 7 de achados-v12.md para a lista de 14 .md alterados e para as 19 correcoes E1-E19, como o RELATORIO-V1.2.md secao 4 ja traz."
+    },
+    {
+      "severity": "low",
+      "file": "livro-v1.0/18-combate.md",
+      "issue": "Linha 259, frase de abertura de 18.7: 'O que distingue a sua arma das outras da mesma categoria e a aparencia, o Elemento e uma propriedade especial.' Falta o qualificador 'ate uma' que as outras posicoes do livro passaram a usar (24.2, 24.7 passo 3, tabela de checagem de 24.7, resumo do cap. 24, 18.7 linha 262 e 27.9). A linha 262, logo abaixo, corrige, entao nenhum numero divergiu: e redacao, nao contradicao de limite.",
+      "fix": "Trocar 'uma propriedade especial' por 'ate uma propriedade especial' na linha 259. Mudanca de uma palavra; depois dela, regerar DOCX/PDF e refazer a linha de base de protegidos (apagar build/ficha_protegidos.json e rodar --suite protegidos), na ordem que o plano exige."
+    },
+    {
+      "severity": "low",
+      "file": ".agents/tasks/v12/features/FEAT-001.json",
+      "issue": "Ressalva autodeclarada no campo findings: uma busca de texto pelo termo 'Avginiano' rodou sobre o workspace inteiro sem filtro de pasta e pode ter varrido 'Explorando Galaxias RPG - Players\\' no indice de busca. Nenhuma escrita aconteceu e nenhum resultado de la foi consultado, mas a proibicao da pasta inclui leitura.",
+      "fix": "Nada a corrigir no conteudo. Nas proximas rodadas, filtrar toda busca por pasta (livro-v1.0, build, scripts) para que a pasta dos players nunca entre no escopo de nenhuma ferramenta."
+    },
+    {
+      "severity": "low",
+      "file": "Modelo para copia - Ficha players - Explorando Galáxias V1.1.gsheet",
+      "issue": "O atalho .gsheet da raiz, que e o modelo que a mesa copia, continua apontando para a ficha V1.1. Nenhum script pode criar a versao V1.2 de um atalho do Google Drive; o RELATORIO-V1.2.md secao 11 declara isso como pendencia do autor. Ja existe 'Ficha Automatizada - Explorando Galaxias V1.2.gsheet' em ficha-automatizada\\, o que sugere que a publicacao comecou.",
+      "fix": "Acao do autor, fora do alcance do codigo: seguir o passo 1 do COMO-USAR-NO-GOOGLE-PLANILHAS.md (subir o .xlsx V1.2 e salvar como Planilhas Google) e trocar o modelo de copia da mesa para o link V1.2."
+    },
+    {
+      "severity": "low",
+      "file": ".agents/tasks/v12/task.json",
+      "issue": "Limite de evidencia, nao defeito: a autorizacao do autor para A2 (Choque 3 turnos), A3 (Avginiano com bonus em escolha), a subida da Planilha do Mestre para V1.2 e a autoridade ampliada para mexer em numero sem pausar esta registrada apenas nos arquivos da tarefa (task.json, context.json, findings dos FEAT e achados-v12.md secao 1). Nao ha como confirma-la pelo disco, porque veio como resposta a send_message.",
+      "fix": "Nada a corrigir se o registro estiver fiel. Se alguma das quatro decisoes nao corresponder ao que foi autorizado, o ponto a reverter e o numero (21.2/21.5 para o Choque, cap. 05 para o Avginiano, 24.2 para o Espaco da Leve e o alcance de Arremessavel) mais os espelhos de oraculo listados em achados-v12.md secao 8."
+    }
+  ],
+  "summary": "APROVADO. Conferi no disco, nao nos relatos. (1) A Recarga saiu da tabela de 24.2 (4 linhas) e a decisao chegou aos seis pontos de propagacao: paragrafo de sabor em 24.2, item 'Municao ou celula de reserva' de 24.3 com Espaco 0,5 e 20 Cr intactos e 'Para que' novo, 18.7 com os quatro nomes reais, e o espelho hardcoded de oraculo_mestre_hist.py:59 com a string identica; o que sobra de 'recarg' no livro e o quadro de mudanca de 24.2, a recarga de Habilidade (16.7/16.8) e a recarga em Ciclos do cap. 28, tres coisas distintas e corretas. (2) Obrigatoriedade coerente nas cinco posicoes cobradas (24.2, 24.7 passo 3, tabela de checagem de 24.7, resumo do cap. 24, 18.7 e 27.9); unica sobra e a frase de abertura de 18.7 na linha 259, sem o 'ate' — redacao, nao divergencia de numero. (3) A auditoria cobriu as listas que a secao 2.2 do plano deixou pendentes (108 Bencaos nos 9 Caminhos, escolhas internas de Caminho, Memoespirito, as 14 linhas de 16.5, Elementos, categorias e propriedades de arma, armaduras, pocoes, itens, Cones, Reliquias, Ressonancias, atributos/pericias/Eficacia, 19/22/23, limites de 27.9 e 27.10), com a regua certa — custo nao e defeito — e nao virou rebalanceamento: cinco entradas de regra mudaram, todas dentro de uma lista de opcoes, economia central intocada. Conferi que as correcoes nao criaram dominancia nova (Leve 0,5 ainda paga 1d8 contra 1d10 da Media; Arremessavel a dois passos ainda deixa o jogador sem a arma). (4) Versao corrente em 1.2 em todos os pontos da secao 4.1, e os comentarios historicos da secao 4.2 intactos (os 12 de gerar_ficha.py, os de testar_ficha.py e oraculo_ficha.py, ficha_dados.py:343, requirements-ficha.txt:2 e os dois changelogs antigos, com data anterior a tarefa). Tres desvios do plano, todos com justificativa registrada e sem apagar registro historico: oraculo_ficha.py e ficha_dados.py tinham versao corrente fora da lista, e a Planilha do Mestre subiu para V1.2 por decisao do autor. (5) Os quatro entregaveis V1.2 existem e os cinco V1.1 estao no disco com data e tamanho originais; os 38 hashes de ficha_protegidos.json conferem um por um contra o disco, provando que livro e entregaveis estao em sincronia (ultimo .md 06/10 18:02, DOCX/PDF 18:17, linha de base 18:18). Rodei por fora dos relatos: checar-tabelas, checar-nomenclatura e checar-completude saem 0, e as suites dados (3294), ouro (539), oraculo (247) e protegidos (76) saem 0 falha — a dados e a que prova que a planilha bate com o livro novo. Minhas execucoes nao alteraram nenhum arquivo. (6) 'Explorando Galaxias RPG - Players' e 'versoes antigas' tem mtime de diretorio anterior ao inicio da tarefa, evidencia de que nada foi criado, renomeado ou apagado dentro delas; fica a ressalva autodeclarada de uma busca sem filtro de pasta. (7) As quatro decisoes que mudam comportamento tem registro consistente em tres arquivos e estao aplicadas como descritas. Cinco achados, todos de severidade baixa e nenhum bloqueante: a secao 7 de achados-v12.md desatualizada, o qualificador faltando em 18-combate.md:259, a ressalva da busca, o atalho .gsheet da raiz ainda em V1.1 e o limite de evidencia do rastro de autorizacao. Documento completo da revisao em .agents/tasks/v12/2026-10-06-235853-review.md",
+  "reviewDoc": ".agents/tasks/v12/2026-10-06-235853-review.md"
+}

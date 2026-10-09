@@ -1,0 +1,56 @@
+{
+  "verdict": "APPROVED",
+  "findings": [
+    {
+      "id": 1,
+      "label": "Tenacidade de Elite nao monotonica",
+      "severity": "low",
+      "blocking": false,
+      "confidence": "confirmed",
+      "where": "livro-v1.0/20-elementos-tenacidade-e-quebra.md (tabela 'Tenacidade dos inimigos, por tipo e faixa'); livro-v1.0/29-apendices-e-fichas.md 29.4",
+      "issue": "A tabela publica Elite 5 / 6 / 7 / 6 / 7 por faixa: o valor cai de 7 (faixa 9-12) para 6 (faixa 13-16), e o Boss empata em 12 nas mesmas duas faixas. Confere com a tabela de ancoras do design aprovado, porque a Tenacidade e derivada da reducao efetiva do grupo por Ciclo (Boss 2x, Elite 1x, Comum 0,5x) sobre a reducao ja condicionada ao acerto, e essa derivacao nao cresce de forma uniforme entre faixas.",
+      "action": "Acrescentar uma linha na tabela do capitulo 20 explicando que a Tenacidade e derivada da reducao efetiva do grupo por Ciclo e por isso pode nao subir a cada faixa. Sem a nota, o degrau vai ler como erro de digitacao para quem acabou de ler no changelog que tabela nao monotonica foi um bug da v0.1."
+    },
+    {
+      "id": 2,
+      "label": "Condicao 'Provocado' nao existe no livro",
+      "severity": "low",
+      "blocking": false,
+      "confidence": "confirmed",
+      "where": "livro-v1.0/21-condicoes.md (catalogo); livro-v1.0/15-caminho-preservacao.md",
+      "issue": "A lacuna 12 do handoff lista 'Provocado' entre as condicoes a consolidar, e a lacuna 1 descreve a identidade da Preservacao como 'escudos, tanque, provocar, protecao de aliados'. A palavra nao aparece como condicao em nenhum capitulo, e o design aprovado tambem nunca a define. Nenhuma regra a cita, portanto nao existe referencia pendurada: a fantasia de tanque e entregue por Barreira (PV temporario com nome proprio) mais a Reacao Intervir (capitulo 18.4).",
+      "action": "Confirmar com o autor que Barreira + Intervir cobrem a intencao, ou abrir a condicao Provocado numa v1.1. Nao e bloqueante porque nenhuma regra do livro depende dela."
+    },
+    {
+      "id": 3,
+      "label": "Capitulos 12 a 15 sem arte",
+      "severity": "low",
+      "blocking": false,
+      "confidence": "confirmed",
+      "where": "livro-v1.0/12-caminho-erudicao.md, 13-caminho-euforia.md, 14-caminho-caca.md, 15-caminho-preservacao.md",
+      "issue": "Os cinco Caminhos que o autor ja havia escrito tem imagem (image13/image9, image17, image4/image8, image1/image3, image10/image15); os quatro Caminhos novos nao tem nenhuma, porque o acervo da v0.1 tem 17 imagens e nenhum simbolo para Erudicao, Euforia, Caca e Preservacao. Cada um desses quatro arquivos carrega um comentario HTML '<!-- ARTE PENDENTE: simbolo do Caminho -->' que o build remove (RE_COMENTARIO_HTML em build/gerar_docx.py), confirmado ausente do .docx compilado.",
+      "action": "Conseguir quatro simbolos de Caminho ou aceitar a assimetria visual. Nada vaza para o livro impresso."
+    },
+    {
+      "id": 4,
+      "label": "Tabela de armas repartida em dois capitulos",
+      "severity": "low",
+      "blocking": false,
+      "confidence": "confirmed",
+      "where": "livro-v1.0/18-combate.md 18.5 e 18.7; livro-v1.0/24-equipamentos.md 24.2",
+      "issue": "A lacuna 8 pedia 'tabela de armas completa' com dano, elemento, alcance, atributo, propriedades e reducao de Tenacidade. As seis categorias estao completas, mas repartidas: dados base, alcance, atributo e reducao de Tenacidade em 18.5; Elemento e propriedade especial em 18.7 e na tabela de propriedades de 24.2.",
+      "action": "Consolidar numa tabela unica, ou cruzar as duas com uma referencia explicita em cada cabecalho."
+    },
+    {
+      "id": 5,
+      "label": "Checador de Heading mede presenca, nao quantidade",
+      "severity": "low",
+      "blocking": false,
+      "confidence": "confirmed",
+      "where": "scripts/verificar-livro-final.ps1 linhas 148-151 e 190-191",
+      "issue": "O script testa 'Heading 1' in estilos e imprime H1=1 H2=1 H3=1 como flags booleanas. O rotulo 'docx: Heading 1/2/3' sugere contagem, mas o teste passaria um .docx com um unico titulo. A contagem real, que medi de forma independente com python-docx, esta correta: 33 Heading 1, 234 Heading 2, 332 Heading 3, mais 295 tabelas sem nenhuma vazia.",
+      "action": "Trocar as flags por contagem minima (por exemplo H1 >= 32, H2 >= 100, H3 >= 100) para o indicador valer o que o rotulo promete."
+    }
+  ],
+  "reviewDoc": "g:\\Meu Drive\\DriveSyncFiles\\Explorando Galáxias RPG/.agents/tasks/revisao-final.md"
+}

@@ -1,0 +1,40 @@
+﻿Bateria da Planilha do Mestre ÔÇö su├¡tes: spike, protegidos, dados, bestiario, ouro, oraculo, determinismo, extremos, lint, texto, preview, visual, sabor
+In├¡cio: 2026-10-07 15:16:09
+python : 
+No linha:1 caractere:321
++ ... ficha.txt"; python "build\testar_mestre.py" --suite tudo 2>&1 | Out-F ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  0%|          | 0/11 [00:00<?, ?it/s]
+100%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê| 11/11 [00:00<00:00, 10642.99it/s]
+
+=== Su├¡te spike: OK ÔÇö 142 checagens, 0 falha(s)
+  ┬À 141 casos; carga do modelo 1.75 s; maior intermedi├írio do or├ículo 2.815e+14 (< 2^53 = 9.007e+15)
+  ┬À tempo: 1.9 s
+
+=== Su├¡te protegidos: FALHOU ÔÇö 127 checagens, 1 falha(s)
+  ┬À ausente conhecido (P5): ficha-automatizada/C├│pia de Ficha Automatizada - Explorando Gal├íxias V1.1.xlsx ÔÇö ausente j├í antes da Fase 1; a Mestre nunca grava em ficha-automatizada\
+  ┬À 38 arquivos do livro e 13 da ficha conferidos (SHA-256)
+  ┬À tempo: 0.2 s
+  Ô£ù arquivo da ficha ALTERADO: g:\Meu Drive\DriveSyncFiles\Explorando Gal├íxias RPG\build\ficha_funcoes_ok.json
+
+=== Su├¡te dados: OK ÔÇö 803 checagens, 0 falha(s)
+  ┬À H8: ambientes com criatura numa faixa s├│ (o livro d├í ├ás fac├º├Áes uma faixa; o encontro aleat├│rio cai para 'qualquer ambiente da faixa' e diz isso): Cidade corporativa (5-8); Cl├¡nica ou ateli├¬ (13-16); Col├┤nia ou mina abandonada (1-4); Esta├º├úo (5-8); Mundo com Stellaron (17-20); Nave-cidade (9-12); Qualquer lugar onde o grupo esteja (13-16); Ru├¡na (1-4); Teatro, festa ou multid├úo (9-12)
+  ┬À Fase 2: 156 checagens item a item contra 24.1, 24.2, 24.3, 24.5, 25.1, 25.2, 25.3, 26.7, 27.7, 27.8, 27.16 e 27.17 (3 armaduras, 6 armas, 3 po├º├Áes, 11 itens, 5 N├¡veis de Cone, 6 slots ├ù 4 Tiers, 2 Conjuntos, 4 Resson├óncias)
+  ┬À tempo: 1.5 s
+
+  0%|          | 0/6907 [00:00<?, ?it/s]
+ 11%|Ôûê         | 762/6907 [00:00<00:00, 7613.44it/s]
+ 24%|ÔûêÔûêÔûì       | 1676/6907 [00:00<00:00, 8504.98it/s]
+ 37%|ÔûêÔûêÔûêÔûï      | 2587/6907 [00:00<00:00, 8780.98it/s]
+ 51%|ÔûêÔûêÔûêÔûêÔûê     | 3516/6907 [00:00<00:00, 8980.46it/s]
+ 64%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûì   | 4415/6907 [00:01<00:00, 2733.35it/s]
+ 73%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûÄ  | 5034/6907 [00:01<00:00, 2074.48it/s]
+ 79%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûë  | 5485/6907 [00:02<00:01, 1267.56it/s]
+ 85%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûî | 5885/6907 [00:02<00:00, 1287.06it/s]
+ 91%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê | 6268/6907 [00:02<00:00, 1514.09it/s]
+ 95%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûî| 6568/6907 [00:04<00:00, 719.56it/s] 
+ 99%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûë| 6839/6907 [00:07<00:00, 272.34it/s]
+100%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê| 6907/6907 [00:07<00:00, 888.31it/s]

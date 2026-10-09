@@ -1,0 +1,158 @@
+﻿python : 
+No linha:1 caractere:22
++ ... ONUTF8="1"; python "g:\Meu Drive\DriveSyncFiles\Explorando Galáxias R ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  0%|          | 0/9 [00:00<?, ?it/s]
+100%|██████████| 9/9 [00:00<00:00, 8526.93it/s]
+
+=== Suíte spike: OK — 14 checagens, 0 falha(s)
+  · carga do modelo: 1.30 s
+  · calculate (todas as saídas): 0.0309 s
+  · calculate (cenário com 3 entradas, 8 saídas): 0.0029 s
+  · comportamento — duplo menos unário (--): formulas=0, Google=2  (DIVERGE)
+  · comportamento — COUNTIF "?*" em intervalo com número e texto: formulas=2, Google=1  (DIVERGE)
+  · comportamento — TRIM com espaço duplo interno: formulas='a  b', Google='a b'  (DIVERGE)
+  · comportamento — divisão por zero sem proteção: formulas='#DIV/0!', Google='#DIV/0!'
+  · comportamento — MATCH sem achado: formulas='#N/A', Google='#N/A'
+  · REPROVADA [TRIM] =TRIM("  a  b ") → obtido 'a  b', esperado 'a b'
+  · lista efetiva (33): IF, IFERROR, AND, OR, NOT, SUM, SUMIF, SUMPRODUCT, COUNTIF, COUNTIFS, COUNTA, COUNTBLANK, INDEX, MATCH, VLOOKUP, HLOOKUP, CHOOSE, MIN, MAX, ROUNDUP, ROUND, INT, MOD, ABS, LEN, CONCATENATE, REPT, ISBLANK, ISNUMBER, ISERROR, ROWS, LARGE, SMALL + operador &
+  · veredito acento em nome de aba: ok
+  · gravado G:\Meu Drive\DriveSyncFiles\Explorando Galáxias RPG\build\ficha_funcoes_ok.json
+  · tempo da suíte: 1.7 s
+
+=== Suíte protegidos: OK — 76 checagens, 0 falha(s)
+  · 38 arquivos conferidos
+  · tempo da suíte: 0.2 s
+
+=== Suíte dados: OK — 3297 checagens, 0 falha(s)
+  · 49 blocos e 32 listas conferidos célula a célula; 51 âncoras; 108 Bênçãos
+  · tempo da suíte: 0.4 s
+
+  0%|          | 0/569 [00:00<?, ?it/s]
+100%|██████████| 569/569 [00:00<00:00, 6332.49it/s]
+
+  0%|          | 0/531 [00:00<?, ?it/s]
+100%|██████████| 531/531 [00:00<00:00, 6308.90it/s]
+
+  0%|          | 0/569 [00:00<?, ?it/s]
+  0%|          | 0/569 [00:00<?, ?it/s]
+ 96%|█████████▌| 547/569 [00:00<00:00, 5448.70it/s]
+100%|██████████| 569/569 [00:00<00:00, 5484.14it/s]
+
+ 99%|█████████▉| 563/569 [00:00<00:00, 5627.11it/s]
+100%|██████████| 569/569 [00:00<00:00, 5613.37it/s]
+
+  0%|          | 0/569 [00:00<?, ?it/s]
+100%|██████████| 569/569 [00:00<00:00, 6427.92it/s]
+
+  0%|          | 0/569 [00:00<?, ?it/s]
+  0%|          | 0/569 [00:00<?, ?it/s]
+  0%|          | 0/569 [00:00<?, ?it/s]
+  0%|          | 0/569 [00:00<?, ?it/s]
+  0%|          | 0/569 [00:00<?, ?it/s]
+ 86%|████████▋ | 491/569 [00:00<00:00, 4908.20it/s]
+ 92%|█████████▏| 525/569 [00:00<00:00, 5235.41it/s]
+100%|██████████| 569/569 [00:00<00:00, 5193.57it/s]
+
+100%|██████████| 569/569 [00:00<00:00, 4928.58it/s]
+
+ 84%|████████▍ | 480/569 [00:00<00:00, 4757.95it/s]
+ 85%|████████▌ | 486/569 [00:00<00:00, 4834.83it/s]
+100%|██████████| 569/569 [00:00<00:00, 4608.22it/s]
+
+ 87%|████████▋ | 494/569 [00:00<00:00, 4932.83it/s]
+100%|██████████| 569/569 [00:00<00:00, 4730.97it/s]
+
+100%|██████████| 569/569 [00:00<00:00, 4998.28it/s]
+
+  0%|          | 0/569 [00:00<?, ?it/s]
+100%|██████████| 569/569 [00:00<00:00, 7084.55it/s]
+
+  0%|          | 0/569 [00:00<?, ?it/s]
+  0%|          | 0/569 [00:00<?, ?it/s]
+100%|██████████| 569/569 [00:00<00:00, 6663.41it/s]
+
+100%|██████████| 569/569 [00:00<00:00, 6653.78it/s]
+
+  0%|          | 0/569 [00:00<?, ?it/s]
+100%|██████████| 569/569 [00:00<00:00, 6394.65it/s]
+
+  0%|          | 0/569 [00:00<?, ?it/s]
+  0%|          | 0/569 [00:00<?, ?it/s]
+  0%|          | 0/569 [00:00<?, ?it/s]
+100%|██████████| 569/569 [00:00<00:00, 6406.94it/s]
+
+  0%|          | 0/569 [00:00<?, ?it/s]
+100%|██████████| 569/569 [00:00<00:00, 5758.50it/s]
+
+ 95%|█████████▍| 538/569 [00:00<00:00, 5375.25it/s]
+100%|██████████| 569/569 [00:00<00:00, 5458.44it/s]
+
+100%|██████████| 569/569 [00:00<00:00, 6223.39it/s]
+
+=== Suíte ouro: OK — 533 checagens, 0 falha(s)
+  · planilha carregada em 8.3 s
+  · (n) cobertura: 78 campos das fichas 29.8 e 29.9, 230 células conferidas no mapa
+  · planilha: casos (a)–(o) comparados, calculados na planilha pela biblioteca formulas
+  · (p) Ficha Exemplo - Nadir: 42 entradas, 2363 células com fórmula iguais ao modelo, 0 diferença(s), 0 aviso(s)
+  · modo completo: oráculo e PLANILHA (calculada pela biblioteca formulas)
+  · tempo da suíte: 32.0 s
+
+=== Suíte oraculo: OK — 247 checagens, 0 falha(s)
+  · 126 casos da matriz, 60 da varredura (3 × 20), 61 casos-limite
+  · 247 casos, 43712 saídas comparadas, 234 códigos de aviso do oráculo conferidos na planilha; 0 divergência(s); 8 processo(s), 76 s
+  · tempo da suíte: 78.1 s
+
+=== Suíte extremos: OK — 858 checagens, 0 falha(s)
+  · 2363 células com fórmula; 358 entradas; 185 células de aviso
+  · 657 cenários de um campo por vez
+  · 765 cenários em 8 processo(s)
+  · tempo dos cenários: 321 s
+  · tempo da suíte: 321.4 s
+
+=== Suíte lint: OK — 6204 checagens, 0 falha(s)
+  · Em Jogo: A:L soma 1360 px; tela nas linhas 1-40; título e legenda a partir da linha 42
+  · 2363 fórmulas, 299 validações, 196 regras de formatação condicional conferidas em 10 abas
+  · tempo da suíte: 0.6 s
+
+=== Suíte texto: OK — 975083 checagens, 0 falha(s)
+  · 7415 trechos de texto visível extraídos (valores, literais de fórmula, validações, abas)
+  · (2) 2 grafia(s) fora do glossário que são citação literal do livro (aceitas): 'Bônus de atributo' em 'Dados'!B6; 'dano contínuo' em 'Dados'!C377
+  · (1) 25 strings proibidas + 18 aposentadas × trechos = 318845 buscas; (2) 97 termos do glossário, 2655 ocorrências conferidas; (3) 23285 palavras, léxico de 4911 palavras do livro + 87 extras; (4) 85 formas sem acento, 630275 buscas
+  · tempo da suíte: 3.5 s
+
+  0%|          | 0/569 [00:00<?, ?it/s]
+100%|██████████| 569/569 [00:00<00:00, 7805.10it/s]
+
+=== Suíte preview: OK — 278 checagens, 0 falha(s)
+  · Em Jogo, pior caso: 13 efeitos de condição, 6 Vantagens raciais e 53 Bênçãos com frequência medidos (cabem numa linha)
+  · 40 PNGs inteiros + 344 recortes 1:1 (≤ 1800 × 1800 px) em G:\Meu Drive\DriveSyncFiles\Explorando Galáxias RPG\.agents\tasks\ficha-preview; índice em indice-recortes.txt; 0 texto(s) cortado(s); Em Jogo A:L × 1-40 = 1360 × 760 px
+  · tempo da suíte: 131.4 s
+
+  0%|          | 0/569 [00:00<?, ?it/s]
+100%|██████████| 569/569 [00:00<00:00, 7978.79it/s]
+
+=== Suíte visual: OK — 23898 checagens, 0 falha(s)
+  · (1) 22521 textos medidos em 4 estados (em-branco, nadir-nivel-1, nivel-20-completo, pior-caso); 0 não couberam
+  · (2) 196 células com lista suspensa conferidas (opção mais longa + 24 px)
+  · (3) 552 células com texto buscado na aba Dados e (4) 185 avisos medidos com o texto mais longo que a fórmula pode mostrar
+  · (6) fonte >= 9 pt em todas as abas; (7) 14 combinações de texto e fundo com contraste >= 4,5:1 (menor: 4.96:1)
+  · (8) 55 tabelas fora da aba Dados: toda linha de dados a até 15 linhas do cabeçalho
+  · (9) área do jogador em até 1360 px em 9 abas (colunas auxiliares ocultas); Em Jogo A:L × 1-40 = 1360 × 760 px
+  · (10) aviso, não bloqueia: 51 coluna(s) com mais que o dobro do maior conteúdo: 'Caminho'!B (89 px, maior conteúdo 35 px); 'Caminho'!E (75 px, maior conteúdo 23 px); 'Criação'!D (91 px, maior conteúdo 33 px); 'Criação'!E (93 px, maior conteúdo 35 px); 'Criação'!G (111 px, maior conteúdo 23 px); 'Criação'!H (87 px, maior conteúdo 23 px); 'Criação'!I (91 px, maior conteúdo 23 px); 'Criação'!J (82 px, maior conteúdo 23 px); 'Criação'!K (103 px, maior conteúdo 23 px); 'Criação'!L (152 px, maior conteúdo 23 px); 'Dados'!J (103 px, maior conteúdo 33 px); 'Dados'!K (111 px, maior conteúdo 15 px)
+  · tempo da suíte: 67.0 s
+
+=== RESUMO
+  spike       OK      14 checagens, 0 falha(s)
+  protegidos  OK      76 checagens, 0 falha(s)
+  dados       OK      3297 checagens, 0 falha(s)
+  ouro        OK      533 checagens, 0 falha(s)
+  oraculo     OK      247 checagens, 0 falha(s)
+  extremos    OK      858 checagens, 0 falha(s)
+  lint        OK      6204 checagens, 0 falha(s)
+  texto       OK      975083 checagens, 0 falha(s)
+  preview     OK      278 checagens, 0 falha(s)
+  visual      OK      23898 checagens, 0 falha(s)

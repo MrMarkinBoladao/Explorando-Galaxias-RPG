@@ -1,0 +1,63 @@
+﻿Explorando Gal├íxias ÔÇö montagem do livro v1.2 em PDF
+  raiz do projeto : G:\Meu Drive\DriveSyncFiles\Explorando Gal├íxias RPG
+  capitulos       : G:\Meu Drive\DriveSyncFiles\Explorando Gal├íxias RPG\livro-v1.0
+  imagens         : G:\Meu Drive\DriveSyncFiles\Explorando Gal├íxias RPG\assets\imagens-v01
+  reportlab       : 4.4.4
+  fontes          : Calibri + Consolas
+
+  [01/34] 00-capa-e-creditos.md
+  [02/34] 00-changelog-v01-para-v10.md
+  [03/34] 00-changelog-v10-para-v11.md
+  [04/34] 00-changelog-v11-para-v12.md
+  [05/34] 01-introducao.md
+  [06/34] 02-como-jogar.md
+  [07/34] 03-criacao-de-personagem.md
+  [08/34] 04-atributos-e-pericias.md
+  [09/34] 05-racas.md
+  [10/34] 06-caminhos-visao-geral.md
+  [11/34] 07-caminho-destruicao.md
+  [12/34] 08-caminho-inexistencia.md
+  [13/34] 09-caminho-harmonia.md
+  [14/34] 10-caminho-abundancia.md
+  [15/34] 11-caminho-recordacao.md
+  [16/34] 12-caminho-erudicao.md
+  [17/34] 13-caminho-euforia.md
+  [18/34] 14-caminho-caca.md
+  [19/34] 15-caminho-preservacao.md
+  [20/34] 16-habilidades.md
+  [21/34] 17-ultimate-e-energia.md
+  [22/34] 18-combate.md
+  [23/34] 19-fila-de-acao-e-velocidade.md
+  [24/34] 20-elementos-tenacidade-e-quebra.md
+  [25/34] 21-condicoes.md
+  [26/34] 22-testes-de-resistencia.md
+  [27/34] 23-dano-cura-e-morte.md
+  [28/34] 24-equipamentos.md
+  [29/34] 25-cones-de-luz-e-reliquias.md
+  [30/34] 26-progressao-e-ressonancias.md
+  [31/34] 27-guia-do-mestre.md
+  [32/34] 28-bestiario.md
+  [33/34] 29-apendices-e-fichas.md
+  [34/34] 30-glossario.md
+
+  montando o PDF (duas passadas, para o sumario sair com as paginas certas)...
+
+Pronto.
+  capitulos  : 34
+  paginas    : 268
+  tabelas    : 305 (em paisagem: 0)
+  imagens    : 17
+  marcadores : 616
+  titulos amarrados ao bloco seguinte: 282
+  amarracoes recusadas (bloco maior que a pagina): 1
+  avisos     : 0
+
+  Figuras que chegaram ao pe de uma pagina (pedido / piso / resultado):
+    - image2.png     altura natural 15.75 cm, pedida  75.6%, piso  50.0%, encolheu para 75.6%
+    - image16.png    altura natural 13.41 cm, pedida  94.0%, piso  50.0%, encolheu para 94.0%
+    - image6.png     altura natural 15.75 cm, pedida  80.8%, piso  50.0%, encolheu para 80.8%
+    - image9.png     altura natural  6.64 cm, pedida  95.2%, piso  90.4%, encolheu para 95.2%
+    - image8.png     altura natural 11.68 cm, pedida  54.1%, piso  51.4%, encolheu para 54.1%
+    - image3.png     altura natural 11.68 cm, pedida  54.1%, piso  51.4%, encolheu para 54.1%
+    - image15.png    altura natural 11.68 cm, pedida  54.1%, piso  51.4%, encolheu para 54.1%
+  arquivo    : G:\Meu Drive\DriveSyncFiles\Explorando Gal├íxias RPG\Sistema de HSR by MC Filhos V1.2.pdf (17.5 MB)

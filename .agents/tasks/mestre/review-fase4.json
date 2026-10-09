@@ -1,0 +1,9 @@
+{
+  "verdict": "APPROVED",
+  "findings": [
+    {"id": "N1", "blocking": false, "confidence": "confirmed", "label": "Nome do modelo desatualizado no plano", "detail": "plano-mestre.md seção 1 e tabela R12 ainda dizem '…V1.1.xlsx'; entregável e SAIDA_MODELO são V1.2 por decisão do usuário (notas-fase2 07/10, notas-fase4 09/10). Atualizar a seção 1 citando a decisão."},
+    {"id": "N2", "blocking": false, "confidence": "likely", "label": "Estado da Fila no Exemplo contradiz o guia", "detail": "Combate C9 do Exemplo: Nadir (casa 4) 'Já agiu' enquanto Tessaly (casa 1) 'Agindo agora'. Marcar casas 1-3 como já agiram ou tirar o 'Já agiu' da Nadir."},
+    {"id": "N3", "blocking": false, "confidence": "confirmed", "label": "'31 funções' no relatório", "detail": "ficha_funcoes_ok.json tem 33 funções; 31 é após proibir ROUND/ROUNDUP. Escrever '31 das 33 (sem ROUND e ROUNDUP)'."}
+  ],
+  "reviewDoc": "g:\\Meu Drive\\DriveSyncFiles\\Explorando Galáxias RPG\\.agents\\tasks\\mestre\\review-fase4.md"
+}

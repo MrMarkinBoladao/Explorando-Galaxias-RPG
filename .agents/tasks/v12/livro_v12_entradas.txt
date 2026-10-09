@@ -1,0 +1,38 @@
+    "'Criação'!C25": ('Escolha onde vai o +2: Sincronia ou Presença',
+                      'Escolha onde vai o +2: Discernimento ou Presença'),
+    "'Criação'!N25": ('Sincronia',
+                      'Discernimento'),
+    "'Criação'!O25": ('Sincronia',
+                      'Discernimento'),
+    "'Criação'!B29": ('To na sua mente (2 vezes por dia, deixa o alvo Controlado)',
+                      'To na sua mente (ativável: 2 vezes por dia, deixa o alvo Controlado) · Asas de '
+                      'Halo (passivo: não sofre dano de queda)'),
+    "'Criação'!B30": ('To na sua mente: 2 vezes por dia. Gaste a sua Ação Complementar. 1. Ativação. '
+                      'Se você segue o Caminho da Harmonia, não há teste de ativação. Caso contrário, '
+                      'faça um Teste de Sintonia contra DT 13; se falhar, você não pode usar este '
+                      'traço até o próximo Descanso Longo. 2. Resistência do alvo. Em ambos os casos, '
+                      'o alvo faz um Teste de Força de Vontade contra a sua DT (8 + Bônus do Atributo '
+                      'de Habilidade + Eficiência). 3. Na falha do alvo, ele fica Controlado '
+                      '(capítulo 21) por 2 turnos se for Comum, ou 1 turno se for Elite ou Boss. Não '
+                      'funciona em Boss em cena de clímax sem autorização do Mestre. Fora de combate, '
+                      'o Mestre define a duração pela cena — a referência é meia hora. A DT 13 da '
+                      'ativação é fixa em todas as faixas e é uma das cinco DTs de subsistema do '
+                      'livro (capítulo 02).',
+                      'To na sua mente: 2 vezes por dia. Gaste a sua Ação Complementar. 1. Ativação. '
+                      'Faça um Teste de Sintonia contra DT 13. Se falhar, este uso é gasto e nada '
+                      'acontece. 2. Resistência do alvo. Se você passar, o alvo faz um Teste de Força '
+                      'de Vontade contra a sua DT (8 + Bônus do Atributo de Habilidade + Eficiência). '
+                      '3. Na falha do alvo, ele fica Controlado (capítulo 21) por 2 turnos se for '
+                      'Comum, ou 1 turno se for Elite ou Boss. Não funciona em Boss em cena de clímax '
+                      'sem autorização do Mestre. Fora de combate, o Mestre define a duração pela '
+                      'cena — a referência é meia hora. A DT 13 da ativação é fixa em todas as faixas '
+                      'e é uma das cinco DTs de subsistema do livro (capítulo 02). Asas de Halo: As '
+                      'asas não levam o seu peso para cima, mas não deixam você cair. • Você não '
+                      'sofre dano de queda, de nenhuma altura, e não faz Teste de Reflexos por cair '
+                      '(capítulo 22). • Você desce planando: ao cair, ou ao pular de propósito, você '
+                      'chega ao chão de pé, no ponto que escolher dentro de uma Distância do lugar de '
+                      'onde saiu (capítulo 18). • Não é voo. Você não ganha altura, não ignora '
+                      'terreno em combate, e isso não muda a sua Velocidade, a sua Ação de Movimento '
+                      'nem a sua casa na Fila (capítulo 19).'),
+    "'Em Jogo'!B10": ('—',
+                      'Controlado 2× por dia; sem dano de queda'),

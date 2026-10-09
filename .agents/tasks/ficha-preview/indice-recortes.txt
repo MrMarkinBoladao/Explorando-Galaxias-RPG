@@ -1,0 +1,410 @@
+Recortes 1:1 da prévia (no máximo 1800 × 1800 px cada). Formato: arquivo · largura × altura · intervalo de células
+
+[em-branco] Início: aba inteira 1304 × 1377 px -> em-branco-inicio.png
+    em-branco-inicio-parte-01.png · 1304 × 1377 · A1:L53
+[em-branco] Criação: aba inteira 1492 × 4719 px -> em-branco-criacao.png
+    em-branco-criacao-parte-01.png · 1492 × 1746 · A1:P45
+    em-branco-criacao-parte-02.png · 1492 × 1794 · A46:P92
+    em-branco-criacao-parte-03.png · 1492 × 1219 · A93:P127
+[em-branco] Em Jogo: aba inteira 2566 × 887 px -> em-branco-em-jogo.png
+    em-branco-em-jogo-parte-01.png · 1415 × 887 · A1:M44
+    em-branco-em-jogo-parte-02.png · 1187 × 887 · N1:AE44
+[em-branco] Testes: aba inteira 1492 × 1947 px -> em-branco-testes.png
+    em-branco-testes-parte-01.png · 1492 × 1769 · A1:M44
+    em-branco-testes-parte-02.png · 1492 × 198 · A45:M47
+[em-branco] Habilidades: aba inteira 1530 × 2309 px -> em-branco-habilidades.png
+    em-branco-habilidades-parte-01.png · 1530 × 1792 · A1:X47
+    em-branco-habilidades-parte-02.png · 1530 × 537 · A48:X63
+[em-branco] Caminho: aba inteira 1492 × 3956 px -> em-branco-caminho.png
+    em-branco-caminho-parte-01.png · 1492 × 1745 · A1:O44
+    em-branco-caminho-parte-02.png · 1492 × 1791 · A45:O80
+    em-branco-caminho-parte-03.png · 1492 × 460 · A81:O96
+[em-branco] Equipamento: aba inteira 1492 × 4418 px -> em-branco-equipamento.png
+    em-branco-equipamento-parte-01.png · 1492 × 1749 · A1:AB38
+    em-branco-equipamento-parte-02.png · 1492 × 1797 · A39:AB73
+    em-branco-equipamento-parte-03.png · 1492 × 912 · A74:AB97
+[em-branco] Progressão: aba inteira 2260 × 2148 px -> em-branco-progressao.png
+    em-branco-progressao-parte-01.png · 1780 × 1788 · A1:M70
+    em-branco-progressao-parte-02.png · 516 × 1788 · N1:S70
+    em-branco-progressao-parte-03.png · 1780 × 380 · A71:M88
+    em-branco-progressao-parte-04.png · 516 × 380 · N71:S88
+[em-branco] Regras Rápidas: aba inteira 1279 × 3301 px -> em-branco-regras-rapidas.png
+    em-branco-regras-rapidas-parte-01.png · 1279 × 1781 · A1:L71
+    em-branco-regras-rapidas-parte-02.png · 1279 × 1540 · A72:L119
+[em-branco] Dados: aba inteira 7792 × 23187 px -> em-branco-dados.png
+    em-branco-dados-parte-01.png · 1742 × 1567 · A1:H11
+    em-branco-dados-parte-02.png · 1761 × 1567 · I1:U11
+    em-branco-dados-parte-03.png · 1766 × 1567 · V1:AE11
+    em-branco-dados-parte-04.png · 1766 × 1567 · AF1:AO11
+    em-branco-dados-parte-05.png · 901 × 1567 · AP1:AT11
+    em-branco-dados-parte-06.png · 1742 × 1798 · A12:H54
+    em-branco-dados-parte-07.png · 1761 × 1798 · I12:U54
+    em-branco-dados-parte-08.png · 1766 × 1798 · V12:AE54
+    em-branco-dados-parte-09.png · 1766 × 1798 · AF12:AO54
+    em-branco-dados-parte-10.png · 901 × 1798 · AP12:AT54
+    em-branco-dados-parte-11.png · 1742 × 1757 · A55:H95
+    em-branco-dados-parte-12.png · 1761 × 1757 · I55:U95
+    em-branco-dados-parte-13.png · 1766 × 1757 · V55:AE95
+    em-branco-dados-parte-14.png · 1766 × 1757 · AF55:AO95
+    em-branco-dados-parte-15.png · 901 × 1757 · AP55:AT95
+    em-branco-dados-parte-16.png · 1742 × 1785 · A96:H150
+    em-branco-dados-parte-17.png · 1761 × 1785 · I96:U150
+    em-branco-dados-parte-18.png · 1766 × 1785 · V96:AE150
+    em-branco-dados-parte-19.png · 1766 × 1785 · AF96:AO150
+    em-branco-dados-parte-20.png · 901 × 1785 · AP96:AT150
+    em-branco-dados-parte-21.png · 1742 × 1791 · A151:H199
+    em-branco-dados-parte-22.png · 1761 × 1791 · I151:U199
+    em-branco-dados-parte-23.png · 1766 × 1791 · V151:AE199
+    em-branco-dados-parte-24.png · 1766 × 1791 · AF151:AO199
+    em-branco-dados-parte-25.png · 901 × 1791 · AP151:AT199
+    em-branco-dados-parte-26.png · 1742 × 1773 · A200:H253
+    em-branco-dados-parte-27.png · 1761 × 1773 · I200:U253
+    em-branco-dados-parte-28.png · 1766 × 1773 · V200:AE253
+    em-branco-dados-parte-29.png · 1766 × 1773 · AF200:AO253
+    em-branco-dados-parte-30.png · 901 × 1773 · AP200:AT253
+    em-branco-dados-parte-31.png · 1742 × 1786 · A254:H302
+    em-branco-dados-parte-32.png · 1761 × 1786 · I254:U302
+    em-branco-dados-parte-33.png · 1766 × 1786 · V254:AE302
+    em-branco-dados-parte-34.png · 1766 × 1786 · AF254:AO302
+    em-branco-dados-parte-35.png · 901 × 1786 · AP254:AT302
+    em-branco-dados-parte-36.png · 1742 × 1782 · A303:H356
+    em-branco-dados-parte-37.png · 1761 × 1782 · I303:U356
+    em-branco-dados-parte-38.png · 1766 × 1782 · V303:AE356
+    em-branco-dados-parte-39.png · 1766 × 1782 · AF303:AO356
+    em-branco-dados-parte-40.png · 901 × 1782 · AP303:AT356
+    em-branco-dados-parte-41.png · 1742 × 1792 · A357:H410
+    em-branco-dados-parte-42.png · 1761 × 1792 · I357:U410
+    em-branco-dados-parte-43.png · 1766 × 1792 · V357:AE410
+    em-branco-dados-parte-44.png · 1766 × 1792 · AF357:AO410
+    em-branco-dados-parte-45.png · 901 × 1792 · AP357:AT410
+    em-branco-dados-parte-46.png · 1742 × 1793 · A411:H469
+    em-branco-dados-parte-47.png · 1761 × 1793 · I411:U469
+    em-branco-dados-parte-48.png · 1766 × 1793 · V411:AE469
+    em-branco-dados-parte-49.png · 1766 × 1793 · AF411:AO469
+    em-branco-dados-parte-50.png · 901 × 1793 · AP411:AT469
+    em-branco-dados-parte-51.png · 1742 × 1737 · A470:H515
+    em-branco-dados-parte-52.png · 1761 × 1737 · I470:U515
+    em-branco-dados-parte-53.png · 1766 × 1737 · V470:AE515
+    em-branco-dados-parte-54.png · 1766 × 1737 · AF470:AO515
+    em-branco-dados-parte-55.png · 901 × 1737 · AP470:AT515
+    em-branco-dados-parte-56.png · 1742 × 1766 · A516:H560
+    em-branco-dados-parte-57.png · 1761 × 1766 · I516:U560
+    em-branco-dados-parte-58.png · 1766 × 1766 · V516:AE560
+    em-branco-dados-parte-59.png · 1766 × 1766 · AF516:AO560
+    em-branco-dados-parte-60.png · 901 × 1766 · AP516:AT560
+    em-branco-dados-parte-61.png · 1742 × 1784 · A561:H590
+    em-branco-dados-parte-62.png · 1761 × 1784 · I561:U590
+    em-branco-dados-parte-63.png · 1766 × 1784 · V561:AE590
+    em-branco-dados-parte-64.png · 1766 × 1784 · AF561:AO590
+    em-branco-dados-parte-65.png · 901 × 1784 · AP561:AT590
+    em-branco-dados-parte-66.png · 1742 × 536 · A591:H601
+    em-branco-dados-parte-67.png · 1761 × 536 · I591:U601
+    em-branco-dados-parte-68.png · 1766 × 536 · V591:AE601
+    em-branco-dados-parte-69.png · 1766 × 536 · AF591:AO601
+    em-branco-dados-parte-70.png · 901 × 536 · AP591:AT601
+[nadir-nivel-1] Início: aba inteira 1304 × 1377 px -> nadir-nivel-1-inicio.png
+    nadir-nivel-1-inicio-parte-01.png · 1304 × 1377 · A1:L53
+[nadir-nivel-1] Criação: aba inteira 1492 × 4719 px -> nadir-nivel-1-criacao.png
+    nadir-nivel-1-criacao-parte-01.png · 1492 × 1746 · A1:P45
+    nadir-nivel-1-criacao-parte-02.png · 1492 × 1794 · A46:P92
+    nadir-nivel-1-criacao-parte-03.png · 1492 × 1219 · A93:P127
+[nadir-nivel-1] Em Jogo: aba inteira 2566 × 887 px -> nadir-nivel-1-em-jogo.png
+    nadir-nivel-1-em-jogo-parte-01.png · 1415 × 887 · A1:M44
+    nadir-nivel-1-em-jogo-parte-02.png · 1187 × 887 · N1:AE44
+[nadir-nivel-1] Testes: aba inteira 1492 × 1947 px -> nadir-nivel-1-testes.png
+    nadir-nivel-1-testes-parte-01.png · 1492 × 1769 · A1:M44
+    nadir-nivel-1-testes-parte-02.png · 1492 × 198 · A45:M47
+[nadir-nivel-1] Habilidades: aba inteira 1530 × 2309 px -> nadir-nivel-1-habilidades.png
+    nadir-nivel-1-habilidades-parte-01.png · 1530 × 1792 · A1:X47
+    nadir-nivel-1-habilidades-parte-02.png · 1530 × 537 · A48:X63
+[nadir-nivel-1] Caminho: aba inteira 1492 × 3956 px -> nadir-nivel-1-caminho.png
+    nadir-nivel-1-caminho-parte-01.png · 1492 × 1745 · A1:O44
+    nadir-nivel-1-caminho-parte-02.png · 1492 × 1791 · A45:O80
+    nadir-nivel-1-caminho-parte-03.png · 1492 × 460 · A81:O96
+[nadir-nivel-1] Equipamento: aba inteira 1492 × 4418 px -> nadir-nivel-1-equipamento.png
+    nadir-nivel-1-equipamento-parte-01.png · 1492 × 1749 · A1:AB38
+    nadir-nivel-1-equipamento-parte-02.png · 1492 × 1797 · A39:AB73
+    nadir-nivel-1-equipamento-parte-03.png · 1492 × 912 · A74:AB97
+[nadir-nivel-1] Progressão: aba inteira 2260 × 2148 px -> nadir-nivel-1-progressao.png
+    nadir-nivel-1-progressao-parte-01.png · 1780 × 1788 · A1:M70
+    nadir-nivel-1-progressao-parte-02.png · 516 × 1788 · N1:S70
+    nadir-nivel-1-progressao-parte-03.png · 1780 × 380 · A71:M88
+    nadir-nivel-1-progressao-parte-04.png · 516 × 380 · N71:S88
+[nadir-nivel-1] Regras Rápidas: aba inteira 1279 × 3301 px -> nadir-nivel-1-regras-rapidas.png
+    nadir-nivel-1-regras-rapidas-parte-01.png · 1279 × 1781 · A1:L71
+    nadir-nivel-1-regras-rapidas-parte-02.png · 1279 × 1540 · A72:L119
+[nadir-nivel-1] Dados: aba inteira 7792 × 23187 px -> nadir-nivel-1-dados.png
+    nadir-nivel-1-dados-parte-01.png · 1742 × 1567 · A1:H11
+    nadir-nivel-1-dados-parte-02.png · 1761 × 1567 · I1:U11
+    nadir-nivel-1-dados-parte-03.png · 1766 × 1567 · V1:AE11
+    nadir-nivel-1-dados-parte-04.png · 1766 × 1567 · AF1:AO11
+    nadir-nivel-1-dados-parte-05.png · 901 × 1567 · AP1:AT11
+    nadir-nivel-1-dados-parte-06.png · 1742 × 1798 · A12:H54
+    nadir-nivel-1-dados-parte-07.png · 1761 × 1798 · I12:U54
+    nadir-nivel-1-dados-parte-08.png · 1766 × 1798 · V12:AE54
+    nadir-nivel-1-dados-parte-09.png · 1766 × 1798 · AF12:AO54
+    nadir-nivel-1-dados-parte-10.png · 901 × 1798 · AP12:AT54
+    nadir-nivel-1-dados-parte-11.png · 1742 × 1757 · A55:H95
+    nadir-nivel-1-dados-parte-12.png · 1761 × 1757 · I55:U95
+    nadir-nivel-1-dados-parte-13.png · 1766 × 1757 · V55:AE95
+    nadir-nivel-1-dados-parte-14.png · 1766 × 1757 · AF55:AO95
+    nadir-nivel-1-dados-parte-15.png · 901 × 1757 · AP55:AT95
+    nadir-nivel-1-dados-parte-16.png · 1742 × 1785 · A96:H150
+    nadir-nivel-1-dados-parte-17.png · 1761 × 1785 · I96:U150
+    nadir-nivel-1-dados-parte-18.png · 1766 × 1785 · V96:AE150
+    nadir-nivel-1-dados-parte-19.png · 1766 × 1785 · AF96:AO150
+    nadir-nivel-1-dados-parte-20.png · 901 × 1785 · AP96:AT150
+    nadir-nivel-1-dados-parte-21.png · 1742 × 1791 · A151:H199
+    nadir-nivel-1-dados-parte-22.png · 1761 × 1791 · I151:U199
+    nadir-nivel-1-dados-parte-23.png · 1766 × 1791 · V151:AE199
+    nadir-nivel-1-dados-parte-24.png · 1766 × 1791 · AF151:AO199
+    nadir-nivel-1-dados-parte-25.png · 901 × 1791 · AP151:AT199
+    nadir-nivel-1-dados-parte-26.png · 1742 × 1773 · A200:H253
+    nadir-nivel-1-dados-parte-27.png · 1761 × 1773 · I200:U253
+    nadir-nivel-1-dados-parte-28.png · 1766 × 1773 · V200:AE253
+    nadir-nivel-1-dados-parte-29.png · 1766 × 1773 · AF200:AO253
+    nadir-nivel-1-dados-parte-30.png · 901 × 1773 · AP200:AT253
+    nadir-nivel-1-dados-parte-31.png · 1742 × 1786 · A254:H302
+    nadir-nivel-1-dados-parte-32.png · 1761 × 1786 · I254:U302
+    nadir-nivel-1-dados-parte-33.png · 1766 × 1786 · V254:AE302
+    nadir-nivel-1-dados-parte-34.png · 1766 × 1786 · AF254:AO302
+    nadir-nivel-1-dados-parte-35.png · 901 × 1786 · AP254:AT302
+    nadir-nivel-1-dados-parte-36.png · 1742 × 1782 · A303:H356
+    nadir-nivel-1-dados-parte-37.png · 1761 × 1782 · I303:U356
+    nadir-nivel-1-dados-parte-38.png · 1766 × 1782 · V303:AE356
+    nadir-nivel-1-dados-parte-39.png · 1766 × 1782 · AF303:AO356
+    nadir-nivel-1-dados-parte-40.png · 901 × 1782 · AP303:AT356
+    nadir-nivel-1-dados-parte-41.png · 1742 × 1792 · A357:H410
+    nadir-nivel-1-dados-parte-42.png · 1761 × 1792 · I357:U410
+    nadir-nivel-1-dados-parte-43.png · 1766 × 1792 · V357:AE410
+    nadir-nivel-1-dados-parte-44.png · 1766 × 1792 · AF357:AO410
+    nadir-nivel-1-dados-parte-45.png · 901 × 1792 · AP357:AT410
+    nadir-nivel-1-dados-parte-46.png · 1742 × 1793 · A411:H469
+    nadir-nivel-1-dados-parte-47.png · 1761 × 1793 · I411:U469
+    nadir-nivel-1-dados-parte-48.png · 1766 × 1793 · V411:AE469
+    nadir-nivel-1-dados-parte-49.png · 1766 × 1793 · AF411:AO469
+    nadir-nivel-1-dados-parte-50.png · 901 × 1793 · AP411:AT469
+    nadir-nivel-1-dados-parte-51.png · 1742 × 1737 · A470:H515
+    nadir-nivel-1-dados-parte-52.png · 1761 × 1737 · I470:U515
+    nadir-nivel-1-dados-parte-53.png · 1766 × 1737 · V470:AE515
+    nadir-nivel-1-dados-parte-54.png · 1766 × 1737 · AF470:AO515
+    nadir-nivel-1-dados-parte-55.png · 901 × 1737 · AP470:AT515
+    nadir-nivel-1-dados-parte-56.png · 1742 × 1766 · A516:H560
+    nadir-nivel-1-dados-parte-57.png · 1761 × 1766 · I516:U560
+    nadir-nivel-1-dados-parte-58.png · 1766 × 1766 · V516:AE560
+    nadir-nivel-1-dados-parte-59.png · 1766 × 1766 · AF516:AO560
+    nadir-nivel-1-dados-parte-60.png · 901 × 1766 · AP516:AT560
+    nadir-nivel-1-dados-parte-61.png · 1742 × 1784 · A561:H590
+    nadir-nivel-1-dados-parte-62.png · 1761 × 1784 · I561:U590
+    nadir-nivel-1-dados-parte-63.png · 1766 × 1784 · V561:AE590
+    nadir-nivel-1-dados-parte-64.png · 1766 × 1784 · AF561:AO590
+    nadir-nivel-1-dados-parte-65.png · 901 × 1784 · AP561:AT590
+    nadir-nivel-1-dados-parte-66.png · 1742 × 536 · A591:H601
+    nadir-nivel-1-dados-parte-67.png · 1761 × 536 · I591:U601
+    nadir-nivel-1-dados-parte-68.png · 1766 × 536 · V591:AE601
+    nadir-nivel-1-dados-parte-69.png · 1766 × 536 · AF591:AO601
+    nadir-nivel-1-dados-parte-70.png · 901 × 536 · AP591:AT601
+[nivel-20-completo] Início: aba inteira 1304 × 1377 px -> nivel-20-completo-inicio.png
+    nivel-20-completo-inicio-parte-01.png · 1304 × 1377 · A1:L53
+[nivel-20-completo] Criação: aba inteira 1492 × 4719 px -> nivel-20-completo-criacao.png
+    nivel-20-completo-criacao-parte-01.png · 1492 × 1746 · A1:P45
+    nivel-20-completo-criacao-parte-02.png · 1492 × 1794 · A46:P92
+    nivel-20-completo-criacao-parte-03.png · 1492 × 1219 · A93:P127
+[nivel-20-completo] Em Jogo: aba inteira 2566 × 887 px -> nivel-20-completo-em-jogo.png
+    nivel-20-completo-em-jogo-parte-01.png · 1415 × 887 · A1:M44
+    nivel-20-completo-em-jogo-parte-02.png · 1187 × 887 · N1:AE44
+[nivel-20-completo] Testes: aba inteira 1492 × 1947 px -> nivel-20-completo-testes.png
+    nivel-20-completo-testes-parte-01.png · 1492 × 1769 · A1:M44
+    nivel-20-completo-testes-parte-02.png · 1492 × 198 · A45:M47
+[nivel-20-completo] Habilidades: aba inteira 1530 × 2309 px -> nivel-20-completo-habilidades.png
+    nivel-20-completo-habilidades-parte-01.png · 1530 × 1792 · A1:X47
+    nivel-20-completo-habilidades-parte-02.png · 1530 × 537 · A48:X63
+[nivel-20-completo] Caminho: aba inteira 1492 × 3956 px -> nivel-20-completo-caminho.png
+    nivel-20-completo-caminho-parte-01.png · 1492 × 1745 · A1:O44
+    nivel-20-completo-caminho-parte-02.png · 1492 × 1791 · A45:O80
+    nivel-20-completo-caminho-parte-03.png · 1492 × 460 · A81:O96
+[nivel-20-completo] Equipamento: aba inteira 1492 × 4418 px -> nivel-20-completo-equipamento.png
+    nivel-20-completo-equipamento-parte-01.png · 1492 × 1749 · A1:AB38
+    nivel-20-completo-equipamento-parte-02.png · 1492 × 1797 · A39:AB73
+    nivel-20-completo-equipamento-parte-03.png · 1492 × 912 · A74:AB97
+[nivel-20-completo] Progressão: aba inteira 2260 × 2148 px -> nivel-20-completo-progressao.png
+    nivel-20-completo-progressao-parte-01.png · 1780 × 1788 · A1:M70
+    nivel-20-completo-progressao-parte-02.png · 516 × 1788 · N1:S70
+    nivel-20-completo-progressao-parte-03.png · 1780 × 380 · A71:M88
+    nivel-20-completo-progressao-parte-04.png · 516 × 380 · N71:S88
+[nivel-20-completo] Regras Rápidas: aba inteira 1279 × 3301 px -> nivel-20-completo-regras-rapidas.png
+    nivel-20-completo-regras-rapidas-parte-01.png · 1279 × 1781 · A1:L71
+    nivel-20-completo-regras-rapidas-parte-02.png · 1279 × 1540 · A72:L119
+[nivel-20-completo] Dados: aba inteira 7792 × 23187 px -> nivel-20-completo-dados.png
+    nivel-20-completo-dados-parte-01.png · 1742 × 1567 · A1:H11
+    nivel-20-completo-dados-parte-02.png · 1761 × 1567 · I1:U11
+    nivel-20-completo-dados-parte-03.png · 1766 × 1567 · V1:AE11
+    nivel-20-completo-dados-parte-04.png · 1766 × 1567 · AF1:AO11
+    nivel-20-completo-dados-parte-05.png · 901 × 1567 · AP1:AT11
+    nivel-20-completo-dados-parte-06.png · 1742 × 1798 · A12:H54
+    nivel-20-completo-dados-parte-07.png · 1761 × 1798 · I12:U54
+    nivel-20-completo-dados-parte-08.png · 1766 × 1798 · V12:AE54
+    nivel-20-completo-dados-parte-09.png · 1766 × 1798 · AF12:AO54
+    nivel-20-completo-dados-parte-10.png · 901 × 1798 · AP12:AT54
+    nivel-20-completo-dados-parte-11.png · 1742 × 1757 · A55:H95
+    nivel-20-completo-dados-parte-12.png · 1761 × 1757 · I55:U95
+    nivel-20-completo-dados-parte-13.png · 1766 × 1757 · V55:AE95
+    nivel-20-completo-dados-parte-14.png · 1766 × 1757 · AF55:AO95
+    nivel-20-completo-dados-parte-15.png · 901 × 1757 · AP55:AT95
+    nivel-20-completo-dados-parte-16.png · 1742 × 1785 · A96:H150
+    nivel-20-completo-dados-parte-17.png · 1761 × 1785 · I96:U150
+    nivel-20-completo-dados-parte-18.png · 1766 × 1785 · V96:AE150
+    nivel-20-completo-dados-parte-19.png · 1766 × 1785 · AF96:AO150
+    nivel-20-completo-dados-parte-20.png · 901 × 1785 · AP96:AT150
+    nivel-20-completo-dados-parte-21.png · 1742 × 1791 · A151:H199
+    nivel-20-completo-dados-parte-22.png · 1761 × 1791 · I151:U199
+    nivel-20-completo-dados-parte-23.png · 1766 × 1791 · V151:AE199
+    nivel-20-completo-dados-parte-24.png · 1766 × 1791 · AF151:AO199
+    nivel-20-completo-dados-parte-25.png · 901 × 1791 · AP151:AT199
+    nivel-20-completo-dados-parte-26.png · 1742 × 1773 · A200:H253
+    nivel-20-completo-dados-parte-27.png · 1761 × 1773 · I200:U253
+    nivel-20-completo-dados-parte-28.png · 1766 × 1773 · V200:AE253
+    nivel-20-completo-dados-parte-29.png · 1766 × 1773 · AF200:AO253
+    nivel-20-completo-dados-parte-30.png · 901 × 1773 · AP200:AT253
+    nivel-20-completo-dados-parte-31.png · 1742 × 1786 · A254:H302
+    nivel-20-completo-dados-parte-32.png · 1761 × 1786 · I254:U302
+    nivel-20-completo-dados-parte-33.png · 1766 × 1786 · V254:AE302
+    nivel-20-completo-dados-parte-34.png · 1766 × 1786 · AF254:AO302
+    nivel-20-completo-dados-parte-35.png · 901 × 1786 · AP254:AT302
+    nivel-20-completo-dados-parte-36.png · 1742 × 1782 · A303:H356
+    nivel-20-completo-dados-parte-37.png · 1761 × 1782 · I303:U356
+    nivel-20-completo-dados-parte-38.png · 1766 × 1782 · V303:AE356
+    nivel-20-completo-dados-parte-39.png · 1766 × 1782 · AF303:AO356
+    nivel-20-completo-dados-parte-40.png · 901 × 1782 · AP303:AT356
+    nivel-20-completo-dados-parte-41.png · 1742 × 1792 · A357:H410
+    nivel-20-completo-dados-parte-42.png · 1761 × 1792 · I357:U410
+    nivel-20-completo-dados-parte-43.png · 1766 × 1792 · V357:AE410
+    nivel-20-completo-dados-parte-44.png · 1766 × 1792 · AF357:AO410
+    nivel-20-completo-dados-parte-45.png · 901 × 1792 · AP357:AT410
+    nivel-20-completo-dados-parte-46.png · 1742 × 1793 · A411:H469
+    nivel-20-completo-dados-parte-47.png · 1761 × 1793 · I411:U469
+    nivel-20-completo-dados-parte-48.png · 1766 × 1793 · V411:AE469
+    nivel-20-completo-dados-parte-49.png · 1766 × 1793 · AF411:AO469
+    nivel-20-completo-dados-parte-50.png · 901 × 1793 · AP411:AT469
+    nivel-20-completo-dados-parte-51.png · 1742 × 1737 · A470:H515
+    nivel-20-completo-dados-parte-52.png · 1761 × 1737 · I470:U515
+    nivel-20-completo-dados-parte-53.png · 1766 × 1737 · V470:AE515
+    nivel-20-completo-dados-parte-54.png · 1766 × 1737 · AF470:AO515
+    nivel-20-completo-dados-parte-55.png · 901 × 1737 · AP470:AT515
+    nivel-20-completo-dados-parte-56.png · 1742 × 1766 · A516:H560
+    nivel-20-completo-dados-parte-57.png · 1761 × 1766 · I516:U560
+    nivel-20-completo-dados-parte-58.png · 1766 × 1766 · V516:AE560
+    nivel-20-completo-dados-parte-59.png · 1766 × 1766 · AF516:AO560
+    nivel-20-completo-dados-parte-60.png · 901 × 1766 · AP516:AT560
+    nivel-20-completo-dados-parte-61.png · 1742 × 1784 · A561:H590
+    nivel-20-completo-dados-parte-62.png · 1761 × 1784 · I561:U590
+    nivel-20-completo-dados-parte-63.png · 1766 × 1784 · V561:AE590
+    nivel-20-completo-dados-parte-64.png · 1766 × 1784 · AF561:AO590
+    nivel-20-completo-dados-parte-65.png · 901 × 1784 · AP561:AT590
+    nivel-20-completo-dados-parte-66.png · 1742 × 536 · A591:H601
+    nivel-20-completo-dados-parte-67.png · 1761 × 536 · I591:U601
+    nivel-20-completo-dados-parte-68.png · 1766 × 536 · V591:AE601
+    nivel-20-completo-dados-parte-69.png · 1766 × 536 · AF591:AO601
+    nivel-20-completo-dados-parte-70.png · 901 × 536 · AP591:AT601
+[pior-caso] Início: aba inteira 1304 × 1377 px -> pior-caso-inicio.png
+    pior-caso-inicio-parte-01.png · 1304 × 1377 · A1:L53
+[pior-caso] Criação: aba inteira 1492 × 4719 px -> pior-caso-criacao.png
+    pior-caso-criacao-parte-01.png · 1492 × 1746 · A1:P45
+    pior-caso-criacao-parte-02.png · 1492 × 1794 · A46:P92
+    pior-caso-criacao-parte-03.png · 1492 × 1219 · A93:P127
+[pior-caso] Em Jogo: aba inteira 2566 × 887 px -> pior-caso-em-jogo.png
+    pior-caso-em-jogo-parte-01.png · 1415 × 887 · A1:M44
+    pior-caso-em-jogo-parte-02.png · 1187 × 887 · N1:AE44
+[pior-caso] Testes: aba inteira 1492 × 1947 px -> pior-caso-testes.png
+    pior-caso-testes-parte-01.png · 1492 × 1769 · A1:M44
+    pior-caso-testes-parte-02.png · 1492 × 198 · A45:M47
+[pior-caso] Habilidades: aba inteira 1530 × 2309 px -> pior-caso-habilidades.png
+    pior-caso-habilidades-parte-01.png · 1530 × 1792 · A1:X47
+    pior-caso-habilidades-parte-02.png · 1530 × 537 · A48:X63
+[pior-caso] Caminho: aba inteira 1492 × 3956 px -> pior-caso-caminho.png
+    pior-caso-caminho-parte-01.png · 1492 × 1745 · A1:O44
+    pior-caso-caminho-parte-02.png · 1492 × 1791 · A45:O80
+    pior-caso-caminho-parte-03.png · 1492 × 460 · A81:O96
+[pior-caso] Equipamento: aba inteira 1492 × 4418 px -> pior-caso-equipamento.png
+    pior-caso-equipamento-parte-01.png · 1492 × 1749 · A1:AB38
+    pior-caso-equipamento-parte-02.png · 1492 × 1797 · A39:AB73
+    pior-caso-equipamento-parte-03.png · 1492 × 912 · A74:AB97
+[pior-caso] Progressão: aba inteira 2260 × 2148 px -> pior-caso-progressao.png
+    pior-caso-progressao-parte-01.png · 1780 × 1788 · A1:M70
+    pior-caso-progressao-parte-02.png · 516 × 1788 · N1:S70
+    pior-caso-progressao-parte-03.png · 1780 × 380 · A71:M88
+    pior-caso-progressao-parte-04.png · 516 × 380 · N71:S88
+[pior-caso] Regras Rápidas: aba inteira 1279 × 3301 px -> pior-caso-regras-rapidas.png
+    pior-caso-regras-rapidas-parte-01.png · 1279 × 1781 · A1:L71
+    pior-caso-regras-rapidas-parte-02.png · 1279 × 1540 · A72:L119
+[pior-caso] Dados: aba inteira 7792 × 23187 px -> pior-caso-dados.png
+    pior-caso-dados-parte-01.png · 1742 × 1567 · A1:H11
+    pior-caso-dados-parte-02.png · 1761 × 1567 · I1:U11
+    pior-caso-dados-parte-03.png · 1766 × 1567 · V1:AE11
+    pior-caso-dados-parte-04.png · 1766 × 1567 · AF1:AO11
+    pior-caso-dados-parte-05.png · 901 × 1567 · AP1:AT11
+    pior-caso-dados-parte-06.png · 1742 × 1798 · A12:H54
+    pior-caso-dados-parte-07.png · 1761 × 1798 · I12:U54
+    pior-caso-dados-parte-08.png · 1766 × 1798 · V12:AE54
+    pior-caso-dados-parte-09.png · 1766 × 1798 · AF12:AO54
+    pior-caso-dados-parte-10.png · 901 × 1798 · AP12:AT54
+    pior-caso-dados-parte-11.png · 1742 × 1757 · A55:H95
+    pior-caso-dados-parte-12.png · 1761 × 1757 · I55:U95
+    pior-caso-dados-parte-13.png · 1766 × 1757 · V55:AE95
+    pior-caso-dados-parte-14.png · 1766 × 1757 · AF55:AO95
+    pior-caso-dados-parte-15.png · 901 × 1757 · AP55:AT95
+    pior-caso-dados-parte-16.png · 1742 × 1785 · A96:H150
+    pior-caso-dados-parte-17.png · 1761 × 1785 · I96:U150
+    pior-caso-dados-parte-18.png · 1766 × 1785 · V96:AE150
+    pior-caso-dados-parte-19.png · 1766 × 1785 · AF96:AO150
+    pior-caso-dados-parte-20.png · 901 × 1785 · AP96:AT150
+    pior-caso-dados-parte-21.png · 1742 × 1791 · A151:H199
+    pior-caso-dados-parte-22.png · 1761 × 1791 · I151:U199
+    pior-caso-dados-parte-23.png · 1766 × 1791 · V151:AE199
+    pior-caso-dados-parte-24.png · 1766 × 1791 · AF151:AO199
+    pior-caso-dados-parte-25.png · 901 × 1791 · AP151:AT199
+    pior-caso-dados-parte-26.png · 1742 × 1773 · A200:H253
+    pior-caso-dados-parte-27.png · 1761 × 1773 · I200:U253
+    pior-caso-dados-parte-28.png · 1766 × 1773 · V200:AE253
+    pior-caso-dados-parte-29.png · 1766 × 1773 · AF200:AO253
+    pior-caso-dados-parte-30.png · 901 × 1773 · AP200:AT253
+    pior-caso-dados-parte-31.png · 1742 × 1786 · A254:H302
+    pior-caso-dados-parte-32.png · 1761 × 1786 · I254:U302
+    pior-caso-dados-parte-33.png · 1766 × 1786 · V254:AE302
+    pior-caso-dados-parte-34.png · 1766 × 1786 · AF254:AO302
+    pior-caso-dados-parte-35.png · 901 × 1786 · AP254:AT302
+    pior-caso-dados-parte-36.png · 1742 × 1782 · A303:H356
+    pior-caso-dados-parte-37.png · 1761 × 1782 · I303:U356
+    pior-caso-dados-parte-38.png · 1766 × 1782 · V303:AE356
+    pior-caso-dados-parte-39.png · 1766 × 1782 · AF303:AO356
+    pior-caso-dados-parte-40.png · 901 × 1782 · AP303:AT356
+    pior-caso-dados-parte-41.png · 1742 × 1792 · A357:H410
+    pior-caso-dados-parte-42.png · 1761 × 1792 · I357:U410
+    pior-caso-dados-parte-43.png · 1766 × 1792 · V357:AE410
+    pior-caso-dados-parte-44.png · 1766 × 1792 · AF357:AO410
+    pior-caso-dados-parte-45.png · 901 × 1792 · AP357:AT410
+    pior-caso-dados-parte-46.png · 1742 × 1793 · A411:H469
+    pior-caso-dados-parte-47.png · 1761 × 1793 · I411:U469
+    pior-caso-dados-parte-48.png · 1766 × 1793 · V411:AE469
+    pior-caso-dados-parte-49.png · 1766 × 1793 · AF411:AO469
+    pior-caso-dados-parte-50.png · 901 × 1793 · AP411:AT469
+    pior-caso-dados-parte-51.png · 1742 × 1737 · A470:H515
+    pior-caso-dados-parte-52.png · 1761 × 1737 · I470:U515
+    pior-caso-dados-parte-53.png · 1766 × 1737 · V470:AE515
+    pior-caso-dados-parte-54.png · 1766 × 1737 · AF470:AO515
+    pior-caso-dados-parte-55.png · 901 × 1737 · AP470:AT515
+    pior-caso-dados-parte-56.png · 1742 × 1766 · A516:H560
+    pior-caso-dados-parte-57.png · 1761 × 1766 · I516:U560
+    pior-caso-dados-parte-58.png · 1766 × 1766 · V516:AE560
+    pior-caso-dados-parte-59.png · 1766 × 1766 · AF516:AO560
+    pior-caso-dados-parte-60.png · 901 × 1766 · AP516:AT560
+    pior-caso-dados-parte-61.png · 1742 × 1784 · A561:H590
+    pior-caso-dados-parte-62.png · 1761 × 1784 · I561:U590
+    pior-caso-dados-parte-63.png · 1766 × 1784 · V561:AE590
+    pior-caso-dados-parte-64.png · 1766 × 1784 · AF561:AO590
+    pior-caso-dados-parte-65.png · 901 × 1784 · AP561:AT590
+    pior-caso-dados-parte-66.png · 1742 × 536 · A591:H601
+    pior-caso-dados-parte-67.png · 1761 × 536 · I591:U601
+    pior-caso-dados-parte-68.png · 1766 × 536 · V591:AE601
+    pior-caso-dados-parte-69.png · 1766 × 536 · AF591:AO601
+    pior-caso-dados-parte-70.png · 901 × 536 · AP591:AT601

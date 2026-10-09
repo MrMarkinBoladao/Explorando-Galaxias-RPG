@@ -1,0 +1,26 @@
+{
+  "verdict": "APPROVED",
+  "cycle": 2,
+  "priorFindingsClosed": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+  "findings": [
+    {
+      "id": 1,
+      "blocking": false,
+      "label": "Execução em K:L no Bestiário",
+      "confidence": "confirmed",
+      "section": "6.8 (B2), D4",
+      "issue": "A sub-tabela B2 põe Execução em K:L, a coluna que D4 e a convenção da seção 6 reservam ao aviso, sem declarar a exceção.",
+      "action": "Declarar a exceção para tabelas só de leitura (e conferir que o lint aceita) ou levar Execução para B:J."
+    },
+    {
+      "id": 2,
+      "blocking": false,
+      "label": "Coluna do 'Inimigo' na I5",
+      "confidence": "likely",
+      "section": "6.7.1 (I5)",
+      "issue": "Inimigo, Fase, 4 Fraquezas, Tenacidade e ritmo em H:J só cabem em B:J se o Inimigo ficar na coluna A; com ele em B, o ritmo colide com a Tenacidade em H.",
+      "action": "Dizer na tabela de 6.7.1 que o Inimigo da I5 fica na coluna A."
+    }
+  ],
+  "reviewDoc": "g:\\Meu Drive\\DriveSyncFiles\\Explorando Galáxias RPG\\.agents\\tasks\\mestre\\design-review.md"
+}

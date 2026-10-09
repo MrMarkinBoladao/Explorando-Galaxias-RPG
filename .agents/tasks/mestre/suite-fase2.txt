@@ -1,0 +1,150 @@
+Bateria da Planilha do Mestre — suítes: spike, protegidos, dados, bestiario, ouro, oraculo, determinismo, extremos, lint, texto, preview, visual, sabor
+Início: 2026-10-07 20:59:50
+
+=== Suíte spike: OK — 142 checagens, 0 falha(s)
+  · 141 casos; carga do modelo 2.16 s; maior intermediário do oráculo 2.815e+14 (< 2^53 = 9.007e+15)
+  · tempo: 2.3 s
+
+=== Suíte protegidos: OK — 165 checagens, 0 falha(s)
+  · ausente conhecido (P5): ficha-automatizada/Cópia de Ficha Automatizada - Explorando Galáxias V1.1.xlsx — ausente já antes da Fase 1; a Mestre nunca grava em ficha-automatizada\
+  · 38 arquivos do livro e 50 da ficha conferidos (SHA-256)
+  · tempo: 0.4 s
+
+=== Suíte dados: OK — 803 checagens, 0 falha(s)
+  · H8: ambientes com criatura numa faixa só (o livro dá às facções uma faixa; o encontro aleatório cai para 'qualquer ambiente da faixa' e diz isso): Cidade corporativa (5-8); Clínica ou ateliê (13-16); Colônia ou mina abandonada (1-4); Estação (5-8); Mundo com Stellaron (17-20); Nave-cidade (9-12); Qualquer lugar onde o grupo esteja (13-16); Ruína (1-4); Teatro, festa ou multidão (9-12)
+  · Fase 2: 156 checagens item a item contra 24.1, 24.2, 24.3, 24.5, 25.1, 25.2, 25.3, 26.7, 27.7, 27.8, 27.16 e 27.17 (3 armaduras, 6 armas, 3 poções, 11 itens, 5 Níveis de Cone, 6 slots × 4 Tiers, 2 Conjuntos, 4 Ressonâncias)
+  · tempo: 1.5 s
+
+=== Suíte bestiario: OK — 34 checagens, 0 falha(s)
+  · OK  1 Casco Oco: 15 campos, 1 fase(s), 1 ações
+  · OK  2 Larva Fuliginosa: 15 campos, 1 fase(s), 2 ações
+  · OK  3 Esporo Rancoroso: 15 campos, 1 fase(s), 2 ações
+  · OK  4 Peão da Antimatéria: 15 campos, 1 fase(s), 3 ações
+  · OK  5 Sentinela Enferrujada: 15 campos, 1 fase(s), 2 ações
+  · OK  6 Capataz Oco: 15 campos, 1 fase(s), 3 ações
+  · OK  7 Sargento de Trincheira: 15 campos, 1 fase(s), 4 ações
+  · OK  8 O Afogado do Poço Sete: 15 campos, 2 fase(s), 5 ações
+  · OK  9 Fuzileiro da Legião: 15 campos, 1 fase(s), 3 ações
+  · OK 10 Dron de Vigilância Pacificadora: 15 campos, 1 fase(s), 2 ações
+  · OK 11 Devoto do Silêncio: 15 campos, 1 fase(s), 2 ações
+  · OK 12 Centurião Catafracto: 15 campos, 1 fase(s), 4 ações
+  · OK 13 Auditora de Risco: 15 campos, 1 fase(s), 4 ações
+  · OK 14 Pretor Vazio-Nove: 15 campos, 1 fase(s), 5 ações
+  · OK 15 Lanceiro da Frota de Jade: 15 campos, 1 fase(s), 3 ações
+  · OK 16 Palhaço de Pólvora: 15 campos, 1 fase(s), 2 ações
+  · OK 17 Centenário Enlouquecido: 15 campos, 1 fase(s), 2 ações
+  · OK 18 Oficial-Lâmina da Frota de Jade: 15 campos, 1 fase(s), 4 ações
+  · OK 19 Mestre de Cerimônias Mascarado: 15 campos, 1 fase(s), 4 ações
+  · OK 20 O Dramaturgo de Mil Faces: 15 campos, 2 fase(s), 7 ações
+  · OK 21 Noviço da Beleza: 15 campos, 1 fase(s), 2 ações
+  · OK 22 Operativo de Campo dos Caçadores: 15 campos, 1 fase(s), 3 ações
+  · OK 23 Autômato Taciturno: 15 campos, 1 fase(s), 2 ações
+  · OK 24 Escultor de Carne: 15 campos, 1 fase(s), 4 ações
+  · OK 25 Executora de Contrato: 15 campos, 1 fase(s), 4 ações
+  · OK 26 Vênia, a Primeira Obra: 15 campos, 2 fase(s), 7 ações
+  · OK 27 Guarda Pretoriano da Antimatéria: 15 campos, 1 fase(s), 3 ações
+  · OK 28 Escória de Stellaron: 15 campos, 1 fase(s), 2 ações
+  · OK 29 Arcanjo de Ferro-Vazio: 15 campos, 1 fase(s), 4 ações
+  · OK 30 Arauto da Tempestade Vazia: 15 campos, 1 fase(s), 4 ações
+  · OK 31 O Germe de Pavor: 15 campos, 3 fase(s), 7 ações
+  · OK 32 Vazia Coroada: 15 campos, 3 fase(s), 10 ações
+  · L1: 16 fichas sem Execução declarada ('Não declarado'); 16 declaram (Pode/Não)
+  · divergência documentada (o livro não muda): 28.8 O Dramaturgo de Mil Faces — Tenacidade da fase 2 = 9; a planilha mostra 9 (abaixo da âncora 12; 28.5 regra 3 permite cair)
+  · divergência documentada (o livro não muda): 28.10 O Germe de Pavor — Tenacidade da fase 3 = 10; a planilha mostra 10 (abaixo da âncora 13; 28.5 regra 3 permite cair)
+  · divergência documentada (o livro não muda): 28.10 Vazia Coroada — Tenacidade da fase 2 = 12; a planilha mostra 12 (abaixo da âncora 13; 28.5 regra 3 permite cair)
+  · divergência documentada (o livro não muda): 28.10 Vazia Coroada — Tenacidade da fase 3 = 10; a planilha mostra 10 (abaixo da âncora 13; 28.5 regra 3 permite cair)
+  · 116 ataques e ações renderizados na faixa original, 0 diferença exigida
+  · tempo: 132.0 s
+
+=== Suíte ouro: OK — 141 checagens, 0 falha(s)
+  · 23.6 (Descanso Curto) fica para a Fase 3 (Escudo do Mestre)
+  · 27.9 (Ultimate por faixa) não aparece nas abas da Fase 2: fica para a Fase 3 (Escudo do Mestre)
+  · tempo: 204.8 s
+  … 21:43:53 processo 1/8: 1781 casos em 2280 s (0 falha(s))
+  … 21:43:53 processo 2/8: 167 casos em 1934 s (0 falha(s))
+  … 21:43:53 processo 3/8: 159 casos em 1938 s (0 falha(s))
+  … 21:43:53 processo 4/8: 157 casos em 1982 s (0 falha(s))
+  … 21:43:53 processo 5/8: 157 casos em 1947 s (0 falha(s))
+  … 21:43:53 processo 6/8: 155 casos em 1921 s (0 falha(s))
+  … 21:43:53 processo 7/8: 380 casos em 2025 s (0 falha(s))
+  … 21:43:53 processo 8/8: 963 casos em 1856 s (0 falha(s))
+
+=== Suíte oraculo: OK — 609756 checagens, 0 falha(s)
+  · Criador: 120 combinações modo × nível × tipo, 160 Ajustar (32 × 5) em 24 cenários
+  · H1, desvio máximo do PV por tipo: Comum 14.3% (nível 5); Elite 14.7% (nível 9); Boss 14.7% (nível 9)
+  · encontro aleatório: 501 encontros (3 grupos)
+  · Fila: 4 empates fixos + 300 estados aleatórios
+  · calculadora: 2 000 casos; condições: 60 estados
+  · Fase 2: G = 200, 300, 400, 410 e 420 em 300 Rolagens nº × 3 sementes (900 casos), com os parâmetros de §5 sorteados e entradas inválidas a cada 25
+  · H20 G=200: fonte 'livro' 51.1% e 'tabela' 48.9% em 2 000 rolagens
+  · H20 G=300: fonte 'livro' 48.3% e 'tabela' 51.7% em 2 000 rolagens
+  · H22: 40 combinações facção × faixa, nenhum antagonista vazio; degrau 1 (Boss da facção) em 4, 2 (Elite da facção) em 5, 3 (Boss da faixa) em 31
+  · H9: 0, 1 e 2 consumíveis em 34.0%, 32.5% e 33.5% de 3 000 rolagens
+  · H18: créditos de 5%/10%/15% da verba de marco (24.5); erro máximo de arredondamento (INT) 0 Cr; teto num nível com o ritmo de 26.1 (até 4 sessões × 3 combates de 27.7): 12 × 15% = 180% da verba de marco — informativo, porque nada no balanceamento depende de Créditos (24.5)
+  · 3919 casos em 8 processos: 2297 s
+  · cobertura P10: 1602 de 1602 números de regra comparados
+  · tempo: 2301.9 s
+
+=== Suíte determinismo: OK — 161479 checagens, 0 falha(s)
+  · maior intermediário nos extremos: 2.815e+14 (< 2^53)
+  · u/y/x da planilha = oráculo: G = 100, 110, 200, 300, 400, 410 e 420, 300 rolagens × 3 sementes (256 s)
+  · (b) ambiente: 'Ruína' e 'Frente de guerra' mudam as criaturas sorteadas no caso base (semente 777, rolagem 9), e a planilha segue o oráculo
+  · tempo: 1111.6 s
+  … 22:37:49 processo 1/8: 60 casos em 2103 s (0 falha(s))
+  … 22:37:49 processo 2/8: 59 casos em 1933 s (0 falha(s))
+  … 22:37:49 processo 3/8: 58 casos em 1931 s (0 falha(s))
+  … 22:37:49 processo 4/8: 58 casos em 2005 s (0 falha(s))
+  … 22:37:49 processo 5/8: 58 casos em 2041 s (0 falha(s))
+  … 22:37:49 processo 6/8: 57 casos em 1999 s (0 falha(s))
+  … 22:37:49 processo 7/8: 56 casos em 1965 s (0 falha(s))
+  … 23:14:45 processo 8/8: 336 casos em 4315 s (0 falha(s))
+
+=== Suíte extremos: OK — 1024 checagens, 0 falha(s)
+  · 11 estados com as 24688 fórmulas
+  · 200 sementes × 2 rolagens nas 1930 células que dependem do sorteio
+  · requisito do Google: erro injetado em 86 entradas, uma por vez (contador da Início = 1, aviso da linha aceso, nenhuma outra célula com erro), e em todas ao mesmo tempo
+  · 742 casos em 8 processos: 4337 s
+  · 150 entradas × (válido, inválido); referência circular: o modelo do formulas carrega sem ciclo (finish() sem circular=True)
+  · tempo: 4339.6 s
+
+=== Suíte lint: OK — 149589 checagens, 0 falha(s)
+  · 24688 fórmulas, 2272 validações, 1344 formatações condicionais, 2221 entradas; funções permitidas: 31 (ficha_funcoes_ok.json, sem TRIM)
+  · revisão 2: 1029 listas suspensas, 57475 opções conferidas (=, +, -, @, data, hora, número em texto, booleano)
+  · revisão 2: 24688 fórmulas conferidas, 0 leitura(s) direta(s) de entrada; 7271 células na camada de leitura protegida, 7321 entradas com sinal de erro em 1210 linhas; 20 células do contador da Início
+  · requisito do Google: 0 achado(s) (testar_ficha._lint_google com o mapa da Mestre)
+  · tempo: 14.3 s
+
+=== Suíte texto: OK — 6281292 checagens, 0 falha(s)
+  · 47184 trechos de texto visível; léxico do livro 5131 + 770 extras; heurísticas rotuladas: H1, H3, H4, H5, H6, H7, H8, H9, H11, H12, H13, H14, H17, H18, H19, H20, H22, H25, H26
+  · tempo: 30.6 s
+
+=== Suíte preview: OK — 688 checagens, 0 falha(s)
+  · 684 recortes (≤ 1800 px) de 12 abas × 3 estados em G:\Meu Drive\DriveSyncFiles\Explorando Galáxias RPG\.agents\tasks\mestre\preview; 0 texto(s) cortado(s)
+  · tempo: 268.3 s
+
+=== Suíte visual: OK — 33736 checagens, 0 falha(s)
+  · (1) 31169 textos medidos em 3 estados; 0 não couberam
+  · (2) 1028 células com lista suspensa conferidas
+  · (4) 1344 avisos medidos pela mensagem mais longa
+  · (6)(7) 12 combinações de cor com contraste ≥ 4,5:1 (menor 4.96:1); (8) tabelas a ≤ 15 linhas do cabeçalho; (9) A:L ≤ 1360 px
+  · tempo: 176.3 s
+
+=== Suíte sabor: OK — 9269 checagens, 0 falha(s)
+  · 40 tabelas de sabor; 131 nomes do jogo conferidos (palavra, sequência e pedaço colado de 5+ letras), 6666 combinações nome + sobrenome
+  · tempo: 4.6 s
+
+=== RESUMO ===
+  spike         OK           142 checagens, 0 falha(s)
+  protegidos    OK           165 checagens, 0 falha(s)
+  dados         OK           803 checagens, 0 falha(s)
+  bestiario     OK            34 checagens, 0 falha(s)
+  ouro          OK           141 checagens, 0 falha(s)
+  oraculo       OK        609756 checagens, 0 falha(s)
+  determinismo  OK        161479 checagens, 0 falha(s)
+  extremos      OK          1024 checagens, 0 falha(s)
+  lint          OK        149589 checagens, 0 falha(s)
+  texto         OK       6281292 checagens, 0 falha(s)
+  preview       OK           688 checagens, 0 falha(s)
+  visual        OK         33736 checagens, 0 falha(s)
+  sabor         OK          9269 checagens, 0 falha(s)
+  total: 7248118 checagens, 0 falha(s), 8588 s

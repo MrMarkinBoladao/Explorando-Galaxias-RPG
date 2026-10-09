@@ -1,0 +1,15 @@
+{
+  "verdict": "APPROVED",
+  "findings": [
+    {
+      "id": "F6",
+      "blocking": false,
+      "label": "Regravação da linha de base sem aval registrado",
+      "confidence": "confirmed",
+      "detail": "baseline-hashes.json foi regravado às 09:43:38 e às 11:37:09 por causa de edições do workflow paralelo da ficha (corrigir-erros-google), e as linhas de base anteriores ficaram guardadas em baseline-hashes-antes-rev2.json e baseline-hashes-0943.json. O ciclo 1 deixou essa decisão para o usuário.",
+      "action": "Citar no relatório final ao usuário as duas regravações, a causa e os backups, para que ele confirme. Não bloqueia a Fase 1."
+    }
+  ],
+  "closedFromPreviousCycle": ["F1", "F2", "F3", "F4", "F5", "F7", "F8"],
+  "reviewDoc": "g:\\Meu Drive\\DriveSyncFiles\\Explorando Galáxias RPG\\.agents\\tasks\\mestre\\review-fase1.md"
+}

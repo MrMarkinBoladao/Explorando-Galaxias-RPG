@@ -1,0 +1,301 @@
+﻿python : 
+No linha:1 caractere:53
++ ... HONUTF8="1"; python "build\testar_ficha.py" --suite tudo 2>&1 | Out-F ...
++                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  0%|          | 0/10 [00:00<?, ?it/s]
+100%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê| 10/10 [00:00<00:00, 6345.39it/s]
+
+=== Su├¡te spike: OK ÔÇö 23 checagens, 0 falha(s)
+  ┬À carga do modelo: 2.87 s
+  ┬À calculate (todas as sa├¡das): 0.0533 s
+  ┬À calculate (cen├írio com 3 entradas, 8 sa├¡das): 0.0152 s
+  ┬À comportamento ÔÇö duplo menos un├írio (--): formulas=0, Google=2  (DIVERGE)
+  ┬À comportamento ÔÇö COUNTIF "?*" em intervalo com n├║mero e texto: formulas=2, Google=1  (DIVERGE)
+  ┬À comportamento ÔÇö TRIM com espa├ºo duplo interno: formulas='a  b', Google='a b'  (DIVERGE)
+  ┬À comportamento ÔÇö divis├úo por zero sem prote├º├úo: formulas='#DIV/0!', Google='#DIV/0!'
+  ┬À comportamento ÔÇö MATCH sem achado: formulas='#N/A', Google='#N/A'
+  ┬À comportamento ÔÇö texto vazio em conta (""+1): formulas='#VALUE!', Google='#VALUE!'
+  ┬À comportamento ÔÇö refer├¬ncia a c├®lula vazia (=A3): formulas=0, Google=''  (DIVERGE)
+  ┬À comportamento ÔÇö ISBLANK("") (texto vazio n├úo ├® c├®lula vazia): formulas=False, Google=False
+  ┬À revis├úo 2: 9 checagens da leitura protegida e do contador de erros
+  ┬À REPROVADA [TRIM] =TRIM("  a  b ") ÔåÆ obtido 'a  b', esperado 'a b'
+  ┬À lista efetiva (33): IF, IFERROR, AND, OR, NOT, SUM, SUMIF, SUMPRODUCT, COUNTIF, COUNTIFS, COUNTA, COUNTBLANK, INDEX, MATCH, VLOOKUP, HLOOKUP, CHOOSE, MIN, MAX, ROUNDUP, ROUND, INT, MOD, ABS, LEN, CONCATENATE, REPT, ISBLANK, ISNUMBER, ISERROR, ROWS, LARGE, SMALL + operador &
+  ┬À veredito acento em nome de aba: ok
+  ┬À gravado G:\Meu Drive\DriveSyncFiles\Explorando Gal├íxias RPG\build\ficha_funcoes_ok.json
+  ┬À tempo da su├¡te: 3.8 s
+
+
+=== Su├¡te protegidos: FALHOU ÔÇö 76 checagens, 5 falha(s)
+  ┬À 38 arquivos conferidos
+  ┬À tempo da su├¡te: 0.3 s
+  Ô£ù arquivo protegido ALTERADO: livro-v1.0/00-changelog-v11-para-v12.md
+  Ô£ù arquivo protegido ALTERADO: livro-v1.0/04-atributos-e-pericias.md
+  Ô£ù arquivo protegido ALTERADO: livro-v1.0/05-racas.md
+  Ô£ù arquivo protegido ALTERADO: Sistema de HSR by MC Filhos V1.2.docx
+  Ô£ù arquivo protegido ALTERADO: Sistema de HSR by MC Filhos V1.2.pdf
+
+=== Su├¡te dados: OK ÔÇö 3400 checagens, 0 falha(s)
+  ┬À 49 blocos e 32 listas conferidos c├®lula a c├®lula; 58 ├óncoras; 108 B├¬n├º├úos
+  ┬À tempo da su├¡te: 0.7 s
+  0%|          | 0/617 [00:00<?, ?it/s]
+ 13%|ÔûêÔûÄ        | 83/617 [00:00<00:01, 449.95it/s]
+ 29%|ÔûêÔûêÔûè       | 176/617 [00:00<00:00, 545.29it/s]
+ 52%|ÔûêÔûêÔûêÔûêÔûêÔûÅ    | 320/617 [00:00<00:00, 589.25it/s]
+ 61%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûÅ   | 379/617 [00:00<00:00, 584.95it/s]
+ 79%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûè  | 485/617 [00:02<00:01, 121.04it/s]
+ 92%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûÅ| 570/617 [00:02<00:00, 162.25it/s]
+100%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê| 617/617 [00:02<00:00, 219.38it/s]
+
+  0%|          | 0/575 [00:00<?, ?it/s]
+ 14%|ÔûêÔûì        | 83/575 [00:00<00:00, 807.24it/s]
+ 52%|ÔûêÔûêÔûêÔûêÔûêÔûÅ    | 298/575 [00:00<00:00, 1587.51it/s]
+ 80%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûë  | 458/575 [00:00<00:00, 1151.72it/s]
+100%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê| 575/575 [00:01<00:00, 327.86it/s] 
+
+  0%|          | 0/617 [00:00<?, ?it/s]
+  0%|          | 0/617 [00:00<?, ?it/s]
+ 13%|ÔûêÔûÄ        | 83/617 [00:00<00:01, 504.97it/s]
+ 13%|ÔûêÔûÄ        | 83/617 [00:00<00:01, 512.01it/s]
+ 29%|ÔûêÔûêÔûè       | 176/617 [00:00<00:00, 614.52it/s]
+ 29%|ÔûêÔûêÔûè       | 176/617 [00:00<00:00, 608.73it/s]
+  0%|          | 0/617 [00:00<?, ?it/s]
+ 52%|ÔûêÔûêÔûêÔûêÔûêÔûÅ    | 320/617 [00:00<00:00, 661.46it/s]
+ 52%|ÔûêÔûêÔûêÔûêÔûêÔûÅ    | 320/617 [00:00<00:00, 662.36it/s]
+  0%|          | 0/617 [00:00<?, ?it/s]
+ 12%|ÔûêÔûÅ        | 77/617 [00:00<00:00, 769.61it/s]
+ 70%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûê   | 432/617 [00:00<00:00, 787.10it/s]
+ 78%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûè  | 483/617 [00:00<00:00, 928.12it/s]
+ 25%|ÔûêÔûêÔûì       | 154/617 [00:00<00:00, 678.08it/s]
+ 13%|ÔûêÔûÄ        | 83/617 [00:00<00:01, 506.36it/s]
+ 36%|ÔûêÔûêÔûêÔûî      | 223/617 [00:00<00:00, 652.19it/s]
+ 29%|ÔûêÔûêÔûè       | 176/617 [00:00<00:00, 584.01it/s]
+ 52%|ÔûêÔûêÔûêÔûêÔûêÔûÅ    | 320/617 [00:00<00:00, 588.25it/s]
+  0%|          | 0/617 [00:00<?, ?it/s]
+  0%|          | 0/617 [00:00<?, ?it/s]
+ 52%|ÔûêÔûêÔûêÔûêÔûêÔûÅ    | 320/617 [00:00<00:00, 676.32it/s]
+  0%|          | 0/617 [00:00<?, ?it/s]
+  0%|          | 0/617 [00:00<?, ?it/s]
+ 70%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûê   | 432/617 [00:00<00:00, 740.19it/s]
+ 69%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûë   | 427/617 [00:00<00:00, 785.22it/s]
+ 13%|ÔûêÔûÄ        | 83/617 [00:00<00:01, 530.24it/s]
+ 13%|ÔûêÔûÄ        | 83/617 [00:00<00:01, 497.14it/s]
+ 13%|ÔûêÔûÄ        | 83/617 [00:00<00:01, 522.45it/s]
+ 13%|ÔûêÔûÄ        | 83/617 [00:00<00:01, 486.28it/s]
+ 29%|ÔûêÔûêÔûè       | 176/617 [00:00<00:00, 624.00it/s]
+ 29%|ÔûêÔûêÔûè       | 176/617 [00:00<00:00, 613.94it/s]
+ 29%|ÔûêÔûêÔûè       | 176/617 [00:00<00:00, 632.05it/s]
+ 29%|ÔûêÔûêÔûè       | 176/617 [00:00<00:00, 606.94it/s]
+ 52%|ÔûêÔûêÔûêÔûêÔûêÔûÅ    | 320/617 [00:00<00:00, 696.36it/s]
+ 52%|ÔûêÔûêÔûêÔûêÔûêÔûÅ    | 320/617 [00:00<00:00, 683.18it/s]
+ 52%|ÔûêÔûêÔûêÔûêÔûêÔûÅ    | 320/617 [00:00<00:00, 684.27it/s]
+ 52%|ÔûêÔûêÔûêÔûêÔûêÔûÅ    | 320/617 [00:00<00:00, 689.24it/s]
+ 67%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûï   | 412/617 [00:00<00:00, 759.82it/s]
+ 71%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûê   | 435/617 [00:00<00:00, 813.63it/s]
+ 71%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûê   | 435/617 [00:00<00:00, 814.61it/s]
+ 78%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûè  | 483/617 [00:00<00:00, 955.10it/s]
+ 84%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûì | 517/617 [00:01<00:00, 180.50it/s]
+ 93%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûÄ| 574/617 [00:02<00:00, 210.17it/s]
+ 95%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûî| 588/617 [00:02<00:00, 200.49it/s]
+100%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê| 617/617 [00:02<00:00, 289.57it/s]
+
+100%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê| 617/617 [00:02<00:00, 289.81it/s]
+
+ 83%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûÄ | 512/617 [00:02<00:00, 158.32it/s]
+ 83%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûÄ | 510/617 [00:01<00:00, 173.38it/s]
+ 92%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûÅ| 570/617 [00:02<00:00, 189.27it/s]
+ 92%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûÅ| 570/617 [00:02<00:00, 203.84it/s]
+100%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê| 617/617 [00:02<00:00, 276.00it/s]
+
+100%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê| 617/617 [00:02<00:00, 282.91it/s]
+
+ 80%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûë  | 491/617 [00:01<00:00, 164.14it/s]
+ 85%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûì | 522/617 [00:01<00:00, 180.30it/s]
+ 85%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûì | 522/617 [00:02<00:00, 173.44it/s]
+ 92%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûÅ| 570/617 [00:02<00:00, 210.15it/s]
+ 94%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûì| 580/617 [00:02<00:00, 208.40it/s]
+ 95%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûî| 589/617 [00:02<00:00, 191.91it/s]
+100%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê| 617/617 [00:02<00:00, 283.69it/s]
+
+ 94%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûì| 580/617 [00:02<00:00, 198.72it/s]
+100%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê| 617/617 [00:02<00:00, 285.71it/s]
+
+100%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê| 617/617 [00:02<00:00, 279.40it/s]
+
+100%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê| 617/617 [00:02<00:00, 275.74it/s]
+
+  0%|          | 0/617 [00:00<?, ?it/s]
+  0%|          | 0/617 [00:00<?, ?it/s]
+ 13%|ÔûêÔûÄ        | 83/617 [00:00<00:00, 573.06it/s]
+  0%|          | 0/617 [00:00<?, ?it/s]
+ 13%|ÔûêÔûÄ        | 83/617 [00:00<00:00, 543.28it/s]
+ 29%|ÔûêÔûêÔûè       | 176/617 [00:00<00:00, 667.73it/s]
+ 29%|ÔûêÔûêÔûè       | 176/617 [00:00<00:00, 690.60it/s]
+ 13%|ÔûêÔûÄ        | 83/617 [00:00<00:01, 499.32it/s]
+ 52%|ÔûêÔûêÔûêÔûêÔûêÔûÅ    | 320/617 [00:00<00:00, 723.44it/s]
+ 29%|ÔûêÔûêÔûè       | 176/617 [00:00<00:00, 634.38it/s]
+ 52%|ÔûêÔûêÔûêÔûêÔûêÔûÅ    | 320/617 [00:00<00:00, 738.65it/s]
+  0%|          | 0/617 [00:00<?, ?it/s]
+  0%|          | 0/617 [00:00<?, ?it/s]
+ 52%|ÔûêÔûêÔûêÔûêÔûêÔûÅ    | 320/617 [00:00<00:00, 714.02it/s]
+ 13%|ÔûêÔûÄ        | 83/617 [00:00<00:01, 490.87it/s]
+  0%|          | 0/617 [00:00<?, ?it/s]
+  0%|          | 0/617 [00:00<?, ?it/s]
+ 72%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûÅ  | 447/617 [00:00<00:00, 875.14it/s]
+  0%|          | 0/617 [00:00<?, ?it/s]
+ 13%|ÔûêÔûÄ        | 83/617 [00:00<00:01, 530.11it/s]
+ 29%|ÔûêÔûêÔûè       | 176/617 [00:00<00:00, 606.30it/s]
+ 13%|ÔûêÔûÄ        | 83/617 [00:00<00:01, 512.21it/s]
+ 13%|ÔûêÔûÄ        | 83/617 [00:00<00:01, 492.56it/s]
+ 13%|ÔûêÔûÄ        | 83/617 [00:00<00:00, 549.05it/s]
+ 29%|ÔûêÔûêÔûè       | 176/617 [00:00<00:00, 658.79it/s]
+ 29%|ÔûêÔûêÔûè       | 176/617 [00:00<00:00, 650.89it/s]
+ 52%|ÔûêÔûêÔûêÔûêÔûêÔûÅ    | 320/617 [00:00<00:00, 690.90it/s]
+ 29%|ÔûêÔûêÔûè       | 176/617 [00:00<00:00, 630.39it/s]
+ 29%|ÔûêÔûêÔûè       | 176/617 [00:00<00:00, 659.92it/s]
+ 52%|ÔûêÔûêÔûêÔûêÔûêÔûÅ    | 320/617 [00:00<00:00, 741.75it/s]
+ 76%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûï  | 471/617 [00:00<00:00, 922.66it/s]
+ 52%|ÔûêÔûêÔûêÔûêÔûêÔûÅ    | 320/617 [00:00<00:00, 706.50it/s]
+ 77%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûï  | 478/617 [00:00<00:00, 991.32it/s]
+ 52%|ÔûêÔûêÔûêÔûêÔûêÔûÅ    | 320/617 [00:00<00:00, 728.91it/s]
+ 52%|ÔûêÔûêÔûêÔûêÔûêÔûÅ    | 320/617 [00:00<00:00, 719.74it/s]
+ 78%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûè  | 484/617 [00:00<00:00, 974.96it/s]
+ 71%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûÅ  | 441/617 [00:00<00:00, 870.38it/s]
+ 74%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûÄ  | 455/617 [00:00<00:00, 903.30it/s]
+ 79%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûè  | 485/617 [00:01<00:00, 214.72it/s]
+ 79%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûè  | 485/617 [00:01<00:00, 212.52it/s]
+ 92%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûÅ| 570/617 [00:01<00:00, 259.01it/s]
+ 92%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûÅ| 570/617 [00:01<00:00, 260.35it/s]
+100%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê| 617/617 [00:02<00:00, 304.49it/s]
+
+100%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê| 617/617 [00:02<00:00, 306.68it/s]
+
+ 88%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûè | 541/617 [00:01<00:00, 196.68it/s]
+ 98%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûè| 604/617 [00:02<00:00, 229.48it/s]
+100%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê| 617/617 [00:02<00:00, 296.67it/s]
+
+ 93%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûÄ| 573/617 [00:01<00:00, 200.67it/s]
+100%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê| 617/617 [00:02<00:00, 296.54it/s]
+
+ 86%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûï | 533/617 [00:01<00:00, 191.43it/s]
+ 95%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûì| 586/617 [00:01<00:00, 204.89it/s]
+ 89%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûë | 552/617 [00:01<00:00, 201.74it/s]
+100%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê| 617/617 [00:02<00:00, 299.12it/s]
+
+ 96%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûî| 592/617 [00:02<00:00, 206.23it/s]
+ 96%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûï| 595/617 [00:02<00:00, 225.30it/s]
+100%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê| 617/617 [00:01<00:00, 235.47it/s]
+100%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê| 617/617 [00:02<00:00, 295.58it/s]
+
+100%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê| 617/617 [00:02<00:00, 296.08it/s]
+
+100%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê| 617/617 [00:02<00:00, 298.58it/s]
+
+=== Su├¡te ouro: FALHOU ÔÇö 539 checagens, 2 falha(s)
+  ┬À planilha carregada em 18.3 s
+  ┬À (n) cobertura: 78 campos das fichas 29.8 e 29.9, 230 c├®lulas conferidas no mapa
+  ┬À planilha: casos (a)ÔÇô(o) comparados, calculados na planilha pela biblioteca formulas
+  ┬À (p) Ficha Exemplo - Nadir: 42 entradas, 2948 c├®lulas com f├│rmula iguais ao modelo, 0 diferen├ºa(s), 0 aviso(s)
+  ┬À modo completo: or├ículo e PLANILHA (calculada pela biblioteca formulas)
+  ┬À tempo da su├¡te: 76.2 s
+  Ô£ù (a) Per├¡cias escolhidas permitidas: or├ículo=3 livro=2
+  Ô£ù [planilha] (a) Per├¡cias escolhidas permitidas: planilha=3 livro=2
+
+=== Su├¡te oraculo: OK ÔÇö 247 checagens, 0 falha(s)
+  ┬À 126 casos da matriz, 60 da varredura (3 ├ù 20), 61 casos-limite
+  ┬À 247 casos, 43678 sa├¡das comparadas, 239 c├│digos de aviso do or├ículo conferidos na planilha; 0 diverg├¬ncia(s); 8 processo(s), 194 s
+  ┬À tempo da su├¡te: 194.2 s
+
+=== Su├¡te extremos: OK ÔÇö 2714 checagens, 0 falha(s)
+  ┬À 2948 c├®lulas com f├│rmula; 358 entradas; 218 c├®lulas de aviso
+  ┬À 657 cen├írios de um campo por vez
+  ┬À revis├úo 2: 366 cen├írios com valor de erro numa entrada (358 entradas: 20 decimal, 83 inteiro, 196 lista, 59 texto; mais 7 por cima da Nadir e o caso do usu├írio)
+  ┬À 1131 cen├írios em 8 processo(s)
+  ┬À tempo dos cen├írios: 794 s
+  ┬À tempo da su├¡te: 794.5 s
+
+=== Su├¡te lint: OK ÔÇö 11924 checagens, 0 falha(s)
+  ┬À revis├úo 2: 196 listas suspensas, 4096 op├º├Áes conferidas (=, +, -, @, data, hora, n├║mero em texto, booleano)
+  ┬À revis├úo 2: 2948 f├│rmulas conferidas, 0 leitura(s) direta(s) de entrada; 333 c├®lulas na camada de leitura protegida, 358 entradas com sinal de erro em 206 linhas; 12 c├®lulas do contador da In├¡cio
+  ┬À Em Jogo: A:L soma 1360 px; tela nas linhas 1-40; t├¡tulo e legenda a partir da linha 42
+  ┬À 2948 f├│rmulas, 299 valida├º├Áes, 229 regras de formata├º├úo condicional conferidas em 10 abas
+  ┬À tempo da su├¡te: 1.0 s
+
+=== Su├¡te texto: FALHOU ÔÇö 1012928 checagens, 1 falha(s)
+  ┬À 7682 trechos de texto vis├¡vel extra├¡dos (valores, literais de f├│rmula, valida├º├Áes, abas)
+  ┬À (2) 2 grafia(s) fora do gloss├írio que s├úo cita├º├úo literal do livro (aceitas): 'B├┤nus de atributo' em 'Dados'!B6; 'dano cont├¡nuo' em 'Dados'!C384
+  ┬À (1) 25 strings proibidas + 18 aposentadas ├ù trechos = 330326 buscas; (2) 97 termos do gloss├írio, 2763 ocorr├¬ncias conferidas; (3) 26846 palavras, l├®xico de 5131 palavras do livro + 83 extras; (4) 85 formas sem acento, 652970 buscas
+  ┬À tempo da su├¡te: 4.1 s
+  Ô£ù ficha_lexico_extra.txt repete palavras que o livro j├í tem: ['aba', 'abas']
+
+  0%|          | 0/617 [00:00<?, ?it/s]
+ 13%|ÔûêÔûÄ        | 83/617 [00:00<00:00, 792.06it/s]
+ 52%|ÔûêÔûêÔûêÔûêÔûêÔûÅ    | 320/617 [00:00<00:00, 1038.92it/s]
+ 79%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûè  | 485/617 [00:01<00:00, 327.20it/s] 
+100%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê| 617/617 [00:01<00:00, 442.66it/s]
+
+=== Su├¡te preview: OK ÔÇö 279 checagens, 0 falha(s)
+  ┬À Em Jogo, pior caso: 13 efeitos de condi├º├úo, 7 Vantagens raciais e 53 B├¬n├º├úos com frequ├¬ncia medidos (cabem numa linha)
+  ┬À 40 PNGs inteiros + 368 recortes 1:1 (Ôëñ 1800 ├ù 1800 px) em G:\Meu Drive\DriveSyncFiles\Explorando Gal├íxias RPG\.agents\tasks\ficha-preview; ├¡ndice em indice-recortes.txt; 0 texto(s) cortado(s); Em Jogo A:L ├ù 1-40 = 1360 ├ù 760 px
+  ┬À tempo da su├¡te: 176.1 s
+
+  0%|          | 0/617 [00:00<?, ?it/s]
+  9%|Ôûë         | 54/617 [00:00<00:05, 105.37it/s]
+ 29%|ÔûêÔûêÔûè       | 176/617 [00:00<00:01, 322.54it/s]
+ 52%|ÔûêÔûêÔûêÔûêÔûêÔûÅ    | 320/617 [00:00<00:00, 551.10it/s]
+ 79%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûè  | 485/617 [00:01<00:00, 287.99it/s]
+100%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê| 617/617 [00:01<00:00, 348.03it/s]
+
+=== Su├¡te visual: OK ÔÇö 24103 checagens, 0 falha(s)
+  ┬À (1) 22690 textos medidos em 4 estados (em-branco 5278, nadir-nivel-1 5489, nivel-20-completo 5813, pior-caso 6110); 0 n├úo couberam
+  ┬À (2) 196 c├®lulas com lista suspensa conferidas (op├º├úo mais longa + 24 px)
+  ┬À (3) 554 c├®lulas com texto buscado na aba Dados e (4) 218 avisos medidos com o texto mais longo que a f├│rmula pode mostrar
+  ┬À (6) fonte >= 9 pt em todas as abas; (7) 14 combina├º├Áes de texto e fundo com contraste >= 4,5:1 (menor: 4.96:1)
+  ┬À (8) 56 tabelas fora da aba Dados: toda linha de dados a at├® 15 linhas do cabe├ºalho
+  ┬À (9) ├írea do jogador em at├® 1360 px em 9 abas (colunas auxiliares ocultas); Em Jogo A:L ├ù 1-40 = 1360 ├ù 760 px
+  ┬À (10) aviso, n├úo bloqueia: 57 coluna(s) com mais que o dobro do maior conte├║do: 'Caminho'!B (89 px, maior conte├║do 35 px); 'Caminho'!E (75 px, maior conte├║do 23 px); 'Cria├º├úo'!D (91 px, maior conte├║do 33 px); 'Cria├º├úo'!E (93 px, maior conte├║do 35 px); 'Cria├º├úo'!G (111 px, maior conte├║do 23 px); 'Cria├º├úo'!H (87 px, maior conte├║do 23 px); 'Cria├º├úo'!I (91 px, maior conte├║do 23 px); 'Cria├º├úo'!J (82 px, maior conte├║do 23 px); 'Cria├º├úo'!K (103 px, maior conte├║do 23 px); 'Cria├º├úo'!L (130 px, maior conte├║do 23 px); 'Dados'!J (103 px, maior conte├║do 33 px); 'Dados'!K (111 px, maior conte├║do 15 px)
+  ┬À tempo da su├¡te: 91.2 s
+
+  0%|          | 0/569 [00:00<?, ?it/s]
+100%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê| 569/569 [00:00<00:00, 7481.00it/s]
+
+  0%|          | 0/617 [00:00<?, ?it/s]
+ 13%|ÔûêÔûÄ        | 83/617 [00:00<00:00, 769.59it/s]
+ 52%|ÔûêÔûêÔûêÔûêÔûêÔûÅ    | 320/617 [00:00<00:00, 1095.80it/s]
+ 79%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûè  | 485/617 [00:01<00:00, 354.42it/s] 
+100%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê| 617/617 [00:01<00:00, 476.00it/s]
+
+=== Su├¡te google: FALHOU ÔÇö 4735 checagens, 4 falha(s)
+  ┬À export do Google (C├│pia): 4 entradas preenchidas: criacao.jogador = 'MCFilhos', criacao.metodo = 'Compra de Pontos', criacao.nome = 'BF "Blake Foster"', criacao.raca = 'Haloviano'
+  ┬À (a) revis├úo 1 ├ù Google: 2363 de 2363 c├®lulas iguais; diverg├¬ncias por tipo (formulas, Google): nenhuma
+  ┬À (b) diverg├¬ncia aceita (livro v1.2): 'Cria├º├úo'!C25 ÔåÆ 'Cria├º├úo'!C25: Google (v1.1)='Escolha onde vai o +2: Sincronia ou Presen├ºa', v1.2='Escolha onde vai o +2: Discernimento ou Presen├ºa'
+  ┬À (b) diverg├¬ncia aceita (livro v1.2): 'Cria├º├úo'!N25 ÔåÆ 'Cria├º├úo'!N25: Google (v1.1)='Sincronia', v1.2='Discernimento'
+  ┬À (b) diverg├¬ncia aceita (livro v1.2): 'Cria├º├úo'!O25 ÔåÆ 'Cria├º├úo'!O25: Google (v1.1)='Sincronia', v1.2='Discernimento'
+  ┬À (b) diverg├¬ncia aceita (livro v1.2): 'Equipamento'!W71 ÔåÆ 'Equipamento'!W71: Google (v1.1)=1, v1.2=0.5
+  ┬À (b) diverg├¬ncia aceita (livro v1.2): 'Progress├úo'!G70 ÔåÆ 'Progress├úo'!G70: Google (v1.1)='Sua Ultimate ativa com 80 de Energia e consome 80 (o teto do medidor continua 100); ou sua B├¬n├º├úo Avatar afeta um alvo adicional', v1.2='Sua Ultimate ativa com 80 de Energia e consome 80 (o teto do medidor continua 100); ou, se voc├¬ tiver a B├¬n├º├úo Avatar do seu Caminho, ela afeta um alvo adicional'
+  ┬À (b) diverg├¬ncia aceita (livro v1.2): 'Regras R├ípidas'!H99 ÔåÆ 'Regras R├ípidas'!H99: Google (v1.1)='2 turnos', v1.2='3 turnos'
+  ┬À (b) diverg├¬ncia aceita (livro v1.2): 'Regras R├ípidas'!C100 ÔåÆ 'Regras R├ípidas'!C100: Google (v1.1)='Dano Cont├¡nuo 1d6 por ac├║mulo (Vento)', v1.2='Dano Cont├¡nuo 1d6 por ac├║mulo (Vento), 1 ac├║mulo por ataque seu de Vento'
+  ┬À (b) revis├úo 2 ├ù Google: 2353 de 2363 c├®lulas iguais pelo nome l├│gico, 0 diverg├¬ncia(s) aceita(s) por r├│tulo novo, 0 sem par; 585 f├│rmulas novas da revis├úo 2 (camada, sinais, contador)
+  ┬À evid├¬ncia: export com erro tem 261 f├│rmula(s) com #ERROR!; entradas diferentes da C├│pia: criacao.raca = 'Humano', criacao.raca.atributo1 = 'Poder', criacao.raca.atributo2 = 'Agilidade', criacao.raca.modo = '#ERROR!'
+  ┬À (c) Humano + Dois Atributos (+1 cada) + Poder + Agilidade: 0 erro(s), contador 0, b├┤nus racial {'Poder': 1, 'Agilidade': 1, 'Vigor': 0, 'Sincronia': 0, 'Discernimento': 0, 'Presen├ºa': 0}
+  ┬À tempo da su├¡te: 34.3 s
+  Ô£ù (b) 'Cria├º├úo'!B29 ÔåÆ 'Cria├º├úo'!B29: revis├úo 2='To na sua mente (ativ├ível: 2 vezes por dia, deixa o alvo Controlado) ┬À Asas de Halo (passivo: n├úo sofre dano de queda)' Google='To na sua mente (2 vezes por dia, deixa o alvo Controlado)' (=IF($Q$25="","",IFERROR(INDEX('Dados'!$F$7:$F$13,MATCH($Q$25,'Dados'!$A$7:$A$13,0)),"")))
+  Ô£ù (b) 'Cria├º├úo'!B30 ÔåÆ 'Cria├º├úo'!B30: revis├úo 2='To na sua mente: 2 vezes por dia. Gaste a sua A├º├úo Complementar. 1. Ativa├º├úo. Fa├ºa um Teste de Sintonia contra DT 13. Se falhar, este uso ├® gasto e nada acontece. 2. Resist├¬ncia do alvo. Se voc├¬ passar, o alvo faz um Teste de For├ºa de Vontade contra a sua DT (8 + B├┤nus do Atributo de Habilidade + Efici├¬ncia). 3. Na falha do alvo, ele fica Controlado (cap├¡tulo 21) por 2 turnos se for Comum, ou 1 turno se for Elite ou Boss. N├úo funciona em Boss em cena de cl├¡max sem autoriza├º├úo do Mestre. Fora de combate, o Mestre define a dura├º├úo pela cena ÔÇö a refer├¬ncia ├® meia hora. A DT 13 da ativa├º├úo ├® fixa em todas as faixas e ├® uma das cinco DTs de subsistema do livro (cap├¡tulo 02). Asas de Halo: As asas n├úo levam o seu peso para cima, mas n├úo deixam voc├¬ cair. ÔÇó Voc├¬ n├úo sofre dano de queda, de nenhuma altura, e n├úo faz Teste de Reflexos por cair (cap├¡tulo 22). ÔÇó Voc├¬ desce planando: ao cair, ou ao pular de prop├│sito, voc├¬ chega ao ch├úo de p├®, no ponto que escolher dentro de uma Dist├óncia do lugar de onde saiu (cap├¡tulo 18). ÔÇó N├úo ├® voo. Voc├¬ n├úo ganha altura, n├úo ignora terreno em combate, e isso n├úo muda a sua Velocidade, a sua A├º├úo de Movimento nem a sua casa na Fila (cap├¡tulo 19).' Google='To na sua mente: 2 vezes por dia. Gaste a sua A├º├úo Complementar. 1. Ativa├º├úo. Se voc├¬ segue o Caminho da Harmonia, n├úo h├í teste de ativa├º├úo. Caso contr├írio, fa├ºa um Teste de Sintonia contra DT 13; se falhar, voc├¬ n├úo pode usar este tra├ºo at├® o pr├│ximo Descanso Longo. 2. Resist├¬ncia do alvo. Em ambos os casos, o alvo faz um Teste de For├ºa de Vontade contra a sua DT (8 + B├┤nus do Atributo de Habilidade + Efici├¬ncia). 3. Na falha do alvo, ele fica Controlado (cap├¡tulo 21) por 2 turnos se for Comum, ou 1 turno se for Elite ou Boss. N├úo funciona em Boss em cena de cl├¡max sem autoriza├º├úo do Mestre. Fora de combate, o Mestre define a dura├º├úo pela cena ÔÇö a refer├¬ncia ├® meia hora. A DT 13 da ativa├º├úo ├® fixa em todas as faixas e ├® uma das cinco DTs de subsistema do livro (cap├¡tulo 02).' (=IF($Q$25="","",IFERROR(INDEX('Dados'!$G$7:$G$13,MATCH($Q$25,'Dados'!$A$7:$A$13,0)),"")))
+  Ô£ù (b) 'Em Jogo'!B10 ÔåÆ 'Em Jogo'!B10: revis├úo 2='Controlado 2├ù por dia; sem dano de queda' Google='ÔÇö' (=IF('Cria├º├úo'!$Q$25="Humano","Esfor├ºo (1 ponto) e +1 Per├¡cia na cria├º├úo",IF('Cria├º├úo'!$Q$25="Intellitron","Tecnologia, Mec├ónica, Fraqueza; i)
+  Ô£ù (b) LIVRO_V12 lista c├®lula que n├úo divergiu mais: ["'Cria├º├úo'!B30", "'Em Jogo'!B10"]
+
+=== RESUMO
+  spike       OK      23 checagens, 0 falha(s)
+  protegidos  FALHOU  76 checagens, 5 falha(s)
+  dados       OK      3400 checagens, 0 falha(s)
+  ouro        FALHOU  539 checagens, 2 falha(s)
+  oraculo     OK      247 checagens, 0 falha(s)
+  extremos    OK      2714 checagens, 0 falha(s)
+  lint        OK      11924 checagens, 0 falha(s)
+  texto       FALHOU  1012928 checagens, 1 falha(s)
+  preview     OK      279 checagens, 0 falha(s)
+  visual      OK      24103 checagens, 0 falha(s)
+  google      FALHOU  4735 checagens, 4 falha(s)
+EXIT=1

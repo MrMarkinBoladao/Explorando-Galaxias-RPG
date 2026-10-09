@@ -1,0 +1,21 @@
+﻿Bateria da Planilha do Mestre ÔÇö su├¡tes: spike, protegidos, dados, bestiario, ouro, oraculo, determinismo, extremos, lint, texto, preview, visual, sabor
+In├¡cio: 2026-10-07 14:53:45
+python : 
+No linha:1 caractere:253
++ ... ficha.txt"; python "build\testar_mestre.py" --suite tudo 2>&1 | Out-F ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  0%|          | 0/11 [00:00<?, ?it/s]
+100%|ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê| 11/11 [00:00<00:00, 8806.52it/s]
+
+=== Su├¡te spike: OK ÔÇö 142 checagens, 0 falha(s)
+  ┬À 141 casos; carga do modelo 4.57 s; maior intermedi├írio do or├ículo 2.815e+14 (< 2^53 = 9.007e+15)
+  ┬À tempo: 5.4 s
+
+=== Su├¡te protegidos: FALHOU ÔÇö 127 checagens, 1 falha(s)
+  ┬À ausente conhecido (P5): ficha-automatizada/C├│pia de Ficha Automatizada - Explorando Gal├íxias V1.1.xlsx ÔÇö ausente j├í antes da Fase 1; a Mestre nunca grava em ficha-automatizada\
+  ┬À 38 arquivos do livro e 13 da ficha conferidos (SHA-256)
+  ┬À tempo: 0.9 s
+  Ô£ù arquivo da ficha ALTERADO: g:\Meu Drive\DriveSyncFiles\Explorando Gal├íxias RPG\build\ficha_funcoes_ok.json

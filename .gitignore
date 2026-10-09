@@ -1,0 +1,30 @@
+# === Lixo do Windows / Google Drive ===
+desktop.ini
+Thumbs.db
+ehthumbs.db
+*.lnk
+.DS_Store
+
+# Atalhos do Google Drive (apontam para arquivos na nuvem, nao tem conteudo)
+*.gsheet
+*.gdoc
+*.gslides
+
+# Arquivos temporarios do Office (locks de arquivos abertos)
+~$*
+
+# === Python ===
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+
+# === Clone vazio aninhado do proprio repositorio ===
+/Explorando-Galaxias-RPG/
+
+# === Artefatos de preview gerados pelos agentes ===
+# Sao ~1800 screenshots PNG (161 MB) regeneraveis pelos scripts de render.
+# Os relatorios (.md/.json/.txt) das tasks continuam versionados.
+.agents/tasks/**/*.png

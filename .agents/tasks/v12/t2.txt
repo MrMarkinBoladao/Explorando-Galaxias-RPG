@@ -1,0 +1,12 @@
+﻿python : usage: testar_ficha.py [-h]
+No linha:1 caractere:53
++ ... ONUTF8="1"; python "build\testar_ficha.py" --suite dados,ouro,oraculo ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (usage: testar_ficha.py [-h]:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+                       --suite {spike,protegidos,dados,ouro,oraculo,extremos,lint,texto,preview,visual,google,tudo}
+                       [--so-oraculo]
+testar_ficha.py: error: argument --suite: invalid choice: 'dados,ouro,oraculo,extremos,lint,texto,preview,visual,google' (choose from 
+'spike', 'protegidos', 'dados', 'ouro', 'oraculo', 'extremos', 'lint', 'texto', 'preview', 'visual', 'google', 'tudo')
+EXIT=2

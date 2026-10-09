@@ -1,0 +1,7 @@
+{
+  "task_id": "task-ficha-automatizada",
+  "task_description": "Gerar a ficha de personagem automatizada (um .xlsx via openpyxl, para Google Planilhas) do RPG Explorando Galáxias v1.0, níveis 1 a 20, com 10 abas (Início, Criação, Em Jogo, Testes, Habilidades, Caminho, Equipamento, Progressão, Regras Rápidas, Dados), e auditá-la por script (formulas 1.3.4, oráculo independente, testes de ouro, estados extremos, lint de compatibilidade, auditoria de texto PT-BR e prévia visual em PNG). O livro v1.0 é intocável. Plano completo: g:\\Meu Drive\\DriveSyncFiles\\Explorando Galáxias RPG\\.agents\\tasks\\plano-ficha.md",
+  "status": "pending",
+  "feature_order": ["FEAT-001", "FEAT-002", "FEAT-003", "FEAT-004"],
+  "blocked_reason": null
+}

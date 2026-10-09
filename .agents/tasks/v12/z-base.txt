@@ -1,0 +1,7 @@
+﻿iguais        : 12
+ausentes      : 1 -> ['ficha-automatizada/C├│pia de Ficha Automatizada - Explorando Gal├íxias V1.1.xlsx']
+alterados     : 1
+  - build/ficha_funcoes_ok.json
+      regravado pela pr├│pria su├¡te da ficha
+
+gravado: G:\Meu Drive\DriveSyncFiles\Explorando Gal├íxias RPG\.agents\tasks\mestre\baseline-hashes.json
