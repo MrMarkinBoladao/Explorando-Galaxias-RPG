@@ -362,6 +362,8 @@ button.rolar:hover { background: var(--ouro); color: #1a1406; }
 .orcamento-leitura b { font-size: 1.2rem; font-variant-numeric: tabular-nums; display: block; }
 .orcamento-leitura .sub { font-size: .8rem; color: var(--suave); }
 .orcamento-leitura .barra-pv { margin: .2rem 0; }
+.participantes { display: flex; flex-wrap: wrap; gap: .2rem 1.2rem; margin: .2rem 0 .4rem; }
+.participantes .marca span .suave { font-size: .82rem; }
 .contrato { padding: .6rem .9rem; border-radius: 8px; border: 1px solid var(--borda); margin: .6rem 0; font-size: .92rem; }
 .contrato.ok { background: var(--verde-fundo); border-color: #2b6b44; }
 .contrato.pendente { background: #2e2511; border-color: #6b5520; }

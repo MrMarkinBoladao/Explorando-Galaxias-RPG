@@ -307,6 +307,31 @@
     return meus.concat(livro);
   };
 
+  const ORDEM_TIPO = { Comum: 0, Elite: 1, Boss: 2 };
+
+  /**
+   * As <option> do catálogo de inimigos, agrupadas: primeiro os inimigos da campanha, depois
+   * o bestiário faixa por faixa, com a faixa do grupo na frente. Dentro de cada grupo, a
+   * ordem é Comum, Elite e Boss, e depois alfabética — a mesma ordem do capítulo 28.
+   */
+  G.opcoesDeInimigo = function (faixaPreferida) {
+    const cat = G.catalogoDeInimigos();
+    const ordenar = (a, b) => (ORDEM_TIPO[a.tipo] - ORDEM_TIPO[b.tipo]) || a.nome.localeCompare(b.nome);
+    const bloco = (titulo, itens) => (!itens.length ? "" :
+      "<optgroup label='" + esc(titulo) + "'>" + itens.slice().sort(ordenar).map((t) =>
+        "<option value='" + esc(t.ref) + "'>" + esc(t.nome) + " · " + esc(t.tipo) + " · " +
+        (t.pv || 0) + " PV</option>").join("") + "</optgroup>");
+    let html = bloco("Inimigos da campanha", cat.filter((t) => t.ref.indexOf("salvo:") === 0));
+    const doLivro = cat.filter((t) => t.ref.indexOf("livro:") === 0);
+    const faixas = C().mestre.ancoras.slice().sort((a, b) =>
+      (a.n === faixaPreferida ? -1 : 0) - (b.n === faixaPreferida ? -1 : 0) || a.n - b.n);
+    for (const a of faixas) {
+      html += bloco("Faixa " + a.faixa + (a.n === faixaPreferida ? " — a faixa do grupo" : ""),
+        doLivro.filter((t) => t.faixa_n === a.n));
+    }
+    return html;
+  };
+
   G.inimigoDaRef = function (ref) {
     if (!ref) return null;
     const [tipo, resto] = [ref.slice(0, ref.indexOf(":")), ref.slice(ref.indexOf(":") + 1)];
@@ -533,25 +558,47 @@
   // ---------------------------------------------------------------------------
   // Encontros (27.4 e 27.5)
   // ---------------------------------------------------------------------------
-  /** Custo do encontro em PV contra o orçamento da faixa, e a leitura de 27.4. */
-  G.contaDoEncontro = function (itens, faixaN) {
+  /** O grupo de referência do orçamento publicado: 4 personagens (29.1). */
+  G.GRUPO_DE_REFERENCIA = 4;
+
+  /**
+   * Custo do encontro em PV contra o orçamento da faixa, e a leitura de 27.4.
+   *
+   * `emCena` é quantos personagens entram na cena. O orçamento do livro é
+   * `dano do grupo por Ciclo × 4 Ciclos` calculado **para um grupo de 4** (29.1), e o DPC é
+   * 4 ações agressivas por Ciclo — uma por personagem. Com um número diferente de gente em
+   * cena, esta conta ajusta o orçamento na mesma proporção. Isso é extrapolação da tela, não
+   * tabela do livro: `orcamento` continua trazendo o número publicado, ao lado do ajustado.
+   */
+  G.contaDoEncontro = function (itens, faixaN, emCena) {
     const orc = G.orcamento(faixaN);
+    const ref = G.GRUPO_DE_REFERENCIA;
+    const pessoas = emCena == null ? ref : Math.max(0, Math.round(emCena));
     let custo = 0, acoes = 0, n = 0;
     const porTipo = { Comum: 0, Elite: 0, Boss: 0 };
+    const catalogo = G.catalogoDeInimigos();
     for (const it of itens || []) {
       const qtd = Math.max(1, Number(it.qtd) || 1);
-      const ref = G.catalogoDeInimigos().find((x) => x.ref === it.ref);
-      if (!ref) continue;
-      custo += (ref.pv || 0) * qtd;
-      porTipo[ref.tipo] = (porTipo[ref.tipo] || 0) + qtd;
-      acoes += ({ Comum: 1, Elite: 1.5, Boss: 2 }[ref.tipo] || 1) * qtd;
+      const t = catalogo.find((x) => x.ref === it.ref);
+      if (!t) continue;
+      custo += (t.pv || 0) * qtd;
+      porTipo[t.tipo] = (porTipo[t.tipo] || 0) + qtd;
+      acoes += ({ Comum: 1, Elite: 1.5, Boss: 2 }[t.tipo] || 1) * qtd;
       n += qtd;
     }
-    const pct = orc && orc.orcamento ? Math.round(100 * custo / orc.orcamento) : 0;
-    const leitura = !n ? "vazio" : pct <= 60 ? "cena de passagem (2 Ciclos)"
+    const publicado = orc ? orc.orcamento : 0;
+    const ajustado = pessoas === ref ? publicado : Math.round(publicado * pessoas / ref);
+    const dpc = orc ? orc.dano_ciclo : 0;
+    const pct = ajustado ? Math.round(100 * custo / ajustado) : 0;
+    const leitura = !n ? "vazio" : !pessoas ? "ninguém do grupo está na cena"
+      : pct <= 60 ? "cena de passagem (2 Ciclos)"
       : pct <= 110 ? "encontro típico (3 a 5 Ciclos)" : "mais pesado que o orçamento da faixa";
-    return { orcamento: orc ? orc.orcamento : 0, custo: custo, pct: pct, leitura: leitura,
-      acoes: acoes, n: n, por_tipo: porTipo };
+    return {
+      orcamento: publicado, orcamento_ajustado: ajustado, em_cena: pessoas, referencia: ref,
+      ajustado: pessoas !== ref,
+      dpc: dpc, dpc_ajustado: pessoas === ref ? dpc : Math.round(dpc * pessoas / ref),
+      custo: custo, pct: pct, leitura: leitura, acoes: acoes, n: n, por_tipo: porTipo,
+    };
   };
 
   G.elementosDoGrupo = function (g) {

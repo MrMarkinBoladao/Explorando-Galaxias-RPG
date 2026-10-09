@@ -68,7 +68,11 @@ próprio** (`data-mp`, `data-m`) e zera `F.P` ao entrar, para não gravar ficha 
 4. **Inimigos** — bestiário das 32 fichas com filtro e ficha completa do livro; criador pela
    tabela de âncoras (28.3) com a régua de ações de 28.4; inimigos salvos da campanha.
 5. **Encontros** — orçamento de PV (27.4) com leitura de passagem/típico/pesado, as 4 composições,
-   contrato da Fraqueza (27.5), DT para descobrir Fraqueza (27.3) e encontros salvos.
+   contrato da Fraqueza (27.5), DT para descobrir Fraqueza (27.3) e encontros salvos. Cada
+   encontro marca **quem do grupo entra na cena**: o orçamento publicado é para um grupo de 4
+   (29.1), então a tela ajusta na proporção de quem está em cena — rotulado como conta da tela,
+   não tabela do livro — e o contrato da Fraqueza passa a olhar só os Elementos presentes. Ao
+   levar o encontro para o combate, quem ficou fora já entra fora da Fila.
 6. **Recompensas** — calendário de marco (27.8), verba (24.5), conferência por PJ (o que o nível
    dele já deveria ter), tesouro do grupo e a lista do que não se deve dar.
 7. **Consulta** — o Escudo do Mestre: DT por faixa, as 5 DTs de subsistema, redução de
