@@ -1,0 +1,55 @@
+# Publica o site (ficha + livro de consulta) no GitHub Pages a cada envio para a main.
+# Antes de publicar, gera de novo os dados a partir de livro-v1.0/, então o site
+# sempre mostra a versão do livro que está no repositório.
+name: Publicar o site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - "livro-v1.0/**"
+      - "build/ficha_dados.py"
+      - ".github/workflows/site.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o repositório
+        uses: actions/checkout@v4
+
+      - name: Preparar o Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Gerar os dados do site a partir do livro
+        run: python site/gerar_site.py
+        env:
+          PYTHONUTF8: "1"
+
+      - name: Configurar o Pages
+        uses: actions/configure-pages@v5
+
+      - name: Enviar o site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Publicar
+        id: deployment
+        uses: actions/deploy-pages@v5
