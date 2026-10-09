@@ -1,12 +1,35 @@
 # Site: ficha online e livro de consulta
 
-Uma página só, sem instalação, com três abas:
+Uma página só, sem instalação, com quatro abas:
 
 - **Jogar** — a ficha na mesa: PV com dano e cura (já desconta RD e PV temporários), Energia, PH do grupo, ataques e Testes prontos para rolar (clique no valor), Bênçãos com usos, condições, Morrendo, Memoespírito e inventário.
 - **Editar ficha** — os doze passos do capítulo 03, mais progressão, equipamento e Memoespírito. Tudo é recalculado na hora, e o que fere uma regra aparece em vermelho na seção.
 - **Regras** — o livro inteiro (v1.2) com pesquisa instantânea, sem acento e sem maiúscula.
+- **Área do Mestre** — a mesa do Mestre, sincronizada com as fichas (abaixo).
 
-As fichas ficam salvas **no navegador** de cada jogador. Para backup ou para mandar ao Mestre: **Mais → Exportar** (gera um arquivo `.json`) e **Mais → Importar**.
+As fichas ficam salvas **no navegador** de cada jogador. Para backup ou para mandar ao Mestre: **Mais > Exportar** (gera um arquivo `.json`) e **Mais > Importar**.
+
+## A Área do Mestre
+
+Abre com um aviso que **um clique dispensa para sempre**. Sete telas:
+
+| Tela | O que tem |
+|---|---|
+| **Painel** | Campanha, faixa, PH do grupo, a tira do grupo com PV e Energia, o Ciclo em curso, a DT da faixa (27.2), rolador e checklist de abertura de sessão |
+| **Grupo** | Tamanho do grupo com o PH resultante (16.2); por jogador: PV com dano e cura já descontando RD, PV temporário, Energia, Defesa/Esquiva/RD/VEL/DT, condições com turnos, Memoespírito (invocar, dispensar, PV) e o painel de Morrendo; cobertura de Elementos, ordem de VEL e os descansos do grupo |
+| **Combate** | A Fila de Ação (19.3) com PJs, Memoespíritos em campo e inimigos; Ciclo com os quatro passos de avanço; Atrasar e Avançar com Firmeza e teto (19.4); Tenacidade com a calculadora de redução (20.3) e a Quebra com dano e efeito por Elemento (20.5); virada de fase de Boss (28.5); condições com turnos |
+| **Inimigos** | O bestiário das 32 fichas do capítulo 28 com filtro, o criador pela tabela de âncoras (28.3) e os inimigos da campanha |
+| **Encontros** | Orçamento de PV (27.4) com a leitura de passagem/típico/pesado, as quatro composições, o contrato da Fraqueza (27.5) e a DT para descobrir Fraqueza (27.3) |
+| **Recompensas** | O calendário de marco (27.8), a verba (24.5), a conferência do que o nível de cada um já libera e o tesouro do grupo |
+| **Escudo do Mestre** | As tabelas de consulta, imprimíveis: DTs, Tenacidade e Quebra, Fila, as nove regras de inimigo, âncoras, condições e Energia |
+
+**O que é da ficha fica na ficha.** PV, PV temporário, Energia, PH do grupo, condições e Memoespírito que o
+Mestre mexer aparecem na aba **Jogar** de cada ficha salva naquele navegador — é o que mantém a mesa
+sincronizada. O PH e o tamanho do grupo são gravados em **todas** as fichas, porque são um recurso só.
+Só o estado do combate (quem participa, quem já agiu, atrasos) mora na mesa do Mestre.
+
+A mesa tem chave própria no navegador (`explorando-galaxias:mestre`) e se exporta em **Mais > Exportar a
+mesa**. Para pôr um jogador no grupo, peça o `.json` da ficha dele e use **Importar ficha**.
 
 ## Como abrir
 
@@ -34,6 +57,9 @@ Os **números das fórmulas** (PV, Defesa, dano, tetos...) moram em `site/js/mot
 | `js/ficha-base.js` | Modelo da ficha, salvar, exportar e importar |
 | `js/ficha-editar.js` | A aba Editar ficha |
 | `js/ficha-jogar.js` | A aba Jogar |
+| `js/mestre-base.js` | Estado da mesa do Mestre, sincronia com as fichas, as regras de mesa (Fila, Firmeza, Tenacidade, Quebra, orçamento), o aviso de abertura e a rota |
+| `js/mestre.js` | As telas de mesa: Painel, Grupo, Combate, Inimigos e Encontros |
+| `js/mestre-escudo.js` | As telas de consulta: Recompensas e Escudo do Mestre |
 | `js/regras.js` | A aba Regras (pesquisa e leitura) |
 | `js/app.js` | Rolador de dados, avisos e navegação |
 | `js/vendor/marked.umd.js` | Biblioteca que transforma o texto do livro em página (licença MIT) |

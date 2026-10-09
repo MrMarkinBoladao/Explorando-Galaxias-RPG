@@ -598,6 +598,230 @@ def tipos_habilidade():
 
 
 # ---------------------------------------------------------------------------
+# Mesa do Mestre: âncoras de inimigo, orçamento de encontro e recompensas
+# ---------------------------------------------------------------------------
+
+TIPOS_INIMIGO = ["Comum", "Elite", "Boss"]
+
+
+def _por_tipo(celula):
+    """'13 / 15 / 16' -> {'Comum': 13, 'Elite': 15, 'Boss': 16}."""
+    partes = [p.strip() for p in limpar(celula).split("/")]
+    return {t: num(p) for t, p in zip(TIPOS_INIMIGO, partes)}
+
+
+def _tabela_por_tamanho(prefixo, titulo, primeira_coluna, colunas):
+    """A tabela da seção que começa por `primeira_coluna` e tem `colunas` colunas.
+    Duas tabelas da mesma seção podem abrir pela mesma palavra (28.2 e 28.3)."""
+    for cab, corpo in tabelas(secao(prefixo, titulo)):
+        if cab and cab[0].startswith(primeira_coluna) and len(cab) == colunas:
+            return cab, corpo
+    raise ValueError(f"tabela '{primeira_coluna}' de {colunas} colunas não achada "
+                     f"em {prefixo} {titulo}")
+
+
+def ancoras_inimigo():
+    """28.3 — a tabela mestra do bestiário: uma linha por faixa, 13 campos por tipo."""
+    _, corpo = _tabela_por_tamanho("28", "## 28.3", "Faixa", 13)
+    _, dados_ = _tabela_por_tamanho("28", "## 28.3", "Faixa", 4)
+    dano = {}
+    for l in dados_:
+        dano[l[0]] = {t: {"texto": limpar(v).split("·")[0].strip(),
+                          "media": num(limpar(v).split("·")[-1])}
+                      for t, v in zip(TIPOS_INIMIGO, l[1:])}
+    saida = []
+    for i, l in enumerate(corpo):
+        faixa = l[0]
+        saida.append({
+            "faixa": faixa, "n": i + 1,
+            "pv": {t: num(v) for t, v in zip(TIPOS_INIMIGO, l[1:4])},
+            "defesa": _por_tipo(l[4]), "rd": _por_tipo(l[5]),
+            "tenacidade": _por_tipo(l[6]), "vel": _por_tipo(l[7]),
+            "ataque": num(l[8]),
+            "dano_media": _por_tipo(l[9]), "dt": _por_tipo(l[10]), "tr": _por_tipo(l[11]),
+            "fraquezas": {t: p.strip() for t, p in zip(TIPOS_INIMIGO, l[12].split("/"))},
+            "dano": dano.get(faixa, {}),
+        })
+    return saida
+
+
+def orcamento_encontro():
+    """27.4 — orçamento de PV por faixa e o custo de cada tipo de inimigo."""
+    _, corpo = tabela("27", "## 27.4", "Faixa")
+    return [{"faixa": l[0], "n": i + 1, "dano_ciclo": num(l[1]), "orcamento": num(l[2]),
+             "custo": {t: num(v) for t, v in zip(TIPOS_INIMIGO, l[3:6])}}
+            for i, l in enumerate(corpo)]
+
+
+def composicoes_encontro():
+    """27.4 — as quatro composições que gastam o orçamento inteiro."""
+    _, corpo = tabela("27", "## 27.4", "Composição")
+    return [{"composicao": l[0], "sensacao": l[1], "duracao": l[2]} for l in corpo]
+
+
+def acoes_por_tipo():
+    """28.2 regra 5 — ações agressivas por turno e por Ciclo."""
+    _, corpo = _tabela_por_tamanho("28", "## 28.2", "Tipo", 3)
+    return [{"tipo": l[0], "por_turno": l[1], "por_ciclo": l[2]} for l in corpo]
+
+
+def fraquezas_por_tipo():
+    """28.2 regra 7 — quantas Fraquezas cada tipo tem."""
+    _, corpo = _tabela_por_tamanho("28", "## 28.2", "Tipo", 2)
+    return [{"tipo": l[0], "fraquezas": l[1]} for l in corpo]
+
+
+def atraso_por_tipo():
+    """19.4 — teto de Atraso por Ciclo e quem tem Firmeza."""
+    _, corpo = tabela("19", "## 19.4", "Tipo de alvo")
+    saida = []
+    for l in corpo:
+        for tipo in re.split(r",| e ", l[0]):
+            tipo = tipo.strip()
+            if tipo in TIPOS_INIMIGO:
+                saida.append({"tipo": tipo, "teto": num(l[1]),
+                              "firmeza": "Sim" if l[2].lower().startswith("tem") else "Não"})
+    return saida
+
+
+def recompensas_calendario():
+    """27.8 — quando entra cada recompensa e quem decide."""
+    _, corpo = tabela("27", "## 27.8", "Recompensa")
+    return [{"recompensa": l[0], "quando": l[1], "quem": l[2]} for l in corpo]
+
+
+def equipamento_por_faixa():
+    """27.8 — Cone de Luz máximo e Tier de Relíquia por faixa."""
+    _, corpo = tabela("27", "## 27.8", "Faixa")
+    return [{"faixa": l[0], "n": i + 1, "cone": l[1], "reliquias": l[2]}
+            for i, l in enumerate(corpo)]
+
+
+# ---------------------------------------------------------------------------
+# Bestiário: as 32 fichas nominais de 28.6 a 28.10
+# ---------------------------------------------------------------------------
+
+# O subtítulo da ficha, já sem o itálico que `limpar` tira:
+# "Comum · Fragmentum · faixa 1-4" (com " · 2 fases" nos Bosses de fase)
+RE_SUBTITULO = re.compile(r"^(Comum|Elite|Boss) · (.+?) · faixa ([\d-]+)(.*)$")
+RE_ATAQUE = re.compile(r"^- \*\*(.+?)\*\*\s*\((.+?)\)\s*:\s*(.*)$")
+
+
+def _blocos_do_bestiario():
+    """(título, linhas) de cada '### ' do capítulo 28 que tenha ficha de inimigo."""
+    blocos, atual = [], None
+    for linha in capitulo("28"):
+        if linha.startswith("### "):
+            atual = (limpar(linha[4:]), [])
+            blocos.append(atual)
+        elif atual is not None:
+            atual[1].append(linha)
+    marca = "| Campo | Valor |"
+    return [b for b in blocos if any(l.strip().startswith(marca) for l in b[1])]
+
+
+def _campos_do_bloco(linhas):
+    """Junta as tabelas 'Campo | Valor' do bloco. A primeira ocorrência vence:
+    o quadro principal manda, e o quadro da fase 1 só completa o que falta."""
+    campos = {}
+    for cab, corpo in tabelas(linhas):
+        if len(cab) != 2 or cab[0] != "Campo":
+            continue
+        for l in corpo:
+            campos.setdefault(l[0], l[1])
+    return campos
+
+
+def _lista_marcada(celula):
+    """'**Físico**, **Fogo**' -> ['Físico', 'Fogo']; '—' -> []."""
+    celula = limpar(celula or "")
+    if celula in ("—", "-", "", "nenhuma", "Nenhuma"):
+        return []
+    return [p.strip() for p in celula.split(",") if p.strip() and p.strip() != "—"]
+
+
+def _itens_da_secao(linhas, titulos):
+    """Os itens de lista ('- ...') do primeiro bloco em negrito cujo texto está em `titulos`."""
+    dentro = False
+    itens = []
+    for l in linhas:
+        t = l.strip()
+        if t.startswith("**"):
+            rotulo = limpar(t).split("—")[0].split(":")[0].strip().rstrip(".")
+            if rotulo in titulos:
+                if "nenhuma" in limpar(t).lower():
+                    return []
+                dentro = True
+                continue
+            if dentro:
+                break
+        if dentro and t.startswith("- "):
+            itens.append(t)
+        elif dentro and itens and t and not t.startswith(("-", ">", "|")):
+            itens[-1] += " " + t
+    return itens
+
+
+def bestiario():
+    """As fichas nominais do capítulo 28, com os números estruturados.
+    O texto completo de cada ficha já está em LIVRO (o bloco '### Nome' do capítulo 28)."""
+    faixas = [a["faixa"] for a in ancoras_inimigo()]
+    saida = []
+    for nome, linhas in _blocos_do_bestiario():
+        sub = next((limpar(l) for l in linhas
+                    if l.startswith("*") and RE_SUBTITULO.match(limpar(l))), "")
+        m = RE_SUBTITULO.match(sub)
+        if not m:
+            raise ValueError(f"bestiário: subtítulo não reconhecido em '{nome}': {sub!r}")
+        tipo, faccao, faixa, resto = m.group(1), m.group(2), m.group(3), m.group(4)
+        campos = _campos_do_bloco(linhas)
+        fases = num(re.search(r"(\d+) fases", resto).group(1)) if "fases" in resto else 1
+        frase = next((limpar(l).strip('>" ') for l in linhas if l.startswith("> *")), "")
+        ataques = []
+        for item in _itens_da_secao(linhas, ("Ataques", "Ataque")):
+            ma = RE_ATAQUE.match(item.strip())
+            if not ma:
+                continue
+            partes = [p.strip() for p in limpar(ma.group(2)).split(",")]
+            corpo = limpar(ma.group(3))
+            md = re.search(r"`([^`]+)`", ma.group(3))
+            ataques.append({
+                "nome": limpar(ma.group(1)),
+                "alcance": partes[0] if partes else "",
+                "elemento": partes[1] if len(partes) > 1 else "",
+                "nota": ", ".join(partes[2:]),
+                "dados": md.group(1) if md else "",
+                "media": num(corpo.split("média")[-1]) if "média" in corpo else None,
+                "texto": corpo,
+            })
+        especiais = []
+        for item in _itens_da_secao(linhas, ("Ações especiais", "Ação especial")):
+            ma = re.match(r"^- \*\*(.+?)\*\*\s*(\((.+?)\))?\s*:?\s*(.*)$", item.strip())
+            if not ma:
+                continue
+            especiais.append({"nome": limpar(ma.group(1)), "recarga": limpar(ma.group(3) or ""),
+                              "efeito": limpar(ma.group(4))})
+        fila = next((limpar(l).replace("Na Fila:", "").strip()
+                     for l in linhas if l.strip().startswith("**Na Fila:**")), "")
+        saida.append({
+            "nome": nome, "tipo": tipo, "faccao": faccao, "faixa": faixa,
+            "faixa_n": faixas.index(faixa) + 1 if faixa in faixas else None,
+            "fases": fases, "frase": frase,
+            "pv": num(campos.get("PV")), "defesa": num(campos.get("Defesa")),
+            "rd": num(campos.get("RD")), "tenacidade": num(campos.get("Tenacidade")),
+            "vel": num(campos.get("Velocidade")), "ataque": num(campos.get("Teste de Ataque")),
+            "dt": num(campos.get("DT dos efeitos")),
+            "tr": num(campos.get("Teste de Resistência")),
+            "fraquezas": _lista_marcada(campos.get("Fraquezas")),
+            "resistencias": _lista_marcada(campos.get("Resistências")),
+            "ataques": ataques, "especiais": especiais,
+            "fila": fila, "firmeza": "Não" if "sem Firmeza" in fila else "Sim",
+            "pv_nota": limpar(campos.get("PV", "")),
+        })
+    return saida
+
+
+# ---------------------------------------------------------------------------
 # Módulo transcrito (interpretação), com âncora literal no .md
 # ---------------------------------------------------------------------------
 

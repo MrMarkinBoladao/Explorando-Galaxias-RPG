@@ -146,6 +146,29 @@ def tabela_do_riso():
     return [{"d6": fd.num(l[0]), "efeito": l[1]} for l in corpo]
 
 
+def mesa_do_mestre():
+    """As tabelas que a Área do Mestre usa: âncoras de inimigo (28.3), orçamento de
+    encontro (27.4), DTs (27.2, 27.3, 20.2), Tenacidade (20.3), Atraso (19.4) e
+    recompensas (27.8)."""
+    cab, dt = fd.dt_faixa()
+    return {
+        "ancoras": fd.ancoras_inimigo(),
+        "orcamento": fd.orcamento_encontro(),
+        "composicoes": fd.composicoes_encontro(),
+        "acoes_tipo": fd.acoes_por_tipo(),
+        "fraquezas_tipo": fd.fraquezas_por_tipo(),
+        "atraso_tipo": fd.atraso_por_tipo(),
+        "dt_faixa": {"faixas": cab[1:], "linhas": [{"dificuldade": l[0], "dt": l[1:]} for l in dt]},
+        "dt_subsistema": fd.dt_subsistema(),
+        "dt_fraqueza": fd.dt_fraqueza(),
+        "fraqueza_resistencia": fd.fraqueza_resistencia(),
+        "reducao_tenacidade": fd.tenacidade(),
+        "recompensas": fd.recompensas_calendario(),
+        "equipamento_faixa": fd.equipamento_por_faixa(),
+        "verba": fd.verba(),
+    }
+
+
 def catalogo():
     recurso = {x["caminho"]: x["recurso"] for x in fd.TRANSCRITO["recurso_proprio"]}
     caminhos = fd.caminhos()
@@ -175,6 +198,8 @@ def catalogo():
         "passivas": fd.passivas(),
         "energia": fd.energia(),
         "tabela_do_riso": tabela_do_riso(),
+        "bestiario": fd.bestiario(),
+        "mestre": mesa_do_mestre(),
         "memo": {
             "conceitos": [{"nome": a, "texto": b} for a, b in fd.memo_tabela("Conceito")],
             "funcoes": [{"nome": a, "texto": b} for a, b in fd.memo_tabela("Função")],

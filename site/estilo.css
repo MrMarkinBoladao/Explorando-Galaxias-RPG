@@ -232,6 +232,126 @@ button.rolar:hover { background: var(--ouro); color: #1a1406; }
 .inventario input.curto { width: 4.5rem; }
 .acoes-item { white-space: nowrap; }
 
+/* ---------- Área do Mestre ---------- */
+.aviso-mestre { max-width: 52rem; margin: 2rem auto; }
+.aviso-mestre h1 { color: var(--ouro); }
+.lista-aviso { padding-left: 1.2rem; }
+.lista-aviso li { margin: .5rem 0; }
+.barra-mestre { display: flex; flex-wrap: wrap; gap: .5rem 1rem; align-items: center; justify-content: space-between; margin-bottom: .6rem; }
+.sub-abas { display: flex; gap: .3rem; overflow-x: auto; padding: 0 0 .8rem; }
+.sub-aba {
+  flex: none; text-decoration: none; color: var(--suave); font-weight: 600; font-size: .92rem;
+  background: var(--painel); border: 1px solid var(--borda); border-radius: 999px; padding: .35rem .85rem;
+}
+.sub-aba:hover { color: var(--texto); border-color: var(--ouro-escuro); }
+.sub-aba.ativa { color: #1a1406; background: var(--ouro); border-color: var(--ouro); }
+.sub-aba.ativa .etiqueta { background: #1a1406; color: var(--ouro); border-color: #1a1406; }
+.titulo-secao { margin: 1.2rem 0 .6rem; color: var(--ouro); }
+.rodape-mestre { text-align: center; }
+.grade-mestre { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; align-items: start; }
+.grade-mestre.duas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 1150px) { .grade-mestre { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .grade-mestre, .grade-mestre.duas { grid-template-columns: 1fr; } .grade-mestre .coluna { display: contents; } }
+.grade-membros { display: grid; grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr)); gap: 1rem; align-items: start; }
+@media (max-width: 560px) { .grade-membros { grid-template-columns: 1fr; } }
+.rolagem-pj { font-size: .85rem; color: var(--suave); white-space: nowrap; }
+.grade-bichos { display: grid; grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr)); gap: 1rem; align-items: start; }
+@media (max-width: 560px) { .grade-bichos { grid-template-columns: 1fr; } }
+.grande-valor { font-size: 1.4rem; font-weight: 800; }
+.ph-grande { font-size: 1.8rem; font-weight: 800; color: var(--ouro); }
+.destaque { color: var(--ouro); }
+.bom-texto { color: var(--verde); }
+.numeros.compactos { grid-template-columns: repeat(auto-fill, minmax(5.2rem, 1fr)); gap: .35rem; }
+.numeros.compactos .numero { padding: .3rem .45rem; }
+.numeros.compactos .grande { font-size: 1.2rem; }
+
+/* Tira do grupo (Painel) */
+.tira-grupo { list-style: none; margin: 0; padding: 0; }
+.tira-grupo li { padding: .45rem 0; border-bottom: 1px solid var(--borda); }
+.tira-grupo li:last-child { border-bottom: 0; }
+.tira-topo { display: flex; flex-wrap: wrap; gap: .2rem .5rem; align-items: baseline; justify-content: space-between; }
+.tira-pv { display: flex; align-items: center; gap: .5rem; margin: .2rem 0; }
+.tira-pv span { font-weight: 800; font-variant-numeric: tabular-nums; }
+.tira-pv small { color: var(--suave); font-weight: 400; }
+.tira-pv .barra-pv { flex: 1 1 6rem; }
+.tira-extra { display: flex; flex-wrap: wrap; gap: .2rem .8rem; font-size: .85rem; color: var(--suave); }
+
+/* Tabelas de consulta */
+.tabela-mestre { border-collapse: collapse; width: 100%; font-size: .9rem; }
+.tabela-mestre th, .tabela-mestre td { border: 1px solid var(--borda); padding: .3rem .5rem; text-align: left; vertical-align: top; }
+.tabela-mestre th { background: var(--painel-2); color: var(--ouro); font-size: .82rem; }
+.tabela-mestre.ancora td:first-child { white-space: nowrap; }
+.tabela-mestre input.curto { width: 4.2rem; }
+.lista-regras { padding-left: 1.3rem; font-size: .92rem; }
+.lista-regras li { margin: .35rem 0; }
+.checklist { list-style: none; padding: 0; margin: 0; }
+.checklist li { padding: .35rem 0; border-bottom: 1px dashed var(--borda); font-size: .92rem; }
+.checklist li:last-child { border-bottom: 0; }
+
+/* Membro do grupo */
+.membro-topo { display: flex; justify-content: space-between; gap: .5rem 1rem; flex-wrap: wrap; align-items: flex-start; margin-bottom: .6rem; }
+.membro-topo h3 { margin: 0; color: var(--ouro); }
+.membro-topo p { margin: 0; }
+.membro-topo .botoes { margin-top: 0; }
+.membro .campo.estreito { flex: 0 1 8.5rem; }
+.membro .pv { margin-top: .4rem; }
+.memo-mestre .numeros { margin: .4rem 0; }
+
+/* Fila de Ação */
+.ciclo-controle { display: flex; align-items: center; gap: .4rem; }
+.ciclo-num { font-size: 1.6rem; font-weight: 800; color: var(--ouro); min-width: 1.6rem; text-align: center; }
+.faixa-ph { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; padding: .5rem .9rem; margin-bottom: 1rem;
+  background: var(--painel-2); border: 1px solid var(--borda); border-radius: var(--raio); }
+.faixa-ph b { font-size: 1.3rem; color: var(--ouro); }
+.faixa-ph .botoes { margin: 0; }
+.fila { list-style: none; margin: 0; padding: 0; }
+.fila-casa {
+  display: grid; grid-template-columns: 2.4rem minmax(0, 1.6fr) minmax(0, 1fr) auto; gap: .5rem 1rem;
+  align-items: center; padding: .5rem .3rem; border-bottom: 1px solid var(--borda);
+}
+.fila-casa:last-child { border-bottom: 0; }
+.fila-casa.agora { background: rgba(230, 195, 106, .1); border-left: 3px solid var(--ouro); padding-left: .5rem; }
+.fila-casa.agiu { opacity: .6; }
+.fila-casa.caiu .casa-quem b { text-decoration: line-through; }
+.fila-casa.quebrado { background: rgba(124, 224, 164, .07); }
+.casa-num { font-size: 1.4rem; font-weight: 800; color: var(--suave); text-align: center; font-variant-numeric: tabular-nums; }
+.fila-casa.agora .casa-num { color: var(--ouro); }
+.casa-quem > div { font-size: .9rem; }
+.casa-cond { margin-top: .2rem; display: flex; flex-wrap: wrap; gap: .2rem; }
+.casa-vitais { display: flex; flex-direction: column; gap: .3rem; }
+.casa-vital { display: grid; grid-template-columns: 5.5rem auto; gap: .4rem; align-items: center; font-size: .85rem; }
+.casa-vital .rotulo { font-size: .7rem; }
+.casa-vital b { font-variant-numeric: tabular-nums; }
+.casa-vital small { color: var(--suave); font-weight: 400; }
+.casa-vital .barra-pv, .casa-vital .barra-tenacidade { grid-column: 1 / -1; }
+.casa-botoes { display: flex; flex-wrap: wrap; gap: .25rem; justify-content: flex-end; }
+@media (max-width: 900px) {
+  .fila-casa { grid-template-columns: 2.2rem minmax(0, 1fr); }
+  .casa-vitais, .casa-botoes { grid-column: 2 / -1; justify-content: flex-start; }
+}
+.barra-tenacidade { position: relative; height: .55rem; background: #0e1426; border: 1px solid var(--borda); border-radius: 999px; overflow: hidden; }
+.barra-tenacidade span { display: block; height: 100%; background: linear-gradient(90deg, #7a6ad8, #b6a6ff); }
+.barra-tenacidade span.zerada { background: var(--verde); }
+.tenacidade-painel { display: flex; align-items: center; gap: .6rem; margin: .3rem 0; }
+.tenacidade-painel b { font-size: 1.2rem; font-variant-numeric: tabular-nums; }
+.tenacidade-painel .barra-tenacidade { flex: 1 1 8rem; }
+.alvo-painel { border-color: var(--ouro-escuro); }
+.lista-acoes { list-style: none; margin: 0; padding: 0; }
+.lista-acoes li { padding: .4rem 0; border-bottom: 1px dashed var(--borda); }
+.lista-acoes li:last-child { border-bottom: 0; }
+.etiqueta.tipo-boss { background: var(--vermelho-fundo); border-color: #6b2a36; color: var(--vermelho); }
+.etiqueta.tipo-elite { background: #2e2511; border-color: #6b5520; color: var(--ouro); }
+.etiqueta.pj { background: var(--verde-fundo); border-color: #2b6b44; color: var(--verde); }
+
+/* Encontros */
+.orcamento-leitura { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: .6rem 1rem; margin: .8rem 0; }
+.orcamento-leitura b { font-size: 1.2rem; font-variant-numeric: tabular-nums; display: block; }
+.orcamento-leitura .sub { font-size: .8rem; color: var(--suave); }
+.orcamento-leitura .barra-pv { margin: .2rem 0; }
+.contrato { padding: .6rem .9rem; border-radius: 8px; border: 1px solid var(--borda); margin: .6rem 0; font-size: .92rem; }
+.contrato.ok { background: var(--verde-fundo); border-color: #2b6b44; }
+.contrato.pendente { background: #2e2511; border-color: #6b5520; }
+
 /* ---------- Regras ---------- */
 .regras { max-width: 60rem; margin: 0 auto; }
 .busca { position: sticky; top: 3.6rem; z-index: 10; padding: .5rem 0; background: linear-gradient(var(--fundo) 85%, transparent); }
@@ -304,19 +424,26 @@ body[data-tela=regras] .historico { display: none; }
   .tabela-atributos .opcional { display: none; }
   .cartao { padding: .8rem; }
   .topo { padding: .5rem .7rem; }
-  .abas a { padding: .35rem .65rem; font-size: .92rem; }
+  .abas { flex-wrap: wrap; }
+  .abas a { padding: .35rem .6rem; font-size: .88rem; }
   .atalhos, .busca { top: 6.2rem; }
   .capitulo { padding: .8rem; }
+  .tabela-mestre { font-size: .82rem; }
+  .tabela-mestre th, .tabela-mestre td { padding: .25rem .3rem; }
 }
 
 /* ---------- Impressão ---------- */
 @media print {
   body { background: #fff; color: #000; }
-  .topo, .barra-personagem, .historico, #toasts, .rodape, .botoes, .botao, .controles-pv, .status-ficha, .atalhos { display: none !important; }
+  .topo, .barra-personagem, .historico, #toasts, .rodape, .botoes, .botao, .controles-pv, .status-ficha, .atalhos,
+  .sub-abas, .barra-mestre, .casa-botoes, .rodape-mestre { display: none !important; }
   .cartao, .acao, .numero { box-shadow: none; background: #fff; border-color: #999; color: #000; break-inside: avoid; }
-  .grade-jogo { grid-template-columns: 1fr 1fr; }
+  .grade-jogo, .grade-mestre { grid-template-columns: 1fr 1fr; }
+  .grade-membros, .grade-bichos { grid-template-columns: 1fr 1fr; }
   button.rolar { color: #000; border-color: #999; background: #fff; }
   input, select, textarea { color: #000; background: #fff; border-color: #999; }
   .suave, .ajuda, small { color: #444; }
-  h3 { color: #000; }
+  h3, .destaque, .titulo-secao { color: #000; }
+  .tabela-mestre th { background: #eee; color: #000; }
+  .fila-casa.agora { background: #f4f4f4; }
 }
