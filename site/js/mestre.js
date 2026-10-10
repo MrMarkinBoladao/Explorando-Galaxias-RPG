@@ -170,6 +170,8 @@
     if (!m.R.memo || m.p.caminho !== "A Recordação") return "";
     const memo = m.p.memoespirito, mm = m.R.memo, j = m.p.jogo;
     const pv = j.memo_pv == null ? mm.pv : Math.min(j.memo_pv, mm.pv);
+    // O PH é recurso dos jogadores (16.2): o Memoespírito de um NPC não tira PH da mesa.
+    const invocar = m.npc ? "Invocar (Ação Complementar)" : "Invocar (Ação Complementar + 1 PH)";
     return "<div class='subcartao memo-mestre'>" +
       "<div class='subcartao-topo'><b>" + esc(memo.nome || "Memoespírito") + "</b>" +
       "<span class='suave'>de " + esc(G.nome(m)) + " · " + esc([memo.funcao, memo.elemento].filter(Boolean).join(" · ")) + "</span></div>" +
@@ -177,7 +179,7 @@
       (j.memo_ativo
         ? "<span class='etiqueta pronta'>em campo</span> " +
           H.botao("dispensar-memo", "Dispensar", { classe: "pequeno", dados: { mid: m.id } })
-        : H.botao("invocar-memo", "Invocar (Ação Complementar + 1 PH)", { classe: "primario pequeno", dados: { mid: m.id } })) +
+        : H.botao("invocar-memo", invocar, { classe: "primario pequeno", dados: { mid: m.id } })) +
       "</div>" +
       "<div class='numeros compactos'>" + H.num("PV", pv + "<small>/" + mm.pv + "</small>") +
       H.num("Defesa", mm.defesa) + H.num("VEL", mm.velocidade) + H.num("RD", mm.rd) +
@@ -190,19 +192,37 @@
       "próximo Descanso Curto. " + link("11", "11.5", "11.5") + "</p></div>";
   }
 
+  /**
+   * O cartão de um combatente de ficha: PV com dano e cura, Energia, números, Morrendo,
+   * condições e Memoespírito. Serve para o jogador e para o NPC — a ficha é a mesma, então
+   * só o cabeçalho muda (o do NPC leva para a ficha dele e sai da cena, não do grupo).
+   */
   function cartaoMembro(m) {
     const R = m.R, j = m.p.jogo, pv = G.pvAtual(m);
     const falta = (function () { F.P = m.p; F.R = R; const x = F.pendencias(); F.P = null; F.R = null; return x; })();
-    let corpo = "<div class='membro-topo'>" +
-      "<div><h3>" + esc(G.nome(m)) + "</h3><p class='suave'>" +
-      esc([m.p.jogador && "jogador: " + m.p.jogador, m.p.raca, m.p.caminho, "nível " + m.p.nivel, m.p.elemento].filter(Boolean).join(" · ")) + "</p></div>" +
-      "<div class='botoes compactos'>" +
-      "<a class='botao pequeno' href='#jogar'>abrir a ficha</a>" +
-      H.botao("subir", "subir", { classe: "pequeno", dados: { mid: m.id, v: -1 }, titulo: "Subir na ordem da mesa" }) +
-      H.botao("subir", "descer", { classe: "pequeno", dados: { mid: m.id, v: 1 }, titulo: "Descer na ordem da mesa" }) +
-      H.botao("tirar-do-grupo", "Tirar do grupo", { classe: "pequeno perigo", dados: { mid: m.id } }) +
-      "</div></div>" +
-      (falta.length ? "<div class='status-ficha pendente'>Falta escolher na ficha: <b>" + esc(falta.join(", ")) + "</b></div>" : "");
+    const cabeca = m.npc
+      ? "<div><h3>" + esc(G.nome(m)) + " <span class='etiqueta npc'>NPC</span></h3><p class='suave'>" +
+        esc([m.p.npc.papel, m.p.npc.faccao, m.p.raca, m.p.caminho, "nível " + m.p.nivel, m.p.elemento]
+          .filter(Boolean).join(" · ")) + "</p></div>" +
+        "<div class='botoes compactos'>" +
+        "<a class='botao pequeno' href='#mestre/npcs/" + esc(m.id) + "'>abrir a ficha</a>" +
+        H.botao("descanso-npc", "Descanso Longo", { classe: "pequeno", dados: { mid: m.id, t: "longo" },
+          titulo: "PV cheios, condições removidas e Memoespírito dispensado (23.6)" }) +
+        H.botao("tirar-npc-da-cena", "Tirar da cena", { classe: "pequeno perigo", dados: { mid: m.id } }) +
+        "</div>"
+      : "<div><h3>" + esc(G.nome(m)) + "</h3><p class='suave'>" +
+        esc([m.p.jogador && "jogador: " + m.p.jogador, m.p.raca, m.p.caminho, "nível " + m.p.nivel, m.p.elemento].filter(Boolean).join(" · ")) + "</p></div>" +
+        "<div class='botoes compactos'>" +
+        "<a class='botao pequeno' href='#jogar'>abrir a ficha</a>" +
+        H.botao("subir", "subir", { classe: "pequeno", dados: { mid: m.id, v: -1 }, titulo: "Subir na ordem da mesa" }) +
+        H.botao("subir", "descer", { classe: "pequeno", dados: { mid: m.id, v: 1 }, titulo: "Descer na ordem da mesa" }) +
+        H.botao("tirar-do-grupo", "Tirar do grupo", { classe: "pequeno perigo", dados: { mid: m.id } }) +
+        "</div>";
+    let corpo = "<div class='membro-topo'>" + cabeca + "</div>" +
+      (falta.length ? "<div class='status-ficha pendente'>" +
+        (m.npc ? "Em branco na ficha: <b>" + esc(falta.join(", ")) + "</b> " +
+          "<span class='suave'>— num NPC isso não é erro, mas o que falta não entra nas contas.</span>"
+          : "Falta escolher na ficha: <b>" + esc(falta.join(", ")) + "</b>") + "</div>" : "");
 
     corpo += "<div class='pv'><span class='pv-numero'>" + pv + "<small> / " + R.pv_max + "</small></span>" +
       H.barraPV(pv, R.pv_max, "PV de " + G.nome(m)) + "</div>" +
@@ -354,6 +374,8 @@
     const tipoAtraso = i.kind === "inimigo" ? i.tipo : "Comum";
     const etiqueta = i.kind === "inimigo"
       ? "<span class='etiqueta tipo-" + i.tipo.toLowerCase() + "'>" + esc(i.tipo) + "</span>"
+      : i.kind === "npc" ? "<span class='etiqueta npc'>NPC" + (i.papel ? " · " + esc(i.papel) : "") + "</span>"
+      : i.kind === "npcmemo" ? "<span class='etiqueta npc'>Memoespírito de NPC</span>"
       : i.kind === "memo" ? "<span class='etiqueta'>Memoespírito</span>" : "<span class='etiqueta pj'>PJ</span>";
     const quebrado = i.x && i.x.quebrado;
     let vitais = "<div class='casa-vital'><span class='rotulo'>PV</span>" +
@@ -370,7 +392,8 @@
       "<div class='casa-quem'><div><b>" + esc(i.nome) + "</b> " + etiqueta +
       (i.agora ? " <span class='etiqueta pronta'>agindo agora</span>" : "") +
       (quebrado ? " <span class='etiqueta ruim'>Quebrado</span>" : "") +
-      (i.pv === 0 ? " <span class='etiqueta ruim'>" + (i.kind === "pj" ? "Morrendo" : i.kind === "memo" ? "caiu" : "derrotado") + "</span>" : "") +
+      (i.pv === 0 ? " <span class='etiqueta ruim'>" + (i.kind === "pj" || i.kind === "npc" ? "Morrendo"
+        : i.kind === "memo" || i.kind === "npcmemo" ? "caiu" : "derrotado") + "</span>" : "") +
       "</div><div class='suave'>" + esc(i.sub) + " · VEL " + i.vel +
       (i.atraso_casas ? " · <span class='ruim'>atrasado " + i.atraso_casas + (i.atraso_casas > 1 ? " casas" : " casa") +
         (i.atraso_bruto !== i.atraso_casas ? " (de " + i.atraso_bruto + " brutas" + (G.temFirmeza(tipoAtraso) ? ", Firmeza" : "") + ")" : "") + "</span>" : "") +
@@ -512,7 +535,7 @@
     const g = G.grupo();
     const rt = G.estado().combate.rt;
     const fonte = G.FONTES_RT.find((f) => f.id === rt.fonte) || G.FONTES_RT[0];
-    const m = rt.quem ? G.membro(rt.quem) : null;
+    const m = rt.quem ? G.alguem(rt.quem) : null;
     const elemento = rt.elemento || (m ? m.p.elemento : "");
     const relacao = G.relacaoElemento(x, elemento);
     const previa = G.reducaoTenacidade(fonte.base, relacao);
@@ -520,7 +543,8 @@
       link("20", "20.3", "20.3") + "</div>" +
       "<div class='linha'>" +
       H.campo("Quem reduziu", H.lista("g", "combate.rt.quem",
-        g.map((y) => [y.id, G.nome(y) + " · " + (y.p.elemento || "sem Elemento") + " · Ef " + sinal(y.R.eficiencia)]),
+        g.concat(G.npcsEmCena()).map((y) => [y.id, G.nome(y) + (y.npc ? " (NPC)" : "") + " · " +
+          (y.p.elemento || "sem Elemento") + " · Ef " + sinal(y.R.eficiencia)]),
         { rotulo: "Quem reduziu", vazio: "Eficiência +" + M.eficiencia(G.nivel()) + " (nível do grupo)" }), "", "estreito") +
       H.campo("Fonte", H.lista("g", "combate.rt.fonte",
         G.FONTES_RT.map((f) => [f.id, f.rotulo + " (" + f.base + ")"]),
@@ -540,7 +564,7 @@
 
   function painelDoPJ(i) {
     const m = i.m;
-    if (i.kind === "memo") {
+    if (i.kind === "memo" || i.kind === "npcmemo") {
       return H.cartao(esc(i.nome), cartaoMemoDoPJ(m) +
         "<p class='ajuda'>Memoespírito não tem Tenacidade, não fica Quebrado nem Congelado, e o dano nele se " +
         "aplica no campo <b>PV dele agora</b>. " + link("20", "20.1", "20.1") + "</p>", "alvo-painel");
@@ -633,13 +657,14 @@
     const painelAlvo = !alvo ? "" : alvo.kind === "inimigo" ? painelDoInimigo(alvo.x) : painelDoPJ(alvo);
 
     const ph = G.recursoPH(g);
+    const npcs = G.cartaoNpcsEmCena ? G.cartaoNpcsEmCena() : "";
     app().innerHTML = topo("combate") + barra +
       (ph ? "<div class='faixa-ph'><span class='rotulo'>PH do grupo</span><b>" + ph.atual + " / " + ph.max + "</b>" +
         "<div class='botoes compactos'>" + H.botao("ph", "−1", { classe: "pequeno", dados: { v: -1 } }) +
         H.botao("ph", "+1", { classe: "pequeno", dados: { v: 1 } }) +
         H.botao("ph", "+" + ph.geracao + " (acertou o Básico)", { classe: "pequeno", dados: { v: ph.geracao } }) +
         "</div></div>" : "") +
-      fila + painelAlvo + painelDeCondicoes() + porInimigosEmCena();
+      fila + painelAlvo + painelDeCondicoes() + porInimigosEmCena() + npcs;
   }
 
   // ---------------------------------------------------------------------------
@@ -955,10 +980,46 @@
           "tabela do livro</b>.") + "</p>";
   }
 
+  /** Os NPCs que este encontro leva para a cena, na ordem do banco. */
+  function npcsDoEncontro(e) {
+    if (!Array.isArray(e.npcs)) return [];
+    return e.npcs.map(G.npc).filter(Boolean);
+  }
+
+  /**
+   * Os NPCs do encontro, com o que cada papel faz na conta: Aliado soma uma ação por Ciclo
+   * do lado do grupo e por isso sobe o orçamento; Adversário custa os PV da ficha dele.
+   */
+  function escolhaDeNpcs(e, i, npcs) {
+    const banco = G.npcs();
+    if (!banco.length) {
+      return vazio("Nenhum NPC no banco ainda. <a href='#mestre/npcs'>Criar um NPC »</a>");
+    }
+    const dentro = new Set(npcs.map((m) => m.id));
+    return "<div class='participantes'>" + banco.map((p) =>
+      "<label class='marca'><input type='checkbox' data-m='toggle-npc-encontro' data-i='" + i +
+      "' data-mid='" + esc(p.id) + "'" + (dentro.has(p.id) ? " checked" : "") + "> <span>" +
+      esc(p.nome || "NPC sem nome") + " <span class='suave'>" + esc(p.npc.papel) +
+      (p.elemento ? " · " + esc(p.elemento) : "") + "</span></span></label>").join("") + "</div>" +
+      (npcs.length
+        ? "<p class='ajuda'>" +
+          (npcs.filter((m) => m.p.npc.papel === "Aliado").length
+            ? "<b>Aliados</b> agem um turno por Ciclo do lado do grupo, então o orçamento sobe na " +
+              "mesma proporção de quem está em cena. " : "") +
+          (npcs.filter((m) => m.p.npc.papel === "Adversário").length
+            ? "<b>Adversários</b> entram no custo pelos PV máximos da ficha — é a mesma regra do " +
+              "inimigo, cujo custo é o PV dele (" + link("27", "27.4", "27.4") + "). " : "") +
+          (npcs.filter((m) => m.p.npc.papel === "Neutro").length
+            ? "<b>Neutros</b> entram na Fila e não mexem em conta nenhuma: quem decide o que eles " +
+              "fazem é você. " : "") + "</p>"
+        : "<p class='ajuda'>Marque um NPC para ele entrar na cena junto com o encontro.</p>");
+  }
+
   function cartaoEncontro(e, i, g) {
     const faixaN = Number(e.faixa_n) || G.faixaN();
     const emCena = participantesDo(e, g);
-    const conta = G.contaDoEncontro(e.itens, faixaN, g.length ? emCena.length : null);
+    const npcs = npcsDoEncontro(e);
+    const conta = G.contaDoEncontro(e.itens, faixaN, g.length ? emCena.length : null, npcs);
     const contrato = G.contratoDaFraqueza(e.itens, emCena);
     const cat = G.catalogoDeInimigos();
     const linhas = (e.itens || []).map((it, j) => {
@@ -983,6 +1044,7 @@
       "<select id='add-enc-" + i + "'>" + G.opcoesDeInimigo(faixaN) + "</select>" +
       H.botao("por-no-encontro", "Adicionar", { dados: { i: i } }) + "</div>" +
       "<h3>Quem do grupo entra nesta cena</h3>" + escolhaDeParticipantes(e, i, g, emCena) +
+      "<h3>NPCs nesta cena</h3>" + escolhaDeNpcs(e, i, npcs) +
       "<div class='orcamento-leitura'>" +
       "<div><span class='rotulo'>Gasto</span><b>" + conta.custo + " / " + conta.orcamento_ajustado + " PV</b>" +
       "<div class='barra-pv'><span style='width:" + Math.min(100, conta.pct) + "%' class='" + pctClasse.trim() + "'></span></div>" +
@@ -991,13 +1053,16 @@
       "<b>" + conta.orcamento_ajustado + " PV</b>" +
       "<span class='sub'>" + (conta.ajustado
         ? "ajustado de " + conta.orcamento + " para " + conta.em_cena +
-          (conta.em_cena === 1 ? " personagem" : " personagens")
+          (conta.em_cena === 1 ? " personagem" : " personagens") +
+          (conta.npc_aliados ? " (com " + conta.npc_aliados +
+            (conta.npc_aliados === 1 ? " NPC aliado" : " NPCs aliados") + ")" : "")
         : "o número publicado, para um grupo de " + conta.referencia) + "</span></div>" +
       "<div><span class='rotulo'>Dano do grupo por Ciclo</span><b>" + conta.dpc_ajustado + "</b>" +
       "<span class='sub'>" + (conta.ajustado ? "de " + conta.dpc + " com " + conta.referencia + " personagens"
         : "o orçamento é esse dano em 4 Ciclos") + "</span></div>" +
-      "<div><span class='rotulo'>Ações agressivas do inimigo por Ciclo</span><b>" + conta.acoes + "</b>" +
-      "<span class='sub'>" + conta.n + (conta.n === 1 ? " inimigo" : " inimigos") + " em cena</span></div>" +
+      "<div><span class='rotulo'>Ações agressivas contra o grupo por Ciclo</span><b>" + conta.acoes + "</b>" +
+      "<span class='sub'>" + conta.n + (conta.n === 1 ? " na cena" : " na cena") +
+      (conta.npc_adversarios ? ", " + conta.npc_adversarios + " de ficha de NPC" : "") + "</span></div>" +
       "</div>" +
       "<div class='contrato " + (contrato.cumprido ? "ok" : "pendente") + "'>" +
       "<b>Contrato da Fraqueza: " + (contrato.cumprido ? "cumprido" : "não cumprido") + "</b> — " +
@@ -1148,7 +1213,7 @@
   };
 
   A["dano-pj"] = (b) => {
-    const m = G.membro(b.dataset.mid);
+    const m = G.alguem(b.dataset.mid);
     const v = lerNum("dano-" + b.dataset.mid);
     if (!m || !v) { EG.toast("Digite quanto de dano ele sofreu.", "erro"); return false; }
     const r = G.aplicarDano(m, v, marcado("cont-" + b.dataset.mid));
@@ -1156,7 +1221,7 @@
   };
 
   A["curar-pj"] = (b) => {
-    const m = G.membro(b.dataset.mid);
+    const m = G.alguem(b.dataset.mid);
     const v = lerNum("dano-" + b.dataset.mid);
     if (!m || !v) { EG.toast("Digite quanto ele cura.", "erro"); return false; }
     const r = G.curar(m, v);
@@ -1164,12 +1229,12 @@
   };
 
   A["energia-pj"] = (b) => {
-    const m = G.membro(b.dataset.mid);
+    const m = G.alguem(b.dataset.mid);
     if (m) G.energia(m, Number(b.dataset.v));
   };
 
   A["rolar-morrendo"] = (b) => {
-    const m = G.membro(b.dataset.mid);
+    const m = G.alguem(b.dataset.mid);
     if (!m) return false;
     const j = m.p.jogo, R = m.R;
     const r = EG.rolar(M.rolagem(R.morrendo_bonus), { rotulo: G.nome(m) + ": Teste de Morrendo (DT 10)",
@@ -1187,7 +1252,7 @@
   };
 
   A["por-cond-pj"] = (b) => {
-    const m = G.membro(b.dataset.mid);
+    const m = G.alguem(b.dataset.mid);
     const nome = lerVal("cond-" + b.dataset.mid);
     if (!m || !nome) return false;
     const t = lerNum("cond-t-" + b.dataset.mid);
@@ -1196,14 +1261,14 @@
   };
 
   A["tirar-cond-pj"] = (b) => {
-    const m = G.membro(b.dataset.mid);
+    const m = G.alguem(b.dataset.mid);
     if (!m) return false;
     m.p.jogo.condicoes.splice(Number(b.dataset.i), 1);
     G.gravarFicha(m);
   };
 
   A["cond-turno"] = (b) => {
-    const m = G.membro(b.dataset.mid);
+    const m = G.alguem(b.dataset.mid);
     if (!m) return false;
     const c = m.p.jogo.condicoes[Number(b.dataset.i)];
     if (!c) return false;
@@ -1213,20 +1278,37 @@
   };
 
   A["invocar-memo"] = (b) => {
-    const m = G.membro(b.dataset.mid);
+    const m = G.alguem(b.dataset.mid);
     if (!m || !m.R.memo) return false;
-    const r = G.recursoPH();
+    // O PH é um recurso dos jogadores (16.2). O Memoespírito de um NPC custa a Ação
+    // Complementar dele e mais nada: não há de onde um NPC tirar PH da mesa.
+    const r = m.npc ? null : G.recursoPH();
     if (r && r.atual < 1) { EG.toast("Invocar custa 1 PH e o grupo está sem PH.", "erro"); return false; }
     if (r) G.definirPH(r.atual - 1);
-    const m2 = G.membro(b.dataset.mid);
+    const m2 = G.alguem(b.dataset.mid);
     m2.p.jogo.memo_ativo = true;
     m2.p.jogo.memo_pv = m2.R.memo.pv;
     G.gravarFicha(m2);
-    EG.toast("Memoespírito de " + esc(G.nome(m2)) + " em campo: Ação Complementar e −1 PH. Ele ganha casa própria na Fila.");
+    EG.toast("Memoespírito de " + esc(G.nome(m2)) + " em campo: Ação Complementar" +
+      (r ? " e −1 PH" : "") + ". Ele ganha casa própria na Fila.");
+  };
+
+  A["descanso-npc"] = (b) => {
+    const m = G.npc(b.dataset.mid);
+    if (!m) return false;
+    const pv = G.descansoDoNpc(m, b.dataset.t === "curto" ? "curto" : "longo");
+    EG.toast("Descanso " + (b.dataset.t === "curto" ? "Curto" : "Longo") + " de " + esc(G.nome(m)) +
+      ": PV " + pv + "/" + m.R.pv_max + (b.dataset.t === "curto" ? "." : ", condições limpas."));
+  };
+
+  A["tirar-npc-da-cena"] = (b) => {
+    const m = G.npc(b.dataset.mid);
+    if (!G.tirarNpcDaCena(b.dataset.mid)) return false;
+    EG.toast(esc(m ? G.nome(m) : "NPC") + " saiu da cena. A ficha continua no banco de NPCs.");
   };
 
   A["dispensar-memo"] = (b) => {
-    const m = G.membro(b.dataset.mid);
+    const m = G.alguem(b.dataset.mid);
     if (!m) return false;
     m.p.jogo.memo_ativo = false;
     G.gravarFicha(m);
@@ -1259,9 +1341,11 @@
     const cb = G.estado().combate;
     cb.ativo = false;
     cb.inimigos = [];
+    cb.npcs = [];
     cb.cc = {};
     cb.alvo = "";
-    EG.toast("Combate encerrado. Vá em <b>Recompensas</b> para o que a cena entrega.");
+    EG.toast("Combate encerrado. As fichas dos NPCs continuam no banco, como ficaram. " +
+      "Vá em <b>Recompensas</b> para o que a cena entrega.");
   };
 
   A["agiu"] = (b) => {
@@ -1272,12 +1356,12 @@
       cc.descontou = true;
       let saiu = [];
       if (i && i.kind === "inimigo") saiu = G.fimDeTurno(i.x.condicoes, i.x);
-      else if (i && i.kind === "pj") { saiu = G.fimDeTurno(i.m.p.jogo.condicoes); G.gravarFicha(i.m); }
+      else if (i && (i.kind === "pj" || i.kind === "npc")) { saiu = G.fimDeTurno(i.m.p.jogo.condicoes); G.gravarFicha(i.m); }
       if (saiu.length) EG.toast("Fim do turno de " + esc(i.nome) + ": saiu <b>" + esc(saiu.join(", ")) + "</b>.");
     } else if (!cc.agiu && cc.descontou) {
       cc.descontou = false;
       if (i && i.kind === "inimigo") G.desfazerFimDeTurno(i.x.condicoes);
-      else if (i && i.kind === "pj") { G.desfazerFimDeTurno(i.m.p.jogo.condicoes); G.gravarFicha(i.m); }
+      else if (i && (i.kind === "pj" || i.kind === "npc")) { G.desfazerFimDeTurno(i.m.p.jogo.condicoes); G.gravarFicha(i.m); }
     }
   };
 
@@ -1336,7 +1420,7 @@
     const x = inimigoPorUid(b.dataset.uid);
     if (!x) return false;
     const rt = G.estado().combate.rt;
-    const m = rt.quem ? G.membro(rt.quem) : null;
+    const m = rt.quem ? G.alguem(rt.quem) : null;
     const ef = m ? m.R.eficiencia : M.eficiencia(G.nivel());
     const fonte = G.FONTES_RT.find((f) => f.id === rt.fonte) || G.FONTES_RT[0];
     const elemento = rt.elemento || (m ? m.p.elemento : "");
@@ -1452,6 +1536,7 @@
     const cb = G.estado().combate;
     cb.nome = e.nome || cb.nome;
     cb.inimigos = [];
+    cb.npcs = [];
     cb.cc = {};
     cb.ciclo = 1;
     cb.ativo = true;
@@ -1473,8 +1558,11 @@
         n++;
       }
     }
+    let comNpc = 0;
+    for (const id of e.npcs || []) if (G.porNpcEmCena(id)) comNpc++;
     cb.alvo = "";
     EG.toast("<b>" + esc(e.nome || "Encontro") + "</b> na mesa: " + n + (n === 1 ? " inimigo" : " inimigos") +
+      (comNpc ? " e " + comNpc + (comNpc === 1 ? " NPC" : " NPCs") : "") +
       ", Ciclo 1" + (fora ? ", e " + fora + (fora === 1 ? " personagem fora" : " personagens fora") +
         " da Fila (quem você não marcou na cena)" : "") +
       ". Confira a Surpresa antes de montar a Fila (19.3).");
@@ -1645,7 +1733,16 @@
   // --- Encontros -------------------------------------------------------------
   A["novo-encontro"] = () => {
     G.estado().encontros.unshift({ nome: "", faixa_n: G.faixaN(), itens: [],
-      participantes: G.estado().grupo.slice() });
+      participantes: G.estado().grupo.slice(), npcs: [] });
+  };
+
+  A["toggle-npc-encontro"] = (b) => {
+    const e = G.estado().encontros[Number(b.dataset.i)];
+    if (!e) return false;
+    if (!Array.isArray(e.npcs)) e.npcs = [];
+    const j = e.npcs.indexOf(b.dataset.mid);
+    if (j >= 0) e.npcs.splice(j, 1);
+    else e.npcs.push(b.dataset.mid);
   };
 
   A["toggle-participante"] = (b) => {

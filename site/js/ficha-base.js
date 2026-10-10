@@ -155,12 +155,23 @@
   F.P = null;      // personagem aberto
   F.R = null;      // resultado do motor
 
+  /**
+   * Para onde `F.salvar()` grava, quando a ficha aberta não é do mapa de fichas.
+   *
+   * O mapa "explorando-galaxias:fichas" é só das fichas dos jogadores — todo o site o lê
+   * assim. Mas a ficha de um NPC é igual à de um personagem jogável e mora na mesa do
+   * Mestre, então quem abre uma ficha de fora põe aqui a função que grava, e a tela de
+   * editar inteira funciona sem saber de onde a ficha veio. Nulo = mapa de fichas.
+   */
+  F.aoSalvar = null;
+
   F.temFicha = () => Object.keys(EG.Armazem.todas()).length > 0;
 
   F.abrirAtual = function () {
     const todas = EG.Armazem.todas();
     let id = EG.Armazem.atualId();
     if (!todas[id]) id = Object.keys(todas)[0];
+    F.aoSalvar = null;                 // esta ficha é do mapa de fichas
     F.P = id ? completar(todas[id]) : null;
     if (F.P) EG.Armazem.definirAtual(F.P.id);
     F.recalcular();
@@ -174,7 +185,11 @@
     }
   };
 
-  F.salvar = function () { if (F.P) EG.Armazem.salvar(F.P); };
+  F.salvar = function () {
+    if (!F.P) return;
+    if (F.aoSalvar) F.aoSalvar(F.P);
+    else EG.Armazem.salvar(F.P);
+  };
 
   F.trocar = function (id) {
     EG.Armazem.definirAtual(id);
@@ -182,6 +197,7 @@
   };
 
   F.criar = function (p) {
+    F.aoSalvar = null;
     F.P = completar(p || novoPersonagem());
     F.salvar();
     EG.Armazem.definirAtual(F.P.id);

@@ -53,7 +53,14 @@
   // ---------------------------------------------------------------------------
   // Seções
   // ---------------------------------------------------------------------------
+  /**
+   * Ficha de NPC aberta (a mesma tela, chamada pela Área do Mestre). Muda só o cabeçalho:
+   * NPC não tem jogador nem entra na tabela de PH do grupo, e tem Papel e Facção.
+   */
+  let modoNpc = false;
+
   function secaoBasico() {
+    if (modoNpc) return secaoBasicoNpc();
     return secao("basico", "1 · Personagem",
       linha(H.campo("Nome", H.texto("nome", { rotulo: "Nome" })),
         H.campo("Jogador", H.texto("jogador", { rotulo: "Jogador" }))) +
@@ -64,6 +71,23 @@
       H.campo("Propósito de Vida", H.texto("proposito", { area: true, rotulo: "Propósito de Vida",
         ph: "O que ele quer: um objetivo de longo prazo, alcançável e que envolva outras pessoas" }),
       link("03", "Passo 1 — Conceito e Propósito de Vida", "Passo 1 do capítulo 03")),
+      { regra: link("03", "Criação de personagem", "Criação, capítulo 03") });
+  }
+
+  function secaoBasicoNpc() {
+    const G = EG.Mestre;
+    return secao("basico", "1 · O NPC",
+      linha(H.campo("Nome", H.texto("nome", { rotulo: "Nome", ph: "Kafka" })),
+        H.campo("Papel na mesa", H.lista("npc.papel", G.PAPEIS, { vazio: false, rotulo: "Papel na mesa" }),
+          "Aliado entra na cena do lado do grupo; Adversário custa orçamento", "estreito"),
+        H.campo("Nível", H.numero("nivel", { min: 1, max: 20, rotulo: "Nível" }), "1 a 20", "estreito")) +
+      linha(H.campo("Facção", H.texto("npc.faccao", { rotulo: "Facção", ph: "Caçadores de Stellaron" })),
+        H.campo("Conceito", H.texto("conceito", { rotulo: "Conceito", ph: "Quem é esse sujeito, em uma frase" }))) +
+      H.campo("O que ele quer", H.texto("proposito", { area: true, rotulo: "O que o NPC quer",
+        ph: "O objetivo dele — é o que faz o NPC agir quando o grupo não está olhando" })) +
+      "<p class='ajuda'>Daqui para baixo é a ficha de personagem inteira (capítulo 03), e <b>nada " +
+      "é obrigatório</b>: preencha só o que você for usar. Para o NPC lutar, o que conta é " +
+      "Caminho, Atributos, Elemento, Armadura e Arma — é de lá que saem PV, Defesa, VEL e o dano.</p>",
       { regra: link("03", "Criação de personagem", "Criação, capítulo 03") });
   }
 
@@ -433,6 +457,34 @@
     ["pericias", "Perícias"], ["habilidades", "Habilidades"], ["bencaos", "Bênçãos"], ["equipamento", "Equipamento"],
     ["ressonancias", "Ressonâncias"], ["memo", "Memoespírito"]];
 
+  /**
+   * O editor inteiro da ficha que já está aberta em `F.P`: os atalhos, a linha de situação e
+   * as dez seções. A Área do Mestre chama isto com `{npc: true}` para editar a ficha de um
+   * NPC, que é a mesma ficha — só muda onde ela é gravada (`F.aoSalvar`) e o cabeçalho.
+   */
+  F.corpoDoEditor = function (o) {
+    o = o || {};
+    modoNpc = !!o.npc;
+    const falta = F.pendencias();
+    const erros = F.R.avisos.filter((a) => !SO_INFORMACAO.includes(a)).length;
+    const mostrar = SECOES.filter(([id]) => id !== "memo" || F.P.caminho === "A Recordação");
+    const situacao = modoNpc
+      ? "<div class='status-ficha " + (erros ? "pendente" : "ok") + "'>" +
+        (falta.length ? "Em branco nesta ficha: <b>" + esc(falta.join(", ")) + "</b>. " +
+          "<span class='suave'>Para um NPC isso não é erro — preencha só o que você for usar.</span>"
+          : "Ficha completa: este NPC entra em combate como um personagem jogável.") +
+        (erros ? " " + erros + (erros > 1 ? " avisos" : " aviso") + " de regra (em vermelho nas seções)." : "") + "</div>"
+      : "<div class='status-ficha " + (falta.length || erros ? "pendente" : "ok") + "'>" +
+        (falta.length ? "Falta escolher: <b>" + esc(falta.join(", ")) + "</b>." : "Ficha completa.") +
+        (erros ? " " + erros + (erros > 1 ? " avisos" : " aviso") + " de regra (em vermelho nas seções)." : "") +
+        " <a href='#jogar'>Ir para Jogar »</a></div>";
+    return "<nav class='atalhos' aria-label='Seções da ficha'>" + mostrar.map(([id, t]) =>
+        "<button type='button' class='atalho" + (F.R.avisos.some((a) => SECAO_DO_AVISO[a] === id && !SO_INFORMACAO.includes(a)) ? " com-aviso" : "") +
+        "' data-ir='sec-" + id + "'>" + t + "</button>").join("") + "</nav>" + situacao +
+      secaoBasico() + secaoRaca() + secaoCaminho() + secaoAtributos() + secaoPericias() + secaoHabilidades() +
+      secaoBencaos() + secaoEquipamento() + secaoRessonancias() + secaoMemo();
+  };
+
   function tela() {
     const app = document.getElementById("app");
     F.abrirAtual();
@@ -444,19 +496,7 @@
         "<button type='button' class='botao' data-acao='importar'>Importar arquivo</button></div></div>";
       return;
     }
-    const falta = F.pendencias();
-    const erros = F.R.avisos.filter((a) => !SO_INFORMACAO.includes(a)).length;
-    const mostrar = SECOES.filter(([id]) => id !== "memo" || F.P.caminho === "A Recordação");
-    app.innerHTML = F.barra() +
-      "<nav class='atalhos' aria-label='Seções da ficha'>" + mostrar.map(([id, t]) =>
-        "<button type='button' class='atalho" + (F.R.avisos.some((a) => SECAO_DO_AVISO[a] === id && !SO_INFORMACAO.includes(a)) ? " com-aviso" : "") +
-        "' data-ir='sec-" + id + "'>" + t + "</button>").join("") + "</nav>" +
-      "<div class='status-ficha " + (falta.length || erros ? "pendente" : "ok") + "'>" +
-      (falta.length ? "Falta escolher: <b>" + esc(falta.join(", ")) + "</b>." : "Ficha completa.") +
-      (erros ? " " + erros + (erros > 1 ? " avisos" : " aviso") + " de regra (em vermelho nas seções)." : "") +
-      " <a href='#jogar'>Ir para Jogar »</a></div>" +
-      secaoBasico() + secaoRaca() + secaoCaminho() + secaoAtributos() + secaoPericias() + secaoHabilidades() +
-      secaoBencaos() + secaoEquipamento() + secaoRessonancias() + secaoMemo();
+    app.innerHTML = F.barra() + F.corpoDoEditor();
   }
 
   document.addEventListener("click", (ev) => {

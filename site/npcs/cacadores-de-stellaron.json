@@ -1,0 +1,742 @@
+{
+  "tipo": "explorando-galaxias:npcs",
+  "versao": 1,
+  "nome": "Caçadores de Stellaron",
+  "npcs": [
+    {
+      "id": "",
+      "versao": 1,
+      "nome": "Kafka",
+      "jogador": "",
+      "conceito": "A que fala baixo, chega na hora marcada e já sabia o que você ia responder.",
+      "proposito": "Cumprir um roteiro que ela leu inteiro e não mostra para ninguém.",
+      "crenca": "Eu não minto. Só não conto a parte que ainda não serve.",
+      "aparencia": "Casaco roxo, óculos escuros, calma de quem não precisa correr.",
+      "coisa": "Um disco de música que ela toca antes de trabalhar.",
+      "notas": "",
+      "nivel": 10,
+      "jogadores": 4,
+      "raca": "Humano",
+      "bonus_racial": {
+        "modo": "Um Atributo (+2)",
+        "attr1": "Discernimento",
+        "attr2": ""
+      },
+      "caminho": "A Inexistência",
+      "atributo_habilidade": "Discernimento",
+      "elemento": "Raio",
+      "metodo": "Array oficial",
+      "atributos": {
+        "Discernimento": 15,
+        "Agilidade": 14,
+        "Presença": 13,
+        "Vigor": 12,
+        "Sincronia": 10,
+        "Poder": 8
+      },
+      "aumentos": {
+        "3": {
+          "modo": "Um Atributo (+2)",
+          "attr1": "Discernimento",
+          "attr2": ""
+        },
+        "6": {
+          "modo": "Um Atributo (+2)",
+          "attr1": "Agilidade",
+          "attr2": ""
+        },
+        "9": {
+          "modo": "Um Atributo (+2)",
+          "attr1": "Presença",
+          "attr2": ""
+        }
+      },
+      "sintonia": "Discernimento",
+      "pericias_escolhidas": [
+        "Enganação",
+        "Persuasão",
+        "Intimidação"
+      ],
+      "eficacia_pericias": [
+        "Percepção",
+        "Enganação"
+      ],
+      "eficacia_tr": [
+        "Força de Vontade"
+      ],
+      "habilidades": [
+        {
+          "nome": "Fio de Corrente",
+          "tipo": "Dano",
+          "nivel": 3,
+          "area": false,
+          "resolucao": "Teste de Ataque",
+          "alcance": "Média",
+          "ress3": false,
+          "efeito": "O chicote encosta, e a corrente continua o caminho por dentro do alvo."
+        },
+        {
+          "nome": "Sentença",
+          "tipo": "Debuff",
+          "nivel": 4,
+          "area": false,
+          "resolucao": "Teste de Resistência",
+          "alcance": "Longa",
+          "ress3": false,
+          "efeito": "Ela diz em voz alta o que vai acontecer com o alvo, e começa a acontecer."
+        },
+        {
+          "nome": "Coro de Raios",
+          "tipo": "Dano",
+          "nivel": 4,
+          "area": true,
+          "resolucao": "Teste de Ataque",
+          "alcance": "Média",
+          "ress3": false,
+          "efeito": "Todo alvo já marcado por ela recebe o mesmo raio ao mesmo tempo."
+        },
+        {
+          "nome": "Mentira Confortável",
+          "tipo": "Debuff",
+          "nivel": 2,
+          "area": false,
+          "resolucao": "Teste de Resistência",
+          "alcance": "Curta",
+          "ress3": false,
+          "efeito": "O inimigo acredita na versão dela por tempo suficiente."
+        },
+        {
+          "nome": "Ela Já Sabia",
+          "tipo": "Passiva",
+          "nivel": 2,
+          "area": false,
+          "resolucao": "",
+          "alcance": "",
+          "ress3": false,
+          "efeito": "Uma vez por cena ela revela que previu aquilo — e a revelação é verdadeira."
+        }
+      ],
+      "ultimate": {
+        "nome": "Fim do Capítulo",
+        "tipo": "Dano",
+        "area": true,
+        "resolucao": "Teste de Ataque",
+        "efeito": "Ela fecha o roteiro e cobra, de uma vez, tudo que plantou na cena."
+      },
+      "bencaos": [
+        "Marca do Vazio",
+        "Corrupção Progressiva",
+        "Veneno do Nada",
+        "Mestre das Aflições",
+        "Erosão Mental"
+      ],
+      "fragmento": "",
+      "forma_avatar": "",
+      "armadura": "Leve",
+      "armadura_nome": "Casaco de corte caro, com placas finas por dentro",
+      "arma": {
+        "nome": "Pistola-chicote",
+        "categoria": "Disparo curto",
+        "atributo": "Agilidade",
+        "elemento": "Raio",
+        "propriedade": "Nenhuma"
+      },
+      "cone": {
+        "nome": "Disco de Vinil Rachado",
+        "nivel": 3,
+        "alvo": "Dano de Habilidade",
+        "qual": "",
+        "escolha": "Numérico",
+        "sobreposicoes": 0,
+        "efeito": "Contra alvo que já esteja sob um efeito dela, o dano sobe."
+      },
+      "reliquias": {
+        "Cabeça": {
+          "tem": true,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Mãos": {
+          "tem": true,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Tronco": {
+          "tem": false,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Botas": {
+          "tem": true,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Esfera Planar": {
+          "tem": true,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Corda de Ligação": {
+          "tem": false,
+          "nome": "",
+          "conjunto": "—"
+        }
+      },
+      "esfera_elemento": "Raio",
+      "conjuntos": {
+        "A": {
+          "nome": "",
+          "bonus2": "",
+          "rolagem": "",
+          "efeito4": ""
+        },
+        "B": {
+          "nome": "",
+          "bonus2": "",
+          "rolagem": "",
+          "efeito4": ""
+        },
+        "C": {
+          "nome": "",
+          "bonus2": "",
+          "rolagem": "",
+          "efeito4": ""
+        }
+      },
+      "ressonancias": {
+        "I": "Velocidade +1",
+        "II": "Ultimate com efeito extra",
+        "III": "",
+        "IV": ""
+      },
+      "tecnica": "Ela conversa cinco minutos com alguém e sai sabendo o que a pessoa esconde.",
+      "inventario": [],
+      "creditos": 0,
+      "memoespirito": {
+        "nome": "",
+        "conceito": "",
+        "funcao": "",
+        "elemento": "",
+        "pontos": {},
+        "atributo_ataque": "Poder",
+        "bonus_menores": [],
+        "evolucoes": [],
+        "memoria_desperta": "",
+        "hab_ofensiva": "",
+        "hab_auxiliar": ""
+      },
+      "jogo": {
+        "pv": null,
+        "temp": 0,
+        "energia": 0,
+        "ph": null,
+        "esforco": 1,
+        "memo_ativo": false,
+        "memo_pv": null,
+        "acumulos": {},
+        "condicoes": [],
+        "usos": {},
+        "morrendo": {
+          "s": 0,
+          "f": 0
+        },
+        "presa": ""
+      },
+      "npc": {
+        "papel": "Adversário",
+        "faccao": "Caçadores de Stellaron"
+      }
+    },
+    {
+      "id": "",
+      "versao": 1,
+      "nome": "Silver Wolf",
+      "jogador": "",
+      "conceito": "A jogadora que trata o universo como jogo mal programado, e abusa dos bugs.",
+      "proposito": "Achar o chefe final deste mundo e derrotar ele de um jeito que ninguém tentou.",
+      "crenca": "Se tem brecha, a brecha faz parte das regras.",
+      "aparencia": "Capuz, fones enormes, olhos de quem não dorme há dois dias por escolha.",
+      "coisa": "Um cartucho de um console que ninguém mais fabrica.",
+      "notas": "",
+      "nivel": 10,
+      "jogadores": 4,
+      "raca": "Humano",
+      "bonus_racial": {
+        "modo": "Um Atributo (+2)",
+        "attr1": "Sincronia",
+        "attr2": ""
+      },
+      "caminho": "A Inexistência",
+      "atributo_habilidade": "Sincronia",
+      "elemento": "Quântico",
+      "metodo": "Array oficial",
+      "atributos": {
+        "Sincronia": 15,
+        "Discernimento": 14,
+        "Agilidade": 13,
+        "Vigor": 12,
+        "Presença": 10,
+        "Poder": 8
+      },
+      "aumentos": {
+        "3": {
+          "modo": "Um Atributo (+2)",
+          "attr1": "Sincronia",
+          "attr2": ""
+        },
+        "6": {
+          "modo": "Um Atributo (+2)",
+          "attr1": "Discernimento",
+          "attr2": ""
+        },
+        "9": {
+          "modo": "Um Atributo (+2)",
+          "attr1": "Agilidade",
+          "attr2": ""
+        }
+      },
+      "sintonia": "Sincronia",
+      "pericias_escolhidas": [
+        "Tecnologia",
+        "Mecânica",
+        "Ciência",
+        "Enganação",
+        "Acrobacia",
+        "Investigação",
+        "Intuição"
+      ],
+      "eficacia_pericias": [
+        "Tecnologia",
+        "Pesquisa"
+      ],
+      "eficacia_tr": [
+        "Resistência Mental"
+      ],
+      "habilidades": [
+        {
+          "nome": "Injetar Fraqueza",
+          "tipo": "Debuff",
+          "nivel": 4,
+          "area": false,
+          "resolucao": "Teste de Resistência",
+          "alcance": "Longa",
+          "ress3": false,
+          "efeito": "Ela escreve uma linha no alvo, e o alvo passa a ter uma falha que não tinha."
+        },
+        {
+          "nome": "Pacote Corrompido",
+          "tipo": "Dano",
+          "nivel": 3,
+          "area": false,
+          "resolucao": "Teste de Ataque",
+          "alcance": "Longa",
+          "ress3": false,
+          "efeito": "O dano chega como se sempre tivesse estado ali, só faltava carregar."
+        },
+        {
+          "nome": "Travar Rotina",
+          "tipo": "Debuff",
+          "nivel": 3,
+          "area": false,
+          "resolucao": "Teste de Resistência",
+          "alcance": "Média",
+          "ress3": false,
+          "efeito": "O inimigo repete a última ação dele porque não consegue sair do laço."
+        },
+        {
+          "nome": "Área de Teste",
+          "tipo": "Dano",
+          "nivel": 3,
+          "area": true,
+          "resolucao": "Teste de Ataque",
+          "alcance": "Média",
+          "ress3": false,
+          "efeito": "Um quadrado da cena roda com regras diferentes por um instante."
+        },
+        {
+          "nome": "Ponto de Salvamento",
+          "tipo": "Passiva",
+          "nivel": 2,
+          "area": false,
+          "resolucao": "",
+          "alcance": "",
+          "ress3": false,
+          "efeito": "Uma vez por cena ela desfaz o próprio erro, como quem recarrega o jogo."
+        }
+      ],
+      "ultimate": {
+        "nome": "Partida Encerrada",
+        "tipo": "Debuff",
+        "area": true,
+        "resolucao": "Teste de Resistência",
+        "efeito": "Ela mostra a tela de fim de jogo para a cena inteira, e por um momento todos acreditam."
+      },
+      "bencaos": [
+        "Marca do Vazio",
+        "Olhar da Ausência",
+        "Corrupção Progressiva",
+        "Silêncio da Existência",
+        "Implante de Fraqueza"
+      ],
+      "fragmento": "",
+      "forma_avatar": "",
+      "armadura": "Leve",
+      "armadura_nome": "Jaqueta com tecido de camuflagem de dados",
+      "arma": {
+        "nome": "Injetor de código",
+        "categoria": "Energia",
+        "atributo": "Sincronia",
+        "elemento": "Quântico",
+        "propriedade": "Nenhuma"
+      },
+      "cone": {
+        "nome": "Console Modificado",
+        "nivel": 3,
+        "alvo": "Dano de Habilidade",
+        "qual": "",
+        "escolha": "Numérico",
+        "sobreposicoes": 0,
+        "efeito": "Contra alvo com Fraqueza que ela mesma implantou, o dano sobe."
+      },
+      "reliquias": {
+        "Cabeça": {
+          "tem": true,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Mãos": {
+          "tem": true,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Tronco": {
+          "tem": false,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Botas": {
+          "tem": false,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Esfera Planar": {
+          "tem": true,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Corda de Ligação": {
+          "tem": true,
+          "nome": "",
+          "conjunto": "—"
+        }
+      },
+      "esfera_elemento": "Quântico",
+      "conjuntos": {
+        "A": {
+          "nome": "",
+          "bonus2": "",
+          "rolagem": "",
+          "efeito4": ""
+        },
+        "B": {
+          "nome": "",
+          "bonus2": "",
+          "rolagem": "",
+          "efeito4": ""
+        },
+        "C": {
+          "nome": "",
+          "bonus2": "",
+          "rolagem": "",
+          "efeito4": ""
+        }
+      },
+      "ressonancias": {
+        "I": "Habilidade de Nível 3 ou menor sem PH (1 por combate)",
+        "II": "Ultimate com efeito extra",
+        "III": "",
+        "IV": ""
+      },
+      "tecnica": "Ela entra em qualquer sistema civil em dez minutos e sai sem deixar registro.",
+      "inventario": [],
+      "creditos": 0,
+      "memoespirito": {
+        "nome": "",
+        "conceito": "",
+        "funcao": "",
+        "elemento": "",
+        "pontos": {},
+        "atributo_ataque": "Poder",
+        "bonus_menores": [],
+        "evolucoes": [],
+        "memoria_desperta": "",
+        "hab_ofensiva": "",
+        "hab_auxiliar": ""
+      },
+      "jogo": {
+        "pv": null,
+        "temp": 0,
+        "energia": 0,
+        "ph": null,
+        "esforco": 1,
+        "memo_ativo": false,
+        "memo_pv": null,
+        "acumulos": {},
+        "condicoes": [],
+        "usos": {},
+        "morrendo": {
+          "s": 0,
+          "f": 0
+        },
+        "presa": ""
+      },
+      "npc": {
+        "papel": "Adversário",
+        "faccao": "Caçadores de Stellaron"
+      }
+    },
+    {
+      "id": "",
+      "versao": 1,
+      "nome": "Blade",
+      "jogador": "",
+      "conceito": "O que não morre, e por isso luta como quem não tem nada a perder — porque não tem.",
+      "proposito": "Encontrar alguém capaz de acabar com ele de verdade.",
+      "crenca": "",
+      "aparencia": "Cabelo preso, cicatrizes que não fecham, espada quebrada que ele não troca.",
+      "coisa": "O punho de uma espada antiga, sem lâmina, que ele carrega no cinto.",
+      "notas": "",
+      "nivel": 10,
+      "jogadores": 4,
+      "raca": "Xianzhouíta",
+      "bonus_racial": {
+        "modo": "Um Atributo (+2)",
+        "attr1": "Vigor",
+        "attr2": ""
+      },
+      "caminho": "A Destruição",
+      "atributo_habilidade": "Poder",
+      "elemento": "Vento",
+      "metodo": "Array oficial",
+      "atributos": {
+        "Poder": 15,
+        "Vigor": 14,
+        "Agilidade": 13,
+        "Presença": 12,
+        "Discernimento": 10,
+        "Sincronia": 8
+      },
+      "aumentos": {
+        "3": {
+          "modo": "Um Atributo (+2)",
+          "attr1": "Poder",
+          "attr2": ""
+        },
+        "6": {
+          "modo": "Um Atributo (+2)",
+          "attr1": "Vigor",
+          "attr2": ""
+        },
+        "9": {
+          "modo": "Um Atributo (+2)",
+          "attr1": "Agilidade",
+          "attr2": ""
+        }
+      },
+      "sintonia": "Discernimento",
+      "pericias_escolhidas": [
+        "Intimidação",
+        "Percepção"
+      ],
+      "eficacia_pericias": [
+        "Resistência",
+        "Atletismo"
+      ],
+      "eficacia_tr": [
+        "Resistência Física"
+      ],
+      "habilidades": [
+        {
+          "nome": "Corte do Próprio Sangue",
+          "tipo": "Dano",
+          "nivel": 4,
+          "area": false,
+          "resolucao": "Teste de Ataque",
+          "alcance": "Curta",
+          "ress3": false,
+          "efeito": "Ele abre a mão na lâmina, e o corte sai mais fundo do que devia."
+        },
+        {
+          "nome": "Rajada de Fio",
+          "tipo": "Dano",
+          "nivel": 3,
+          "area": true,
+          "resolucao": "Teste de Ataque",
+          "alcance": "Curta",
+          "ress3": false,
+          "efeito": "A espada quebrada canta no ar, e o vento corta junto."
+        },
+        {
+          "nome": "Não Caio",
+          "tipo": "Buff",
+          "nivel": 2,
+          "area": false,
+          "resolucao": "Teste de Ataque",
+          "alcance": "Pessoal",
+          "ress3": false,
+          "efeito": "Ele decide que ainda não acabou, e o corpo obedece."
+        },
+        {
+          "nome": "Dívida de Dor",
+          "tipo": "Debuff",
+          "nivel": 3,
+          "area": false,
+          "resolucao": "Teste de Resistência",
+          "alcance": "Curta",
+          "ress3": false,
+          "efeito": "Tudo que ele sofreu neste combate volta como peso para quem está na frente."
+        },
+        {
+          "nome": "Carne Que Não Fecha",
+          "tipo": "Passiva",
+          "nivel": 2,
+          "area": false,
+          "resolucao": "",
+          "alcance": "",
+          "ress3": false,
+          "efeito": "Ferimento nele vira só mais uma cicatriz, e cicatriz nele não impede nada."
+        }
+      ],
+      "ultimate": {
+        "nome": "Lâmina Sem Fim",
+        "tipo": "Dano",
+        "area": false,
+        "resolucao": "Teste de Ataque",
+        "efeito": "Ele gasta o próprio sangue até a espada ficar inteira por um golpe só."
+      },
+      "bencaos": [
+        "Pacto da Ruína",
+        "Corpo Forjado na Dor",
+        "Instinto de Sobrevivência",
+        "Quebrador de Mundos",
+        "Último Fragmento de Vida"
+      ],
+      "fragmento": "",
+      "forma_avatar": "",
+      "armadura": "Média",
+      "armadura_nome": "Peças soltas de armadura por cima de roupa comum",
+      "arma": {
+        "nome": "Espada quebrada",
+        "categoria": "Pesada",
+        "atributo": "Poder",
+        "elemento": "Vento",
+        "propriedade": "Nenhuma"
+      },
+      "cone": {
+        "nome": "Punho Sem Lâmina",
+        "nivel": 3,
+        "alvo": "Dano de Ataque Básico",
+        "qual": "",
+        "escolha": "Numérico",
+        "sobreposicoes": 0,
+        "efeito": "Quanto menos PV ele tem, mais o golpe dele pesa."
+      },
+      "reliquias": {
+        "Cabeça": {
+          "tem": false,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Mãos": {
+          "tem": true,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Tronco": {
+          "tem": true,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Botas": {
+          "tem": true,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Esfera Planar": {
+          "tem": false,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Corda de Ligação": {
+          "tem": true,
+          "nome": "",
+          "conjunto": "—"
+        }
+      },
+      "esfera_elemento": "",
+      "conjuntos": {
+        "A": {
+          "nome": "",
+          "bonus2": "",
+          "rolagem": "",
+          "efeito4": ""
+        },
+        "B": {
+          "nome": "",
+          "bonus2": "",
+          "rolagem": "",
+          "efeito4": ""
+        },
+        "C": {
+          "nome": "",
+          "bonus2": "",
+          "rolagem": "",
+          "efeito4": ""
+        }
+      },
+      "ressonancias": {
+        "I": "Velocidade +1",
+        "II": "Ultimate com efeito extra",
+        "III": "",
+        "IV": ""
+      },
+      "tecnica": "Ele aguenta o que mataria qualquer um e segue andando, e quem vê entende o recado.",
+      "inventario": [],
+      "creditos": 0,
+      "memoespirito": {
+        "nome": "",
+        "conceito": "",
+        "funcao": "",
+        "elemento": "",
+        "pontos": {},
+        "atributo_ataque": "Poder",
+        "bonus_menores": [],
+        "evolucoes": [],
+        "memoria_desperta": "",
+        "hab_ofensiva": "",
+        "hab_auxiliar": ""
+      },
+      "jogo": {
+        "pv": null,
+        "temp": 0,
+        "energia": 0,
+        "ph": null,
+        "esforco": 1,
+        "memo_ativo": false,
+        "memo_pv": null,
+        "acumulos": {},
+        "condicoes": [],
+        "usos": {},
+        "morrendo": {
+          "s": 0,
+          "f": 0
+        },
+        "presa": ""
+      },
+      "npc": {
+        "papel": "Adversário",
+        "faccao": "Caçadores de Stellaron"
+      }
+    }
+  ]
+}

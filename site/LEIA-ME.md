@@ -13,15 +13,16 @@ As fichas ficam salvas **no navegador** de cada jogador. Para backup ou para man
 
 Abre com um **aviso de spoiler** curto — é a página que mostra o bestiário e as recompensas, então
 quem é jogador e não está mestrando é melhor não entrar. Um clique dispensa o aviso para sempre, e
-o botão **Rever o aviso de spoiler**, no fim do Painel, traz ele de volta. Sete telas:
+o botão **Rever o aviso de spoiler**, no fim do Painel, traz ele de volta. Oito telas:
 
 | Tela | O que tem |
 |---|---|
 | **Painel** | Campanha, faixa, PH do grupo, a tira do grupo com PV e Energia, o Ciclo em curso, a DT da faixa (27.2), rolador e checklist de abertura de sessão |
 | **Grupo** | Tamanho do grupo com o PH resultante (16.2); por jogador: PV com dano e cura já descontando RD, PV temporário, Energia, Defesa/Esquiva/RD/VEL/DT, condições com turnos, Memoespírito (invocar, dispensar, PV) e o painel de Morrendo; cobertura de Elementos, ordem de VEL e os descansos do grupo |
-| **Combate** | A Fila de Ação (19.3) com PJs, Memoespíritos em campo e inimigos; Ciclo com os quatro passos de avanço; Atrasar e Avançar com Firmeza e teto (19.4); Tenacidade com a calculadora de redução (20.3) e a Quebra com dano e efeito por Elemento (20.5); virada de fase de Boss (28.5); condições com turnos |
+| **Combate** | A Fila de Ação (19.3) com PJs, Memoespíritos em campo, NPCs e inimigos; Ciclo com os quatro passos de avanço; Atrasar e Avançar com Firmeza e teto (19.4); Tenacidade com a calculadora de redução (20.3) e a Quebra com dano e efeito por Elemento (20.5); virada de fase de Boss (28.5); condições com turnos |
 | **Inimigos** | O bestiário das 32 fichas do capítulo 28 com filtro, o criador pela tabela de âncoras (28.3), os inimigos da campanha e a **importação/exportação de inimigos em `.json`** (abaixo) |
-| **Encontros** | Orçamento de PV (27.4) com a leitura de passagem/típico/pesado, **quem do grupo entra na cena** (o orçamento e o contrato da Fraqueza se ajustam a isso), as quatro composições e a DT para descobrir Fraqueza (27.3) |
+| **NPCs** | O banco de NPCs: **ficha de personagem completa**, igual à de um jogável, para quem não é do grupo. Criar do zero, copiar de uma ficha salva, filtrar por papel, pôr em cena e a **importação/exportação em `.json`** (abaixo) |
+| **Encontros** | Orçamento de PV (27.4) com a leitura de passagem/típico/pesado, **quem do grupo entra na cena** e **quais NPCs entram** (o orçamento e o contrato da Fraqueza se ajustam a isso), as quatro composições e a DT para descobrir Fraqueza (27.3) |
 | **Recompensas** | O calendário de marco (27.8), a verba (24.5), a conferência do que o nível de cada um já libera e o tesouro do grupo |
 | **Escudo do Mestre** | As tabelas de consulta, imprimíveis: DTs, Tenacidade e Quebra, Fila, as nove regras de inimigo, âncoras, condições e Energia |
 
@@ -63,6 +64,47 @@ São 40 fichas montadas pela tabela de âncoras, oito por faixa de nível (5 Com
 
 As Fraquezas delas são **sugestões**: troque à vontade para cumprir o contrato de encontro de 27.5,
 que é o que as fichas do capítulo 28 também pedem.
+
+### NPCs
+
+Inimigo e NPC resolvem problemas diferentes. O **inimigo** sai da tabela de âncoras de 28.3: treze
+números e nada mais, para a cena de luta. O **NPC** é uma figura com nome — e por isso ele tem a
+**ficha de personagem inteira**, a mesma dos jogadores: Raça, Caminho, Atributos, Perícias,
+Habilidades, Ultimate, Bênçãos, equipamento, Cone, Relíquias, Ressonâncias e Memoespírito. A tela
+que edita a ficha dele é literalmente a aba **Editar ficha**, com os mesmos cálculos e os mesmos
+avisos de regra.
+
+- **Nada é obrigatório.** Um NPC só de nome já serve para a sua lista. Se ele for lutar, preencha
+  Caminho, Atributos, Elemento, Armadura e Arma — PV, Defesa, RD, VEL, DT e dano saem sozinhos do
+  mesmo motor de regras da ficha. A tela diz o que está em branco, sem tratar como erro.
+- **NPC não entra no grupo.** A ficha dele mora na mesa do Mestre, não no mapa de fichas dos
+  jogadores: ele não aparece no seletor de personagem de ninguém, não é somado ao tamanho do grupo
+  e não encosta no PH, que é recurso dos jogadores (16.2). O Memoespírito de um NPC custa a Ação
+  Complementar dele e mais nada.
+- **Em combate** ele ganha **casa própria na Fila de Ação** pela VEL da ficha, com os desempates de
+  19.3 — em empate, os jogadores vêm antes dos NPCs. No painel dele estão os mesmos controles do
+  grupo: dano já descontando RD, cura, PV temporário, Energia e Ultimate, condições com turnos,
+  Morrendo e o Memoespírito (que também ganha casa própria na Fila).
+- **Três papéis**, que mudam só a conta do encontro: **Aliado** age um turno por Ciclo do lado do
+  grupo, então o orçamento de 27.4 sobe na mesma proporção de quem está em cena; **Adversário**
+  custa os PV máximos da ficha dele, pela regra de que o custo de um inimigo é o PV dele;
+  **Neutro** entra na Fila e não mexe em conta nenhuma.
+- **O arquivo de NPC é um arquivo de ficha.** Isso vale nos dois sentidos: o `.json` que um jogador
+  exporta na aba Jogar importa aqui como NPC (o personagem que saiu da campanha e virou figura da
+  história), e um NPC exportado abre como ficha de personagem. A importação **soma** ao banco e
+  nunca apaga nada. Só o `nome` é obrigatório; o que faltar fica em branco, e se a ficha ferir
+  alguma regra do livro a importação avisa e a tela de editar mostra onde.
+- **Copiar de uma ficha salva** faz uma cópia como NPC: a ficha do jogador continua intacta.
+
+As coleções de exemplo ficam em **`site/npcs/*.json`**, com link de download no próprio cartão.
+São fichas de **nível 10** (faixa 9-12), todas sem nenhum aviso de regra:
+
+| Arquivo | Papel | Quem |
+|---|---|---|
+| `npcs/tripulacao-do-expresso-astral.json` | Aliado | Himeko, Welt, Dan Heng e March 7th |
+| `npcs/cacadores-de-stellaron.json` | Adversário | Kafka, Silver Wolf e Blade |
+
+Depois de importadas são **suas**: mude nível, Elemento, Bênçãos e Habilidades à vontade.
 
 ## Como abrir
 
@@ -123,12 +165,14 @@ Os **números das fórmulas** (PV, Defesa, dano, tetos...) moram em `site/js/mot
 | `js/ficha-base.js` | Modelo da ficha, salvar, exportar e importar |
 | `js/ficha-editar.js` | A aba Editar ficha |
 | `js/ficha-jogar.js` | A aba Jogar |
-| `js/mestre-base.js` | Estado da mesa do Mestre, sincronia com as fichas, as regras de mesa (Fila, Firmeza, Tenacidade, Quebra, orçamento), o aviso de abertura e a rota |
+| `js/mestre-base.js` | Estado da mesa do Mestre, sincronia com as fichas, o modelo de inimigo e de NPC, as regras de mesa (Fila, Firmeza, Tenacidade, Quebra, orçamento), o aviso de abertura e a rota |
 | `js/mestre.js` | As telas de mesa: Painel, Grupo, Combate, Inimigos e Encontros |
+| `js/mestre-npcs.js` | A tela NPCs: o banco e a ficha de cada NPC (que reaproveita a aba Editar ficha) |
 | `js/mestre-escudo.js` | As telas de consulta: Recompensas e Escudo do Mestre |
 | `js/regras.js` | A aba Regras (pesquisa e leitura) |
 | `js/app.js` | Rolador de dados, avisos e navegação |
 | `js/vendor/marked.umd.js` | Biblioteca que transforma o texto do livro em página (licença MIT) |
 | `inimigos/*.json` | As coleções de inimigos prontas para importar na aba Inimigos |
+| `npcs/*.json` | As coleções de NPCs prontas para importar na aba NPCs |
 | `dados/*.js`, `img/`, `versao.json` | Gerados por `gerar_site.py`. Não edite à mão |
 | `index.html` | A casca. O `?v=<selo>` dos endereços é posto por `gerar_site.py` — rode o script depois de mexer em qualquer `.js` ou no `.css` |
