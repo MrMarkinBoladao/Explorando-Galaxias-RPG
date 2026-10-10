@@ -193,6 +193,22 @@
   }
 
   /**
+   * A história que o jogador escreveu, já formatada e **fechada**: na Área do Mestre são
+   * várias fichas na mesma tela, e um texto de mil palavras aberto afogaria o combate. Um
+   * clique abre. Na aba Jogar ela vem aberta, que é a tela de um personagem só.
+   */
+  G.historiaDe = function (m) {
+    const html = EG.markdown(m.p.lore);
+    if (!html) return "";
+    const n = EG.palavras(m.p.lore);
+    return "<details class='lore-fechada'" + EG.atributosAbre("lore:" + m.id, false) +
+      "><summary>Ler a história de " + esc(G.nome(m)) +
+      " <span class='suave'>(" + n + (n === 1 ? " palavra" : " palavras") + ")</span></summary>" +
+      "<div class='texto-lore'>" + html + "</div></details>";
+  };
+  const historiaDe = G.historiaDe;
+
+  /**
    * O cartão de um combatente de ficha: PV com dano e cura, Energia, números, Morrendo,
    * condições e Memoespírito. Serve para o jogador e para o NPC — a ficha é a mesma, então
    * só o cabeçalho muda (o do NPC leva para a ficha dele e sai da cena, não do grupo).
@@ -258,6 +274,15 @@
       "<p class='ajuda'>Descanso Curto devolve <b>" + Math.max(0, R.descanso_curto) + " PV</b> a ele. " +
       (R.esforco_max ? "Esforço: " + (j.esforco ? "<b>disponível</b>" : "gasto") + ". " : "") +
       "Capacidade " + R.ocupado + "/" + R.capacidade + " de Espaço.</p>";
+
+    // O Cone de Luz dele, lido da mesma ficha que o jogador tem aberta: a arte, o Bônus
+    // Maior que já está nos números acima e o Efeito Condicional, que é o que o Mestre
+    // precisa ter na frente para saber quando o gatilho dispara (25.2).
+    if (F.temCone(m.p)) {
+      corpo += "<h3>Cone de Luz</h3>" + F.coneHTML(m.p, R, { mini: true, descricaoFechada: true });
+    }
+
+    corpo += historiaDe(m);
 
     if (pv === 0) {
       const mo = j.morrendo;
@@ -712,6 +737,9 @@
       "</details>";
   }
 
+  /** A chave do recolhível de cada inimigo salvo (ver EG.estaAberto, em app.js). */
+  const chaveDoSalvo = (x) => "inimigo:" + x.uid;
+
   function editorDeInimigo(x, i) {
     const cam = "inimigos_salvos." + i;
     const marcas = (campo) => G.ELEMENTOS.map((e) =>
@@ -746,16 +774,122 @@
         ": dano até 1,5× num alvo, ou o dano cheio por alvo em 2 ou 3 alvos, com recarga de 2 ou 3 Ciclos") +
       "<div class='acao-numeros'><span>Ataque " + botaoRolar(M.rolagem(x.ataque || 0), (x.nome || "Inimigo") + ": ataque") + "</span>" +
       (x.dano ? "<span>Dano " + botaoRolar(x.dano, (x.nome || "Inimigo") + ": dano") + "</span>" : "") + "</div>" +
-      acoesDoSalvo(x) +
+      acoesDoSalvo(x);
+    // O resumo e os botões ficam de fora do <details>: com a mesa cheia de inimigos, a lista
+    // tem de ser lida de relance e "Pôr em cena" tem de estar a um clique, sem abrir a ficha.
+    const resumo = [x.tipo, x.faccao, "faixa " + (x.faixa || "—"), (x.pv || 0) + " PV",
+      (x.fraquezas || []).length ? (x.fraquezas || []).join(", ") : "sem Fraqueza"].filter(Boolean);
+    return "<section class='cartao inimigo-salvo'>" +
+      "<details" + EG.atributosAbre(chaveDoSalvo(x), false) + ">" +
+      "<summary class='cartao-topo'><h2>" + esc(x.nome || "Inimigo sem nome") +
+      "<span class='etiqueta tipo-" + esc(String(x.tipo || "comum").toLowerCase()) + "'>" +
+      esc(x.tipo || "Comum") + "</span></h2>" +
+      "<span class='suave'>" + esc(resumo.join(" · ")) + "</span></summary>" +
+      notaDePV(x) + corpo + "</details>" +
       "<div class='botoes'>" +
       H.botao("por-salvo-em-cena", "Pôr em cena", { classe: "primario", dados: { i: i } }) +
       H.botao("duplicar-salvo", "Duplicar", { dados: { i: i } }) +
       H.botao("exportar-inimigo", "Exportar .json", { dados: { i: i },
         titulo: "Baixa só esta ficha, para guardar ou passar para outra pessoa" }) +
       H.botao("excluir-salvo", "Excluir", { classe: "perigo", dados: { i: i } }) +
-      "</div>";
-    return H.cartao(esc(x.nome || "Inimigo sem nome"), notaDePV(x) + corpo, "inimigo-salvo",
-      "<span class='suave'>" + esc(x.tipo) + " · faixa " + esc(x.faixa || "—") + " · " + (x.pv || 0) + " PV</span>");
+      "</div></section>";
+  }
+
+  // --- Filtros dos inimigos da campanha -------------------------------------
+  const ORDENS_INIMIGO = [
+    ["", "na ordem em que eu criei"],
+    ["nome", "nome (A–Z)"],
+    ["faccao", "facção (agrupado)"],
+    ["tipo", "tipo: Comum → Elite → Boss"],
+    ["faixa", "faixa de nível (agrupado)"],
+    ["pv", "PV (do maior para o menor)"],
+  ];
+  const PESO_TIPO = { Comum: 0, Elite: 1, Boss: 2 };
+  const pesoTipo = (t) => (t in PESO_TIPO ? PESO_TIPO[t] : 9);
+  const SEM_FACCAO = "\u0000sem";
+
+  /** As facções que existem nos meus inimigos, em ordem, para o filtro. */
+  function faccoesSalvas(lista) {
+    const vistas = new Map();
+    for (const x of lista) {
+      const f = String(x.faccao || "").trim();
+      if (f) vistas.set(EG.norm(f), f);
+    }
+    return Array.from(vistas.values()).sort((a, b) => a.localeCompare(b, "pt-BR"));
+  }
+
+  /**
+   * Filtra e ordena os inimigos da campanha preservando o **índice original** de cada um:
+   * é esse índice que liga cada campo da ficha ao array (`inimigos_salvos.<i>.campo`) e que
+   * os botões usam, então filtrar sem ele mandaria a edição para o inimigo errado.
+   */
+  function meusInimigos() {
+    const est = G.estado(), fl = est.filtros;
+    const q = EG.norm(fl.inim_q || "");
+    const visiveis = [];
+    est.inimigos_salvos.forEach((x, i) => {
+      const faccao = String(x.faccao || "").trim();
+      if (fl.inim_faccao === SEM_FACCAO ? faccao : fl.inim_faccao && faccao !== fl.inim_faccao) return;
+      if (fl.inim_tipo && x.tipo !== fl.inim_tipo) return;
+      if (fl.inim_faixa && String(x.faixa_n || "") !== String(fl.inim_faixa)) return;
+      if (q && !EG.norm([x.nome, faccao, x.tipo, x.faixa, x.origem, (x.fraquezas || []).join(" "),
+        (x.resistencias || []).join(" "), x.fila].join(" ")).includes(q)) return;
+      visiveis.push([x, i]);
+    });
+    const porNome = (a, b) => String(a[0].nome || "").localeCompare(String(b[0].nome || ""), "pt-BR");
+    const ordem = fl.inim_ordem;
+    if (ordem === "nome") visiveis.sort(porNome);
+    else if (ordem === "faccao") visiveis.sort((a, b) =>
+      String(a[0].faccao || "\uffff").localeCompare(String(b[0].faccao || "\uffff"), "pt-BR") || porNome(a, b));
+    else if (ordem === "tipo") visiveis.sort((a, b) => pesoTipo(a[0].tipo) - pesoTipo(b[0].tipo) || porNome(a, b));
+    else if (ordem === "faixa") visiveis.sort((a, b) => (a[0].faixa_n || 0) - (b[0].faixa_n || 0) || porNome(a, b));
+    else if (ordem === "pv") visiveis.sort((a, b) => (b[0].pv || 0) - (a[0].pv || 0) || porNome(a, b));
+    return visiveis;
+  }
+
+  function filtrosDosMeus(visiveis, total, faccoes) {
+    const fl = G.estado().filtros;
+    const filtrando = !!(fl.inim_faccao || fl.inim_tipo || fl.inim_faixa || fl.inim_q);
+    return H.cartao("Procurar nos meus inimigos",
+      "<div class='linha'>" +
+      H.campo("Facção", H.lista("g", "filtros.inim_faccao",
+        faccoes.map((f) => [f, f]).concat(faccoes.length ? [[SEM_FACCAO, "— sem facção —"]] : []),
+        { rotulo: "Facção", vazio: "todas as facções" }), "", "estreito") +
+      H.campo("Tipo", H.lista("g", "filtros.inim_tipo", G.TIPOS,
+        { rotulo: "Tipo", vazio: "todos os tipos" }), "", "estreito") +
+      H.campo("Faixa", H.lista("g", "filtros.inim_faixa", C().mestre.ancoras.map((a) => [String(a.n), a.faixa]),
+        { rotulo: "Faixa", vazio: "todas as faixas" }), "", "estreito") +
+      H.campo("Ordem", H.lista("g", "filtros.inim_ordem", ORDENS_INIMIGO,
+        { rotulo: "Ordem da lista", vazio: false }), "", "estreito") +
+      H.campo("Procurar", H.texto("g", "filtros.inim_q", { rotulo: "Procurar nos meus inimigos",
+        busca: true, vivo: true, ph: "nome, facção, Fraqueza ou comportamento" })) +
+      "</div>" +
+      "<div class='botoes compactos'>" +
+      H.botao("abrir-inimigos", "Abrir todas as fichas", { classe: "pequeno" }) +
+      H.botao("fechar-inimigos", "Fechar todas", { classe: "pequeno" }) +
+      (filtrando ? H.botao("limpar-filtros-inimigos", "Limpar o filtro", { classe: "pequeno" }) : "") +
+      "</div>" +
+      "<p class='ajuda'>" + visiveis + " de " + total + (total === 1 ? " inimigo" : " inimigos") +
+      " da campanha. Clique no nome para abrir a ficha e editar; o que está fechado continua " +
+      "salvo do mesmo jeito.</p>", "filtros-meus-inimigos");
+  }
+
+  /** Os cartões, com um título de grupo quando a ordem é agrupada. */
+  function listaDosMeus(visiveis, ordem) {
+    let html = "", grupoAtual = null;
+    for (const [x, i] of visiveis) {
+      if (ordem === "faccao" || ordem === "faixa") {
+        const grupo = ordem === "faccao"
+          ? (String(x.faccao || "").trim() || "Sem facção")
+          : "Faixa " + (x.faixa || "—");
+        if (grupo !== grupoAtual) {
+          grupoAtual = grupo;
+          html += "<h3 class='grupo-inimigos'>" + esc(grupo) + "</h3>";
+        }
+      }
+      html += editorDeInimigo(x, i);
+    }
+    return html;
   }
 
   function fichaDoBestiario(b) {
@@ -906,11 +1040,17 @@
       "Resistência no Elemento certo é mais duro do que a ficha dele sugere. " + link("28", "28.2", "28.2") + "</p>",
       "criador");
 
-    const meus = est.inimigos_salvos.length
-      ? est.inimigos_salvos.map(editorDeInimigo).join("")
-      : H.cartao("Inimigos da campanha",
+    const total = est.inimigos_salvos.length;
+    const visiveis = total ? meusInimigos() : [];
+    const meus = !total
+      ? H.cartao("Inimigos da campanha",
         vazio("Nenhum inimigo seu ainda. Crie um pela âncora acima, copie uma ficha do bestiário " +
-          "ou importe um arquivo .json."), "vazio");
+          "ou importe um arquivo .json."), "vazio")
+      : filtrosDosMeus(visiveis.length, total, faccoesSalvas(est.inimigos_salvos)) +
+        (visiveis.length
+          ? listaDosMeus(visiveis, fl.inim_ordem)
+          : H.cartao("Nada encontrado", vazio("Nenhum inimigo seu com esse filtro.") +
+            "<div class='botoes'>" + H.botao("limpar-filtros-inimigos", "Limpar o filtro") + "</div>", "vazio"));
 
     const filtros = H.cartao("Bestiário do capítulo 28",
       "<div class='linha'>" +
@@ -1576,6 +1716,7 @@
     const x = G.inimigoDaAncora(faixaN, tipo, lerVal("criar-nome").trim() ||
       (tipo + " da faixa " + G.faixaTexto(faixaN)));
     G.estado().inimigos_salvos.unshift(x);
+    EG.definirAberto(chaveDoSalvo(x), true);   // criou agora: já abre para preencher
     EG.toast("<b>" + esc(x.nome) + "</b> criado com os números da faixa " + esc(x.faixa) + ". " +
       "Agora escolha as Fraquezas (" + (C().mestre.fraquezas_tipo.find((y) => y.tipo === tipo) || {}).fraquezas +
       " para " + esc(tipo) + ") e escreva as ações.");
@@ -1608,12 +1749,32 @@
     x.uid = EG.uid();
     x.nome = (x.nome || "Inimigo") + " (cópia)";
     est.inimigos_salvos.splice(Number(b.dataset.i) + 1, 0, x);
+    EG.definirAberto(chaveDoSalvo(x), true);
   };
 
   A["excluir-salvo"] = (b) => {
     const est = G.estado(), x = est.inimigos_salvos[Number(b.dataset.i)];
     if (x && x.nome && !confirm("Excluir " + x.nome + "?")) return false;
     est.inimigos_salvos.splice(Number(b.dataset.i), 1);
+  };
+
+  // --- Organizar a lista de inimigos da campanha -----------------------------
+  // Abrir e fechar é estado de tela: redesenha, mas não grava a mesa de novo.
+  A["abrir-inimigos"] = () => {
+    for (const [x] of meusInimigos()) EG.definirAberto(chaveDoSalvo(x), true);
+    G.redesenhar();
+    return false;
+  };
+
+  A["fechar-inimigos"] = () => {
+    for (const [x] of meusInimigos()) EG.definirAberto(chaveDoSalvo(x), false);
+    G.redesenhar();
+    return false;
+  };
+
+  A["limpar-filtros-inimigos"] = () => {
+    const fl = G.estado().filtros;
+    fl.inim_faccao = ""; fl.inim_tipo = ""; fl.inim_faixa = ""; fl.inim_q = ""; fl.inim_ordem = "";
   };
 
   A["por-bestiario-em-cena"] = (b) => {
@@ -1627,6 +1788,7 @@
     const x = G.inimigoDoBestiario(b.dataset.nome);
     if (!x) return false;
     G.estado().inimigos_salvos.unshift(x);
+    EG.definirAberto(chaveDoSalvo(x), true);
     EG.toast("<b>" + esc(x.nome) + "</b> copiado para os seus inimigos: troque o que quiser sem mexer no livro.");
   };
 

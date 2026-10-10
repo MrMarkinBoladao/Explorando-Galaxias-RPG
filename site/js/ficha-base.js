@@ -26,6 +26,9 @@
     return {
       id: "", versao: 1,
       nome: "", jogador: "", conceito: "", proposito: "", crenca: "", aparencia: "", coisa: "", notas: "",
+      // A história do personagem, escrita pelo jogador, em Markdown: ela é longa de
+      // propósito e por isso mora num campo só dela, mostrada formatada e recolhível.
+      lore: "",
       nivel: 1, jogadores: 4,
       raca: "", bonus_racial: { modo: "Um Atributo (+2)", attr1: "", attr2: "" },
       caminho: "", atributo_habilidade: "", elemento: "",
@@ -38,7 +41,11 @@
       bencaos: [], fragmento: "", forma_avatar: "",
       armadura: "", armadura_nome: "",
       arma: { nome: "", categoria: "", atributo: "Poder", elemento: "", propriedade: "Nenhuma" },
-      cone: { nome: "", nivel: null, alvo: "", qual: "", escolha: "Numérico", sobreposicoes: 0, efeito: "" },
+      // `descricao` e `imagem` são só o sabor do Cone (25.2) e por isso não vão ao motor:
+      // a descrição é a história que ele carrega, e a imagem é a arte dele, guardada na
+      // própria ficha (um endereço `data:`) ou um link para fora.
+      cone: { nome: "", nivel: null, alvo: "", qual: "", escolha: "Numérico", sobreposicoes: 0, efeito: "",
+        descricao: "", imagem: "" },
       reliquias: Object.fromEntries(SLOTS_RELIQUIA.map((s) => [s, { tem: false, nome: "", conjunto: "—" }])),
       esfera_elemento: "",
       conjuntos: Object.fromEntries(LETRAS_CONJUNTO.map((l) => [l, { nome: "", bonus2: "", rolagem: "", efeito4: "" }])),
@@ -185,10 +192,11 @@
     }
   };
 
+  /** Devolve false quando o navegador recusou gravar (espaço cheio). */
   F.salvar = function () {
-    if (!F.P) return;
-    if (F.aoSalvar) F.aoSalvar(F.P);
-    else EG.Armazem.salvar(F.P);
+    if (!F.P) return false;
+    if (F.aoSalvar) return F.aoSalvar(F.P) !== false;
+    return EG.Armazem.salvar(F.P) !== false;
   };
 
   F.trocar = function (id) {
@@ -232,8 +240,10 @@
   H.texto = (caminho, o) => {
     o = o || {};
     const v = obter(F.P, caminho);
+    // redesenha: campo de texto que muda o desenho da tela (a arte do Cone), e por isso
+    // redesenha quando a pessoa sai dele — digitando, só grava, como todos os outros.
     const comum = " id='" + idDe(caminho) + "' data-p='" + esc(caminho) + "' aria-label='" + esc(o.rotulo || caminho) + "'" +
-      (o.ph ? " placeholder='" + esc(o.ph) + "'" : "");
+      (o.ph ? " placeholder='" + esc(o.ph) + "'" : "") + (o.redesenha ? " data-redesenha='1'" : "");
     return o.area
       ? "<textarea rows='" + (o.linhas || 2) + "'" + comum + ">" + esc(v) + "</textarea>"
       : "<input type='text'" + comum + " value='" + esc(v) + "'>";
@@ -336,13 +346,29 @@
       definir(F.P, el.dataset.lista, lista);
     } else if (el.dataset.p) {
       definir(F.P, el.dataset.p, valorDo(el));
-      if (el.tagName !== "SELECT" && el.type !== "checkbox" && el.dataset.t !== "num") { F.salvar(); return; }
+      if (el.tagName !== "SELECT" && el.type !== "checkbox" && el.dataset.t !== "num") {
+        F.salvar();
+        if (el.dataset.redesenha !== "1") return;
+      }
     } else return;
     if (F.aoMudar) F.aoMudar(el);
     F.salvar();
     F.recalcular();
     F.redesenhar();
   });
+
+  /**
+   * Arte de Cone que não carregou (link errado, site fora do ar, sem internet): a moldura
+   * diz o que aconteceu em vez de deixar o ícone de imagem quebrada na ficha. Vale em
+   * qualquer tela, porque a moldura é a mesma na ficha e na Área do Mestre.
+   */
+  document.addEventListener("error", (ev) => {
+    const img = ev.target;
+    if (!img || img.tagName !== "IMG" || !img.closest || !img.closest(".cone-arte")) return;
+    const moldura = img.closest(".cone-arte");
+    moldura.classList.add("vazia", "quebrada");
+    moldura.innerHTML = "<span>A imagem do Cone não carregou. Confira o endereço em Editar ficha.</span>";
+  }, true);
 
   // ---------------------------------------------------------------------------
   // Barra de personagens (topo das telas Jogar e Editar)
@@ -430,7 +456,10 @@
         F.redesenhar();
       }
     } else if (F.acoes && F.acoes[acao]) {
-      F.acoes[acao](b);
+      // Devolver false é "não mexi na ficha, não redesenhe" — é o que uma ação precisa
+      // fazer quando ela abre uma janela do sistema (escolher um arquivo): um redesenho
+      // aqui trocaria o elemento que está esperando a resposta dessa janela.
+      if (F.acoes[acao](b) === false) return;
       F.salvar();
       F.recalcular();
       F.redesenhar();
@@ -453,6 +482,74 @@
     return b ? EG.Regras.link(F.capituloDoCaminho(b.caminho), b.n + ". " + b.bencao, rotulo || nome) : esc(nome);
   };
 
+  // ---------------------------------------------------------------------------
+  // O Cone de Luz desenhado (25.2)
+  //
+  // Uma função só, usada pela tela Jogar, pela Área do Mestre e pela galeria de Cones do
+  // grupo: as três leem a mesma ficha, então o jogador e o Mestre veem sempre a mesma arte,
+  // o mesmo Bônus Maior, o mesmo Efeito Condicional e a mesma descrição.
+  // ---------------------------------------------------------------------------
+  const ROTULO_CONE = ["", "+1 ou +10 PV", "+1 e +10 PV", "+2 ou +25 PV", "+2 e +25 PV", "+3 ou +50 PV"];
+
+  /** Tem algo de Cone para mostrar? (Nível, nome, arte, efeito ou descrição.) */
+  F.temCone = function (p) {
+    const c = (p && p.cone) || {};
+    return !!(c.nivel || c.nome || (c.imagem || "").trim() || c.efeito || c.descricao);
+  };
+
+  /** A moldura com a arte do Cone, ou nada se a ficha não tem imagem. */
+  F.arteDoCone = function (p, o) {
+    o = o || {};
+    const url = (p.cone.imagem || "").trim();
+    if (!url) return "";
+    return "<figure class='cone-arte" + (o.classe ? " " + o.classe : "") + "'><img src='" + esc(url) +
+      "' loading='lazy' decoding='async' alt='Arte do Cone de Luz " + esc(p.cone.nome || "sem nome") + "'></figure>";
+  };
+
+  /** O Bônus Maior que o Cone está somando na ficha, em texto. Vazio quando não soma nada. */
+  F.bonusDoCone = function (p, R) {
+    const c = R && R.cone;
+    // Sem alvo escolhido o Cone não soma em nada: o motor já calcula o número, mas ele não
+    // se aplica a coisa alguma (`coneEm` compara o alvo), então aqui não se anuncia bônus.
+    if (!c || !c.alvo) return "";
+    const partes = [];
+    if (c.numerico) partes.push("+" + c.numerico + " em " + (c.qual || c.alvo));
+    if (c.pv) partes.push("+" + c.pv + " PV máximos");
+    return partes.join(" e ");
+  };
+
+  /**
+   * O Cone inteiro: arte, Nome com o Nível, o Bônus Maior que já está somado na ficha, o
+   * Efeito Condicional e a descrição.
+   * o: {mini (arte pequena ao lado do texto), descricaoFechada (descrição num <details>)}
+   */
+  F.coneHTML = function (p, R, o) {
+    o = o || {};
+    const c = p.cone;
+    if (!F.temCone(p)) return "";
+    const nivel = c.nivel ? Math.max(1, Math.min(5, c.nivel)) : 0;
+    const bonus = F.bonusDoCone(p, R);
+    const descricao = EG.paragrafos(c.descricao);
+
+    let texto = "<div class='cone-topo'><b>" + esc(c.nome || "Cone de Luz sem nome") + "</b>" +
+      (nivel ? " <span class='etiqueta'>Nível " + nivel + "</span> <span class='suave'>" + esc(ROTULO_CONE[nivel]) + "</span>" : "") +
+      (c.sobreposicoes ? " <span class='suave'>+" + c.sobreposicoes + " sobrepos" + (c.sobreposicoes > 1 ? "ições" : "ição") + "</span>" : "") +
+      (!nivel ? " <span class='etiqueta ruim'>sem Nível</span>" : "") + "</div>";
+    if (bonus) texto += "<p class='cone-bonus'>Bônus Maior, sempre ligado: <b>" + esc(bonus) + "</b></p>";
+    else if (nivel) texto += "<p class='ajuda'>O Bônus Maior ainda não soma em nada: escolha o alvo em Editar ficha.</p>";
+    if (c.efeito) texto += "<p class='efeito'><b>Efeito Condicional:</b> " + esc(c.efeito) + "</p>";
+    if (descricao) {
+      texto += o.descricaoFechada
+        ? "<details class='cone-descricao-fechada'" +
+          EG.atributosAbre("cone-desc:" + (o.chave || p.id || c.nome), false) +
+          "><summary>Ler a descrição</summary>" +
+          "<div class='cone-descricao'>" + descricao + "</div></details>"
+        : "<div class='cone-descricao'>" + descricao + "</div>";
+    }
+    return "<div class='cone" + (o.mini ? " mini" : "") + "'>" + F.arteDoCone(p) +
+      "<div class='cone-corpo'>" + texto + "</div></div>";
+  };
+
   /** O que ainda falta escolher para a ficha ficar jogável. */
   F.pendencias = function () {
     const p = F.P, falta = [];
@@ -470,6 +567,6 @@
     return falta;
   };
 
-  Object.assign(F, { SLOTS_RELIQUIA, LETRAS_CONJUNTO, novaHabilidade, novoPersonagem, exemploNadir, completar,
-    paraMotor, obter, definir, idDe, H });
+  Object.assign(F, { SLOTS_RELIQUIA, LETRAS_CONJUNTO, ROTULO_CONE, novaHabilidade, novoPersonagem, exemploNadir,
+    completar, paraMotor, obter, definir, idDe, H });
 })();

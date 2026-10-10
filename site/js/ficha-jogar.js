@@ -487,8 +487,32 @@
     return cartao("Inventário", corpo, "inventario", link("24", "24.4", "regra"));
   }
 
+  function cartaoCone() {
+    const p = F.P;
+    if (!F.temCone(p)) return "";
+    return cartao("Cone de Luz", F.coneHTML(p, F.R) +
+      "<p class='ajuda'>O Bônus Maior já está somado nos números desta ficha e fica <b>fora</b> do teto de " +
+      "bônus; o Efeito Condicional <b>entra</b> no teto. " + link("25", "25.2", "regra 25.2") + "</p>",
+      "cone-cartao", "<a class='botao pequeno' href='#editar'>trocar a arte</a>");
+  }
+
   function cartaoNotas() {
     return cartao("Notas", H.texto("notas", { area: true, linhas: 5, rotulo: "Notas", ph: "Anotações da sessão, nomes, pistas…" }), "notas");
+  }
+
+  /**
+   * A história do personagem, inteira e já formatada (o Markdown que o jogador escreveu).
+   * Vem embaixo da grade e ocupa a largura toda, porque texto longo em coluna estreita não
+   * se lê — e é um <details> aberto: um clique recolhe quando a mesa precisa da tela.
+   */
+  function cartaoLore() {
+    const p = F.P, html = EG.markdown(p.lore);
+    if (!html) return "";
+    const n = EG.palavras(p.lore);
+    return "<details class='cartao lore'" + EG.atributosAbre("lore", true) + "><summary class='cartao-topo'>" +
+      "<h2>História de " + esc(p.nome || "este personagem") + "</h2>" +
+      "<span class='suave'>" + n + (n === 1 ? " palavra" : " palavras") + " · um clique recolhe</span>" +
+      "</summary><div class='texto-lore'>" + html + "</div></details>";
   }
 
   // ---------------------------------------------------------------------------
@@ -502,8 +526,8 @@
       "<div class='grade-jogo'>" +
       "<div class='coluna'>" + cartaoVida() + cartaoRecursos() + cartaoDefesa() + cartaoCondicoes() + "</div>" +
       "<div class='coluna'>" + cartaoAcoes() + cartaoMemo() + cartaoBencaos() + "</div>" +
-      "<div class='coluna'>" + cartaoTestes() + cartaoInventario() + cartaoNotas() + "</div>" +
-      "</div>";
+      "<div class='coluna'>" + cartaoTestes() + cartaoCone() + cartaoInventario() + cartaoNotas() + "</div>" +
+      "</div>" + cartaoLore();
   }
 
   // Enter no campo de valor aplica dano

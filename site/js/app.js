@@ -32,6 +32,90 @@
     return String(texto).split(re).map((p, i) => (i % 2 ? "<mark>" + esc(p) + "</mark>" : esc(p))).join("");
   }
 
+  /**
+   * Texto de várias linhas virando parágrafos, já escapado: linha em branco separa
+   * parágrafo, linha solta vira quebra. É assim que a descrição de um Cone de Luz mantém
+   * na tela a forma com que foi escrita, sem precisar de markdown (que aceitaria HTML).
+   */
+  function paragrafos(texto, classe) {
+    const t = String(texto == null ? "" : texto).replace(/\r\n?/g, "\n").trim();
+    if (!t) return "";
+    const c = classe ? " class='" + classe + "'" : "";
+    return t.split(/\n{2,}/).map((b) => "<p" + c + ">" + esc(b).replace(/\n/g, "<br>") + "</p>").join("");
+  }
+
+  // ---------------------------------------------------------------------------
+  // Markdown escrito por gente (a história de um personagem)
+  //
+  // O livro vem do próprio repositório e é renderizado direto (regras.js): é texto
+  // confiável, e HTML escrito nele deve valer. Um `.md` colado por um jogador, não — ele
+  // pode trazer <script>, <iframe> ou um `onerror=` escondido num atributo. Então aqui o
+  // HTML que o marked produz passa por uma peneira: as etiquetas de formatação ficam, as
+  // de comportamento somem, e todo atributo que não está na lista é apagado.
+  //
+  // O HTML é montado num <template>, que o navegador analisa sem rodar script nenhum e sem
+  // buscar imagem nenhuma — a limpeza acontece antes de qualquer coisa entrar na página.
+  // ---------------------------------------------------------------------------
+  const MD_ETIQUETAS = new Set(["P", "BR", "HR", "STRONG", "B", "EM", "I", "U", "S", "DEL", "INS", "MARK",
+    "SMALL", "CODE", "PRE", "BLOCKQUOTE", "UL", "OL", "LI", "DL", "DT", "DD", "SUP", "SUB",
+    "H1", "H2", "H3", "H4", "H5", "H6", "A", "IMG", "TABLE", "THEAD", "TBODY", "TFOOT", "TR", "TH", "TD",
+    "SPAN", "DIV", "DETAILS", "SUMMARY"]);
+  const MD_FORA = new Set(["SCRIPT", "STYLE", "IFRAME", "OBJECT", "EMBED", "APPLET", "LINK", "META", "BASE",
+    "FORM", "INPUT", "BUTTON", "SELECT", "TEXTAREA", "OPTION", "SVG", "MATH", "NOSCRIPT", "TITLE",
+    "AUDIO", "VIDEO", "SOURCE", "TRACK", "TEMPLATE", "CANVAS", "DIALOG", "PORTAL"]);
+  const MD_ATRIBUTOS = { A: ["href", "title"], IMG: ["src", "alt", "title"],
+    TD: ["colspan", "rowspan"], TH: ["colspan", "rowspan", "scope"], OL: ["start"] };
+  const MD_ENDERECO = /^(https?:\/\/|mailto:|#|\/|\.{0,2}\/)/i;
+
+  function limparHtml(raiz) {
+    for (const el of Array.from(raiz.querySelectorAll("*"))) {
+      // `contains`, e não `isConnected`: dentro de um <template> nada está "conectado" a um
+      // documento, e o que precisa ser visto aqui é só se o elemento ainda está na árvore.
+      if (!raiz.contains(el)) continue;                    // já saiu junto com o pai
+      if (MD_FORA.has(el.tagName)) { el.remove(); continue; }
+      if (!MD_ETIQUETAS.has(el.tagName)) { el.replaceWith(...el.childNodes); continue; }  // guarda o texto
+      const permitidos = MD_ATRIBUTOS[el.tagName] || [];
+      for (const at of Array.from(el.attributes)) {
+        const nome = at.name.toLowerCase();
+        if (!permitidos.includes(nome)) { el.removeAttribute(at.name); continue; }
+        if ((nome === "href" || nome === "src") && !MD_ENDERECO.test(at.value.trim()) &&
+          !(nome === "src" && /^data:image\//i.test(at.value.trim()))) el.removeAttribute(at.name);
+      }
+      if (el.tagName === "A" && el.getAttribute("href")) {
+        el.setAttribute("rel", "noopener noreferrer nofollow");
+        el.setAttribute("target", "_blank");
+      }
+      if (el.tagName === "IMG") { el.setAttribute("loading", "lazy"); el.setAttribute("decoding", "async"); }
+    }
+    return raiz;
+  }
+
+  // Converter e peneirar uma história de mil palavras custa caro, e as telas redesenham a
+  // cada tecla digitada — a Área do Mestre desenha a história de todo o grupo de uma vez.
+  // Como o texto só muda quando alguém o edita, guardar o resultado pelo próprio texto
+  // resolve: o mesmo texto nunca é convertido duas vezes.
+  const feitos = new Map();
+
+  /** Markdown de um texto escrito por gente, em HTML já peneirado. */
+  function markdown(md) {
+    const t = String(md == null ? "" : md).trim();
+    if (!t) return "";
+    if (feitos.has(t)) return feitos.get(t);
+    if (!window.marked || !window.marked.parse) return paragrafos(t);   // sem a biblioteca, texto puro
+    let bruto;
+    try { bruto = window.marked.parse(t, { gfm: true, breaks: false }); } catch (_) { return paragrafos(t); }
+    const molde = document.createElement("template");
+    molde.innerHTML = bruto;
+    limparHtml(molde.content);
+    const html = molde.innerHTML;
+    if (feitos.size > 40) feitos.clear();
+    feitos.set(t, html);
+    return html;
+  }
+
+  /** Quantas palavras tem um texto — para dizer o tamanho de uma história. */
+  const palavras = (t) => (String(t || "").trim().match(/\S+/g) || []).length;
+
   // ---------------------------------------------------------------------------
   // Armazenamento (localStorage do navegador)
   // ---------------------------------------------------------------------------
@@ -48,11 +132,12 @@
         return false;
       }
     },
+    /** Devolve false quando o navegador recusou gravar (espaço cheio). */
     salvar(p) {
       const mapa = this.todas();
       p.atualizado = new Date().toISOString();
       mapa[p.id] = p;
-      this.gravarTodas(mapa);
+      return this.gravarTodas(mapa);
     },
     excluir(id) {
       const mapa = this.todas();
@@ -74,6 +159,75 @@
     return limpo || padrao || "arquivo";
   }
 
+  /**
+   * Um `<input type=file>` criado uma vez e **fora de #app**: as telas redesenham inteiras,
+   * e um elemento dentro de #app seria trocado por outro enquanto a janela de escolher
+   * arquivo estivesse aberta — aí a resposta dela não chegaria a ninguém.
+   */
+  function seletorDeArquivo(id, aceita, varios) {
+    let el = document.getElementById(id);
+    if (!el) {
+      el = document.createElement("input");
+      el.type = "file";
+      el.id = id;
+      el.accept = aceita || ".json,application/json";
+      if (varios) el.multiple = true;
+      el.hidden = true;
+      document.body.appendChild(el);
+    }
+    return el;
+  }
+
+  // ---------------------------------------------------------------------------
+  // O que está recolhido na tela
+  //
+  // As telas redesenham inteiras a cada campo mudado, então um <details> aberto pela pessoa
+  // se fecharia sozinho na próxima tecla. Quem desenha um recolhível põe `data-abre="chave"`
+  // e pergunta `EG.estaAberto(chave, padrao)`; o resto é este par de linhas.
+  //
+  // Fica em memória de propósito: é estado de tela, não de campanha. Não vai para o
+  // localStorage, não vai para o arquivo de mesa e não vai para o backup.
+  // ---------------------------------------------------------------------------
+  const abertos = {};
+  const estaAberto = (chave, padrao) => (chave in abertos ? abertos[chave] : !!padrao);
+
+  document.addEventListener("toggle", (ev) => {
+    const d = ev.target;
+    if (!d || d.tagName !== "DETAILS" || !d.dataset.abre) return;
+    abertos[d.dataset.abre] = d.open;
+  }, true);
+
+  /** Marca um recolhível como aberto ou fechado sem esperar o clique da pessoa. */
+  function definirAberto(chave, aberto) { abertos[chave] = !!aberto; }
+
+  /** `data-abre` + `open`, pronto para entrar na etiqueta <details>. */
+  const atributosAbre = (chave, padrao) =>
+    " data-abre='" + esc(chave) + "'" + (estaAberto(chave, padrao) ? " open" : "");
+
+  /**
+   * Imprimir abre tudo o que estiver recolhido e devolve ao estado anterior depois. A tela
+   * recolhe para não poluir; o papel não tem esse problema, e uma ficha impressa pela
+   * metade — sem a história do personagem, sem a descrição do Cone — não serve.
+   */
+  let recolhidos = [];
+  window.addEventListener("beforeprint", () => {
+    recolhidos = Array.from(document.querySelectorAll("details:not([open])"))
+      .filter((d) => !d.classList.contains("menu"));
+    recolhidos.forEach((d) => { d.open = true; });
+  });
+  window.addEventListener("afterprint", () => {
+    recolhidos.forEach((d) => { d.open = false; });
+    recolhidos = [];
+  });
+
+  /** Redesenha a tela que está aberta, preservando foco e rolagem. */
+  function redesenharTela() {
+    const t = rotaAtual().tela;
+    if (t === "mestre" && EG.Mestre) EG.Mestre.redesenhar();
+    else if (EG.Ficha) EG.Ficha.redesenhar();
+    else navegar();
+  }
+
   /** Baixa `dados` como .json. Devolve false para servir de retorno de ação. */
   function baixarJSON(nomeArquivo, dados) {
     const blob = new Blob([JSON.stringify(dados, null, 2)], { type: "application/json" });
@@ -87,18 +241,91 @@
   }
 
   // ---------------------------------------------------------------------------
+  // Imagens guardadas na ficha (a arte do Cone de Luz)
+  //
+  // O site não tem servidor: o único lugar para guardar é o localStorage do navegador, que
+  // é pequeno (uns 5 MB para a mesa inteira) e só guarda texto. Então a imagem escolhida é
+  // redesenhada num <canvas> menor e vira um endereço `data:` — o mesmo texto que entra na
+  // ficha, no .json exportado e no backup, e que por isso aparece sozinho na Área do
+  // Mestre. Sem encolher, duas fotos de celular enchem o espaço de todas as fichas.
+  //
+  // Quem preferir não gastar esse espaço pode colar um link (http...) no mesmo campo: a
+  // ficha guarda só o endereço, e aí a imagem depende da internet para aparecer.
+  // ---------------------------------------------------------------------------
+  const IMAGEM_LADO = 560;              // maior lado, em pixels
+  const IMAGEM_LIMITE = 220 * 1024;     // teto do texto final, em caracteres
+
+  /** Quantos KB a imagem tem (o peso do arquivo, não o do texto em base64). */
+  function pesoDaImagem(url) {
+    const s = String(url || ""), i = s.indexOf(",");
+    if (!/^data:/.test(s) || i < 0) return 0;
+    return Math.max(1, Math.round((s.length - i - 1) * 0.75 / 1024));
+  }
+
+  const ehImagemGuardada = (url) => /^data:image\//.test(String(url || ""));
+
+  function encolherImagem(img, lado, qualidade) {
+    const maior = Math.max(img.naturalWidth, img.naturalHeight);
+    const escala = Math.min(1, lado / maior);
+    const tela = document.createElement("canvas");
+    tela.width = Math.max(1, Math.round(img.naturalWidth * escala));
+    tela.height = Math.max(1, Math.round(img.naturalHeight * escala));
+    tela.getContext("2d").drawImage(img, 0, 0, tela.width, tela.height);
+    const url = tela.toDataURL("image/webp", qualidade);
+    // Navegador sem webp devolve png (ignora o formato pedido): aí vai de jpeg.
+    return url.indexOf("data:image/webp") === 0 ? url : tela.toDataURL("image/jpeg", qualidade);
+  }
+
+  /**
+   * Lê o arquivo escolhido e devolve a imagem já encolhida, em `data:`.
+   * `aoPronto(erro, url, kb)` — `erro` é texto pronto para mostrar em um toast.
+   */
+  function lerImagem(arquivo, aoPronto) {
+    if (!arquivo) return;
+    if (!/^image\//.test(arquivo.type || "")) {
+      aoPronto("Esse arquivo não é uma imagem. Escolha um <b>.png</b>, <b>.jpg</b> ou <b>.webp</b>.");
+      return;
+    }
+    const leitor = new FileReader();
+    leitor.onerror = () => aoPronto("Não foi possível ler esse arquivo.");
+    leitor.onload = () => {
+      const img = new Image();
+      img.onerror = () => aoPronto("Não foi possível abrir essa imagem.");
+      img.onload = () => {
+        if (!img.naturalWidth || !img.naturalHeight) { aoPronto("Essa imagem não tem tamanho definido."); return; }
+        let url = "", lado = IMAGEM_LADO, q = 0.82;
+        // Tenta até caber: primeiro baixa a qualidade, depois o tamanho.
+        for (let i = 0; i < 7 && (!url || url.length > IMAGEM_LIMITE); i++) {
+          if (url) { if (q > 0.55) q -= 0.12; else lado = Math.round(lado * 0.8); }
+          url = encolherImagem(img, lado, q);
+        }
+        if (url.length > IMAGEM_LIMITE) {
+          aoPronto("Não deu para encolher essa imagem o bastante. Recorte a arte antes de escolher, " +
+            "ou cole um link dela no campo de endereço.");
+          return;
+        }
+        aoPronto(null, url, pesoDaImagem(url));
+      };
+      img.src = leitor.result;
+    };
+    leitor.readAsDataURL(arquivo);
+  }
+
+  // ---------------------------------------------------------------------------
   // Backup completo: todas as fichas e a mesa do Mestre num arquivo só
   // ---------------------------------------------------------------------------
   const CHAVE_MESTRE = "explorando-galaxias:mestre";
+  const CHAVE_CONES = "explorando-galaxias:cones";
   const MARCA_BACKUP = "explorando-galaxias:backup";
 
   function exportarTudo() {
-    let mestre = null;
+    let mestre = null, cones = null;
     try { mestre = JSON.parse(localStorage.getItem(CHAVE_MESTRE)); } catch (_) { mestre = null; }
+    try { cones = JSON.parse(localStorage.getItem(CHAVE_CONES)); } catch (_) { cones = null; }
     const fichas = Armazem.todas();
     const pacote = {
       tipo: MARCA_BACKUP, versao: 1, salvo_em: new Date().toISOString(),
-      fichas: fichas, atual: Armazem.atualId(), mestre: mestre,
+      fichas: fichas, atual: Armazem.atualId(), mestre: mestre, cones: cones,
     };
     const dia = new Date().toISOString().slice(0, 10);
     baixarJSON("explorando-galaxias-backup-" + dia + ".json", pacote);
@@ -121,6 +348,8 @@
         if (p.atual && p.fichas[p.atual]) Armazem.definirAtual(p.atual);
         if (p.mestre) localStorage.setItem(CHAVE_MESTRE, JSON.stringify(p.mestre));
         else localStorage.removeItem(CHAVE_MESTRE);
+        // Backup antigo (sem banco de Cones) não apaga o banco que está no navegador.
+        if (p.cones) localStorage.setItem(CHAVE_CONES, JSON.stringify(p.cones));
         location.reload();
       } catch (_) {
         toast("Esse arquivo não é um backup deste site. O backup se faz em <b>Mais &gt; Exportar tudo</b>.", "erro");
@@ -369,7 +598,9 @@
     if (ev.target.id === "arquivo-backup" && ev.target.files[0]) importarTudo(ev.target.files[0]);
   });
 
-  Object.assign(EG, { esc, norm, sinal, uid, clonar, destacar, regexSemAcento, Armazem, toast, rolar, botaoRolar,
-    registrarTela, rotaAtual, navegar, historico, exportarTudo, importarTudo, checarAtualizacao,
-    baixarJSON, fatiarNome, VERSAO });
+  Object.assign(EG, { esc, norm, sinal, uid, clonar, destacar, regexSemAcento, paragrafos, markdown,
+    limparHtml, palavras, Armazem, toast, rolar, botaoRolar, registrarTela, rotaAtual, navegar, historico,
+    exportarTudo, importarTudo, checarAtualizacao, baixarJSON, fatiarNome, seletorDeArquivo,
+    redesenharTela, estaAberto, definirAberto, atributosAbre, lerImagem, pesoDaImagem,
+    ehImagemGuardada, VERSAO });
 })();

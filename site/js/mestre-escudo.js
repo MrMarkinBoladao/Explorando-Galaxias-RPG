@@ -31,13 +31,100 @@
     if (!slots) falta.push("o primeiro slot de Relíquia");
     return [
       "<b>" + esc(G.nome(m)) + "</b> <span class='suave'>nível " + p.nivel + "</span>",
-      "Nível " + (p.cone.nivel || 0) + " / <b>" + R.cone_maximo + "</b>" +
+      (p.cone.nome ? "<b>" + esc(p.cone.nome) + "</b><br>" : "") +
+        "Nível " + (p.cone.nivel || 0) + " / <b>" + R.cone_maximo + "</b>" +
         (p.cone.sobreposicoes ? " <span class='suave'>+" + p.cone.sobreposicoes + " sobrep.</span>" : ""),
       "<b>Tier " + ROMANOS[R.tier_reliquia - 1] + "</b> <span class='suave'>em " + slots + "/6 slots</span>",
       ress + " / " + liberadas,
       R.verba_marco + " Cr",
       falta.length ? "<span class='ruim'>falta " + esc(falta.join(", ")) + "</span>" : "<span class='bom-texto'>em dia</span>",
     ];
+  }
+
+  /**
+   * A galeria de Cones de Luz da mesa: a arte, o Nome, o Bônus Maior e o Efeito Condicional
+   * de cada personagem do grupo e de cada NPC do banco que já carrega um Cone.
+   *
+   * Não existe cópia disso em lugar nenhum: é a mesma ficha que o jogador tem aberta na aba
+   * Jogar, lida na hora de desenhar. O que ele trocar na arte ou na descrição aparece aqui
+   * no próximo desenho, e o que o Mestre entregar na ficha aparece lá — é o mesmo arquivo.
+   */
+  function galeriaDeCones(g) {
+    const npcs = G.npcs().map((p) => G.npc(p.id)).filter(Boolean);
+    const comCone = g.concat(npcs).filter((m) => F.temCone(m.p));
+    const semCone = g.filter((m) => !F.temCone(m.p));
+    const item = (m) => "<article class='cone-item'><div class='cone-item-topo'><h3>" + esc(G.nome(m)) +
+      (m.npc ? " <span class='etiqueta npc'>NPC</span>" : "") + "</h3>" +
+      "<a class='botao pequeno' href='" + (m.npc ? "#mestre/npcs/" + esc(m.id) : "#mestre/grupo") + "'>ficha</a></div>" +
+      F.coneHTML(m.p, m.R, { descricaoFechada: true }) +
+      "<div class='botoes compactos'>" +
+      H.botao("guardar-cone-no-banco", "Guardar no banco", { classe: "pequeno", dados: { mid: m.id },
+        titulo: "Põe este Cone na coleção da mesa, para outra ficha poder usar depois" }) +
+      "</div></article>";
+    return H.cartao("Cones de Luz da mesa",
+      (comCone.length
+        ? "<div class='galeria-cones'>" + comCone.map(item).join("") + "</div>"
+        : vazio("Nenhum Cone preenchido ainda. A arte, a descrição e o Efeito Condicional são escritos na " +
+            "ficha — a do jogador, na aba <b>Editar ficha</b>, e a de um NPC, no banco de NPCs.")) +
+      (semCone.length
+        ? "<p class='ajuda'>Sem Cone nenhum na ficha: <b>" + esc(semCone.map(G.nome).join(", ")) + "</b>.</p>"
+        : "") +
+      "<p class='ajuda'>Isto é a ficha de cada um, lida na hora: o que o jogador guardar aparece aqui, e o que " +
+      "você escrever na ficha dele aparece na tela de Jogar. Quem concede o Cone — nome, arte, história e " +
+      "gatilho — é você, como marco. " + link("25", "25.2", "25.2") + "</p>",
+      "galeria-de-cones", "<span class='suave'>" + comCone.length + " com arte e história</span>");
+  }
+
+  /**
+   * O banco de Cones de Luz do lado do Mestre: a coleção escrita antes da sessão e a
+   * **entrega** ao personagem quando a faixa vira (25.1). Entregar copia o Cone para a
+   * ficha de quem recebe — e, se a pessoa já estava com um Cone, ele é guardado no banco
+   * primeiro, para nunca se perder um Cone que já teve nome e história.
+   *
+   * O banco não é da mesa: mora em chave própria do navegador (cones.js) e por isso o
+   * mesmo banco serve ao jogador na aba <b>Editar ficha</b>, onde ele escolhe qual usar.
+   */
+  function bancoDeCones(g) {
+    const B = EG.Cones, lista = B.todos();
+    const npcs = G.npcs().map((p) => G.npc(p.id)).filter(Boolean);
+    const alvos = g.concat(npcs).map((m) => [m.id, G.nome(m) + (m.npc ? " (NPC)" : "") +
+      " · nível " + (m.p.nivel || 1) + (m.p.cone.nome ? " · com " + m.p.cone.nome : " · sem Cone")]);
+    const entrega = lista.length && alvos.length
+      ? "<div class='linha'>" +
+        H.campo("Entregar o Cone",
+          "<select id='cone-a-entregar' aria-label='Cone a entregar'>" +
+          lista.map((c) => "<option value='" + esc(c.id) + "'>" + esc(B.rotulo(c)) + "</option>").join("") +
+          "</select>") +
+        H.campo("Para",
+          "<select id='cone-para-quem' aria-label='Para quem'>" +
+          alvos.map(([id, rot]) => "<option value='" + esc(id) + "'>" + esc(rot) + "</option>").join("") +
+          "</select>") +
+        H.botao("entregar-cone", "Entregar »", { classe: "primario" }) +
+        "</div>"
+      : "";
+    const botoesDoItem = (c) =>
+      H.botao("exportar-um-cone", "Exportar .json", { classe: "pequeno", dados: { id: c.id },
+        titulo: "Baixa só este Cone, para passar a um jogador" }) +
+      H.botao("excluir-cone-guardado", "Tirar do banco", { classe: "pequeno perigo", dados: { id: c.id } });
+    return H.cartao("Banco de Cones de Luz",
+      "<p class='ajuda'>A coleção de Cones da mesa. <b>Entregar</b> copia o Cone para a ficha da pessoa — " +
+      "nome, Nível, Bônus Maior, Efeito Condicional, arte e história — e guarda no banco o Cone que ela " +
+      "estava usando, para nenhum Cone com nome e história se perder numa troca. " +
+      link("25", "25.1", "25.1") + "</p>" +
+      entrega +
+      "<div class='botoes compactos'>" +
+      H.botao("importar-cones", "Importar Cones (.json)", { classe: lista.length ? "" : "primario" }) +
+      H.botao("exportar-cones", "Exportar o banco", { desabilitado: !lista.length,
+        titulo: lista.length ? "Baixa os " + lista.length + " Cones num arquivo, para dar aos jogadores"
+          : "O banco está vazio" }) +
+      "</div>" +
+      (lista.length
+        ? B.galeriaHtml(botoesDoItem)
+        : vazio("Banco vazio. Um Cone se escreve na <b>ficha</b> de quem vai usar — é lá que estão o " +
+          "Bônus Maior, o Efeito Condicional, a arte e a história. Depois é só <b>Guardar no banco</b>, " +
+          "na galeria abaixo, e ele fica guardado para qualquer ficha usar.")),
+      "banco-de-cones", "<span class='suave'>" + lista.length +
+      (lista.length === 1 ? " Cone guardado" : " Cones guardados") + "</span>");
   }
 
   function telaRecompensas() {
@@ -101,7 +188,7 @@
       "</ul><p class='ajuda'>" + link("27", "27.8", "27.8") + " e a lista de efeitos proibidos de " +
       link("27", "27.9", "27.9") + ".</p>", "proibido");
 
-    app().innerHTML = topo("recompensas") + conferencia +
+    app().innerHTML = topo("recompensas") + conferencia + bancoDeCones(g) + galeriaDeCones(g) +
       "<div class='grade-mestre duas'><div class='coluna'>" + entregas + tesouro + "</div>" +
       "<div class='coluna'>" + proibido + "</div></div>" + calendario;
   }
@@ -218,6 +305,62 @@
   };
 
   G.acoes["tirar-tesouro"] = (b) => { G.estado().tesouro.splice(Number(b.dataset.i), 1); };
+
+  // ---------------------------------------------------------------------------
+  // Ações do banco de Cones de Luz
+  // ---------------------------------------------------------------------------
+  const el = (id) => document.getElementById(id);
+
+  G.acoes["entregar-cone"] = () => {
+    const B = EG.Cones;
+    const c = B.achar(el("cone-a-entregar") ? el("cone-a-entregar").value : "");
+    const m = G.alguem(el("cone-para-quem") ? el("cone-para-quem").value : "");
+    if (!c || !m) { EG.toast("Escolha o Cone e para quem.", "erro"); return false; }
+    const atual = m.p.cone;
+    const trocou = F.temCone(m.p) && EG.norm(atual.nome) !== EG.norm(c.nome);
+    if (trocou && !confirm("Entregar " + (c.nome || "este Cone") + " a " + G.nome(m) + "?\n\n" +
+      "Ele fica com " + (atual.nome || "o Cone atual") + " guardado no banco e equipa o novo.")) return false;
+    if (trocou) B.guardar(B.daFicha(m.p));     // o Cone antigo não se perde
+    B.aplicar(m.p, c);
+    G.gravarFicha(m);
+    EG.toast("<b>" + esc(c.nome || "Cone sem nome") + "</b> entregue a <b>" + esc(G.nome(m)) + "</b>." +
+      (trocou ? " O Cone anterior ficou no banco." : ""));
+  };
+
+  G.acoes["guardar-cone-no-banco"] = (b) => {
+    const m = G.alguem(b.dataset.mid);
+    if (!m) return false;
+    const r = EG.Cones.guardar(EG.Cones.daFicha(m.p));
+    if (!r.ok) return false;
+    EG.toast("<b>" + esc(r.cone.nome || "Cone sem nome") + "</b> " +
+      (r.novo ? "guardado no banco." : "atualizado no banco (mesmo nome)."));
+  };
+
+  G.acoes["excluir-cone-guardado"] = (b) => {
+    const c = EG.Cones.achar(b.dataset.id);
+    if (!c) return false;
+    if (!confirm("Tirar " + (c.nome || "este Cone") + " do banco?\n\n" +
+      "Quem já o equipou não muda: cada ficha tem a cópia dela.")) return false;
+    EG.Cones.remover(c.id);
+  };
+
+  G.acoes["exportar-um-cone"] = (b) => {
+    const c = EG.Cones.achar(b.dataset.id);
+    if (!c) return false;
+    EG.Cones.exportar([c], c.nome || "cone");
+    return false;
+  };
+
+  G.acoes["exportar-cones"] = () => {
+    const lista = EG.Cones.todos();
+    if (!lista.length) return false;
+    EG.Cones.exportar(lista, G.estado().campanha.nome || "da-mesa");
+    EG.toast("<b>" + lista.length + (lista.length === 1 ? " Cone" : " Cones") + "</b> no arquivo. " +
+      "Quem importar soma ao banco dele — nada é apagado.");
+    return false;
+  };
+
+  G.acoes["importar-cones"] = () => { EG.Cones.pedirArquivo(); return false; };
 
   G.telas.recompensas = telaRecompensas;
   G.telas.consulta = telaConsulta;

@@ -2,12 +2,95 @@
 
 Uma página só, sem instalação, com quatro abas:
 
-- **Jogar** — a ficha na mesa: PV com dano e cura (já desconta RD e PV temporários), Energia, PH do grupo, ataques e Testes prontos para rolar (clique no valor), Bênçãos com usos, condições, Morrendo, Memoespírito e inventário.
+- **Jogar** — a ficha na mesa: PV com dano e cura (já desconta RD e PV temporários), Energia, PH do grupo, ataques e Testes prontos para rolar (clique no valor), Bênçãos com usos, condições, Morrendo, Memoespírito, inventário e o **Cone de Luz com a arte e a história dele** (abaixo).
 - **Editar ficha** — os doze passos do capítulo 03, mais progressão, equipamento e Memoespírito. Tudo é recalculado na hora, e o que fere uma regra aparece em vermelho na seção.
 - **Regras** — o livro inteiro (v1.2) com pesquisa instantânea, sem acento e sem maiúscula.
 - **Área do Mestre** — a mesa do Mestre, sincronizada com as fichas (abaixo).
 
 As fichas ficam salvas **no navegador** de cada jogador. Para backup ou para mandar ao Mestre: **Mais > Exportar** (gera um arquivo `.json`) e **Mais > Importar**.
+
+## O Cone de Luz: a arte, o efeito e a história
+
+Toda ficha — de jogador ou de NPC — guarda o Cone de Luz inteiro: Nome, Nível, Bônus Maior,
+Sobreposições e Efeito Condicional, mais a **arte** e a **descrição** dele (25.2). Os dois últimos
+são só sabor: não entram em conta nenhuma, nem no motor de regras. Em **Editar ficha > 8 ·
+Equipamento**, embaixo de *A arte e a história do Cone*:
+
+- **Escolher uma imagem…** pega um arquivo do computador ou do celular. Ela é **encolhida** (até
+  560 px no maior lado, em `.webp`) e guardada **dentro da própria ficha**: aparece sem internet,
+  vai no `.json` exportado e no backup, e não depende de nenhum site de fora. O peso final aparece
+  ao lado do botão.
+- **Ou cole um link** no campo *Endereço da imagem*. Não gasta espaço no navegador, mas depende da
+  internet. Se o link não carregar, a moldura diz isso em vez de deixar uma imagem quebrada.
+- **Descrição** é texto livre, do tamanho que você quiser. Linha em branco separa parágrafo, e é
+  assim que ela aparece na tela — serve para a cena inteira que o Cone carrega, com as falas.
+
+Onde isso aparece — e é sempre a **mesma ficha**, lida na hora de desenhar, nunca uma cópia:
+
+| Onde | O que mostra |
+|---|---|
+| **Jogar** | O cartão *Cone de Luz*: a arte grande, Nome e Nível, o Bônus Maior que já está somado nos números da ficha, o Efeito Condicional e a descrição embaixo |
+| **Mestre > Grupo** e o painel de combate | A arte em miniatura no cartão de cada personagem e de cada NPC em cena, com o Efeito Condicional à vista e a descrição em *Ler a descrição* |
+| **Mestre > NPCs** | A mesma miniatura no cartão de cada NPC do banco |
+| **Mestre > Recompensas** | *Cones de Luz da mesa*: a galeria com o Cone de todo mundo, grupo e NPCs lado a lado, e o nome do Cone na conferência de marco |
+
+> **Espaço no navegador.** O `localStorage` tem uns 5 MB para a mesa inteira, e cada arte guardada
+> come um pedaço dele. Se o navegador recusar gravar, o site avisa e **mantém a arte anterior** —
+> nada da ficha se perde. Nesse caso, use um link em vez do arquivo, ou tire a arte de alguma ficha.
+
+**Inimigo não tem Cone de Luz.** Pela regra 25.2 quem equipa um Cone é personagem, e o inimigo sai
+da tabela de âncoras de 28.3 — treze números e nada mais. Um NPC, que é ficha de personagem
+inteira, tem.
+
+### O banco de Cones
+
+A ficha guarda **um** Cone, o equipado. O **banco** guarda a coleção da mesa — o que a pessoa usa
+hoje, o que ela usava antes, o que o Mestre ainda não entregou. Ele aparece em dois lugares, e é o
+mesmo banco nos dois:
+
+- **Editar ficha > 8 · Equipamento**, no quadro *Banco de Cones de Luz*: escolher um Cone na lista
+  e **Equipar**, ou **Guardar o Cone desta ficha no banco**. *Ver a coleção* abre a galeria com a
+  arte de cada um, para equipar ou tirar do banco direto de lá.
+- **Mestre > Recompensas**, no cartão *Banco de Cones de Luz*: **Entregar** um Cone a qualquer
+  personagem ou NPC. A entrega **guarda no banco o Cone que a pessoa estava usando** antes de
+  equipar o novo, então nenhum Cone com nome e história se perde numa troca.
+
+- **Equipar copia.** Daí em diante a ficha tem a cópia dela: mudar o Cone na ficha não mexe no
+  banco, e tirar um Cone do banco não mexe em ficha nenhuma.
+- **Dois Cones com o mesmo nome são o mesmo Cone.** Guardar de novo **atualiza** o que está lá, em
+  vez de encher o banco de quase-duplicatas.
+- **O banco tem chave própria no navegador** (`explorando-galaxias:cones`), vai no backup completo
+  (*Mais > Exportar tudo*) e se exporta sozinho em **Exportar o banco**. É assim que os Cones saem
+  do navegador do Mestre e entram no do jogador: a importação **soma** ao banco de quem recebe e
+  nunca apaga nada.
+- **Importar aceita vários arquivos** e também aceita um **arquivo de ficha ou de NPC** — dele sai
+  o Cone equipado, que é como se pega um Cone bonito de uma coleção pronta.
+
+Um Cone se **escreve na ficha** (é lá que estão o Bônus Maior, o Efeito Condicional, a arte e a
+história, com todos os avisos de regra) e depois vai para o banco. O banco guarda e entrega.
+
+## A história do personagem
+
+Em **Editar ficha > 1 · Personagem** há o campo **História do personagem**: é o texto comprido que
+o jogador escreve fora da mesa, e ele aceita **Markdown**. Cole o `.md` do jeito que você escreveu
+— `# títulos`, `**negrito**`, `*itálico*`, listas, `> citações`, tabelas, linhas e links — e ele
+aparece formatado. A *Prévia formatada*, ali embaixo do campo, mostra exatamente como vai ficar, e
+o campo conta as palavras.
+
+- **Na aba Jogar** ela vem embaixo da ficha, na largura toda (texto longo em coluna estreita não se
+  lê), **aberta e inteira**. Um clique no título recolhe.
+- **Na Área do Mestre** ela aparece **fechada** em *Ler a história de X*, no cartão de cada
+  personagem (Grupo e combate) e de cada NPC: são várias fichas na mesma tela, e um texto de mil
+  palavras aberto afogaria o combate. Um clique abre.
+- **Imprimir abre tudo.** O que estiver recolhido na tela — a história, a descrição do Cone, as
+  ações de um inimigo — é aberto para o papel e volta a fechar depois.
+- **NPC também tem.** É a mesma ficha, então o mesmo campo está lá.
+
+> **Markdown colado é peneirado.** O livro vem do repositório e é renderizado direto; um `.md`
+> colado de fora, não. O HTML gerado passa por um filtro que mantém a formatação (títulos, ênfase,
+> listas, tabelas, links, imagens) e remove o que é comportamento: `<script>`, `<iframe>`,
+> atributos `on...` e endereços `javascript:`. Link externo sai com `target="_blank"` e
+> `rel="noopener"`.
 
 ## A Área do Mestre
 
@@ -20,10 +103,10 @@ o botão **Rever o aviso de spoiler**, no fim do Painel, traz ele de volta. Oito
 | **Painel** | Campanha, faixa, PH do grupo, a tira do grupo com PV e Energia, o Ciclo em curso, a DT da faixa (27.2), rolador e checklist de abertura de sessão |
 | **Grupo** | Tamanho do grupo com o PH resultante (16.2); por jogador: PV com dano e cura já descontando RD, PV temporário, Energia, Defesa/Esquiva/RD/VEL/DT, condições com turnos, Memoespírito (invocar, dispensar, PV) e o painel de Morrendo; cobertura de Elementos, ordem de VEL e os descansos do grupo |
 | **Combate** | A Fila de Ação (19.3) com PJs, Memoespíritos em campo, NPCs e inimigos; Ciclo com os quatro passos de avanço; Atrasar e Avançar com Firmeza e teto (19.4); Tenacidade com a calculadora de redução (20.3) e a Quebra com dano e efeito por Elemento (20.5); virada de fase de Boss (28.5); condições com turnos |
-| **Inimigos** | O bestiário das 32 fichas do capítulo 28 com filtro, o criador pela tabela de âncoras (28.3), os inimigos da campanha e a **importação/exportação de inimigos em `.json`** (abaixo) |
+| **Inimigos** | O bestiário das 32 fichas do capítulo 28 com filtro, o criador pela tabela de âncoras (28.3), **os inimigos da campanha com filtro, ordem e agrupamento** (abaixo) e a **importação/exportação de inimigos em `.json`** |
 | **NPCs** | O banco de NPCs: **ficha de personagem completa**, igual à de um jogável, para quem não é do grupo. Criar do zero, copiar de uma ficha salva, filtrar por papel, pôr em cena e a **importação/exportação em `.json`** (abaixo) |
 | **Encontros** | Orçamento de PV (27.4) com a leitura de passagem/típico/pesado, **quem do grupo entra na cena** e **quais NPCs entram** (o orçamento e o contrato da Fraqueza se ajustam a isso), as quatro composições e a DT para descobrir Fraqueza (27.3) |
-| **Recompensas** | O calendário de marco (27.8), a verba (24.5), a conferência do que o nível de cada um já libera e o tesouro do grupo |
+| **Recompensas** | O calendário de marco (27.8), a verba (24.5), a conferência do que o nível de cada um já libera, a **galeria dos Cones de Luz da mesa** (arte, Bônus Maior e Efeito Condicional de cada um) e o tesouro do grupo |
 | **Escudo do Mestre** | As tabelas de consulta, imprimíveis: DTs, Tenacidade e Quebra, Fila, as nove regras de inimigo, âncoras, condições e Energia |
 
 **O que é da ficha fica na ficha.** PV, PV temporário, Energia, PH do grupo, condições e Memoespírito que o
@@ -64,6 +147,28 @@ São 40 fichas montadas pela tabela de âncoras, oito por faixa de nível (5 Com
 
 As Fraquezas delas são **sugestões**: troque à vontade para cumprir o contrato de encontro de 27.5,
 que é o que as fichas do capítulo 28 também pedem.
+
+### Achar um inimigo no meio de quarenta
+
+A lista dos **inimigos da campanha** cresce rápido, então ela é feita para ser lida de relance:
+cada ficha vem **fechada**, mostrando só nome, tipo, facção, faixa, PV e as Fraquezas, com **Pôr em
+cena**, Duplicar, Exportar e Excluir sempre à mão. Clique no nome para abrir e editar — e ela
+**continua aberta** enquanto você mexe nos campos.
+
+No cartão *Procurar nos meus inimigos*:
+
+- **Facção**, **Tipo** e **Faixa** filtram; há também uma opção **— sem facção —** para achar o que
+  você criou e ainda não batizou.
+- **Procurar** acha sem acento e sem maiúscula em nome, facção, tipo, faixa, origem, Fraquezas,
+  Resistências e no texto de comportamento.
+- **Ordem** reordena: na ordem em que você criou, por nome (A–Z), por **facção** (com título de
+  grupo), por tipo (Comum → Elite → Boss), por **faixa** (com título de grupo) ou por PV.
+- **Abrir todas as fichas** / **Fechar todas** valem para o que o filtro está mostrando.
+- A contagem **"X de Y"** diz quantos o filtro deixou passar, e **Limpar o filtro** devolve tudo.
+
+Filtrar e reordenar não mexe em nada: a ordem de verdade da sua lista continua a mesma, e editar um
+inimigo com o filtro ligado edita **aquele** inimigo. Abrir e fechar é estado de tela — não vai
+para o arquivo da mesa nem para o backup.
 
 ### NPCs
 
@@ -116,8 +221,8 @@ Depois de importadas são **suas**: mude nível, Elemento, Bênçãos e Habilida
 Tudo fica salvo **no navegador** (`localStorage`), que é apagado se você limpar os dados do site.
 Então:
 
-- **Mais → Exportar tudo** gera um arquivo `.json` com **todas as fichas e a mesa do Mestre**.
-  É o backup da mesa inteira. **Mais → Restaurar um backup** devolve tudo.
+- **Mais → Exportar tudo** gera um arquivo `.json` com **todas as fichas, a mesa do Mestre e o
+  banco de Cones**. É o backup da mesa inteira. **Mais → Restaurar um backup** devolve tudo.
 - **Mais → Exportar esta ficha** gera o `.json` de um personagem só — é o arquivo que o jogador
   manda para o Mestre pôr no grupo.
 - Para ver uma versão nova do site, **nunca** limpe os dados do site: isso apaga as fichas. Use
@@ -162,7 +267,8 @@ Os **números das fórmulas** (PV, Defesa, dano, tetos...) moram em `site/js/mot
 |---|---|
 | `index.html`, `estilo.css` | A página e o visual |
 | `js/motor.js` | As regras de personagem (cópia fiel do oráculo Python) |
-| `js/ficha-base.js` | Modelo da ficha, salvar, exportar e importar |
+| `js/ficha-base.js` | Modelo da ficha, salvar, exportar e importar, e o desenho do Cone de Luz |
+| `js/cones.js` | O banco de Cones de Luz: a coleção, o arquivo `.json` e os pedaços de tela que a ficha e a Área do Mestre compartilham |
 | `js/ficha-editar.js` | A aba Editar ficha |
 | `js/ficha-jogar.js` | A aba Jogar |
 | `js/mestre-base.js` | Estado da mesa do Mestre, sincronia com as fichas, o modelo de inimigo e de NPC, as regras de mesa (Fila, Firmeza, Tenacidade, Quebra, orçamento), o aviso de abertura e a rota |
