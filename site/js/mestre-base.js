@@ -28,7 +28,7 @@
   // Modelo e armazenamento
   // ---------------------------------------------------------------------------
   function combateVazio() {
-    return { nome: "", ciclo: 1, ativo: false, inimigos: [], cc: {}, alvo: "",
+    return { nome: "", ciclo: 1, ativo: false, inimigos: [], npcs: [], cc: {}, alvo: "",
       rt: { quem: "", fonte: "basico", elemento: "" } };
   }
 
@@ -40,7 +40,7 @@
       combate: combateVazio(),
       inimigos_salvos: [], encontros: [], tesouro: [], missoes: [], npcs: [],
       entregas: {},                    // "faixa:3" -> true, o calendário de 27.8
-      filtros: { faixa: "", tipo: "", q: "", ancora: "" },
+      filtros: { faixa: "", tipo: "", q: "", ancora: "", npc_papel: "", npc_q: "" },
     };
   }
 
@@ -111,10 +111,16 @@
     return G.idsDasFichas().filter((id) => !dentro.has(id)).map(G.membro).filter(Boolean);
   };
 
-  /** Grava o que mudou na ficha do jogador: é isso que sincroniza com a aba Jogar. */
-  G.gravarFicha = function (m) { EG.Armazem.salvar(m.p); };
+  /**
+   * Grava o que mudou na ficha. Na do jogador é isso que sincroniza com a aba Jogar; a de
+   * NPC já mora dentro da mesa (`m.p` é referência para `estado.npcs`), então basta salvar.
+   */
+  G.gravarFicha = function (m) {
+    if (m.npc) G.salvar();
+    else EG.Armazem.salvar(m.p);
+  };
 
-  G.nome = (m) => m.p.nome || "Personagem sem nome";
+  G.nome = (m) => m.p.nome || (m.npc ? "NPC sem nome" : "Personagem sem nome");
 
   G.nivelGrupo = function (g) {
     g = g || G.grupo();
@@ -128,6 +134,105 @@
 
   G.faixaN = (nivel) => M.faixa(nivel == null ? G.nivel() : nivel);
   G.faixaTexto = (n) => (C().mestre.ancoras[(n || G.faixaN()) - 1] || {}).faixa || "—";
+
+  // ---------------------------------------------------------------------------
+  // NPCs: fichas completas que não são de ninguém da mesa
+  //
+  // Um NPC é uma ficha de personagem igual à de um jogável — mesmo modelo, mesmo motor de
+  // regras, mesmo Memoespírito, mesma tela de editar. Duas diferenças, as duas de lugar:
+  //
+  // 1. Ele mora na mesa do Mestre (`estado.npcs`) e não no mapa de fichas. Por isso não
+  //    aparece no seletor de personagem do jogador, não é semeado no grupo, não conta no
+  //    tamanho do grupo e não encosta no PH, que é recurso dos jogadores (16.2).
+  // 2. A ficha pode ficar quase vazia. O motor calcula com o que tiver, e a tela diz o que
+  //    está em branco em vez de tratar como erro: a maioria dos NPCs nunca vai rolar dado.
+  //
+  // O formato de `{id, p, R}` é o mesmo de `G.membro()` de propósito: assim PV, Energia,
+  // condições, Morrendo e Memoespírito do NPC usam as funções que já existem para o grupo.
+  // ---------------------------------------------------------------------------
+  G.PAPEIS = ["Aliado", "Neutro", "Adversário"];
+
+  /** Completa a ficha de um NPC (de versão antiga ou de arquivo) com o que falta. */
+  G.completarNpc = function (p) {
+    EG.Ficha.completar(p);
+    if (!p.npc || typeof p.npc !== "object" || Array.isArray(p.npc)) p.npc = {};
+    if (!G.PAPEIS.includes(p.npc.papel)) p.npc.papel = "Neutro";
+    if (typeof p.npc.faccao !== "string") p.npc.faccao = "";
+    return p;
+  };
+
+  /** NPC em branco, no nível da campanha. */
+  G.novoNpc = function (nome, papel) {
+    const p = G.completarNpc(EG.Ficha.novoPersonagem());
+    p.nome = nome || "";
+    p.nivel = G.nivel();
+    if (G.PAPEIS.includes(papel)) p.npc.papel = papel;
+    return p;
+  };
+
+  /** As fichas de NPC da mesa, na ordem do banco e já completas. */
+  G.npcs = function () {
+    const est = G.estado();
+    if (!Array.isArray(est.npcs)) est.npcs = [];
+    return est.npcs.map(G.completarNpc);
+  };
+
+  /** Um NPC no mesmo formato de um membro do grupo. `p` é referência para a mesa. */
+  G.npc = function (id) {
+    const p = G.npcs().find((x) => x.id === id);
+    if (!p) return null;
+    return { id: id, p: p, R: M.calcular(EG.Ficha.paraMotor(p), C()), npc: true };
+  };
+
+  /** Quem quer que seja, por id: um membro do grupo ou um NPC. */
+  G.alguem = function (id) { return G.membro(id) || G.npc(id); };
+
+  G.indiceDoNpc = (id) => G.npcs().findIndex((x) => x.id === id);
+
+  /** Os NPCs em cena no combate, na ordem em que entraram. */
+  G.npcsEmCena = function () {
+    const cb = G.estado().combate;
+    if (!Array.isArray(cb.npcs)) cb.npcs = [];
+    return cb.npcs.map(G.npc).filter(Boolean);
+  };
+
+  G.npcEstaEmCena = (id) => (G.estado().combate.npcs || []).indexOf(id) >= 0;
+
+  G.porNpcEmCena = function (id) {
+    const cb = G.estado().combate, m = G.npc(id);
+    if (!m) return null;
+    if (!Array.isArray(cb.npcs)) cb.npcs = [];
+    if (cb.npcs.indexOf(id) < 0) cb.npcs.push(id);
+    cb.ativo = true;
+    G.cc("n:" + id).participa = true;
+    return m;
+  };
+
+  G.tirarNpcDaCena = function (id) {
+    const cb = G.estado().combate, i = (cb.npcs || []).indexOf(id);
+    if (i < 0) return false;
+    cb.npcs.splice(i, 1);
+    delete cb.cc["n:" + id];
+    delete cb.cc["nm:" + id];
+    if (cb.alvo === "n:" + id || cb.alvo === "nm:" + id) cb.alvo = "";
+    return true;
+  };
+
+  /** 23.6: o Descanso do grupo não alcança NPC, então cada um descansa sozinho. */
+  G.descansoDoNpc = function (m, tipo) {
+    const j = m.p.jogo, antes = G.pvAtual(m);
+    if (tipo === "longo") {
+      j.pv = m.R.pv_max; j.temp = 0; j.condicoes = []; j.morrendo = { s: 0, f: 0 };
+      j.esforco = m.R.esforco_max; j.usos = {}; j.energia = 0;
+      if (m.R.memo) { j.memo_pv = m.R.memo.pv; j.memo_ativo = false; }
+    } else {
+      j.pv = Math.min(m.R.pv_max, antes + Math.max(0, m.R.descanso_curto));
+      if (antes === 0 && j.pv > 0) j.morrendo = { s: 0, f: 0 };
+      if (m.R.memo) j.memo_pv = m.R.memo.pv;
+    }
+    G.gravarFicha(m);
+    return j.pv;
+  };
 
   // ---------------------------------------------------------------------------
   // PV, Energia e condições dos personagens (espelha ficha-jogar.js)
@@ -489,6 +594,81 @@
     };
   };
 
+  // ---------------------------------------------------------------------------
+  // NPCs em arquivo (.json)
+  //
+  // A ficha de NPC é uma ficha de personagem, então o arquivo é o mesmo `.json` que a aba
+  // Jogar exporta — com um bloco `npc` a mais. É de propósito: o `.json` que um jogador
+  // mandou importa como NPC (o personagem que saiu da campanha e virou figura da história),
+  // e um NPC exportado importa como ficha de jogador. Só o `nome` é obrigatório; o resto
+  // `completar()` preenche, e a ficha quase vazia é um caso válido.
+  // ---------------------------------------------------------------------------
+  const MARCA_NPCS = "explorando-galaxias:npcs";
+
+  /** O pacote que a exportação grava, e que a importação reconhece de volta. */
+  G.pacoteDeNpcs = function (lista, nomeDoPacote) {
+    const jogoLimpo = EG.Ficha.novoPersonagem().jogo;
+    return {
+      tipo: MARCA_NPCS,
+      versao: 1,
+      salvo_em: new Date().toISOString(),
+      nome: nomeDoPacote || "",
+      npcs: EG.clonar(lista).map((p) => {
+        // O que é de combate não viaja: PV gasto, Energia e condições são da mesa.
+        p.jogo = EG.clonar(jogoLimpo);
+        return p;
+      }),
+    };
+  };
+
+  /** Onde quer que as fichas de NPC estejam no arquivo, devolve a lista bruta delas. */
+  G.listaDeNpcsDoArquivo = function (bruto) {
+    if (Array.isArray(bruto)) return bruto;
+    if (!bruto || typeof bruto !== "object") return null;
+    if (Array.isArray(bruto.npcs)) return bruto.npcs;                   // pacote de NPCs, ou mesa
+    if (bruto.mestre && Array.isArray(bruto.mestre.npcs)) return bruto.mestre.npcs;   // backup completo
+    if (bruto.fichas && typeof bruto.fichas === "object") return Object.values(bruto.fichas);
+    if ("atributos" in bruto || texto(bruto.nome)) return [bruto];      // uma ficha sozinha
+    return null;
+  };
+
+  /**
+   * Uma ficha de arquivo virando NPC da campanha.
+   * Devolve {npc, avisos} ou {erro} quando nem o nome dá para aproveitar.
+   */
+  G.npcDeArquivo = function (bruto) {
+    if (!bruto || typeof bruto !== "object" || Array.isArray(bruto)) return { erro: "não é uma ficha" };
+    const nome = texto(bruto.nome);
+    if (!nome) return { erro: "ficha sem nome" };
+
+    const avisos = [];
+    const p = G.completarNpc(EG.clonar(bruto));
+    p.nome = nome;
+    p.id = texto(p.id) || EG.uid();
+
+    const papelBruto = texto((bruto.npc || {}).papel) || texto(bruto.papel);
+    const papel = canonico(G.PAPEIS, papelBruto);
+    if (papel) p.npc.papel = papel;
+    else if (papelBruto) avisos.push(nome + ": papel \"" + papelBruto + "\" não existe, virou Neutro");
+
+    if (!texto(p.npc.faccao)) p.npc.faccao = texto(bruto.faccao);
+
+    const nivel = inteiro(p.nivel, null);
+    if (nivel == null || nivel < 1 || nivel > 20) {
+      avisos.push(nome + ": nível " + (nivel == null ? "em branco" : nivel) + " fora de 1 a 20, virou 1");
+      p.nivel = Math.max(1, Math.min(20, nivel || 1));
+    }
+
+    // O motor é a autoridade sobre as regras: se a ficha fere alguma, a tela de editar
+    // mostra onde. Aqui só se conta quantas, para a importação não passar em silêncio.
+    const R = M.calcular(EG.Ficha.paraMotor(p), C());
+    if (R.avisos.length) {
+      avisos.push(nome + ": " + R.avisos.length + (R.avisos.length === 1 ? " aviso" : " avisos") +
+        " de regra na ficha — abra a ficha do NPC para ver quais");
+    }
+    return { npc: p, avisos: avisos };
+  };
+
   /** Todas as fichas que podem entrar num encontro: bestiário + inimigos da campanha. */
   G.catalogoDeInimigos = function () {
     const meus = G.estado().inimigos_salvos.map((x) => ({ ref: "salvo:" + x.uid, nome: x.nome, tipo: x.tipo,
@@ -664,6 +844,31 @@
         });
       }
     }
+    // NPCs em cena: casa própria pela VEL da ficha deles, como qualquer um (19.3). Eles
+    // não são "jogador" no desempate — por 19.3 os jogadores vêm antes dos NPCs empatados,
+    // e isso vale também para o NPC que luta do lado do grupo.
+    for (const m of G.npcsEmCena()) {
+      const chave = "n:" + m.id, cc = G.cc(chave);
+      itens.push({
+        chave: chave, kind: "npc", tipo: "NPC", papel: m.p.npc.papel,
+        nome: G.nome(m),
+        sub: [m.p.npc.faccao, m.p.caminho, m.p.elemento].filter(Boolean).join(" · ") || "NPC",
+        vel: m.R.velocidade || 10, agi: (m.R.bonus || {}).Agilidade || 0,
+        dis: (m.R.bonus || {}).Discernimento || 0, jogador: false, cc: cc, m: m,
+        pv: G.pvAtual(m), pv_max: m.R.pv_max, condicoes: m.p.jogo.condicoes || [],
+      });
+      if (m.R.memo && m.p.jogo.memo_ativo) {
+        const ck = "nm:" + m.id, cm = G.cc(ck);
+        itens.push({
+          chave: ck, kind: "npcmemo", tipo: "Memoespírito", papel: m.p.npc.papel,
+          nome: m.p.memoespirito.nome || "Memoespírito", sub: "de " + G.nome(m),
+          vel: m.R.memo.velocidade, agi: (m.R.memo.tr.Agilidade || 0) - m.R.eficiencia,
+          dis: (m.R.memo.tr.Discernimento || 0) - m.R.eficiencia, jogador: false, cc: cm, m: m,
+          pv: m.p.jogo.memo_pv == null ? m.R.memo.pv : Math.min(m.p.jogo.memo_pv, m.R.memo.pv),
+          pv_max: m.R.memo.pv, condicoes: [],
+        });
+      }
+    }
     for (const x of cb.inimigos) {
       const chave = "i:" + x.uid, cc = G.cc(chave);
       itens.push({
@@ -760,11 +965,17 @@
    * 4 ações agressivas por Ciclo — uma por personagem. Com um número diferente de gente em
    * cena, esta conta ajusta o orçamento na mesma proporção. Isso é extrapolação da tela, não
    * tabela do livro: `orcamento` continua trazendo o número publicado, ao lado do ajustado.
+   *
+   * `npcs` são as fichas de NPC da cena. Um NPC Aliado age um turno por Ciclo como qualquer
+   * personagem, então ele entra na mesma proporção de `emCena`; um NPC Adversário custa os
+   * PV máximos da ficha dele, pela regra de que o custo de um inimigo é o PV dele (27.4).
    */
-  G.contaDoEncontro = function (itens, faixaN, emCena) {
+  G.contaDoEncontro = function (itens, faixaN, emCena, npcs) {
     const orc = G.orcamento(faixaN);
     const ref = G.GRUPO_DE_REFERENCIA;
-    const pessoas = emCena == null ? ref : Math.max(0, Math.round(emCena));
+    const aliados = (npcs || []).filter((m) => m.p.npc.papel === "Aliado");
+    const adversarios = (npcs || []).filter((m) => m.p.npc.papel === "Adversário");
+    const pessoas = (emCena == null ? ref : Math.max(0, Math.round(emCena))) + aliados.length;
     let custo = 0, acoes = 0, n = 0;
     const porTipo = { Comum: 0, Elite: 0, Boss: 0 };
     const catalogo = G.catalogoDeInimigos();
@@ -776,6 +987,11 @@
       porTipo[t.tipo] = (porTipo[t.tipo] || 0) + qtd;
       acoes += ({ Comum: 1, Elite: 1.5, Boss: 2 }[t.tipo] || 1) * qtd;
       n += qtd;
+    }
+    for (const m of adversarios) {
+      custo += m.R.pv_max || 0;
+      acoes += 1;                      // ficha de personagem: um turno por Ciclo
+      n += 1;
     }
     const publicado = orc ? orc.orcamento : 0;
     const ajustado = pessoas === ref ? publicado : Math.round(publicado * pessoas / ref);
@@ -789,6 +1005,7 @@
       ajustado: pessoas !== ref,
       dpc: dpc, dpc_ajustado: pessoas === ref ? dpc : Math.round(dpc * pessoas / ref),
       custo: custo, pct: pct, leitura: leitura, acoes: acoes, n: n, por_tipo: porTipo,
+      npc_aliados: aliados.length, npc_adversarios: adversarios.length,
     };
   };
 
@@ -849,7 +1066,7 @@
 
   function valorEm(alvo, caminho) {
     if (alvo === "g") return obter(G.estado(), caminho);
-    const m = G.membro(alvo);
+    const m = G.alguem(alvo);
     return m ? obter(m.p, caminho) : undefined;
   }
 
@@ -938,6 +1155,7 @@
     ["grupo", "Grupo"],
     ["combate", "Combate"],
     ["inimigos", "Inimigos"],
+    ["npcs", "NPCs"],
     ["encontros", "Encontros"],
     ["recompensas", "Recompensas"],
     ["consulta", "Escudo do Mestre"],
@@ -973,6 +1191,7 @@
       "<input type='file' id='arquivo-ficha-mestre' accept='.json,application/json' hidden>" +
       "<input type='file' id='arquivo-backup' accept='.json,application/json' hidden>" +
       "<input type='file' id='arquivo-inimigos' accept='.json,application/json' multiple hidden>" +
+      "<input type='file' id='arquivo-npcs' accept='.json,application/json' multiple hidden>" +
       "</div>" +
       "<nav class='sub-abas' aria-label='Área do Mestre'>" + abas + "</nav>";
   };
@@ -1020,10 +1239,12 @@
       return true;
     }
     if (el.dataset.mf && el.dataset.mid) {
-      const m = G.membro(el.dataset.mid);
+      const m = G.alguem(el.dataset.mid);
       if (!m) return false;
       definir(m.p, el.dataset.mf, valor);
-      if (el.dataset.mf === "jogadores") return G.definirTamanho(valor), true;
+      // O tamanho do grupo é um recurso só e vai para todas as fichas (16.2) — mas isso é
+      // dos jogadores: um NPC não muda a tabela de PH da mesa.
+      if (el.dataset.mf === "jogadores" && !m.npc) return G.definirTamanho(valor), true;
       G.gravarFicha(m);
       return true;
     }
@@ -1102,8 +1323,10 @@
   function tela(r) {
     // A ficha aberta é zerada aqui: os delegados de ficha-base.js gravariam F.P em cima do que
     // esta tela escreveu. Jogar e Editar chamam F.abrirAtual() ao entrar, então nada se perde.
+    // A tela de ficha de NPC reabre a dela (e repõe o aoSalvar) logo depois disto.
     EG.Ficha.P = null;
     EG.Ficha.R = null;
+    EG.Ficha.aoSalvar = null;
     if (!G.estado().aviso_lido) { telaAviso(); return; }
     const qual = (r && r.partes && r.partes[0]) || "painel";
     (G.telas[qual] || G.telas.painel)(r);
@@ -1112,5 +1335,5 @@
   EG.registrarTela("mestre", tela);
 
   Object.assign(G, { ELEMENTOS, TIPOS, TELAS, obter, definir, idDe, modeloVazio, completar, CHAVE,
-    MARCA_INIMIGOS, mediaDeDados });
+    MARCA_INIMIGOS, MARCA_NPCS, mediaDeDados });
 })();

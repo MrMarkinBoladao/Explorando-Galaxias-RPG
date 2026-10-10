@@ -1,0 +1,988 @@
+{
+  "tipo": "explorando-galaxias:npcs",
+  "versao": 1,
+  "nome": "Tripulação do Expresso Astral",
+  "npcs": [
+    {
+      "id": "",
+      "versao": 1,
+      "nome": "Himeko",
+      "jogador": "",
+      "conceito": "A navegadora que conserta o trem com uma mão e abre caminho a fogo com a outra.",
+      "proposito": "Levar o Expresso até o fim dos trilhos que ela mesma soldou, e ver o que tem depois.",
+      "crenca": "Quem não entende a máquina não tem o direito de culpar ela.",
+      "aparencia": "Jaqueta de serviço queimada nas mangas, óculos de solda no alto da cabeça.",
+      "coisa": "Um grão de café que ela guarda por superstição desde a primeira viagem.",
+      "notas": "",
+      "nivel": 10,
+      "jogadores": 4,
+      "raca": "Humano",
+      "bonus_racial": {
+        "modo": "Um Atributo (+2)",
+        "attr1": "Sincronia",
+        "attr2": ""
+      },
+      "caminho": "A Erudição",
+      "atributo_habilidade": "Sincronia",
+      "elemento": "Fogo",
+      "metodo": "Array oficial",
+      "atributos": {
+        "Sincronia": 15,
+        "Discernimento": 14,
+        "Poder": 13,
+        "Vigor": 12,
+        "Agilidade": 10,
+        "Presença": 8
+      },
+      "aumentos": {
+        "3": {
+          "modo": "Um Atributo (+2)",
+          "attr1": "Sincronia",
+          "attr2": ""
+        },
+        "6": {
+          "modo": "Um Atributo (+2)",
+          "attr1": "Discernimento",
+          "attr2": ""
+        },
+        "9": {
+          "modo": "Um Atributo (+2)",
+          "attr1": "Vigor",
+          "attr2": ""
+        }
+      },
+      "sintonia": "Sincronia",
+      "pericias_escolhidas": [
+        "Mecânica",
+        "Pilotagem",
+        "Percepção",
+        "Intuição",
+        "Liderança",
+        "Resistência",
+        "Investigação"
+      ],
+      "eficacia_pericias": [
+        "Ciência",
+        "Mecânica"
+      ],
+      "eficacia_tr": [
+        "Percepção Mental"
+      ],
+      "habilidades": [
+        {
+          "nome": "Linha de Solda",
+          "tipo": "Dano",
+          "nivel": 3,
+          "area": false,
+          "resolucao": "Teste de Ataque",
+          "alcance": "Longa",
+          "ress3": false,
+          "efeito": "Um fio de chama desenha uma linha reta no chão e sobe de uma vez."
+        },
+        {
+          "nome": "Ponto de Ignição",
+          "tipo": "Dano",
+          "nivel": 4,
+          "area": true,
+          "resolucao": "Teste de Ataque",
+          "alcance": "Média",
+          "ress3": false,
+          "efeito": "Ela marca um ponto no ar e tudo em volta pega fogo ao mesmo tempo."
+        },
+        {
+          "nome": "Cálculo de Carga",
+          "tipo": "Buff",
+          "nivel": 2,
+          "area": false,
+          "resolucao": "Teste de Ataque",
+          "alcance": "Curta",
+          "ress3": false,
+          "efeito": "Ela diz onde bater, e o próximo ataque do grupo acerta o lugar certo."
+        },
+        {
+          "nome": "Rachadura Térmica",
+          "tipo": "Debuff",
+          "nivel": 3,
+          "area": false,
+          "resolucao": "Teste de Resistência",
+          "alcance": "Média",
+          "ress3": false,
+          "efeito": "O metal do inimigo esquenta até abrir fenda, e a armadura dele deixa de servir."
+        },
+        {
+          "nome": "Mão de Mecânica",
+          "tipo": "Passiva",
+          "nivel": 1,
+          "area": false,
+          "resolucao": "",
+          "alcance": "",
+          "ress3": false,
+          "efeito": "Qualquer máquina que ela já abriu uma vez volta a funcionar na mão dela."
+        }
+      ],
+      "ultimate": {
+        "nome": "Ignição Total",
+        "tipo": "Dano",
+        "area": true,
+        "resolucao": "Teste de Ataque",
+        "efeito": "O cano aquece até o limite e ela solta tudo numa coluna de fogo que atravessa a cena."
+      },
+      "bencaos": [
+        "Teorema da Dispersão",
+        "Vetor Corrigido",
+        "Memória de Trabalho",
+        "Princípio de Nous",
+        "Cálculo Preditivo"
+      ],
+      "fragmento": "",
+      "forma_avatar": "",
+      "armadura": "Leve",
+      "armadura_nome": "Traje de manutenção com placas térmicas",
+      "arma": {
+        "nome": "Lança-chamas de doca adaptado",
+        "categoria": "Energia",
+        "atributo": "Sincronia",
+        "elemento": "Fogo",
+        "propriedade": "Nenhuma"
+      },
+      "cone": {
+        "nome": "Caldeira do Expresso",
+        "nivel": 3,
+        "alvo": "Dano de Habilidade",
+        "qual": "",
+        "escolha": "Numérico",
+        "sobreposicoes": 0,
+        "efeito": "Quando ela acerta um alvo já atingido por fogo neste Ciclo, o dano sobe."
+      },
+      "reliquias": {
+        "Cabeça": {
+          "tem": true,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Mãos": {
+          "tem": true,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Tronco": {
+          "tem": false,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Botas": {
+          "tem": false,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Esfera Planar": {
+          "tem": true,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Corda de Ligação": {
+          "tem": true,
+          "nome": "",
+          "conjunto": "—"
+        }
+      },
+      "esfera_elemento": "Fogo",
+      "conjuntos": {
+        "A": {
+          "nome": "",
+          "bonus2": "",
+          "rolagem": "",
+          "efeito4": ""
+        },
+        "B": {
+          "nome": "",
+          "bonus2": "",
+          "rolagem": "",
+          "efeito4": ""
+        },
+        "C": {
+          "nome": "",
+          "bonus2": "",
+          "rolagem": "",
+          "efeito4": ""
+        }
+      },
+      "ressonancias": {
+        "I": "Velocidade +1",
+        "II": "Ultimate com efeito extra",
+        "III": "",
+        "IV": ""
+      },
+      "tecnica": "Ela escuta o casco e diz, em uma frase, o que está para quebrar.",
+      "inventario": [],
+      "creditos": 0,
+      "memoespirito": {
+        "nome": "",
+        "conceito": "",
+        "funcao": "",
+        "elemento": "",
+        "pontos": {},
+        "atributo_ataque": "Poder",
+        "bonus_menores": [],
+        "evolucoes": [],
+        "memoria_desperta": "",
+        "hab_ofensiva": "",
+        "hab_auxiliar": ""
+      },
+      "jogo": {
+        "pv": null,
+        "temp": 0,
+        "energia": 0,
+        "ph": null,
+        "esforco": 1,
+        "memo_ativo": false,
+        "memo_pv": null,
+        "acumulos": {},
+        "condicoes": [],
+        "usos": {},
+        "morrendo": {
+          "s": 0,
+          "f": 0
+        },
+        "presa": ""
+      },
+      "npc": {
+        "papel": "Aliado",
+        "faccao": "Expresso Astral"
+      }
+    },
+    {
+      "id": "",
+      "versao": 1,
+      "nome": "Welt",
+      "jogador": "",
+      "conceito": "O homem calmo que já salvou um mundo e não faz questão de contar qual.",
+      "proposito": "Garantir que o grupo não repita o erro que ele cometeu uma vez.",
+      "crenca": "Nada que eu carregue é mais pesado do que o que eu deixei para trás.",
+      "aparencia": "Terno escuro, bengala na mão direita, postura de quem não tem pressa.",
+      "coisa": "Um par de luvas velhas que ele nunca usa e nunca joga fora.",
+      "notas": "",
+      "nivel": 10,
+      "jogadores": 4,
+      "raca": "Humano",
+      "bonus_racial": {
+        "modo": "Um Atributo (+2)",
+        "attr1": "Discernimento",
+        "attr2": ""
+      },
+      "caminho": "A Inexistência",
+      "atributo_habilidade": "Discernimento",
+      "elemento": "Imaginário",
+      "metodo": "Array oficial",
+      "atributos": {
+        "Discernimento": 15,
+        "Sincronia": 14,
+        "Presença": 13,
+        "Vigor": 12,
+        "Agilidade": 10,
+        "Poder": 8
+      },
+      "aumentos": {
+        "3": {
+          "modo": "Um Atributo (+2)",
+          "attr1": "Discernimento",
+          "attr2": ""
+        },
+        "6": {
+          "modo": "Um Atributo (+2)",
+          "attr1": "Sincronia",
+          "attr2": ""
+        },
+        "9": {
+          "modo": "Um Atributo (+2)",
+          "attr1": "Vigor",
+          "attr2": ""
+        }
+      },
+      "sintonia": "Discernimento",
+      "pericias_escolhidas": [
+        "Investigação",
+        "Persuasão",
+        "Liderança",
+        "Intuição",
+        "Tecnologia"
+      ],
+      "eficacia_pericias": [
+        "Percepção",
+        "Investigação"
+      ],
+      "eficacia_tr": [
+        "Força de Vontade"
+      ],
+      "habilidades": [
+        {
+          "nome": "Peso do Mundo",
+          "tipo": "Dano",
+          "nivel": 4,
+          "area": false,
+          "resolucao": "Teste de Ataque",
+          "alcance": "Longa",
+          "ress3": false,
+          "efeito": "A gravidade de um ponto do ar triplica, e o que estava ali desce com ela."
+        },
+        {
+          "nome": "Tempo Cobrado",
+          "tipo": "Debuff",
+          "nivel": 3,
+          "area": false,
+          "resolucao": "Teste de Resistência",
+          "alcance": "Média",
+          "ress3": false,
+          "efeito": "O alvo passa a viver meio segundo atrasado do resto da cena."
+        },
+        {
+          "nome": "Punho de Gravidade",
+          "tipo": "Dano",
+          "nivel": 2,
+          "area": false,
+          "resolucao": "Teste de Ataque",
+          "alcance": "Média",
+          "ress3": false,
+          "efeito": "Um golpe que chega de longe, como se o espaço entre os dois não existisse."
+        },
+        {
+          "nome": "Linha de Contenção",
+          "tipo": "Debuff",
+          "nivel": 3,
+          "area": true,
+          "resolucao": "Teste de Resistência",
+          "alcance": "Média",
+          "ress3": false,
+          "efeito": "Ele risca uma linha, e quem tenta cruzar fica preso no próprio peso."
+        },
+        {
+          "nome": "Já Vi Isso Antes",
+          "tipo": "Passiva",
+          "nivel": 2,
+          "area": false,
+          "resolucao": "",
+          "alcance": "",
+          "ress3": false,
+          "efeito": "Uma vez por cena ele diz o que o inimigo vai fazer, e acerta."
+        }
+      ],
+      "ultimate": {
+        "nome": "Juízo da Gravidade",
+        "tipo": "Dano",
+        "area": true,
+        "resolucao": "Teste de Ataque",
+        "efeito": "O chão da cena deixa de puxar para baixo e passa a puxar para o centro."
+      },
+      "bencaos": [
+        "Marca do Vazio",
+        "Olhar da Ausência",
+        "Silêncio da Existência",
+        "Mestre das Aflições",
+        "Colapso das Defesas"
+      ],
+      "fragmento": "",
+      "forma_avatar": "",
+      "armadura": "Leve",
+      "armadura_nome": "Terno reforçado, discreto o bastante para não parecer armadura",
+      "arma": {
+        "nome": "Projeção de gravidade",
+        "categoria": "Energia",
+        "atributo": "Sincronia",
+        "elemento": "Imaginário",
+        "propriedade": "Nenhuma"
+      },
+      "cone": {
+        "nome": "Bengala do Herói Aposentado",
+        "nivel": 3,
+        "alvo": "Dano de Habilidade",
+        "qual": "",
+        "escolha": "Numérico",
+        "sobreposicoes": 0,
+        "efeito": "Contra alvo que já sofreu dano Imaginário nesta cena, o dano sobe."
+      },
+      "reliquias": {
+        "Cabeça": {
+          "tem": true,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Mãos": {
+          "tem": false,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Tronco": {
+          "tem": true,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Botas": {
+          "tem": false,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Esfera Planar": {
+          "tem": true,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Corda de Ligação": {
+          "tem": true,
+          "nome": "",
+          "conjunto": "—"
+        }
+      },
+      "esfera_elemento": "Imaginário",
+      "conjuntos": {
+        "A": {
+          "nome": "",
+          "bonus2": "",
+          "rolagem": "",
+          "efeito4": ""
+        },
+        "B": {
+          "nome": "",
+          "bonus2": "",
+          "rolagem": "",
+          "efeito4": ""
+        },
+        "C": {
+          "nome": "",
+          "bonus2": "",
+          "rolagem": "",
+          "efeito4": ""
+        }
+      },
+      "ressonancias": {
+        "I": "Habilidade de Nível 3 ou menor sem PH (1 por combate)",
+        "II": "Ultimate com efeito extra",
+        "III": "",
+        "IV": ""
+      },
+      "tecnica": "Ele pede para ver o lugar antes de entrar, e sempre nota a saída que ninguém viu.",
+      "inventario": [],
+      "creditos": 0,
+      "memoespirito": {
+        "nome": "",
+        "conceito": "",
+        "funcao": "",
+        "elemento": "",
+        "pontos": {},
+        "atributo_ataque": "Poder",
+        "bonus_menores": [],
+        "evolucoes": [],
+        "memoria_desperta": "",
+        "hab_ofensiva": "",
+        "hab_auxiliar": ""
+      },
+      "jogo": {
+        "pv": null,
+        "temp": 0,
+        "energia": 0,
+        "ph": null,
+        "esforco": 1,
+        "memo_ativo": false,
+        "memo_pv": null,
+        "acumulos": {},
+        "condicoes": [],
+        "usos": {},
+        "morrendo": {
+          "s": 0,
+          "f": 0
+        },
+        "presa": ""
+      },
+      "npc": {
+        "papel": "Aliado",
+        "faccao": "Expresso Astral"
+      }
+    },
+    {
+      "id": "",
+      "versao": 1,
+      "nome": "Dan Heng",
+      "jogador": "",
+      "conceito": "O arquivista de lança que prefere a biblioteca à conversa.",
+      "proposito": "Escrever o registro do que o grupo fez, sem omitir a parte que é dele.",
+      "crenca": "",
+      "aparencia": "Capuz, lança nas costas, cadernos em ordem alfabética.",
+      "coisa": "Uma folha arrancada de um registro que ele se recusa a ler de novo.",
+      "notas": "",
+      "nivel": 10,
+      "jogadores": 4,
+      "raca": "Vidyadhara",
+      "bonus_racial": {
+        "modo": "Um Atributo (+2)",
+        "attr1": "Vigor",
+        "attr2": ""
+      },
+      "caminho": "A Caça",
+      "atributo_habilidade": "Agilidade",
+      "elemento": "Vento",
+      "metodo": "Array oficial",
+      "atributos": {
+        "Agilidade": 15,
+        "Discernimento": 14,
+        "Vigor": 13,
+        "Poder": 12,
+        "Sincronia": 10,
+        "Presença": 8
+      },
+      "aumentos": {
+        "3": {
+          "modo": "Um Atributo (+2)",
+          "attr1": "Agilidade",
+          "attr2": ""
+        },
+        "6": {
+          "modo": "Um Atributo (+2)",
+          "attr1": "Agilidade",
+          "attr2": ""
+        },
+        "9": {
+          "modo": "Um Atributo (+2)",
+          "attr1": "Vigor",
+          "attr2": ""
+        }
+      },
+      "sintonia": "Discernimento",
+      "pericias_escolhidas": [
+        "Investigação",
+        "Pesquisa"
+      ],
+      "eficacia_pericias": [
+        "Percepção",
+        "Furtividade"
+      ],
+      "eficacia_tr": [
+        "Reflexos"
+      ],
+      "habilidades": [
+        {
+          "nome": "Estocada de Nuvem",
+          "tipo": "Dano",
+          "nivel": 4,
+          "area": false,
+          "resolucao": "Teste de Ataque",
+          "alcance": "Curta",
+          "ress3": false,
+          "efeito": "Uma estocada só, tão rápida que o ar fecha depois da lança."
+        },
+        {
+          "nome": "Varredura de Vento",
+          "tipo": "Dano",
+          "nivel": 3,
+          "area": true,
+          "resolucao": "Teste de Ataque",
+          "alcance": "Curta",
+          "ress3": false,
+          "efeito": "A lança gira e o vento sai em círculo, rente ao chão."
+        },
+        {
+          "nome": "Alvo Marcado",
+          "tipo": "Debuff",
+          "nivel": 2,
+          "area": false,
+          "resolucao": "Teste de Resistência",
+          "alcance": "Longa",
+          "ress3": false,
+          "efeito": "Ele escolhe quem cai primeiro e não desvia os olhos."
+        },
+        {
+          "nome": "Recuo Calculado",
+          "tipo": "Buff",
+          "nivel": 2,
+          "area": false,
+          "resolucao": "Teste de Ataque",
+          "alcance": "Pessoal",
+          "ress3": false,
+          "efeito": "Ele sai do alcance antes do golpe chegar, e volta numa posição melhor."
+        },
+        {
+          "nome": "Registro de Fraquezas",
+          "tipo": "Passiva",
+          "nivel": 1,
+          "area": false,
+          "resolucao": "",
+          "alcance": "",
+          "ress3": false,
+          "efeito": "Se existe registro escrito do inimigo, ele já leu."
+        }
+      ],
+      "ultimate": {
+        "nome": "Lança do Dragão Antigo",
+        "tipo": "Dano",
+        "area": false,
+        "resolucao": "Teste de Ataque",
+        "efeito": "A lança atravessa o alvo, e o eco de algo mais antigo que ele atravessa junto."
+      },
+      "bencaos": [
+        "Olho de Lan",
+        "Presa Escolhida",
+        "Tiro Certeiro",
+        "Passos de Sombra",
+        "Perseguição"
+      ],
+      "fragmento": "",
+      "forma_avatar": "",
+      "armadura": "Leve",
+      "armadura_nome": "Traje de arquivo, folgado e silencioso",
+      "arma": {
+        "nome": "Lança Fura-Nuvem",
+        "categoria": "Média",
+        "atributo": "Agilidade",
+        "elemento": "Vento",
+        "propriedade": "Nenhuma"
+      },
+      "cone": {
+        "nome": "Registro do Loufu",
+        "nivel": 3,
+        "alvo": "Dano de Habilidade",
+        "qual": "",
+        "escolha": "Numérico",
+        "sobreposicoes": 0,
+        "efeito": "Contra o alvo que ele marcou neste combate, o dano sobe."
+      },
+      "reliquias": {
+        "Cabeça": {
+          "tem": false,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Mãos": {
+          "tem": true,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Tronco": {
+          "tem": false,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Botas": {
+          "tem": true,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Esfera Planar": {
+          "tem": false,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Corda de Ligação": {
+          "tem": true,
+          "nome": "",
+          "conjunto": "—"
+        }
+      },
+      "esfera_elemento": "",
+      "conjuntos": {
+        "A": {
+          "nome": "",
+          "bonus2": "",
+          "rolagem": "",
+          "efeito4": ""
+        },
+        "B": {
+          "nome": "",
+          "bonus2": "",
+          "rolagem": "",
+          "efeito4": ""
+        },
+        "C": {
+          "nome": "",
+          "bonus2": "",
+          "rolagem": "",
+          "efeito4": ""
+        }
+      },
+      "ressonancias": {
+        "I": "Habilidade de Nível 3 ou menor sem PH (1 por combate)",
+        "II": "Ultimate com efeito extra",
+        "III": "",
+        "IV": ""
+      },
+      "tecnica": "Ele consulta o arquivo e diz de que mundo veio aquilo que o grupo encontrou.",
+      "inventario": [],
+      "creditos": 0,
+      "memoespirito": {
+        "nome": "",
+        "conceito": "",
+        "funcao": "",
+        "elemento": "",
+        "pontos": {},
+        "atributo_ataque": "Poder",
+        "bonus_menores": [],
+        "evolucoes": [],
+        "memoria_desperta": "",
+        "hab_ofensiva": "",
+        "hab_auxiliar": ""
+      },
+      "jogo": {
+        "pv": null,
+        "temp": 0,
+        "energia": 0,
+        "ph": null,
+        "esforco": 1,
+        "memo_ativo": false,
+        "memo_pv": null,
+        "acumulos": {},
+        "condicoes": [],
+        "usos": {},
+        "morrendo": {
+          "s": 0,
+          "f": 0
+        },
+        "presa": ""
+      },
+      "npc": {
+        "papel": "Aliado",
+        "faccao": "Expresso Astral"
+      }
+    },
+    {
+      "id": "",
+      "versao": 1,
+      "nome": "March 7th",
+      "jogador": "",
+      "conceito": "A garota sem passado que decidiu ser o escudo de todo mundo.",
+      "proposito": "Descobrir quem ela era antes do gelo, sem deixar de gostar de quem ela é agora.",
+      "crenca": "Se eu estou na frente, ninguém atrás se machuca.",
+      "aparencia": "Casaco claro, câmera a tiracolo, sorriso que não combina com a cena.",
+      "coisa": "A primeira foto que ela tirou, completamente desfocada.",
+      "notas": "",
+      "nivel": 10,
+      "jogadores": 4,
+      "raca": "Humano",
+      "bonus_racial": {
+        "modo": "Um Atributo (+2)",
+        "attr1": "Vigor",
+        "attr2": ""
+      },
+      "caminho": "A Preservação",
+      "atributo_habilidade": "Vigor",
+      "elemento": "Gelo",
+      "metodo": "Array oficial",
+      "atributos": {
+        "Vigor": 15,
+        "Agilidade": 14,
+        "Presença": 13,
+        "Poder": 12,
+        "Discernimento": 10,
+        "Sincronia": 8
+      },
+      "aumentos": {
+        "3": {
+          "modo": "Um Atributo (+2)",
+          "attr1": "Vigor",
+          "attr2": ""
+        },
+        "6": {
+          "modo": "Um Atributo (+2)",
+          "attr1": "Agilidade",
+          "attr2": ""
+        },
+        "9": {
+          "modo": "Um Atributo (+2)",
+          "attr1": "Presença",
+          "attr2": ""
+        }
+      },
+      "sintonia": "Discernimento",
+      "pericias_escolhidas": [
+        "Percepção",
+        "Persuasão",
+        "Acrobacia"
+      ],
+      "eficacia_pericias": [
+        "Resistência",
+        "Percepção"
+      ],
+      "eficacia_tr": [
+        "Resistência Física"
+      ],
+      "habilidades": [
+        {
+          "nome": "Escudo de Março",
+          "tipo": "Buff",
+          "nivel": 3,
+          "area": false,
+          "resolucao": "Teste de Ataque",
+          "alcance": "Curta",
+          "ress3": false,
+          "efeito": "Uma parede de gelo nasce na frente de quem ela aponta."
+        },
+        {
+          "nome": "Flecha Fria",
+          "tipo": "Dano",
+          "nivel": 2,
+          "area": false,
+          "resolucao": "Teste de Ataque",
+          "alcance": "Longa",
+          "ress3": false,
+          "efeito": "A flecha congela o ar no caminho e chega gelada."
+        },
+        {
+          "nome": "Contragolpe de Cristal",
+          "tipo": "Dano",
+          "nivel": 3,
+          "area": false,
+          "resolucao": "Teste de Ataque",
+          "alcance": "Pessoal",
+          "ress3": false,
+          "efeito": "Quem bate no escudo leva o escudo de volta, em lascas."
+        },
+        {
+          "nome": "Aqui, Olha Para Mim",
+          "tipo": "Debuff",
+          "nivel": 2,
+          "area": false,
+          "resolucao": "Teste de Resistência",
+          "alcance": "Média",
+          "ress3": false,
+          "efeito": "Ela faz barulho suficiente para o inimigo esquecer o resto do grupo."
+        },
+        {
+          "nome": "Fotógrafa Oficial",
+          "tipo": "Passiva",
+          "nivel": 1,
+          "area": false,
+          "resolucao": "",
+          "alcance": "",
+          "ress3": false,
+          "efeito": "Ela tem foto de quase tudo que o grupo encontrou, e acha a certa na hora."
+        }
+      ],
+      "ultimate": {
+        "nome": "Inverno de Todo Mundo",
+        "tipo": "Buff",
+        "area": true,
+        "resolucao": "",
+        "efeito": "O gelo sobe em volta do grupo inteiro e aguenta o próximo golpe por eles."
+      },
+      "bencaos": [
+        "Muralha de Qlipoth",
+        "Escudo Vivo",
+        "Pele de Pedra",
+        "Firmeza de Fundação",
+        "Barreira Compartilhada"
+      ],
+      "fragmento": "",
+      "forma_avatar": "",
+      "armadura": "Média",
+      "armadura_nome": "Casaco com placas de gelo que ela mesma formou",
+      "arma": {
+        "nome": "Arco de gelo",
+        "categoria": "Disparo curto",
+        "atributo": "Agilidade",
+        "elemento": "Gelo",
+        "propriedade": "Nenhuma"
+      },
+      "cone": {
+        "nome": "Lente do Primeiro Instante",
+        "nivel": 2,
+        "alvo": "PV máximos",
+        "qual": "",
+        "escolha": "Numérico",
+        "sobreposicoes": 0,
+        "efeito": "Quando ela protege alguém, o escudo dura um turno a mais."
+      },
+      "reliquias": {
+        "Cabeça": {
+          "tem": true,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Mãos": {
+          "tem": false,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Tronco": {
+          "tem": true,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Botas": {
+          "tem": true,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Esfera Planar": {
+          "tem": false,
+          "nome": "",
+          "conjunto": "—"
+        },
+        "Corda de Ligação": {
+          "tem": false,
+          "nome": "",
+          "conjunto": "—"
+        }
+      },
+      "esfera_elemento": "",
+      "conjuntos": {
+        "A": {
+          "nome": "",
+          "bonus2": "",
+          "rolagem": "",
+          "efeito4": ""
+        },
+        "B": {
+          "nome": "",
+          "bonus2": "",
+          "rolagem": "",
+          "efeito4": ""
+        },
+        "C": {
+          "nome": "",
+          "bonus2": "",
+          "rolagem": "",
+          "efeito4": ""
+        }
+      },
+      "ressonancias": {
+        "I": "Habilidade de Nível 3 ou menor sem PH (1 por combate)",
+        "II": "Ultimate com efeito extra",
+        "III": "",
+        "IV": ""
+      },
+      "tecnica": "Ela fotografa o lugar e, depois, nota na foto o que ninguém viu ao vivo.",
+      "inventario": [],
+      "creditos": 0,
+      "memoespirito": {
+        "nome": "",
+        "conceito": "",
+        "funcao": "",
+        "elemento": "",
+        "pontos": {},
+        "atributo_ataque": "Poder",
+        "bonus_menores": [],
+        "evolucoes": [],
+        "memoria_desperta": "",
+        "hab_ofensiva": "",
+        "hab_auxiliar": ""
+      },
+      "jogo": {
+        "pv": null,
+        "temp": 0,
+        "energia": 0,
+        "ph": null,
+        "esforco": 1,
+        "memo_ativo": false,
+        "memo_pv": null,
+        "acumulos": {},
+        "condicoes": [],
+        "usos": {},
+        "morrendo": {
+          "s": 0,
+          "f": 0
+        },
+        "presa": ""
+      },
+      "npc": {
+        "papel": "Aliado",
+        "faccao": "Expresso Astral"
+      }
+    }
+  ]
+}

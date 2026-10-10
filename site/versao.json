@@ -1,5 +1,5 @@
 {
- "versao": "c6d972634233",
+ "versao": "4890ac512633",
  "livro": "1.2",
  "arquivos": [
   "estilo.css",
@@ -14,6 +14,7 @@
   "js/ficha-jogar.js",
   "js/mestre-base.js",
   "js/mestre.js",
+  "js/mestre-npcs.js",
   "js/mestre-escudo.js"
  ]
 }
