@@ -70,8 +70,34 @@
       H.campo("Conceito", H.texto("conceito", { rotulo: "Conceito", ph: "Quem é esse sujeito, em uma frase" })) +
       H.campo("Propósito de Vida", H.texto("proposito", { area: true, rotulo: "Propósito de Vida",
         ph: "O que ele quer: um objetivo de longo prazo, alcançável e que envolva outras pessoas" }),
-      link("03", "Passo 1 — Conceito e Propósito de Vida", "Passo 1 do capítulo 03")),
+      link("03", "Passo 1 — Conceito e Propósito de Vida", "Passo 1 do capítulo 03")) +
+      campoDaHistoria(),
       { regra: link("03", "Criação de personagem", "Criação, capítulo 03") });
+  }
+
+  /**
+   * A história do personagem: o texto comprido que o jogador escreve fora da mesa. Aceita
+   * **Markdown** colado de um arquivo `.md` — títulos, negrito, itálico, listas, citações,
+   * tabelas e links — e mostra uma prévia já formatada do jeito que vai aparecer em Jogar.
+   *
+   * O HTML sai peneirado por EG.markdown: ao contrário do livro, que vem do repositório e é
+   * confiável, isto é texto colado de fora, e um `.md` pode trazer <script> escondido.
+   */
+  function campoDaHistoria() {
+    const texto = F.P.lore || "";
+    const n = EG.palavras(texto);
+    const previa = EG.markdown(texto);
+    return H.campo("História do personagem", H.texto("lore", { area: true, linhas: 10, rotulo: "História do personagem",
+      redesenha: true,
+      ph: "Cole aqui a história inteira — pode ser o arquivo .md do jeito que você escreveu.\n\n" +
+        "# Títulos, **negrito**, *itálico*, listas e > citações funcionam." }),
+      "Markdown funciona: cole do seu `.md` e ele aparece formatado." +
+      (n ? " <b>" + n + (n === 1 ? " palavra" : " palavras") + "</b> escritas." : "")) +
+      (previa
+        ? "<details class='previa-lore'" + EG.atributosAbre("previa-lore", !modoNpc) +
+          "><summary>Prévia formatada — é assim que ela aparece em Jogar</summary>" +
+          "<div class='texto-lore'>" + previa + "</div></details>"
+        : "");
   }
 
   function secaoBasicoNpc() {
@@ -85,6 +111,7 @@
         H.campo("Conceito", H.texto("conceito", { rotulo: "Conceito", ph: "Quem é esse sujeito, em uma frase" }))) +
       H.campo("O que ele quer", H.texto("proposito", { area: true, rotulo: "O que o NPC quer",
         ph: "O objetivo dele — é o que faz o NPC agir quando o grupo não está olhando" })) +
+      campoDaHistoria() +
       "<p class='ajuda'>Daqui para baixo é a ficha de personagem inteira (capítulo 03), e <b>nada " +
       "é obrigatório</b>: preencha só o que você for usar. Para o NPC lutar, o que conta é " +
       "Caminho, Atributos, Elemento, Armadura e Arma — é de lá que saem PV, Defesa, VEL e o dano.</p>",
@@ -365,22 +392,50 @@
       "</div></div>";
   }
 
+  const seletorDaArte = () => EG.seletorDeArquivo("arquivo-cone-imagem", "image/*");
+
   /**
-   * O seletor de arquivo da arte, criado uma vez e **fora de #app**: as telas redesenham
-   * inteiras, e um elemento dentro de #app seria trocado por outro enquanto a janela de
-   * escolher arquivo estivesse aberta — aí a resposta dela não chegaria a ninguém.
+   * O banco de Cones de Luz, aqui mesmo na seção de Equipamento: escolher um Cone guardado
+   * e equipar, ou guardar o que está na ficha para usar depois. É o lugar fácil — quem está
+   * mexendo no Cone já está olhando para cá.
+   *
+   * A coleção é do navegador, não da ficha (cones.js): um Cone guardado serve para todas as
+   * fichas, e equipar **copia** para esta — daí em diante são duas coisas separadas.
    */
-  function seletorDaArte() {
-    let el = document.getElementById("arquivo-cone-imagem");
-    if (!el) {
-      el = document.createElement("input");
-      el.type = "file";
-      el.id = "arquivo-cone-imagem";
-      el.accept = "image/*";
-      el.hidden = true;
-      document.body.appendChild(el);
-    }
-    return el;
+  function bancoDeConesNaFicha() {
+    const B = EG.Cones, lista = B.todos(), temCone = F.temCone(F.P);
+    const botoesDoItem = (c) =>
+      "<button type='button' class='botao pequeno primario' data-acao='cone-equipar' data-id='" + esc(c.id) +
+      "'>Equipar este</button>" +
+      "<button type='button' class='botao pequeno perigo' data-acao='cone-excluir' data-id='" + esc(c.id) +
+      "'>Tirar do banco</button>";
+    return "<div class='subcartao banco-cones'>" +
+      "<div class='subcartao-topo'><b>Banco de Cones de Luz</b><span class='suave'>" +
+      (lista.length ? lista.length + (lista.length === 1 ? " Cone guardado" : " Cones guardados") : "ainda vazio") +
+      "</span></div>" +
+      (lista.length
+        ? "<div class='linha'>" +
+          H.campo("Usar um Cone guardado", B.seletor("cone-do-banco", { rotulo: "Cone do banco" }),
+            "Substitui o Cone desta ficha pelo escolhido — nome, Nível, Bônus Maior, efeito, arte e história.") +
+          "<button type='button' class='botao primario' data-acao='cone-equipar'>Equipar</button>" +
+          "</div>"
+        : "<p class='ajuda'>Guarde aqui os Cones da sua campanha e depois é só escolher qual o " +
+          "personagem está usando, sem reescrever nada.</p>") +
+      "<div class='botoes compactos'>" +
+      (temCone ? "<button type='button' class='botao' data-acao='cone-guardar'>" +
+        "Guardar o Cone desta ficha no banco</button>" : "") +
+      "<button type='button' class='botao' data-acao='cones-importar'>Importar Cones (.json)</button>" +
+      (lista.length ? "<button type='button' class='botao' data-acao='cones-exportar'>Exportar o banco</button>" : "") +
+      "</div>" +
+      (lista.length
+        ? "<details class='colecao-cones'" + EG.atributosAbre("colecao-cones", false) +
+          "><summary>Ver a coleção (" + lista.length + ")</summary>" +
+          B.galeriaHtml(botoesDoItem) + "</details>"
+        : "") +
+      "<p class='ajuda'>O banco fica neste navegador e vai no backup (<b>Mais &gt; Exportar tudo</b>). " +
+      "Para passar os seus Cones a outra pessoa, use <b>Exportar o banco</b> — a importação lá " +
+      "<b>soma</b> ao que ela já tem. Um arquivo de ficha também serve: dele sai o Cone equipado.</p>" +
+      "</div>";
   }
 
   function secaoEquipamento() {
@@ -408,6 +463,7 @@
     const nivelCone = p.cone.nivel;
     const modoOu = nivelCone && M.CONE[Math.max(1, Math.min(5, nivelCone))][2] === "ou";
     corpo += "<h3>Cone de Luz</h3>" + info("Seu nível permite Cone até Nível <b>" + R.cone_maximo + "</b>. O Mestre concede, como recompensa de marco. " + link("25", "25.2", "regra 25.2"));
+    corpo += bancoDeConesNaFicha();
     corpo += linha(H.campo("Nome", H.texto("cone.nome", { rotulo: "Nome do Cone" })),
       H.campo("Nível", H.lista("cone.nivel", [1, 2, 3, 4, 5].map((n) => [n, n + " (" + ROTULO_CONE[n] + ")"]), { num: true, vazio: "Sem Cone", rotulo: "Nível do Cone" }), "", "estreito"));
     if (nivelCone) {
@@ -595,7 +651,45 @@
   };
   F.acoes["cone-imagem"] = () => {
     seletorDaArte().click();
-    return false;                              // sem redesenhar: ver seletorDaArte()
+    return false;                              // sem redesenhar: ver seletorDeArquivo()
+  };
+
+  // --- Banco de Cones de Luz ------------------------------------------------
+  F.acoes["cone-equipar"] = (b) => {
+    const el = document.getElementById("cone-do-banco");
+    const id = b.dataset.id || (el ? el.value : "");
+    if (!id) { EG.toast("Escolha um Cone do banco na lista.", "erro"); return false; }
+    const c = EG.Cones.achar(id);
+    if (!c) { EG.toast("Esse Cone não está mais no banco.", "erro"); return; }
+    if (F.temCone(F.P) && EG.norm(F.P.cone.nome) !== EG.norm(c.nome) &&
+      !confirm("Equipar " + (c.nome || "este Cone") + " em lugar de " +
+        (F.P.cone.nome || "o Cone atual") + "?\n\nO Cone que está na ficha é substituído. " +
+        "Se você ainda não o guardou no banco, cancele e use \u201cGuardar o Cone desta ficha\u201d primeiro.")) return false;
+    EG.Cones.aplicar(F.P, c);
+    EG.toast("<b>" + esc(c.nome || "Cone sem nome") + "</b> equipado nesta ficha.");
+  };
+
+  F.acoes["cone-guardar"] = () => {
+    const r = EG.Cones.guardar(EG.Cones.daFicha(F.P));
+    if (!r.ok) return;                         // cones.js já avisou do espaço
+    EG.toast("<b>" + esc(r.cone.nome || "Cone sem nome") + "</b> " +
+      (r.novo ? "guardado no banco." : "atualizado no banco (mesmo nome)."));
+  };
+
+  F.acoes["cone-excluir"] = (b) => {
+    const c = EG.Cones.achar(b.dataset.id);
+    if (!c) return;
+    if (!confirm("Tirar " + (c.nome || "este Cone") + " do banco?\n\n" +
+      "A ficha de quem já o equipou não muda: cada ficha tem a cópia dela.")) return false;
+    EG.Cones.remover(c.id);
+  };
+
+  F.acoes["cones-importar"] = () => { EG.Cones.pedirArquivo(); return false; };
+
+  F.acoes["cones-exportar"] = () => {
+    EG.Cones.exportar(EG.Cones.todos(), "da-mesa");
+    EG.toast("Banco de Cones exportado. Quem importar soma ao banco dele.");
+    return false;
   };
   F.acoes["cone-imagem-tirar"] = () => {
     if (EG.ehImagemGuardada(F.P.cone.imagem) && !confirm("Tirar a arte do Cone desta ficha?")) return;

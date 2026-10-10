@@ -40,7 +40,11 @@
       combate: combateVazio(),
       inimigos_salvos: [], encontros: [], tesouro: [], missoes: [], npcs: [],
       entregas: {},                    // "faixa:3" -> true, o calendário de 27.8
-      filtros: { faixa: "", tipo: "", q: "", ancora: "", npc_papel: "", npc_q: "" },
+        // Um saco só de filtros de tela, com prefixo por tela: `faixa/tipo/q` são do
+      // bestiário, `inim_*` dos inimigos da campanha, `npc_*` do banco de NPCs e `ancora`
+      // do Escudo. Campo novo aqui entra sozinho nas mesas já salvas, por `completar`.
+    filtros: { faixa: "", tipo: "", q: "", ancora: "", npc_papel: "", npc_q: "",
+      inim_faccao: "", inim_tipo: "", inim_faixa: "", inim_q: "", inim_ordem: "" },
     };
   }
 

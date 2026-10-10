@@ -26,6 +26,9 @@
     return {
       id: "", versao: 1,
       nome: "", jogador: "", conceito: "", proposito: "", crenca: "", aparencia: "", coisa: "", notas: "",
+      // A história do personagem, escrita pelo jogador, em Markdown: ela é longa de
+      // propósito e por isso mora num campo só dela, mostrada formatada e recolhível.
+      lore: "",
       nivel: 1, jogadores: 4,
       raca: "", bonus_racial: { modo: "Um Atributo (+2)", attr1: "", attr2: "" },
       caminho: "", atributo_habilidade: "", elemento: "",
@@ -537,7 +540,9 @@
     if (c.efeito) texto += "<p class='efeito'><b>Efeito Condicional:</b> " + esc(c.efeito) + "</p>";
     if (descricao) {
       texto += o.descricaoFechada
-        ? "<details class='cone-descricao-fechada'><summary>Ler a descrição</summary>" +
+        ? "<details class='cone-descricao-fechada'" +
+          EG.atributosAbre("cone-desc:" + (o.chave || p.id || c.nome), false) +
+          "><summary>Ler a descrição</summary>" +
           "<div class='cone-descricao'>" + descricao + "</div></details>"
         : "<div class='cone-descricao'>" + descricao + "</div>";
     }

@@ -271,12 +271,71 @@ button.rolar:hover { background: var(--ouro); color: #1a1406; }
 .cone-editor .arte-editor { flex: 0 0 9rem; max-width: 9rem; margin: 0; }
 .cone-editor-corpo { flex: 1 1 18rem; min-width: 0; }
 .galeria-cones { display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 1rem; align-items: start; }
-.cone-item { background: var(--painel-2); border: 1px solid var(--borda); border-radius: 8px; padding: .75rem; }
+.cone-item, .cone-guardado { background: var(--painel-2); border: 1px solid var(--borda); border-radius: 8px; padding: .75rem; }
 .cone-item-topo { display: flex; gap: .5rem; align-items: center; justify-content: space-between; margin-bottom: .5rem; }
 .cone-item-topo h3 { margin: 0; font-size: 1rem; }
+.cone-guardado .cone-arte { flex-basis: 4.5rem; max-width: 4.5rem; }
+.cone-guardado .botoes { margin-top: .4rem; }
+/* O banco de Cones dentro do editor da ficha */
+.banco-cones .colecao-cones { margin-top: .6rem; }
+.banco-cones .colecao-cones > summary { cursor: pointer; font-size: .9rem; color: var(--azul); }
+.banco-cones .colecao-cones .galeria-cones,
+.banco-de-cones .galeria-cones { margin-top: .6rem; grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr)); }
+.banco-cones select { max-width: 100%; }
 @media (max-width: 420px) {
   .cone-editor .arte-editor { flex-basis: 7rem; max-width: 7rem; }
   .cone.mini .cone-arte { flex-basis: 4.2rem; max-width: 4.2rem; }
+}
+
+/* ---------- A história do personagem (Markdown escrito pelo jogador) ---------- */
+.cartao.lore { margin-top: 1rem; }
+.cartao.lore > summary, .lore-fechada > summary, .previa-lore > summary { cursor: pointer; }
+.cartao.lore > summary::-webkit-details-marker { display: none; }
+.lore-fechada, .previa-lore { margin-top: .6rem; border-top: 1px solid var(--borda); padding-top: .5rem; }
+.lore-fechada > summary, .previa-lore > summary { font-size: .9rem; color: var(--azul); }
+.texto-lore { max-width: 62rem; line-height: 1.65; }
+.texto-lore > :first-child { margin-top: .2rem; }
+.texto-lore h1, .texto-lore h2, .texto-lore h3, .texto-lore h4, .texto-lore h5, .texto-lore h6 { color: var(--ouro); }
+.texto-lore h1 { font-size: 1.45rem; margin: 1.2rem 0 .4rem; }
+.texto-lore h2 { font-size: 1.2rem; margin: 1.1rem 0 .4rem; border-top: 1px solid var(--borda); padding-top: .5rem; }
+.texto-lore h3 { font-size: 1.05rem; margin: .9rem 0 .3rem; }
+.texto-lore h4, .texto-lore h5, .texto-lore h6 { font-size: .95rem; margin: .8rem 0 .3rem; }
+.texto-lore p { margin: .6rem 0; }
+.texto-lore blockquote {
+  margin: .7rem 0; padding: .5rem .9rem; border-left: 3px solid var(--ouro-escuro);
+  background: var(--painel-2); border-radius: 0 8px 8px 0; color: var(--suave);
+}
+.texto-lore blockquote p { margin: .3rem 0; }
+.texto-lore ul, .texto-lore ol { margin: .6rem 0; padding-left: 1.4rem; }
+.texto-lore li { margin: .25rem 0; }
+.texto-lore hr { border: 0; border-top: 1px solid var(--borda); margin: 1.2rem 0; }
+.texto-lore img { max-width: 100%; max-height: 420px; height: auto; display: block; margin: .8rem auto; border-radius: 8px; }
+.texto-lore table { border-collapse: collapse; width: 100%; font-size: .92rem; margin: .7rem 0; display: block; overflow-x: auto; }
+.texto-lore th, .texto-lore td { border: 1px solid var(--borda); padding: .35rem .55rem; text-align: left; vertical-align: top; }
+.texto-lore th { background: var(--painel-2); color: var(--ouro); }
+.texto-lore pre { overflow-x: auto; background: #0a0f1e; padding: .8rem; border-radius: 8px; border: 1px solid var(--borda); font-size: .85rem; }
+.texto-lore pre code { background: none; padding: 0; }
+.texto-lore strong, .texto-lore b { color: #fff; }
+
+/* ---------- Inimigos da campanha: lista que se lê de relance ---------- */
+.inimigo-salvo > details > summary { cursor: pointer; }
+.inimigo-salvo > details > summary::-webkit-details-marker { display: none; }
+.inimigo-salvo > details > summary h2 { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
+.inimigo-salvo > details:not([open]) > summary.cartao-topo { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
+.inimigo-salvo > details:not([open]) + .botoes { margin-top: .5rem; }
+.grupo-inimigos { margin: 1.4rem 0 .5rem; color: var(--ouro); font-size: 1.05rem; border-bottom: 1px solid var(--borda); padding-bottom: .3rem; }
+
+/* A seta dos cartões recolhíveis, desenhada com bordas: o <summary> desses dois é um
+   flex (.cartao-topo), que esconde a seta nativa, e assim ela não depende de a fonte do
+   sistema ter o caractere do triângulo. */
+.inimigo-salvo > details > summary h2::before,
+.cartao.lore > summary h2::before {
+  content: ""; display: inline-block; width: 0; height: 0; flex: none; margin-right: .2rem;
+  border: 5px solid transparent; border-left-color: var(--ouro-escuro);
+}
+.inimigo-salvo > details[open] > summary h2::before,
+.cartao.lore[open] > summary h2::before {
+  border-left-color: transparent; border-top-color: var(--ouro-escuro); margin-top: 5px;
 }
 
 /* ---------- Área do Mestre ---------- */
@@ -534,6 +593,14 @@ body[data-tela=regras] .historico { display: none; }
   .cone-arte.vazia { display: none !important; }
   .cone-arte img { border-color: #999; box-shadow: none; }
   .cone-descricao p { color: #333; }
+  .banco-cones, .colecao-cones { display: none !important; }
+  /* Imprimir a ficha leva a história inteira, aberta ou não */
+  .inimigo-salvo > details > summary h2::before, .cartao.lore > summary h2::before { display: none; }
+  .texto-lore { max-width: none; }
+  .texto-lore h1, .texto-lore h2, .texto-lore h3, .texto-lore h4 { color: #000; }
+  .texto-lore blockquote { background: #f4f4f4; border-left-color: #999; color: #333; }
+  .texto-lore th { background: #eee; color: #000; }
+  .texto-lore strong, .texto-lore b { color: #000; }
   .tabela-mestre th { background: #eee; color: #000; }
   .fila-casa.agora { background: #f4f4f4; }
 }

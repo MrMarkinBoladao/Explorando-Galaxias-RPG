@@ -157,6 +157,7 @@
     if (F.temCone(p)) {
       corpo += F.coneHTML(p, R, { mini: true, descricaoFechada: true });
     }
+    corpo += G.historiaDe(m);
     if (R.memo) {
       corpo += "<p class='ajuda'><b>Memoespírito:</b> " + esc(p.memoespirito.nome || "sem nome") +
         " · PV " + R.memo.pv + " · VEL " + R.memo.velocidade +

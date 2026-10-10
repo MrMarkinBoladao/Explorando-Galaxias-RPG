@@ -1,5 +1,5 @@
 {
- "versao": "56f8bd598fb6",
+ "versao": "19379b62d9d8",
  "livro": "1.2",
  "arquivos": [
   "estilo.css",
@@ -10,6 +10,7 @@
   "js/app.js",
   "js/regras.js",
   "js/ficha-base.js",
+  "js/cones.js",
   "js/ficha-editar.js",
   "js/ficha-jogar.js",
   "js/mestre-base.js",
