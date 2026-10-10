@@ -356,6 +356,27 @@ button.rolar:hover { background: var(--ouro); color: #1a1406; }
 .etiqueta.tipo-boss { background: var(--vermelho-fundo); border-color: #6b2a36; color: var(--vermelho); }
 .etiqueta.tipo-elite { background: #2e2511; border-color: #6b5520; color: var(--ouro); }
 .etiqueta.pj { background: var(--verde-fundo); border-color: #2b6b44; color: var(--verde); }
+.acoes-salvas { margin: .4rem 0; }
+.acoes-salvas summary { cursor: pointer; font-size: .85rem; color: var(--ouro); }
+.nota-pv { font-size: .85rem; background: #0e1426; border-left: 3px solid var(--ouro-escuro);
+  padding: .35rem .6rem; border-radius: 0 6px 6px 0; margin: .4rem 0; }
+
+/* Arquivos de inimigo: importar, exportar e as coleções prontas */
+.arquivos-inimigos summary { cursor: pointer; font-weight: 600; font-size: .9rem; margin-top: .6rem; }
+.lista-colecoes { margin: .3rem 0; padding-left: 1.2rem; }
+.lista-colecoes li { padding: .15rem 0; }
+.exemplo-json {
+  overflow-x: auto; background: #0a0f1e; border: 1px solid var(--borda); border-radius: 8px;
+  padding: .7rem; font-size: .78rem; line-height: 1.4;
+}
+.relatorio-import {
+  margin: .6rem 0; padding: .6rem .7rem; border-radius: 8px;
+  background: var(--verde-fundo); border: 1px solid #2b6b44;
+}
+.relatorio-import.ruim { background: var(--vermelho-fundo); border-color: #6b2a36; }
+.relatorio-import p { margin: 0 0 .3rem; }
+.lista-avisos { margin: .3rem 0 .5rem; padding-left: 1.2rem; font-size: .85rem; color: var(--suave); }
+.lista-avisos li { padding: .1rem 0; }
 
 /* Encontros */
 .orcamento-leitura { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: .6rem 1rem; margin: .8rem 0; }

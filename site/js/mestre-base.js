@@ -298,6 +298,197 @@
     return x ? baseCombate(EG.clonar(x)) : null;
   };
 
+  // ---------------------------------------------------------------------------
+  // Inimigos em arquivo (.json): ler, conferir e completar pela âncora
+  //
+  // O arquivo é de quem mestra, então ele é tratado como rascunho e não como
+  // verdade: todo campo que falta ou que vem errado é preenchido pela linha da
+  // âncora (28.3), e cada remendo vira um aviso para a tela mostrar. Assim um
+  // .json escrito à mão nunca derruba a tela nem entra desbalanceado.
+  // ---------------------------------------------------------------------------
+  const MARCA_INIMIGOS = "explorando-galaxias:inimigos";
+
+  const texto = (v) => (v == null ? "" : String(v)).trim();
+
+  function inteiro(v, padrao) {
+    if (typeof v === "number" && Number.isFinite(v)) return Math.round(v);
+    if (typeof v === "string" && v.trim()) {
+      const n = Number(v.trim().replace(",", "."));
+      if (Number.isFinite(n)) return Math.round(n);
+    }
+    return padrao;
+  }
+
+  /** Acha o Elemento ou o Tipo canônico mesmo sem acento e em qualquer caixa. */
+  const canonico = (lista, v) => lista.find((x) => EG.norm(x) === EG.norm(v)) || null;
+
+  /** Média de uma expressão de dano como "4d8 + 2", pela regra de 02.5. */
+  function mediaDeDados(expressao) {
+    const s = texto(expressao).replace(/\s+/g, "").toLowerCase();
+    const m = /^(\d*)d(\d+)([+-]\d+)?$/.exec(s);
+    if (!m) return null;
+    const n = Number(m[1] || 1), face = Number(m[2]), fixo = Number(m[3] || 0);
+    if (!n || !face) return null;
+    return M.media(n, face) + fixo;
+  }
+
+  /** Só os Elementos que o livro conhece, sem repetir. */
+  function elementos(bruto, avisos, campo) {
+    if (bruto == null) return [];
+    const entrada = Array.isArray(bruto) ? bruto : texto(bruto) ? texto(bruto).split(/\s*[,;]\s*/) : [];
+    const fora = [];
+    const dentro = [];
+    for (const v of entrada) {
+      const e = canonico(ELEMENTOS, v);
+      if (!e) { if (texto(v)) fora.push(texto(v)); continue; }
+      if (!dentro.includes(e)) dentro.push(e);
+    }
+    if (fora.length) avisos.push(campo + ": " + fora.join(", ") + " não é Elemento do livro");
+    return dentro;
+  }
+
+  /** A faixa do arquivo, por faixa_n, pelo rótulo "9-12" ou por um nível solto. */
+  function faixaDoArquivo(bruto) {
+    const n = inteiro(bruto.faixa_n, null);
+    if (n != null && n >= 1 && n <= 5) return n;
+    const rotulo = texto(bruto.faixa);
+    const porRotulo = C().mestre.ancoras.find((a) => a.faixa === rotulo);
+    if (porRotulo) return porRotulo.n;
+    const nivel = inteiro(bruto.nivel, null);
+    if (nivel != null && nivel >= 1 && nivel <= 20) return Math.min(5, Math.floor((nivel - 1) / 4) + 1);
+    return null;
+  }
+
+  function listaDeAtaques(bruto, ataqueBase) {
+    if (!Array.isArray(bruto)) return [];
+    return bruto.filter((a) => a && typeof a === "object" && texto(a.nome)).map((a) => {
+      const dados = texto(a.dados) || texto(a.dano);
+      const media = inteiro(a.media, mediaDeDados(dados));
+      return {
+        nome: texto(a.nome),
+        alcance: texto(a.alcance),
+        elemento: canonico(ELEMENTOS, a.elemento) || "",
+        nota: texto(a.nota),
+        dados: dados || texto(ataqueBase),
+        media: media,
+        texto: texto(a.texto) || (dados ? dados + (media != null ? " · média " + media : "") : ""),
+      };
+    });
+  }
+
+  function listaDeEspeciais(bruto) {
+    if (!Array.isArray(bruto)) return [];
+    return bruto.filter((e) => e && typeof e === "object" && texto(e.nome)).map((e) => ({
+      nome: texto(e.nome),
+      recarga: texto(e.recarga),
+      efeito: texto(e.efeito) || texto(e.texto),
+    }));
+  }
+
+  /**
+   * Uma ficha de arquivo virando inimigo da campanha.
+   * Devolve {inimigo, avisos} ou {erro} quando nem o nome dá para aproveitar.
+   */
+  G.inimigoDeArquivo = function (bruto, faixaPadrao) {
+    if (!bruto || typeof bruto !== "object" || Array.isArray(bruto)) return { erro: "não é uma ficha de inimigo" };
+    const nome = texto(bruto.nome);
+    if (!nome) return { erro: "ficha sem nome" };
+
+    const avisos = [];
+    let tipo = canonico(TIPOS, bruto.tipo);
+    if (!tipo) {
+      if (texto(bruto.tipo)) avisos.push("tipo \"" + texto(bruto.tipo) + "\" não existe, virou Comum");
+      else avisos.push("sem tipo, virou Comum");
+      tipo = "Comum";
+    }
+
+    let faixaN = faixaDoArquivo(bruto);
+    if (faixaN == null) {
+      faixaN = faixaPadrao || G.faixaN();
+      avisos.push("sem faixa, entrou na faixa do grupo");
+    }
+
+    const a = G.ancora(faixaN);
+    const padraoDano = (a.dano || {})[tipo] || {};
+    const ataques = listaDeAtaques(bruto.ataques, padraoDano.texto);
+    const dano = texto(bruto.dano) || (ataques[0] || {}).dados || padraoDano.texto || "";
+    const danoMedia = inteiro(bruto.dano_media, (ataques[0] || {}).media);
+
+    const x = {
+      nome: nome,
+      tipo: tipo,
+      faccao: texto(bruto.faccao),
+      frase: texto(bruto.frase),
+      faixa: a.faixa,
+      faixa_n: a.n,
+      pv: Math.max(1, inteiro(bruto.pv, a.pv[tipo])),
+      defesa: Math.max(0, inteiro(bruto.defesa, a.defesa[tipo])),
+      rd: Math.max(0, inteiro(bruto.rd, a.rd[tipo])),
+      tenacidade: Math.max(0, inteiro(bruto.tenacidade, a.tenacidade[tipo])),
+      vel: Math.max(0, inteiro(bruto.vel, a.vel[tipo])),
+      ataque: inteiro(bruto.ataque, a.ataque),
+      dano: dano,
+      dano_media: danoMedia != null ? danoMedia : mediaDeDados(dano),
+      dt: Math.max(0, inteiro(bruto.dt, a.dt[tipo])),
+      tr: inteiro(bruto.tr, a.tr[tipo]),
+      fraquezas: elementos(bruto.fraquezas, avisos, "Fraquezas de " + nome),
+      resistencias: elementos(bruto.resistencias, avisos, "Resistências de " + nome),
+      ataques: ataques,
+      especiais: listaDeEspeciais(bruto.especiais),
+      fila: texto(bruto.fila),
+      firmeza: canonico(["Sim", "Não"], bruto.firmeza) || (tipo === "Comum" ? "Não" : "Sim"),
+      fases: Math.max(1, inteiro(bruto.fases, 1)),
+      pv_nota: texto(bruto.pv_nota),      // onde o Boss vira de fase (28.5)
+      origem: texto(bruto.origem) || "arquivo",
+    };
+
+    // Um Elemento não pode ser Fraqueza e Resistência ao mesmo tempo (20.2).
+    const dobrados = x.resistencias.filter((e) => x.fraquezas.includes(e));
+    if (dobrados.length) {
+      x.resistencias = x.resistencias.filter((e) => !x.fraquezas.includes(e));
+      avisos.push(nome + ": " + dobrados.join(", ") + " estava como Fraqueza e Resistência, ficou só Fraqueza");
+    }
+
+    // Quantas Fraquezas o tipo pede (28.2, regra 7). Aviso, nunca correção:
+    // o contrato de encontro é decisão de quem mestra.
+    const pedidas = { Comum: [1, 2], Elite: [3, 3], Boss: [4, 4] }[x.tipo];
+    if (x.fraquezas.length < pedidas[0] || x.fraquezas.length > pedidas[1]) {
+      avisos.push(nome + " (" + x.tipo + "): " + x.fraquezas.length + " Fraquezas, a tabela pede " +
+        (pedidas[0] === pedidas[1] ? pedidas[0] : pedidas[0] + " a " + pedidas[1]));
+    }
+
+    return { inimigo: baseCombate(x), avisos: avisos };
+  };
+
+  /** Onde quer que os inimigos estejam no arquivo, devolve a lista bruta deles. */
+  G.listaDeInimigosDoArquivo = function (bruto) {
+    if (Array.isArray(bruto)) return bruto;
+    if (!bruto || typeof bruto !== "object") return null;
+    if (Array.isArray(bruto.inimigos)) return bruto.inimigos;              // pacote de inimigos
+    if (Array.isArray(bruto.inimigos_salvos)) return bruto.inimigos_salvos; // arquivo de mesa
+    if (bruto.mestre && Array.isArray(bruto.mestre.inimigos_salvos))        // backup completo
+      return bruto.mestre.inimigos_salvos;
+    if (Array.isArray(bruto.bestiario)) return bruto.bestiario;            // recorte do catálogo
+    if (texto(bruto.nome)) return [bruto];                                 // uma ficha sozinha
+    return null;
+  };
+
+  /** O pacote que a exportação grava, e que a importação reconhece de volta. */
+  G.pacoteDeInimigos = function (lista, nomeDoPacote) {
+    return {
+      tipo: MARCA_INIMIGOS,
+      versao: 1,
+      salvo_em: new Date().toISOString(),
+      nome: nomeDoPacote || "",
+      inimigos: EG.clonar(lista).map((x) => {
+        // O que é de combate não viaja: uid, PV gasto e condições são da mesa, não da ficha.
+        delete x.uid; delete x.pv_max; delete x.reducao; delete x.fase;
+        delete x.quebrado; delete x.condicoes;
+        return x;
+      }),
+    };
+  };
+
   /** Todas as fichas que podem entrar num encontro: bestiário + inimigos da campanha. */
   G.catalogoDeInimigos = function () {
     const meus = G.estado().inimigos_salvos.map((x) => ({ ref: "salvo:" + x.uid, nome: x.nome, tipo: x.tipo,
@@ -781,6 +972,7 @@
       "<input type='file' id='arquivo-mesa' accept='.json,application/json' hidden>" +
       "<input type='file' id='arquivo-ficha-mestre' accept='.json,application/json' hidden>" +
       "<input type='file' id='arquivo-backup' accept='.json,application/json' hidden>" +
+      "<input type='file' id='arquivo-inimigos' accept='.json,application/json' multiple hidden>" +
       "</div>" +
       "<nav class='sub-abas' aria-label='Área do Mestre'>" + abas + "</nav>";
   };
@@ -919,5 +1111,6 @@
 
   EG.registrarTela("mestre", tela);
 
-  Object.assign(G, { ELEMENTOS, TIPOS, TELAS, obter, definir, idDe, modeloVazio, completar, CHAVE });
+  Object.assign(G, { ELEMENTOS, TIPOS, TELAS, obter, definir, idDe, modeloVazio, completar, CHAVE,
+    MARCA_INIMIGOS, mediaDeDados });
 })();

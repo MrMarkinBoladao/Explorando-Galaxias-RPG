@@ -20,7 +20,7 @@ o botão **Rever o aviso de spoiler**, no fim do Painel, traz ele de volta. Sete
 | **Painel** | Campanha, faixa, PH do grupo, a tira do grupo com PV e Energia, o Ciclo em curso, a DT da faixa (27.2), rolador e checklist de abertura de sessão |
 | **Grupo** | Tamanho do grupo com o PH resultante (16.2); por jogador: PV com dano e cura já descontando RD, PV temporário, Energia, Defesa/Esquiva/RD/VEL/DT, condições com turnos, Memoespírito (invocar, dispensar, PV) e o painel de Morrendo; cobertura de Elementos, ordem de VEL e os descansos do grupo |
 | **Combate** | A Fila de Ação (19.3) com PJs, Memoespíritos em campo e inimigos; Ciclo com os quatro passos de avanço; Atrasar e Avançar com Firmeza e teto (19.4); Tenacidade com a calculadora de redução (20.3) e a Quebra com dano e efeito por Elemento (20.5); virada de fase de Boss (28.5); condições com turnos |
-| **Inimigos** | O bestiário das 32 fichas do capítulo 28 com filtro, o criador pela tabela de âncoras (28.3) e os inimigos da campanha |
+| **Inimigos** | O bestiário das 32 fichas do capítulo 28 com filtro, o criador pela tabela de âncoras (28.3), os inimigos da campanha e a **importação/exportação de inimigos em `.json`** (abaixo) |
 | **Encontros** | Orçamento de PV (27.4) com a leitura de passagem/típico/pesado, **quem do grupo entra na cena** (o orçamento e o contrato da Fraqueza se ajustam a isso), as quatro composições e a DT para descobrir Fraqueza (27.3) |
 | **Recompensas** | O calendário de marco (27.8), a verba (24.5), a conferência do que o nível de cada um já libera e o tesouro do grupo |
 | **Escudo do Mestre** | As tabelas de consulta, imprimíveis: DTs, Tenacidade e Quebra, Fila, as nove regras de inimigo, âncoras, condições e Energia |
@@ -32,6 +32,37 @@ Só o estado do combate (quem participa, quem já agiu, atrasos) mora na mesa do
 
 A mesa tem chave própria no navegador (`explorando-galaxias:mestre`) e se exporta em **Mais > Exportar a
 mesa**. Para pôr um jogador no grupo, peça o `.json` da ficha dele e use **Importar ficha**.
+
+### Inimigos em arquivo
+
+Na aba **Inimigos**, o cartão *Importar e exportar inimigos* troca fichas de inimigo em `.json`.
+A diferença em relação a **Mais > Importar mesa** é que esta importação **soma** aos inimigos que
+você já tem, em vez de substituir a mesa inteira.
+
+- **Exportar .json** no cartão de um inimigo salva só aquela ficha; **Exportar meus inimigos**
+  salva todos num arquivo só. O que é de combate (PV gasto, Tenacidade reduzida, condições, fase
+  em vigor) não vai no arquivo — a ficha viaja limpa.
+- **Importar inimigos** aceita vários arquivos de uma vez e reconhece cinco formatos: o pacote
+  que a exportação gera, uma ficha sozinha, uma lista solta de fichas, um arquivo de mesa e um
+  backup completo. Nos dois últimos ele pega **apenas** os inimigos e não toca em mais nada.
+- **Só o campo `nome` é obrigatório.** Dê `tipo` (Comum, Elite ou Boss) e `faixa_n` (1 a 5) e os
+  treze números da ficha vêm da tabela de âncoras de 28.3 sozinhos. Todo remendo que a importação
+  precisar fazer aparece como aviso na tela — inclusive quando a contagem de Fraquezas não bate
+  com a que o tipo pede (28.2, regra 7).
+
+As coleções prontas ficam em **`site/inimigos/*.json`**, com link de download no próprio cartão.
+São 40 fichas montadas pela tabela de âncoras, oito por faixa de nível (5 Comum, 2 Elite, 1 Boss):
+
+| Arquivo | Faixa | Mundo |
+|---|---|---|
+| `inimigos/estacao-espacial-herta.json` | 1-4 | Estação Espacial Herta |
+| `inimigos/jarilo-vi.json` | 5-8 | Jarilo-VI |
+| `inimigos/xianzhou-o-loufu.json` | 9-12 | Xianzhou: O Loufu |
+| `inimigos/penacony.json` | 13-16 | Penacony |
+| `inimigos/amphoreus.json` | 17-20 | Amphoreus |
+
+As Fraquezas delas são **sugestões**: troque à vontade para cumprir o contrato de encontro de 27.5,
+que é o que as fichas do capítulo 28 também pedem.
 
 ## Como abrir
 
@@ -98,5 +129,6 @@ Os **números das fórmulas** (PV, Defesa, dano, tetos...) moram em `site/js/mot
 | `js/regras.js` | A aba Regras (pesquisa e leitura) |
 | `js/app.js` | Rolador de dados, avisos e navegação |
 | `js/vendor/marked.umd.js` | Biblioteca que transforma o texto do livro em página (licença MIT) |
+| `inimigos/*.json` | As coleções de inimigos prontas para importar na aba Inimigos |
 | `dados/*.js`, `img/`, `versao.json` | Gerados por `gerar_site.py`. Não edite à mão |
 | `index.html` | A casca. O `?v=<selo>` dos endereços é posto por `gerar_site.py` — rode o script depois de mexer em qualquer `.js` ou no `.css` |
