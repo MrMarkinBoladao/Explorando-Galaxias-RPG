@@ -1,0 +1,429 @@
+{
+  "tipo": "explorando-galaxias:inimigos",
+  "versao": 1,
+  "nome": "Penacony",
+  "nota": "A Terra dos Sonhos: a maquinaria de serviço que perdeu o controle, os Memes da Zona de Memória e a Família Sabujo fazendo a limpeza. Todos os números vêm da tabela de âncoras de 28.3, pela faixa 13-16. As Fraquezas são sugestões: troque à vontade para cumprir o contrato de encontro de 27.5.",
+  "inimigos": [
+    {
+      "nome": "Trupe do Sobressalto: Cão de Bolhas",
+      "tipo": "Comum",
+      "faccao": "Trupe do Sobressalto",
+      "faixa": "13-16",
+      "faixa_n": 4,
+      "fases": 1,
+      "frase": "Era entregador de refrigerante. Continua insistindo que você aceite.",
+      "pv": 125,
+      "defesa": 20,
+      "rd": 0,
+      "tenacidade": 4,
+      "vel": 14,
+      "ataque": 12,
+      "dano": "3d6 + 2",
+      "dano_media": 12,
+      "dt": 17,
+      "tr": 5,
+      "fraquezas": [
+        "Raio",
+        "Quântico"
+      ],
+      "resistencias": [],
+      "ataques": [
+        {
+          "nome": "Jato borbulhante",
+          "alcance": "Curta",
+          "elemento": "Quântico",
+          "nota": "",
+          "dados": "3d6 + 2",
+          "media": 12,
+          "texto": "3d6 + 2 · média 12"
+        }
+      ],
+      "especiais": [
+        {
+          "nome": "Degustação obrigatória",
+          "recarga": "recarga 2 Ciclos",
+          "efeito": "um alvo a Distância Curta faz Teste de Resistência Física contra DT 17; se falhar, recebe 3d6 + 2 · 12 de dano Quântico e Lentidão por 1 turno."
+        }
+      ],
+      "fila": "VEL 14, sem Firmeza. Segue o personagem que estiver com mais PV, oferecendo.",
+      "firmeza": "Não",
+      "origem": "coleção Penacony",
+      "pv_nota": "125"
+    },
+    {
+      "nome": "Trupe do Sobressalto: Crânio de Pássaro",
+      "tipo": "Comum",
+      "faccao": "Trupe do Sobressalto",
+      "faixa": "13-16",
+      "faixa_n": 4,
+      "fases": 1,
+      "frase": "O número de sapateado acabou há três anos. Ele não recebeu o aviso.",
+      "pv": 125,
+      "defesa": 20,
+      "rd": 0,
+      "tenacidade": 4,
+      "vel": 14,
+      "ataque": 12,
+      "dano": "3d6 + 2",
+      "dano_media": 12,
+      "dt": 17,
+      "tr": 5,
+      "fraquezas": [
+        "Vento",
+        "Físico"
+      ],
+      "resistencias": [],
+      "ataques": [
+        {
+          "nome": "Sapateado desafinado",
+          "alcance": "Pessoal",
+          "elemento": "Físico",
+          "nota": "",
+          "dados": "3d6 + 2",
+          "media": 12,
+          "texto": "3d6 + 2 · média 12"
+        }
+      ],
+      "especiais": [
+        {
+          "nome": "Bis forçado",
+          "recarga": "recarga 2 Ciclos",
+          "efeito": "ele repete o ataque normal contra o mesmo alvo. Os dois ataques causam o mesmo dano da ficha — a régua de 28.4 não deixa o segundo bater mais forte."
+        }
+      ],
+      "fila": "VEL 14, sem Firmeza. Dança em volta do alvo mais próximo e não troca de alvo por nada.",
+      "firmeza": "Não",
+      "origem": "coleção Penacony",
+      "pv_nota": "125"
+    },
+    {
+      "nome": "Trupe do Sobressalto: Sr. Teladomo",
+      "tipo": "Comum",
+      "faccao": "Trupe do Sobressalto",
+      "faixa": "13-16",
+      "faixa_n": 4,
+      "fases": 1,
+      "frase": "Troca de papel a cada cena. Nenhuma delas tinha final feliz.",
+      "pv": 125,
+      "defesa": 20,
+      "rd": 0,
+      "tenacidade": 4,
+      "vel": 14,
+      "ataque": 12,
+      "dano": "3d6 + 2",
+      "dano_media": 12,
+      "dt": 17,
+      "tr": 5,
+      "fraquezas": [
+        "Imaginário",
+        "Fogo"
+      ],
+      "resistencias": [],
+      "ataques": [
+        {
+          "nome": "Estática ao vivo",
+          "alcance": "Média",
+          "elemento": "Imaginário",
+          "nota": "",
+          "dados": "3d6 + 2",
+          "media": 12,
+          "texto": "3d6 + 2 · média 12"
+        }
+      ],
+      "especiais": [
+        {
+          "nome": "Troca de elenco",
+          "recarga": "recarga 2 Ciclos",
+          "efeito": "ele escolhe um alvo a Distância Média: até o fim do próximo turno dele, esse alvo recebe Marcado e o Sr. Teladomo copia o Elemento do último ataque que esse alvo usou."
+        }
+      ],
+      "fila": "VEL 14, sem Firmeza. Fica longe e muda de alvo a cada Ciclo, sempre para quem agiu por último.",
+      "firmeza": "Não",
+      "origem": "coleção Penacony",
+      "pv_nota": "125"
+    },
+    {
+      "nome": "Lobo-Soldado Garra-Negra",
+      "tipo": "Comum",
+      "faccao": "Família Sabujo",
+      "faixa": "13-16",
+      "faixa_n": 4,
+      "fases": 1,
+      "frase": "A segurança do hóspede é prioridade. Hóspede é um termo com letras miúdas.",
+      "pv": 125,
+      "defesa": 20,
+      "rd": 0,
+      "tenacidade": 4,
+      "vel": 14,
+      "ataque": 12,
+      "dano": "3d6 + 2",
+      "dano_media": 12,
+      "dt": 17,
+      "tr": 5,
+      "fraquezas": [
+        "Gelo",
+        "Raio"
+      ],
+      "resistencias": [],
+      "ataques": [
+        {
+          "nome": "Garra de serviço",
+          "alcance": "Pessoal",
+          "elemento": "Físico",
+          "nota": "",
+          "dados": "3d6 + 2",
+          "media": 12,
+          "texto": "3d6 + 2 · média 12"
+        }
+      ],
+      "especiais": [
+        {
+          "nome": "Protocolo de contenção",
+          "recarga": "recarga 2 Ciclos",
+          "efeito": "um alvo a Distância Pessoal faz Teste de Potência Física contra DT 17; se falhar, recebe Aprisionamento. A Família Sabujo prende antes de machucar."
+        }
+      ],
+      "fila": "VEL 14, sem Firmeza. Trabalha em par: dois Lobos-Soldado escolhem sempre o mesmo alvo.",
+      "firmeza": "Não",
+      "origem": "coleção Penacony",
+      "pv_nota": "125"
+    },
+    {
+      "nome": "Trupe do Sobressalto: Batedor de Molas",
+      "tipo": "Comum",
+      "faccao": "Trupe do Sobressalto",
+      "faixa": "13-16",
+      "faixa_n": 4,
+      "fases": 1,
+      "frase": "Ainda sacode os dados. A mesa de jogo não existe mais.",
+      "pv": 125,
+      "defesa": 20,
+      "rd": 0,
+      "tenacidade": 4,
+      "vel": 14,
+      "ataque": 12,
+      "dano": "3d6 + 2",
+      "dano_media": 12,
+      "dt": 17,
+      "tr": 5,
+      "fraquezas": [
+        "Físico",
+        "Quântico"
+      ],
+      "resistencias": [],
+      "ataques": [
+        {
+          "nome": "Dado de chumbo",
+          "alcance": "Curta",
+          "elemento": "Físico",
+          "nota": "",
+          "dados": "3d6 + 2",
+          "media": 12,
+          "texto": "3d6 + 2 · média 12"
+        }
+      ],
+      "especiais": [
+        {
+          "nome": "Aposta da casa",
+          "recarga": "recarga 2 Ciclos",
+          "efeito": "role 1d6. Em 1 a 3, um alvo a Distância Curta recebe 3d6 + 2 · 12 de dano Físico. Em 4 a 6, 2 alvos recebem metade desse dano cada um. Quem mestra rola na mesa, à vista de todos."
+        }
+      ],
+      "fila": "VEL 14, sem Firmeza. Escolhe o alvo no dado também: role para ver quem ele persegue.",
+      "firmeza": "Não",
+      "origem": "coleção Penacony",
+      "pv_nota": "125"
+    },
+    {
+      "nome": "Meme da Zona de Memória: \"Aquele que Tudo Vê\"",
+      "tipo": "Elite",
+      "faccao": "Memes da Zona de Memória",
+      "faixa": "13-16",
+      "faixa_n": 4,
+      "fases": 1,
+      "frase": "Observar, revisitar, inspecionar. Ele faz os três em você ao mesmo tempo.",
+      "pv": 295,
+      "defesa": 22,
+      "rd": 3,
+      "tenacidade": 6,
+      "vel": 16,
+      "ataque": 12,
+      "dano": "4d10 + 2",
+      "dano_media": 24,
+      "dt": 18,
+      "tr": 6,
+      "fraquezas": [
+        "Fogo",
+        "Vento",
+        "Imaginário"
+      ],
+      "resistencias": [],
+      "ataques": [
+        {
+          "nome": "Olhar que atravessa",
+          "alcance": "Longa",
+          "elemento": "Imaginário",
+          "nota": "",
+          "dados": "4d10 + 2",
+          "media": 24,
+          "texto": "4d10 + 2 · média 24"
+        },
+        {
+          "nome": "Pálpebra de pedra",
+          "alcance": "Pessoal",
+          "elemento": "Físico",
+          "nota": "",
+          "dados": "4d10 + 2",
+          "media": 24,
+          "texto": "4d10 + 2 · média 24"
+        }
+      ],
+      "especiais": [
+        {
+          "nome": "Sob exame",
+          "recarga": "recarga 2 Ciclos",
+          "efeito": "todo mundo a Distância Longa faz Teste de Percepção Mental contra DT 18; quem falhar recebe Marcado por 2 turnos e Vulnerável a Imaginário por 1 turno."
+        },
+        {
+          "nome": "Retrospectiva",
+          "recarga": "recarga 3 Ciclos",
+          "efeito": "um alvo Marcado a Distância Longa recebe 6d10 + 3 · 36 de dano Imaginário. Contra alvo não marcado, o dano é o normal da ficha."
+        }
+      ],
+      "fila": "VEL 16, com Firmeza. Marca todo mundo no primeiro Ciclo e só depois começa a cobrar.",
+      "firmeza": "Sim",
+      "origem": "coleção Penacony",
+      "pv_nota": "295"
+    },
+    {
+      "nome": "Meme da Zona de Memória: \"Casca da Fúria Apagada\"",
+      "tipo": "Elite",
+      "faccao": "Memes da Zona de Memória",
+      "faixa": "13-16",
+      "faixa_n": 4,
+      "fases": 1,
+      "frase": "A dor queimou e passou. O que nasceu das cinzas não passa.",
+      "pv": 295,
+      "defesa": 22,
+      "rd": 3,
+      "tenacidade": 6,
+      "vel": 16,
+      "ataque": 12,
+      "dano": "4d10 + 2",
+      "dano_media": 24,
+      "dt": 18,
+      "tr": 6,
+      "fraquezas": [
+        "Gelo",
+        "Raio",
+        "Quântico"
+      ],
+      "resistencias": [
+        "Fogo"
+      ],
+      "ataques": [
+        {
+          "nome": "Punho de brasa fria",
+          "alcance": "Pessoal",
+          "elemento": "Fogo",
+          "nota": "",
+          "dados": "4d10 + 2",
+          "media": 24,
+          "texto": "4d10 + 2 · média 24"
+        },
+        {
+          "nome": "Rachadura de casca",
+          "alcance": "Curta",
+          "elemento": "Físico",
+          "nota": "",
+          "dados": "4d10 + 2",
+          "media": 24,
+          "texto": "4d10 + 2 · média 24"
+        }
+      ],
+      "especiais": [
+        {
+          "nome": "Fúria acumulada",
+          "recarga": "recarga 2 Ciclos",
+          "efeito": "2 alvos a Distância Curta recebem 4d10 + 2 · 24 de dano de Fogo cada um e Queimadura por 2 turnos, sem teste."
+        },
+        {
+          "nome": "Reacender",
+          "recarga": "recarga 3 Ciclos",
+          "efeito": "um alvo que já esteja com Queimadura recebe 6d10 + 3 · 36 de dano de Fogo e a Queimadura dele passa a ter Corrupção somada por 2 turnos."
+        }
+      ],
+      "fila": "VEL 16, com Firmeza. Espalha Queimadura primeiro e guarda Reacender para o alvo mais queimado da cena.",
+      "firmeza": "Sim",
+      "origem": "coleção Penacony",
+      "pv_nota": "295"
+    },
+    {
+      "nome": "Meme da Zona de Memória: \"Algo Rumo à Morte\"",
+      "tipo": "Boss",
+      "faccao": "Memes da Zona de Memória",
+      "faixa": "13-16",
+      "faixa_n": 4,
+      "fases": 2,
+      "frase": "A morte não devia existir dentro de um sonho. Alguém sonhou de outro jeito.",
+      "pv": 750,
+      "defesa": 23,
+      "rd": 6,
+      "tenacidade": 12,
+      "vel": 18,
+      "ataque": 12,
+      "dano": "6d10 + 3",
+      "dano_media": 36,
+      "dt": 19,
+      "tr": 7,
+      "fraquezas": [
+        "Físico",
+        "Fogo",
+        "Vento",
+        "Imaginário"
+      ],
+      "resistencias": [],
+      "ataques": [
+        {
+          "nome": "Foice das Doze Horas",
+          "alcance": "Curta",
+          "elemento": "Quântico",
+          "nota": "",
+          "dados": "6d10 + 3",
+          "media": 36,
+          "texto": "6d10 + 3 · média 36"
+        },
+        {
+          "nome": "Sombra que adianta",
+          "alcance": "Média",
+          "elemento": "Imaginário",
+          "nota": "",
+          "dados": "6d10 + 3",
+          "media": 36,
+          "texto": "6d10 + 3 · média 36"
+        }
+      ],
+      "especiais": [
+        {
+          "nome": "Hora marcada",
+          "recarga": "recarga 2 Ciclos; ocupa uma das 2 ações do turno",
+          "efeito": "3 alvos a Distância Média recebem 6d10 + 3 · 36 de dano Quântico cada um e fazem Teste de Força de Vontade contra DT 19; quem falhar recebe Marcado por 2 turnos."
+        },
+        {
+          "nome": "Sentença do relógio",
+          "recarga": "recarga 3 Ciclos; ocupa uma das 2 ações do turno",
+          "efeito": "um alvo Marcado a Distância Curta recebe 9d10 + 5 · 54 de dano Quântico. Se esse dano levar o alvo a 0 PV, ele vai direto para Morrendo e o relógio da cena avança uma hora — fique à vontade para narrar o que isso custa."
+        },
+        {
+          "nome": "Vira a ampulheta",
+          "recarga": "a partir da fase 2, 1 vez por combate",
+          "efeito": "todas as condições que o grupo pôs nele saem, e a Tenacidade volta cheia. Não causa dano e não gasta ação agressiva."
+        }
+      ],
+      "fila": "VEL 18, com Firmeza. Na fase 1 marca em área; na fase 2 caça quem está Marcado e ignora o resto da mesa.",
+      "firmeza": "Sim",
+      "origem": "coleção Penacony",
+      "pv_nota": "750 — A virada é em 375 PV. Na fase 2 as Fraquezas passam a ser Gelo, Raio, Quântico e Físico — anuncie em voz alta (28.5, regra 4)."
+    }
+  ]
+}

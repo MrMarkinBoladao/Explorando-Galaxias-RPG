@@ -1,0 +1,429 @@
+{
+  "tipo": "explorando-galaxias:inimigos",
+  "versao": 1,
+  "nome": "Jarilo-VI",
+  "nota": "Belobog sob a Geada Eterna: a Guarda Prateada, as sombras do Fragmentum e o que mora no Submundo. Todos os números vêm da tabela de âncoras de 28.3, pela faixa 5-8. As Fraquezas são sugestões: troque à vontade para cumprir o contrato de encontro de 27.5.",
+  "inimigos": [
+    {
+      "nome": "Soldado da Guarda Prateada",
+      "tipo": "Comum",
+      "faccao": "Guarda Prateada",
+      "faixa": "5-8",
+      "faixa_n": 2,
+      "fases": 1,
+      "frase": "Jurou defender a muralha. Ninguém disse de que lado ela fica.",
+      "pv": 70,
+      "defesa": 16,
+      "rd": 0,
+      "tenacidade": 3,
+      "vel": 12,
+      "ataque": 9,
+      "dano": "2d6",
+      "dano_media": 7,
+      "dt": 14,
+      "tr": 3,
+      "fraquezas": [
+        "Fogo",
+        "Vento"
+      ],
+      "resistencias": [],
+      "ataques": [
+        {
+          "nome": "Baioneta de inverno",
+          "alcance": "Pessoal",
+          "elemento": "Físico",
+          "nota": "",
+          "dados": "2d6",
+          "media": 7,
+          "texto": "2d6 · média 7"
+        }
+      ],
+      "especiais": [
+        {
+          "nome": "Abrir brecha",
+          "recarga": "recarga 2 Ciclos",
+          "efeito": "ele ataca e, se acertar, o alvo perde 2 de Defesa até o fim do próximo turno dele. Dois Soldados batendo no mesmo alvo empilham o efeito."
+        }
+      ],
+      "fila": "VEL 12, sem Firmeza. Avança em formação e não deixa a linha, mesmo com o flanco aberto.",
+      "firmeza": "Não",
+      "origem": "coleção Jarilo-VI",
+      "pv_nota": "70"
+    },
+    {
+      "nome": "Fuzileiro da Guarda Prateada",
+      "tipo": "Comum",
+      "faccao": "Guarda Prateada",
+      "faixa": "5-8",
+      "faixa_n": 2,
+      "fases": 1,
+      "frase": "A neve abafa o tiro. Não abafa o resto.",
+      "pv": 70,
+      "defesa": 16,
+      "rd": 0,
+      "tenacidade": 3,
+      "vel": 12,
+      "ataque": 9,
+      "dano": "2d6",
+      "dano_media": 7,
+      "dt": 14,
+      "tr": 3,
+      "fraquezas": [
+        "Gelo",
+        "Quântico"
+      ],
+      "resistencias": [],
+      "ataques": [
+        {
+          "nome": "Fuzil de ferrolho",
+          "alcance": "Longa",
+          "elemento": "Físico",
+          "nota": "",
+          "dados": "2d6",
+          "media": 7,
+          "texto": "2d6 · média 7"
+        }
+      ],
+      "especiais": [
+        {
+          "nome": "Tiro que rasga",
+          "recarga": "recarga 2 Ciclos",
+          "efeito": "um alvo a Distância Longa recebe 2d6 · 7 de dano Físico e faz Teste de Resistência Física contra DT 14; se falhar, recebe Sangramento por 2 turnos."
+        }
+      ],
+      "fila": "VEL 12, sem Firmeza. Procura a maior distância possível e atira em quem curou por último.",
+      "firmeza": "Não",
+      "origem": "coleção Jarilo-VI",
+      "pv_nota": "70"
+    },
+    {
+      "nome": "Sombra-Andante do Inverno Eterno",
+      "tipo": "Comum",
+      "faccao": "Fragmentum",
+      "faixa": "5-8",
+      "faixa_n": 2,
+      "fases": 1,
+      "frase": "Veste o uniforme da Guarda. Da cabeça para cima é só gelo.",
+      "pv": 70,
+      "defesa": 16,
+      "rd": 0,
+      "tenacidade": 3,
+      "vel": 12,
+      "ataque": 9,
+      "dano": "2d6",
+      "dano_media": 7,
+      "dt": 14,
+      "tr": 3,
+      "fraquezas": [
+        "Fogo",
+        "Físico"
+      ],
+      "resistencias": [],
+      "ataques": [
+        {
+          "nome": "Machado de geada",
+          "alcance": "Pessoal",
+          "elemento": "Gelo",
+          "nota": "",
+          "dados": "2d6",
+          "media": 7,
+          "texto": "2d6 · média 7"
+        }
+      ],
+      "especiais": [
+        {
+          "nome": "Sopro da Geada",
+          "recarga": "recarga 2 Ciclos",
+          "efeito": "um alvo a Distância Pessoal faz Teste de Resistência Física contra DT 14; se falhar, recebe Lentidão por 2 turnos. Inimigo não congela personagem (28.2, regra 9): o gelo dela sai como Lentidão."
+        }
+      ],
+      "fila": "VEL 12, sem Firmeza. Caminha devagar e sempre para o grupo maior, nunca para o isolado.",
+      "firmeza": "Não",
+      "origem": "coleção Jarilo-VI",
+      "pv_nota": "70"
+    },
+    {
+      "nome": "Sombra-Andante da Incineração",
+      "tipo": "Comum",
+      "faccao": "Fragmentum",
+      "faixa": "5-8",
+      "faixa_n": 2,
+      "fases": 1,
+      "frase": "O mesmo uniforme, a mesma falta de rosto, e brasa no lugar do crânio.",
+      "pv": 70,
+      "defesa": 16,
+      "rd": 0,
+      "tenacidade": 3,
+      "vel": 12,
+      "ataque": 9,
+      "dano": "2d6",
+      "dano_media": 7,
+      "dt": 14,
+      "tr": 3,
+      "fraquezas": [
+        "Gelo",
+        "Vento"
+      ],
+      "resistencias": [],
+      "ataques": [
+        {
+          "nome": "Machado em brasa",
+          "alcance": "Pessoal",
+          "elemento": "Fogo",
+          "nota": "",
+          "dados": "2d6",
+          "media": 7,
+          "texto": "2d6 · média 7"
+        }
+      ],
+      "especiais": [
+        {
+          "nome": "Marca de cinza",
+          "recarga": "recarga 2 Ciclos",
+          "efeito": "um alvo a Distância Pessoal recebe 2d6 · 7 de dano de Fogo e Queimadura por 2 turnos, sem teste. Vale lembrar: Queimadura é Dano Contínuo e ignora a RD do alvo."
+        }
+      ],
+      "fila": "VEL 12, sem Firmeza. Vai atrás de quem ainda não está com Queimadura.",
+      "firmeza": "Não",
+      "origem": "coleção Jarilo-VI",
+      "pv_nota": "70"
+    },
+    {
+      "nome": "Vagabundo do Submundo",
+      "tipo": "Comum",
+      "faccao": "Submundo",
+      "faixa": "5-8",
+      "faixa_n": 2,
+      "fases": 1,
+      "frase": "Desenterrou a máquina para sobreviver. Agora a máquina decide.",
+      "pv": 70,
+      "defesa": 16,
+      "rd": 0,
+      "tenacidade": 3,
+      "vel": 12,
+      "ataque": 9,
+      "dano": "2d6",
+      "dano_media": 7,
+      "dt": 14,
+      "tr": 3,
+      "fraquezas": [
+        "Raio",
+        "Imaginário"
+      ],
+      "resistencias": [],
+      "ataques": [
+        {
+          "nome": "Britadeira remendada",
+          "alcance": "Pessoal",
+          "elemento": "Físico",
+          "nota": "",
+          "dados": "2d6",
+          "media": 7,
+          "texto": "2d6 · média 7"
+        }
+      ],
+      "especiais": [
+        {
+          "nome": "Sucata no ventilador",
+          "recarga": "recarga 2 Ciclos",
+          "efeito": "2 alvos a Distância Curta fazem Teste de Reflexos contra DT 14: quem falhar recebe 2d6 · 7 de dano Físico; quem passar recebe metade."
+        }
+      ],
+      "fila": "VEL 12, sem Firmeza. Luta recuando, e tenta sair da cena se ficar sozinho.",
+      "firmeza": "Não",
+      "origem": "coleção Jarilo-VI",
+      "pv_nota": "70"
+    },
+    {
+      "nome": "Tenente da Guarda Prateada",
+      "tipo": "Elite",
+      "faccao": "Guarda Prateada",
+      "faixa": "5-8",
+      "faixa_n": 2,
+      "fases": 1,
+      "frase": "O escudo primeiro. A pergunta, se sobrar tempo.",
+      "pv": 160,
+      "defesa": 18,
+      "rd": 2,
+      "tenacidade": 6,
+      "vel": 13,
+      "ataque": 9,
+      "dano": "3d8",
+      "dano_media": 13,
+      "dt": 15,
+      "tr": 4,
+      "fraquezas": [
+        "Fogo",
+        "Raio",
+        "Quântico"
+      ],
+      "resistencias": [
+        "Físico"
+      ],
+      "ataques": [
+        {
+          "nome": "Espada de ordenança",
+          "alcance": "Pessoal",
+          "elemento": "Físico",
+          "nota": "",
+          "dados": "3d8",
+          "media": 13,
+          "texto": "3d8 · média 13"
+        },
+        {
+          "nome": "Borda do escudo",
+          "alcance": "Pessoal",
+          "elemento": "Físico",
+          "nota": "",
+          "dados": "3d8",
+          "media": 13,
+          "texto": "3d8 · média 13"
+        }
+      ],
+      "especiais": [
+        {
+          "nome": "Escudo erguido",
+          "recarga": "recarga 2 Ciclos",
+          "efeito": "até o fim do próximo turno dele, a RD dele sobe para 5 e o primeiro ataque que ele receber dispara um contra-ataque: 3d8 · 13 de dano Físico em quem atacou, sem Teste de Ataque. A Defesa não muda — inimigo não tem Reação defensiva (28.2, regra 1)."
+        },
+        {
+          "nome": "Concentrar fogo",
+          "recarga": "recarga 3 Ciclos",
+          "efeito": "ele aponta um alvo. Até o fim do Ciclo, todo inimigo da Guarda Prateada na cena soma +2 nos Testes de Ataque contra esse alvo, e o alvo recebe Marcado por 2 turnos."
+        }
+      ],
+      "fila": "VEL 13, com Firmeza. Ergue o escudo no primeiro turno e guarda Concentrar fogo para o personagem que estiver curando.",
+      "firmeza": "Sim",
+      "origem": "coleção Jarilo-VI",
+      "pv_nota": "160"
+    },
+    {
+      "nome": "Rondador Gélido",
+      "tipo": "Elite",
+      "faccao": "Fragmentum",
+      "faixa": "5-8",
+      "faixa_n": 2,
+      "fases": 1,
+      "frase": "Não foi gente que montou isso. Foi a Geada, copiando de memória.",
+      "pv": 160,
+      "defesa": 18,
+      "rd": 2,
+      "tenacidade": 6,
+      "vel": 13,
+      "ataque": 9,
+      "dano": "3d8",
+      "dano_media": 13,
+      "dt": 15,
+      "tr": 4,
+      "fraquezas": [
+        "Fogo",
+        "Físico",
+        "Imaginário"
+      ],
+      "resistencias": [],
+      "ataques": [
+        {
+          "nome": "Serra de gelo",
+          "alcance": "Pessoal",
+          "elemento": "Gelo",
+          "nota": "",
+          "dados": "3d8",
+          "media": 13,
+          "texto": "3d8 · média 13"
+        },
+        {
+          "nome": "Estilhaço dirigido",
+          "alcance": "Média",
+          "elemento": "Gelo",
+          "nota": "",
+          "dados": "3d8",
+          "media": 13,
+          "texto": "3d8 · média 13"
+        }
+      ],
+      "especiais": [
+        {
+          "nome": "Chamado da nevasca",
+          "recarga": "recarga 3 Ciclos",
+          "efeito": "2 Sombras-Andantes do Inverno Eterno entram na cena pela VEL, nas casas restantes do Ciclo (capítulo 19)."
+        },
+        {
+          "nome": "Campo de frio absoluto",
+          "recarga": "recarga 2 Ciclos",
+          "efeito": "todo mundo a Distância Curta dele faz Teste de Resistência Física contra DT 15: quem falhar recebe 3d8 · 13 de dano de Gelo e Lentidão por 2 turnos; quem passar recebe metade e nenhuma Lentidão."
+        }
+      ],
+      "fila": "VEL 13, com Firmeza. Mantém distância Média, chama a nevasca cedo e só usa o Campo quando pega 3 alvos.",
+      "firmeza": "Sim",
+      "origem": "coleção Jarilo-VI",
+      "pv_nota": "160"
+    },
+    {
+      "nome": "Cocolia, Mãe do Engano",
+      "tipo": "Boss",
+      "faccao": "Guardiã Suprema",
+      "faixa": "5-8",
+      "faixa_n": 2,
+      "fases": 2,
+      "frase": "Ela congelou a cidade para salvá-la. Dá no mesmo, diz ela.",
+      "pv": 410,
+      "defesa": 19,
+      "rd": 4,
+      "tenacidade": 11,
+      "vel": 15,
+      "ataque": 9,
+      "dano": "4d8 + 2",
+      "dano_media": 20,
+      "dt": 16,
+      "tr": 5,
+      "fraquezas": [
+        "Fogo",
+        "Físico",
+        "Quântico",
+        "Imaginário"
+      ],
+      "resistencias": [],
+      "ataques": [
+        {
+          "nome": "Lança da Geada Eterna",
+          "alcance": "Média",
+          "elemento": "Gelo",
+          "nota": "",
+          "dados": "4d8 + 2",
+          "media": 20,
+          "texto": "4d8 + 2 · média 20"
+        },
+        {
+          "nome": "Mão da Guardiã",
+          "alcance": "Curta",
+          "elemento": "Gelo",
+          "nota": "",
+          "dados": "4d8 + 2",
+          "media": 20,
+          "texto": "4d8 + 2 · média 20"
+        }
+      ],
+      "especiais": [
+        {
+          "nome": "Coroa de lanças",
+          "recarga": "recarga 2 Ciclos; ocupa uma das 2 ações do turno",
+          "efeito": "3 alvos a Distância Média recebem 4d8 + 2 · 20 de dano de Gelo cada um e fazem Teste de Reflexos contra DT 16; quem falhar recebe Lentidão por 1 turno."
+        },
+        {
+          "nome": "Sentença da Guardiã",
+          "recarga": "recarga 3 Ciclos; ocupa uma das 2 ações do turno",
+          "efeito": "um alvo a Distância Média recebe 6d8 + 3 · 30 de dano de Gelo. Se o alvo estiver com Lentidão, ele também recebe Vulnerável a Gelo por 2 turnos."
+        },
+        {
+          "nome": "A cidade inteira",
+          "recarga": "a partir da fase 2, 1 vez por combate",
+          "efeito": "ela puxa a Geada para dentro de si. Ela recupera a Tenacidade cheia e, até o fim do próximo turno dela, todo Teste de Resistência do grupo contra ela é feito contra DT 16 + 2. Não causa dano e não gasta ação agressiva."
+        }
+      ],
+      "fila": "VEL 15, com Firmeza. Na fase 1 abre com a Coroa de lanças; na fase 2 alterna Sentença e ataque normal no alvo de menor PV.",
+      "firmeza": "Sim",
+      "origem": "coleção Jarilo-VI",
+      "pv_nota": "410 — A virada é em 205 PV. Na fase 2 as Fraquezas passam a ser Fogo, Raio, Vento e Imaginário — anuncie em voz alta (28.5, regra 4)."
+    }
+  ]
+}

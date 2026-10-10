@@ -1,0 +1,429 @@
+{
+  "tipo": "explorando-galaxias:inimigos",
+  "versao": 1,
+  "nome": "Amphoreus",
+  "nota": "A Terra Eterna: a Maré Negra que corrói tudo, a Legião de Kremnos e o que sobe do Mar Abissal. Faixa de fechamento de campanha. Todos os números vêm da tabela de âncoras de 28.3, pela faixa 17-20. As Fraquezas são sugestões: troque à vontade para cumprir o contrato de encontro de 27.5.",
+  "inimigos": [
+    {
+      "nome": "Maré Negra: Machado Corroído",
+      "tipo": "Comum",
+      "faccao": "Maré Negra",
+      "faixa": "17-20",
+      "faixa_n": 5,
+      "fases": 1,
+      "frase": "O braço ainda sabe a forma do golpe. O nome do dono, não.",
+      "pv": 155,
+      "defesa": 24,
+      "rd": 0,
+      "tenacidade": 4,
+      "vel": 15,
+      "ataque": 13,
+      "dano": "3d8 + 3",
+      "dano_media": 16,
+      "dt": 19,
+      "tr": 7,
+      "fraquezas": [
+        "Fogo",
+        "Vento"
+      ],
+      "resistencias": [],
+      "ataques": [
+        {
+          "nome": "Machada da maré",
+          "alcance": "Pessoal",
+          "elemento": "Físico",
+          "nota": "",
+          "dados": "3d8 + 3",
+          "media": 16,
+          "texto": "3d8 + 3 · média 16"
+        }
+      ],
+      "especiais": [
+        {
+          "nome": "Corrosão",
+          "recarga": "recarga 2 Ciclos",
+          "efeito": "um alvo a Distância Pessoal recebe 3d8 + 3 · 16 de dano Físico e, sem teste, Corrupção por 2 turnos. A Maré não mata depressa: ela faz cada veneno doer mais."
+        }
+      ],
+      "fila": "VEL 15, sem Firmeza. Avança sempre, nunca recua e vai no primeiro corpo que aparecer.",
+      "firmeza": "Não",
+      "origem": "coleção Amphoreus",
+      "pv_nota": "155"
+    },
+    {
+      "nome": "Maré Negra: Arco Decrépito",
+      "tipo": "Comum",
+      "faccao": "Maré Negra",
+      "faixa": "17-20",
+      "faixa_n": 5,
+      "fases": 1,
+      "frase": "A corda apodreceu. A flecha sai do mesmo jeito.",
+      "pv": 155,
+      "defesa": 24,
+      "rd": 0,
+      "tenacidade": 4,
+      "vel": 15,
+      "ataque": 13,
+      "dano": "3d8 + 3",
+      "dano_media": 16,
+      "dt": 19,
+      "tr": 7,
+      "fraquezas": [
+        "Quântico",
+        "Físico"
+      ],
+      "resistencias": [],
+      "ataques": [
+        {
+          "nome": "Flecha da maré imunda",
+          "alcance": "Longa",
+          "elemento": "Físico",
+          "nota": "",
+          "dados": "3d8 + 3",
+          "media": 16,
+          "texto": "3d8 + 3 · média 16"
+        }
+      ],
+      "especiais": [
+        {
+          "nome": "Fim anunciado",
+          "recarga": "recarga 2 Ciclos",
+          "efeito": "2 alvos a Distância Longa recebem 3d8 + 3 · 16 de dano Físico cada um. Todo PV perdido para este ataque também vira 1 acúmulo de Corrupção por 1 turno em quem perdeu."
+        }
+      ],
+      "fila": "VEL 15, sem Firmeza. Atira do fundo da cena em quem estiver mais ferido.",
+      "firmeza": "Não",
+      "origem": "coleção Amphoreus",
+      "pv_nota": "155"
+    },
+    {
+      "nome": "Lâmina Erodida pela Maré",
+      "tipo": "Comum",
+      "faccao": "Maré Negra",
+      "faixa": "17-20",
+      "faixa_n": 5,
+      "fases": 1,
+      "frase": "Não tem quem a empunhe. Ela aprendeu a dispensar isso.",
+      "pv": 155,
+      "defesa": 24,
+      "rd": 0,
+      "tenacidade": 4,
+      "vel": 15,
+      "ataque": 13,
+      "dano": "3d8 + 3",
+      "dano_media": 16,
+      "dt": 19,
+      "tr": 7,
+      "fraquezas": [
+        "Raio",
+        "Imaginário"
+      ],
+      "resistencias": [],
+      "ataques": [
+        {
+          "nome": "Corte sem mão",
+          "alcance": "Curta",
+          "elemento": "Físico",
+          "nota": "",
+          "dados": "3d8 + 3",
+          "media": 16,
+          "texto": "3d8 + 3 · média 16"
+        }
+      ],
+      "especiais": [
+        {
+          "nome": "Dança de ferro velho",
+          "recarga": "recarga 2 Ciclos",
+          "efeito": "todo mundo a Distância Curta dela faz Teste de Reflexos contra DT 19: quem falhar recebe 3d8 + 3 · 16 de dano Físico e Sangramento por 2 turnos; quem passar recebe metade."
+        }
+      ],
+      "fila": "VEL 15, sem Firmeza. Gira no meio do grupo e prefere ficar onde pegue duas pessoas.",
+      "firmeza": "Não",
+      "origem": "coleção Amphoreus",
+      "pv_nota": "155"
+    },
+    {
+      "nome": "Servo das Marés",
+      "tipo": "Comum",
+      "faccao": "Sereias do Mar Abissal",
+      "faixa": "17-20",
+      "faixa_n": 5,
+      "fases": 1,
+      "frase": "Ele cantou junto. Agora é só a parte do coro que sobrou.",
+      "pv": 155,
+      "defesa": 24,
+      "rd": 0,
+      "tenacidade": 4,
+      "vel": 15,
+      "ataque": 13,
+      "dano": "3d8 + 3",
+      "dano_media": 16,
+      "dt": 19,
+      "tr": 7,
+      "fraquezas": [
+        "Gelo",
+        "Raio"
+      ],
+      "resistencias": [],
+      "ataques": [
+        {
+          "nome": "Tridente afogado",
+          "alcance": "Curta",
+          "elemento": "Gelo",
+          "nota": "",
+          "dados": "3d8 + 3",
+          "media": 16,
+          "texto": "3d8 + 3 · média 16"
+        }
+      ],
+      "especiais": [
+        {
+          "nome": "Canto de sal",
+          "recarga": "recarga 3 Ciclos",
+          "efeito": "um alvo a Distância Curta faz Teste de Força de Vontade contra DT 19; se falhar, recebe Controlado por 1 turno — quem mestra escolhe as ações dele, sem Habilidade, sem Ultimate e sem gastar recursos."
+        }
+      ],
+      "fila": "VEL 15, sem Firmeza. Canta no primeiro Ciclo em que tiver alvo a Distância Curta.",
+      "firmeza": "Não",
+      "origem": "coleção Amphoreus",
+      "pv_nota": "155"
+    },
+    {
+      "nome": "Águia Meteórica",
+      "tipo": "Comum",
+      "faccao": "Amphoreus",
+      "faixa": "17-20",
+      "faixa_n": 5,
+      "fases": 1,
+      "frase": "Desceu com a pedra que caiu do céu, e ficou.",
+      "pv": 155,
+      "defesa": 24,
+      "rd": 0,
+      "tenacidade": 4,
+      "vel": 15,
+      "ataque": 13,
+      "dano": "3d8 + 3",
+      "dano_media": 16,
+      "dt": 19,
+      "tr": 7,
+      "fraquezas": [
+        "Vento",
+        "Gelo"
+      ],
+      "resistencias": [],
+      "ataques": [
+        {
+          "nome": "Mergulho incandescente",
+          "alcance": "Média",
+          "elemento": "Fogo",
+          "nota": "",
+          "dados": "3d8 + 3",
+          "media": 16,
+          "texto": "3d8 + 3 · média 16"
+        }
+      ],
+      "especiais": [
+        {
+          "nome": "Rasante",
+          "recarga": "recarga 2 Ciclos",
+          "efeito": "ela atravessa a cena: 2 alvos em linha recebem 3d8 + 3 · 16 de dano de Fogo cada um e fazem Teste de Reflexos contra DT 19; quem falhar recebe Queimadura por 1 turno."
+        }
+      ],
+      "fila": "VEL 15, sem Firmeza. Sobe num Ciclo e desce no seguinte; no Ciclo em que sobe, ataques a Distância Pessoal não a alcançam.",
+      "firmeza": "Não",
+      "origem": "coleção Amphoreus",
+      "pv_nota": "155"
+    },
+    {
+      "nome": "Conselho da Maré Negra",
+      "tipo": "Elite",
+      "faccao": "Maré Negra",
+      "faixa": "17-20",
+      "faixa_n": 5,
+      "fases": 1,
+      "frase": "Deliberam em silêncio. A pauta é só uma.",
+      "pv": 365,
+      "defesa": 26,
+      "rd": 4,
+      "tenacidade": 7,
+      "vel": 17,
+      "ataque": 13,
+      "dano": "5d12",
+      "dano_media": 32,
+      "dt": 20,
+      "tr": 8,
+      "fraquezas": [
+        "Vento",
+        "Raio",
+        "Fogo"
+      ],
+      "resistencias": [
+        "Quântico"
+      ],
+      "ataques": [
+        {
+          "nome": "Razão partida",
+          "alcance": "Média",
+          "elemento": "Físico",
+          "nota": "",
+          "dados": "5d12",
+          "media": 32,
+          "texto": "5d12 · média 32"
+        },
+        {
+          "nome": "Mão do conselho",
+          "alcance": "Pessoal",
+          "elemento": "Quântico",
+          "nota": "",
+          "dados": "5d12",
+          "media": 32,
+          "texto": "5d12 · média 32"
+        }
+      ],
+      "especiais": [
+        {
+          "nome": "À espreita",
+          "recarga": "recarga 2 Ciclos",
+          "efeito": "ele entra à espreita: até o próximo turno dele, recebe +1 dado de dano de qualquer fonte, e o próximo ataque dele causa 7d12 + 3 · 48 em vez do dano normal. Se sofrer Quebra antes de agir, ele é Atrasado 2 casas e perde o bônus."
+        },
+        {
+          "nome": "Agitação insidiosa",
+          "recarga": "recarga 3 Ciclos",
+          "efeito": "um alvo a Distância Média recebe 5d12 · 32 de dano Quântico e faz Teste de Resistência Mental contra DT 20; se falhar, recebe Silenciado e Corrupção por 2 turnos."
+        }
+      ],
+      "fila": "VEL 17, com Firmeza. Fica à espreita no primeiro turno sempre que o grupo ainda estiver com a Ultimate carregada.",
+      "firmeza": "Sim",
+      "origem": "coleção Amphoreus",
+      "pv_nota": "365"
+    },
+    {
+      "nome": "Trupe das Fúrias: Guerreiro",
+      "tipo": "Elite",
+      "faccao": "Legião de Kremnos",
+      "faixa": "17-20",
+      "faixa_n": 5,
+      "fases": 1,
+      "frase": "Morreu em Kremnos e continuou marchando. A guerra não deu baixa.",
+      "pv": 365,
+      "defesa": 26,
+      "rd": 4,
+      "tenacidade": 7,
+      "vel": 17,
+      "ataque": 13,
+      "dano": "5d12",
+      "dano_media": 32,
+      "dt": 20,
+      "tr": 8,
+      "fraquezas": [
+        "Gelo",
+        "Quântico",
+        "Imaginário"
+      ],
+      "resistencias": [],
+      "ataques": [
+        {
+          "nome": "Lança de cinzas",
+          "alcance": "Curta",
+          "elemento": "Físico",
+          "nota": "",
+          "dados": "5d12",
+          "media": 32,
+          "texto": "5d12 · média 32"
+        },
+        {
+          "nome": "Escudo em arremesso",
+          "alcance": "Média",
+          "elemento": "Físico",
+          "nota": "",
+          "dados": "5d12",
+          "media": 32,
+          "texto": "5d12 · média 32"
+        }
+      ],
+      "especiais": [
+        {
+          "nome": "Falange das Fúrias",
+          "recarga": "recarga 2 Ciclos",
+          "efeito": "3 alvos a Distância Curta recebem 5d12 · 32 de dano Físico cada um e fazem Teste de Potência Física contra DT 20; quem falhar recebe Lentidão por 1 turno."
+        },
+        {
+          "nome": "Último juramento",
+          "recarga": "1 vez por combate, quando ele cai abaixo da metade dos PV",
+          "efeito": "até o fim do combate, o dano dos ataques dele sobe 1 dado e ele não pode ser Controlado. Não causa dano e não gasta ação agressiva."
+        }
+      ],
+      "fila": "VEL 17, com Firmeza. Marcha para o centro da cena e usa a Falange no Ciclo em que alcançar 3 pessoas.",
+      "firmeza": "Sim",
+      "origem": "coleção Amphoreus",
+      "pv_nota": "365"
+    },
+    {
+      "nome": "Campeão da Maré Negra",
+      "tipo": "Boss",
+      "faccao": "Maré Negra",
+      "faixa": "17-20",
+      "faixa_n": 5,
+      "fases": 3,
+      "frase": "Foi herói de alguma recorrência. A Maré guardou a armadura e jogou o nome fora.",
+      "pv": 935,
+      "defesa": 27,
+      "rd": 8,
+      "tenacidade": 13,
+      "vel": 19,
+      "ataque": 13,
+      "dano": "7d12 + 3",
+      "dano_media": 48,
+      "dt": 21,
+      "tr": 9,
+      "fraquezas": [
+        "Fogo",
+        "Gelo",
+        "Vento",
+        "Imaginário"
+      ],
+      "resistencias": [],
+      "ataques": [
+        {
+          "nome": "Espada da maré alta",
+          "alcance": "Curta",
+          "elemento": "Físico",
+          "nota": "",
+          "dados": "7d12 + 3",
+          "media": 48,
+          "texto": "7d12 + 3 · média 48"
+        },
+        {
+          "nome": "Onda negra",
+          "alcance": "Média",
+          "elemento": "Quântico",
+          "nota": "",
+          "dados": "7d12 + 3",
+          "media": 48,
+          "texto": "7d12 + 3 · média 48"
+        }
+      ],
+      "especiais": [
+        {
+          "nome": "Maré que sobe",
+          "recarga": "recarga 2 Ciclos; ocupa uma das 2 ações do turno",
+          "efeito": "3 alvos a Distância Média recebem 7d12 + 3 · 48 de dano Quântico cada um e fazem Teste de Resistência Física contra DT 21; quem falhar recebe Corrupção por 2 turnos."
+        },
+        {
+          "nome": "Golpe do campeão",
+          "recarga": "recarga 3 Ciclos; ocupa uma das 2 ações do turno",
+          "efeito": "um alvo a Distância Curta recebe 11d12 + 1 · 72 de dano Físico. Se o alvo estiver com Corrupção, o dano ignora a RD dele."
+        },
+        {
+          "nome": "Nada se perde na Maré",
+          "recarga": "a partir da fase 2, recarga 3 Ciclos",
+          "efeito": "ele recupera 90 PV por cada personagem que esteja com Corrupção, até o máximo de 3. Não causa dano e não gasta ação agressiva: limpar Corrupção do grupo é o jeito de desligar esta ação."
+        }
+      ],
+      "fila": "VEL 19, com Firmeza. Fase 1 no alvo mais próximo; fase 2 em quem está com Corrupção; fase 3 em quem tem menos PV, sem trocar de alvo até derrubar.",
+      "firmeza": "Sim",
+      "origem": "coleção Amphoreus",
+      "pv_nota": "935 — As viradas são em 623 e em 311 PV. Na fase 2 as Fraquezas passam a ser Físico, Raio, Quântico e Fogo; na fase 3, Gelo, Vento, Imaginário e Quântico — anuncie em voz alta a cada virada (28.5, regra 4)."
+    }
+  ]
+}

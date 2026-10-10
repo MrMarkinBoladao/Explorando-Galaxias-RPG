@@ -470,6 +470,7 @@
     }
 
     corpo += "<h3>Condições nele</h3>" + condicoesDoInimigo(x) +
+      (x.fases > 1 ? notaDePV(x) : "") +
       (x.fila ? "<p class='ajuda'><b>Na Fila:</b> " + esc(x.fila) + "</p>" : "") +
       (x.frase ? "<p class='efeito'><i>" + esc(x.frase) + "</i></p>" : "") +
       "<div class='botoes'>" +
@@ -644,6 +645,48 @@
   // ---------------------------------------------------------------------------
   // Inimigos: criador pela âncora, inimigos da campanha e bestiário
   // ---------------------------------------------------------------------------
+
+  /**
+   * A nota de PV da ficha — onde um Boss vira de fase e quais Fraquezas entram
+   * no lugar (28.5). Ela vem no bestiário do livro e nos arquivos importados, e
+   * só vale mostrar quando diz mais que o número de PV.
+   */
+  function notaDePV(x) {
+    const nota = String(x.pv_nota == null ? "" : x.pv_nota).trim();
+    if (!nota || nota === String(x.pv) || nota === String(x.pv_max)) return "";
+    return "<p class='nota-pv'><b>PV:</b> " + esc(nota) + "</p>";
+  }
+
+  /**
+   * Ataques nomeados e ações especiais de um inimigo salvo, só leitura.
+   * Quem copia do bestiário ou importa um .json traz essas listas, e sem isto
+   * elas ficariam invisíveis até o inimigo entrar em combate.
+   */
+  function acoesDoSalvo(x) {
+    const ataques = x.ataques || [], especiais = x.especiais || [];
+    if (!ataques.length && !especiais.length) return "";
+    const nome = x.nome || "Inimigo";
+    return "<details class='acoes-salvas'><summary>" +
+      (ataques.length ? ataques.length + (ataques.length === 1 ? " ataque" : " ataques") : "") +
+      (ataques.length && especiais.length ? " e " : "") +
+      (especiais.length ? especiais.length + (especiais.length === 1 ? " ação especial" : " ações especiais") : "") +
+      "</summary>" +
+      (ataques.length ? "<ul class='lista-acoes'>" + ataques.map((a) =>
+        "<li><div><b>" + esc(a.nome) + "</b> <span class='suave'>" +
+        esc([a.alcance, a.elemento, a.nota].filter(Boolean).join(", ")) + "</span></div>" +
+        "<div class='acao-numeros'><span>Ataque " + botaoRolar(M.rolagem(x.ataque || 0), nome + ": " + a.nome) + "</span>" +
+        (a.dados ? "<span>Dano " + botaoRolar(a.dados, nome + ": dano de " + a.nome) +
+          (a.media ? " <small>média " + a.media + "</small>" : "") + "</span>" : "") +
+        "</div></li>").join("") + "</ul>" : "") +
+      (especiais.length ? "<ul class='lista-acoes'>" + especiais.map((e) =>
+        "<li><div><b>" + esc(e.nome) + "</b>" +
+        (e.recarga ? " <span class='etiqueta'>" + esc(e.recarga) + "</span>" : "") + "</div>" +
+        (e.efeito ? "<p class='efeito'>" + esc(e.efeito) + "</p>" : "") + "</li>").join("") + "</ul>" : "") +
+      "<p class='ajuda'>Estas listas vêm do bestiário ou do arquivo e viajam junto na exportação. " +
+      "Para mudá-las, edite o .json e importe de novo.</p>" +
+      "</details>";
+  }
+
   function editorDeInimigo(x, i) {
     const cam = "inimigos_salvos." + i;
     const marcas = (campo) => G.ELEMENTOS.map((e) =>
@@ -678,12 +721,15 @@
         ": dano até 1,5× num alvo, ou o dano cheio por alvo em 2 ou 3 alvos, com recarga de 2 ou 3 Ciclos") +
       "<div class='acao-numeros'><span>Ataque " + botaoRolar(M.rolagem(x.ataque || 0), (x.nome || "Inimigo") + ": ataque") + "</span>" +
       (x.dano ? "<span>Dano " + botaoRolar(x.dano, (x.nome || "Inimigo") + ": dano") + "</span>" : "") + "</div>" +
+      acoesDoSalvo(x) +
       "<div class='botoes'>" +
       H.botao("por-salvo-em-cena", "Pôr em cena", { classe: "primario", dados: { i: i } }) +
       H.botao("duplicar-salvo", "Duplicar", { dados: { i: i } }) +
+      H.botao("exportar-inimigo", "Exportar .json", { dados: { i: i },
+        titulo: "Baixa só esta ficha, para guardar ou passar para outra pessoa" }) +
       H.botao("excluir-salvo", "Excluir", { classe: "perigo", dados: { i: i } }) +
       "</div>";
-    return H.cartao(esc(x.nome || "Inimigo sem nome"), corpo, "inimigo-salvo",
+    return H.cartao(esc(x.nome || "Inimigo sem nome"), notaDePV(x) + corpo, "inimigo-salvo",
       "<span class='suave'>" + esc(x.tipo) + " · faixa " + esc(x.faixa || "—") + " · " + (x.pv || 0) + " PV</span>");
   }
 
@@ -709,6 +755,7 @@
       (b.especiais.length ? "<h3>Ações especiais</h3><ul class='lista-acoes'>" + b.especiais.map((a) =>
         "<li><div><b>" + esc(a.nome) + "</b>" + (a.recarga ? " <span class='etiqueta'>" + esc(a.recarga) + "</span>" : "") +
         "</div><p class='efeito'>" + esc(a.efeito) + "</p></li>").join("") + "</ul>" : "") +
+      (b.fases > 1 ? notaDePV(b) : "") +
       (b.fila ? "<p class='ajuda'><b>Na Fila:</b> " + esc(b.fila) + "</p>" : "") +
       "<div class='botoes'>" +
       H.botao("por-bestiario-em-cena", "Pôr em cena", { classe: "primario", dados: { nome: b.nome } }) +
@@ -717,6 +764,95 @@
       "</div>";
     return H.cartao(esc(b.nome), corpo, "ficha-bicho",
       "<span class='etiqueta tipo-" + b.tipo.toLowerCase() + "'>" + esc(b.tipo) + "</span>");
+  }
+
+  // --- Arquivos de inimigo ---------------------------------------------------
+
+  /**
+   * Coleções prontas que o site serve em `inimigos/`. Caminho relativo porque
+   * as rotas são de hash: o index.html está sempre na raiz do site.
+   */
+  const COLECOES = [
+    ["inimigos/estacao-espacial-herta.json", "Estação Espacial Herta"],
+    ["inimigos/jarilo-vi.json", "Jarilo-VI"],
+    ["inimigos/xianzhou-o-loufu.json", "Xianzhou: O Loufu"],
+    ["inimigos/penacony.json", "Penacony"],
+    ["inimigos/amphoreus.json", "Amphoreus"],
+  ];
+
+  /** `?v=<selo>` nos downloads, para o navegador não servir uma coleção velha. */
+  const selo = () => (EG.VERSAO && EG.VERSAO !== "dev" ? "?v=" + EG.VERSAO : "");
+
+  // Relatório da última importação. Fica em memória de propósito: é recado de
+  // tela, não estado de campanha, e não deve ir para o localStorage nem para o
+  // arquivo de mesa.
+  let relatorio = null;
+
+  function cartaoDeArquivos() {
+    const est = G.estado();
+    const n = est.inimigos_salvos.length;
+
+    const aviso = !relatorio ? "" :
+      "<div class='relatorio-import" + (relatorio.erro ? " ruim" : "") + "'>" +
+      "<p><b>" + esc(relatorio.titulo) + "</b></p>" +
+      (relatorio.avisos && relatorio.avisos.length
+        ? "<ul class='lista-avisos'>" + relatorio.avisos.map((a) => "<li>" + esc(a) + "</li>").join("") + "</ul>"
+        : "") +
+      H.botao("limpar-relatorio", "Fechar", { classe: "pequeno" }) +
+      "</div>";
+
+    return H.cartao("Importar e exportar inimigos",
+      "<p class='ajuda'>Um arquivo <b>.json</b> por inimigo ou com vários de uma vez. A importação " +
+      "<b>soma</b> aos seus inimigos — ela nunca apaga a mesa, ao contrário de " +
+      "<b>Mais &gt; Importar mesa</b>. Todo campo que faltar é preenchido pela linha da âncora " +
+      "(" + link("28", "28.3", "28.3") + "), então um arquivo escrito à mão já entra balanceado.</p>" +
+      "<div class='botoes'>" +
+      H.botao("importar-inimigos", "Importar inimigos (.json)", { classe: "primario" }) +
+      H.botao("exportar-inimigos", "Exportar meus inimigos", { desabilitado: !n,
+        titulo: n ? "Baixa os " + n + " inimigos da campanha num arquivo só" : "Você ainda não tem inimigos salvos" }) +
+      "</div>" + aviso +
+      "<h3>Coleções prontas para baixar</h3>" +
+      "<p class='ajuda'>Baixe o arquivo e importe aqui mesmo. São inimigos dos mundos da história, " +
+      "montados pela tabela de âncoras.</p>" +
+      "<ul class='lista-colecoes'>" + COLECOES.map(([caminho, rotulo]) =>
+        "<li><a href='" + esc(caminho + selo()) + "' download>" + esc(rotulo) + "</a></li>").join("") + "</ul>" +
+      "<details><summary>O formato do arquivo</summary>" +
+      "<p class='ajuda'>A exportação grava assim, e a importação aceita de volta. " +
+      "Ela também aceita um arquivo com um inimigo só, uma lista solta de inimigos, " +
+      "um arquivo de mesa e um backup completo — nos dois últimos ela pega apenas os inimigos.</p>" +
+      "<pre class='exemplo-json'>" + esc(
+        "{\n" +
+        '  "tipo": "' + G.MARCA_INIMIGOS + '",\n' +
+        '  "versao": 1,\n' +
+        '  "nome": "Minha coleção",\n' +
+        '  "inimigos": [\n' +
+        "    {\n" +
+        '      "nome": "Carcereiro da Prisão Orbital",\n' +
+        '      "tipo": "Elite",\n' +
+        '      "faixa_n": 3,\n' +
+        '      "faccao": "Corporação da Paz Interastral",\n' +
+        '      "frase": "A chave enferrujou do lado de dentro.",\n' +
+        '      "fraquezas": ["Fogo", "Vento", "Físico"],\n' +
+        '      "resistencias": [],\n' +
+        '      "ataques": [\n' +
+        '        { "nome": "Cassetete de choque", "alcance": "Pessoal",\n' +
+        '          "elemento": "Raio", "dados": "4d8 + 1" }\n' +
+        "      ],\n" +
+        '      "especiais": [\n' +
+        '        { "nome": "Trancafiar", "recarga": "recarga 2 Ciclos",\n' +
+        '          "efeito": "Teste de Reflexos contra a DT dos efeitos; se falhar, Lentidão por 2 turnos." }\n' +
+        "      ],\n" +
+        '      "fila": "VEL 15, com Firmeza. Vai em quem está mais longe do grupo."\n' +
+        "    }\n" +
+        "  ]\n" +
+        "}") + "</pre>" +
+      "<p class='ajuda'><b>Só o <code>nome</code> é obrigatório.</b> " +
+      "<code>tipo</code> aceita Comum, Elite ou Boss (o padrão é Comum) e <code>faixa_n</code> vai de 1 a 5 " +
+      "(o padrão é a faixa do grupo). Dê <code>faixa_n</code> e <code>tipo</code>, e os treze números da " +
+      "ficha vêm da âncora sozinhos — PV, Defesa, RD, Tenacidade, VEL, Ataque, dano, DT e TR. " +
+      "A média do dano é calculada da expressão de dados quando você não escreve <code>media</code>.</p>" +
+      "</details>",
+      "arquivos-inimigos");
   }
 
   function telaInimigos() {
@@ -748,7 +884,8 @@
     const meus = est.inimigos_salvos.length
       ? est.inimigos_salvos.map(editorDeInimigo).join("")
       : H.cartao("Inimigos da campanha",
-        vazio("Nenhum inimigo seu ainda. Crie um pela âncora acima, ou copie uma ficha do bestiário."), "vazio");
+        vazio("Nenhum inimigo seu ainda. Crie um pela âncora acima, copie uma ficha do bestiário " +
+          "ou importe um arquivo .json."), "vazio");
 
     const filtros = H.cartao("Bestiário do capítulo 28",
       "<div class='linha'>" +
@@ -762,7 +899,7 @@
       "Todas foram preenchidas pela tabela de âncoras, então você pode trocar as Fraquezas livremente para " +
       "cumprir o contrato de " + link("27", "27.5", "27.5") + ".</p>", "filtros-bestiario");
 
-    app().innerHTML = topo("inimigos") + criador +
+    app().innerHTML = topo("inimigos") + criador + cartaoDeArquivos() +
       "<h2 class='titulo-secao'>Inimigos da campanha</h2>" + meus +
       "<h2 class='titulo-secao'>Bestiário</h2>" + filtros +
       (lista.length ? "<div class='grade-bichos'>" + lista.map(fichaDoBestiario).join("") + "</div>"
@@ -927,15 +1064,7 @@
 
   A["exportar-mesa"] = () => {
     const est = G.estado();
-    const nome = (est.campanha.nome || "mesa").normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-      .replace(/[^\w-]+/g, "-").replace(/^-+|-+$/g, "").toLowerCase();
-    const blob = new Blob([JSON.stringify(est, null, 2)], { type: "application/json" });
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "mesa-do-mestre-" + (nome || "campanha") + ".json";
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+    EG.baixarJSON("mesa-do-mestre-" + EG.fatiarNome(est.campanha.nome, "campanha") + ".json", est);
     EG.toast("Mesa exportada. O arquivo é o seu backup — as fichas se exportam uma a uma, na aba Jogar.");
     return false;
   };
@@ -1413,6 +1542,106 @@
     EG.toast("<b>" + esc(x.nome) + "</b> copiado para os seus inimigos: troque o que quiser sem mexer no livro.");
   };
 
+  // --- Inimigos em arquivo ---------------------------------------------------
+  A["exportar-inimigo"] = (b) => {
+    const x = G.estado().inimigos_salvos[Number(b.dataset.i)];
+    if (!x) return false;
+    EG.baixarJSON("inimigo-" + EG.fatiarNome(x.nome, "sem-nome") + ".json",
+      G.pacoteDeInimigos([x], x.nome || ""));
+    EG.toast("<b>" + esc(x.nome || "Inimigo") + "</b> exportado. O arquivo importa em qualquer navegador.");
+    return false;
+  };
+
+  A["exportar-inimigos"] = () => {
+    const est = G.estado(), lista = est.inimigos_salvos;
+    if (!lista.length) {
+      EG.toast("Você ainda não tem inimigos salvos para exportar.", "erro");
+      return false;
+    }
+    EG.baixarJSON("inimigos-" + EG.fatiarNome(est.campanha.nome, "campanha") + ".json",
+      G.pacoteDeInimigos(lista, est.campanha.nome || ""));
+    EG.toast("<b>" + lista.length + (lista.length === 1 ? " inimigo" : " inimigos") + "</b> exportados.");
+    return false;
+  };
+
+  A["importar-inimigos"] = () => {
+    const campo = el("arquivo-inimigos");
+    campo.value = "";                  // deixa reimportar o mesmo arquivo
+    campo.click();
+    return false;
+  };
+
+  A["limpar-relatorio"] = () => { relatorio = null; };
+
+  /** Lê um arquivo como texto. */
+  function lerTexto(arquivo) {
+    return new Promise((resolve) => {
+      const leitor = new FileReader();
+      leitor.onload = () => resolve(leitor.result);
+      leitor.onerror = () => resolve(null);
+      leitor.readAsText(arquivo);
+    });
+  }
+
+  async function importarInimigos(arquivos) {
+    const lista = Array.from(arquivos);
+    const prontos = [], avisos = [], recusados = [];
+
+    for (const arquivo of lista) {
+      const cru = await lerTexto(arquivo);
+      let bruto = null;
+      try { bruto = JSON.parse(cru); } catch (_) {
+        recusados.push(arquivo.name + ": não é um JSON válido");
+        continue;
+      }
+      const fichas = G.listaDeInimigosDoArquivo(bruto);
+      if (!fichas) {
+        recusados.push(arquivo.name + ": nenhum inimigo encontrado dentro dele");
+        continue;
+      }
+      if (!fichas.length) {
+        recusados.push(arquivo.name + ": a lista de inimigos está vazia");
+        continue;
+      }
+      for (const ficha of fichas) {
+        const r = G.inimigoDeArquivo(ficha);
+        if (r.erro) { avisos.push(arquivo.name + ": uma ficha foi pulada, " + r.erro); continue; }
+        prontos.push(r.inimigo);
+        for (const a of r.avisos) avisos.push(a);
+      }
+    }
+
+    if (!prontos.length) {
+      relatorio = { erro: true, titulo: "Nada foi importado.", avisos: recusados.concat(avisos) };
+      EG.toast("Nenhum inimigo veio desse arquivo. Veja o motivo na aba Inimigos.", "erro");
+      G.redesenhar();
+      return;
+    }
+
+    const est = G.estado();
+    const jaTinha = prontos.filter((x) => est.inimigos_salvos.some((y) => EG.norm(y.nome) === EG.norm(x.nome)));
+    const quantos = prontos.length;
+    if (!confirm("Importar " + quantos + (quantos === 1 ? " inimigo" : " inimigos") + " para a campanha?\n\n" +
+      "Eles entram somados aos " + est.inimigos_salvos.length + " que você já tem. Nada é apagado." +
+      (jaTinha.length ? "\n\n" + jaTinha.length + (jaTinha.length === 1 ? " nome já existe" : " nomes já existem") +
+        " na sua lista e vão aparecer repetidos." : ""))) return;
+
+    est.inimigos_salvos.unshift(...prontos);
+    if (jaTinha.length) {
+      avisos.push("Nome repetido na sua lista: " + jaTinha.map((x) => x.nome).join(", "));
+    }
+    relatorio = {
+      titulo: quantos + (quantos === 1 ? " inimigo importado" : " inimigos importados") +
+        (recusados.length ? ", e " + recusados.length +
+          (recusados.length === 1 ? " arquivo recusado" : " arquivos recusados") : "") + ".",
+      avisos: recusados.concat(avisos),
+    };
+    G.salvar();
+    EG.toast("<b>" + quantos + (quantos === 1 ? " inimigo" : " inimigos") + "</b> na campanha." +
+      (avisos.length ? " Confira os avisos no cartão de importação." : ""));
+    G.redesenhar();
+  }
+
   // --- Encontros -------------------------------------------------------------
   A["novo-encontro"] = () => {
     G.estado().encontros.unshift({ nome: "", faixa_n: G.faixaN(), itens: [],
@@ -1484,6 +1713,7 @@
     }
     if (ev.target.id === "arquivo-mesa" && ev.target.files[0]) importarMesa(ev.target.files[0]);
     if (ev.target.id === "arquivo-ficha-mestre" && ev.target.files[0]) importarFicha(ev.target.files[0]);
+    if (ev.target.id === "arquivo-inimigos" && ev.target.files.length) importarInimigos(ev.target.files);
   });
 
   function importarMesa(arquivo) {

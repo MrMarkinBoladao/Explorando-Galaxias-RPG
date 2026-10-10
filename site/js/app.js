@@ -65,6 +65,28 @@
   };
 
   // ---------------------------------------------------------------------------
+  // Arquivos: baixar um .json e transformar um nome em nome de arquivo
+  // ---------------------------------------------------------------------------
+
+  /** Nome de arquivo seguro: sem acento, sem espaço, sem maiúscula. */
+  function fatiarNome(s, padrao) {
+    const limpo = norm(s).replace(/[^\w-]+/g, "-").replace(/^-+|-+$/g, "");
+    return limpo || padrao || "arquivo";
+  }
+
+  /** Baixa `dados` como .json. Devolve false para servir de retorno de ação. */
+  function baixarJSON(nomeArquivo, dados) {
+    const blob = new Blob([JSON.stringify(dados, null, 2)], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = nomeArquivo;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+    return false;
+  }
+
+  // ---------------------------------------------------------------------------
   // Backup completo: todas as fichas e a mesa do Mestre num arquivo só
   // ---------------------------------------------------------------------------
   const CHAVE_MESTRE = "explorando-galaxias:mestre";
@@ -79,13 +101,7 @@
       fichas: fichas, atual: Armazem.atualId(), mestre: mestre,
     };
     const dia = new Date().toISOString().slice(0, 10);
-    const blob = new Blob([JSON.stringify(pacote, null, 2)], { type: "application/json" });
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "explorando-galaxias-backup-" + dia + ".json";
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+    baixarJSON("explorando-galaxias-backup-" + dia + ".json", pacote);
     const n = Object.keys(fichas).length;
     toast("Backup salvo: <b>" + n + (n === 1 ? " ficha" : " fichas") + "</b>" +
       (mestre ? " e a mesa do Mestre" : "") + ". Guarde o arquivo.");
@@ -354,5 +370,6 @@
   });
 
   Object.assign(EG, { esc, norm, sinal, uid, clonar, destacar, regexSemAcento, Armazem, toast, rolar, botaoRolar,
-    registrarTela, rotaAtual, navegar, historico, exportarTudo, importarTudo, checarAtualizacao, VERSAO });
+    registrarTela, rotaAtual, navegar, historico, exportarTudo, importarTudo, checarAtualizacao,
+    baixarJSON, fatiarNome, VERSAO });
 })();
