@@ -259,6 +259,13 @@
       (R.esforco_max ? "Esforço: " + (j.esforco ? "<b>disponível</b>" : "gasto") + ". " : "") +
       "Capacidade " + R.ocupado + "/" + R.capacidade + " de Espaço.</p>";
 
+    // O Cone de Luz dele, lido da mesma ficha que o jogador tem aberta: a arte, o Bônus
+    // Maior que já está nos números acima e o Efeito Condicional, que é o que o Mestre
+    // precisa ter na frente para saber quando o gatilho dispara (25.2).
+    if (F.temCone(m.p)) {
+      corpo += "<h3>Cone de Luz</h3>" + F.coneHTML(m.p, R, { mini: true, descricaoFechada: true });
+    }
+
     if (pv === 0) {
       const mo = j.morrendo;
       const bolas = (n, t) => Array.from({ length: 3 }, (_, i) => "<span class='bolinha" + (i < n ? " cheia " + t : "") + "'></span>").join("");

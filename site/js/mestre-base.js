@@ -74,10 +74,12 @@
     return E;
   };
 
+  /** Devolve false quando o navegador recusou gravar (espaço cheio). */
   G.salvar = function () {
-    if (!E) return;
-    try { localStorage.setItem(CHAVE, JSON.stringify(E)); } catch (_) {
+    if (!E) return false;
+    try { localStorage.setItem(CHAVE, JSON.stringify(E)); return true; } catch (_) {
       EG.toast("Não foi possível salvar a mesa do Mestre neste navegador. Use <b>Exportar</b>.", "erro");
+      return false;
     }
   };
 
@@ -116,8 +118,7 @@
    * NPC já mora dentro da mesa (`m.p` é referência para `estado.npcs`), então basta salvar.
    */
   G.gravarFicha = function (m) {
-    if (m.npc) G.salvar();
-    else EG.Armazem.salvar(m.p);
+    return m.npc ? G.salvar() : EG.Armazem.salvar(m.p) !== false;
   };
 
   G.nome = (m) => m.p.nome || (m.npc ? "NPC sem nome" : "Personagem sem nome");

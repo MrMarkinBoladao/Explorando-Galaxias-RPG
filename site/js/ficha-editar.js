@@ -46,7 +46,7 @@
   }
 
   const TIPOS_HABILIDADE = ["Dano", "Cura", "Buff", "Debuff", "Passiva"];
-  const ROTULO_CONE = ["", "+1 ou +10 PV", "+1 e +10 PV", "+2 ou +25 PV", "+2 e +25 PV", "+3 ou +50 PV"];
+  const ROTULO_CONE = F.ROTULO_CONE;
   const linha = (...campos) => "<div class='linha'>" + campos.join("") + "</div>";
   const info = (html) => "<p class='info'>" + html + "</p>";
 
@@ -328,6 +328,61 @@
     return secao("bencaos", "7 · Bênçãos do Caminho", corpo, { regra: link("06", "6.7", "regra 6.7") });
   }
 
+  /**
+   * A arte e a descrição do Cone de Luz: o sabor dele (25.2). Nada aqui entra nas contas —
+   * mas é isto que aparece na tela Jogar e na Área do Mestre, porque mora na ficha.
+   *
+   * A imagem pode vir de duas formas, no mesmo campo `cone.imagem`:
+   *  - um arquivo escolhido aqui, que é encolhido e guardado dentro da própria ficha (vai
+   *    no .json exportado, no backup, e aparece sem internet);
+   *  - um link, que não gasta espaço no navegador mas depende da internet para carregar.
+   *
+   * Isto é desenhado tanto na ficha do jogador quanto na de um NPC: é o mesmo editor.
+   */
+  function arteEDescricaoDoCone() {
+    const p = F.P, url = (p.cone.imagem || "").trim();
+    const guardada = EG.ehImagemGuardada(url);
+    return "<p class='rotulo'>A arte e a história do Cone</p>" +
+      "<div class='cone-editor'>" +
+      (url ? F.arteDoCone(p, { classe: "arte-editor" })
+        : "<div class='cone-arte arte-editor vazia'><span>sem arte</span></div>") +
+      "<div class='cone-editor-corpo'>" +
+      "<div class='botoes compactos'>" +
+      "<button type='button' class='botao' data-acao='cone-imagem'>" +
+      (url ? "Trocar a imagem…" : "Escolher uma imagem…") + "</button>" +
+      (url ? "<button type='button' class='botao perigo' data-acao='cone-imagem-tirar'>Tirar a imagem</button>" : "") +
+      "</div>" +
+      (guardada
+        ? "<p class='ajuda'>Imagem guardada nesta ficha (<b>" + EG.pesoDaImagem(url) + " KB</b>, já encolhida). " +
+          "Ela aparece sem internet, vai no arquivo exportado e no backup, e o Mestre vê a mesma arte na área dele."
+          + "</p>"
+        : H.campo("Endereço da imagem", H.texto("cone.imagem", { rotulo: "Endereço da imagem",
+            ph: "https://… (ou escolha um arquivo acima)", redesenha: true }),
+          "Um link não gasta espaço no navegador, mas depende da internet. Um arquivo escolhido fica guardado na ficha.")) +
+      H.campo("Descrição", H.texto("cone.descricao", { area: true, linhas: 7, rotulo: "Descrição do Cone",
+        ph: "A história que o Cone carrega — a cena, as falas, o que ele lembra.\n\nDeixe uma linha em branco para separar parágrafos." }),
+        "Só sabor: não soma nada. Aparece embaixo da arte, na tela Jogar e na Área do Mestre.") +
+      "</div></div>";
+  }
+
+  /**
+   * O seletor de arquivo da arte, criado uma vez e **fora de #app**: as telas redesenham
+   * inteiras, e um elemento dentro de #app seria trocado por outro enquanto a janela de
+   * escolher arquivo estivesse aberta — aí a resposta dela não chegaria a ninguém.
+   */
+  function seletorDaArte() {
+    let el = document.getElementById("arquivo-cone-imagem");
+    if (!el) {
+      el = document.createElement("input");
+      el.type = "file";
+      el.id = "arquivo-cone-imagem";
+      el.accept = "image/*";
+      el.hidden = true;
+      document.body.appendChild(el);
+    }
+    return el;
+  }
+
   function secaoEquipamento() {
     const p = F.P, R = F.R;
     const arm = C().armaduras.find((a) => a.tipo === p.armadura);
@@ -350,7 +405,7 @@
         esc(ab.elemento) + " · alcance " + esc(ab.alcance) + " · Tenacidade " + ab.rt + " · Espaço " + H.espaco(ab.espaco) + "</p>";
     }
     // Cone de Luz
-    const cone = R.cone, nivelCone = p.cone.nivel;
+    const nivelCone = p.cone.nivel;
     const modoOu = nivelCone && M.CONE[Math.max(1, Math.min(5, nivelCone))][2] === "ou";
     corpo += "<h3>Cone de Luz</h3>" + info("Seu nível permite Cone até Nível <b>" + R.cone_maximo + "</b>. O Mestre concede, como recompensa de marco. " + link("25", "25.2", "regra 25.2"));
     corpo += linha(H.campo("Nome", H.texto("cone.nome", { rotulo: "Nome do Cone" })),
@@ -362,11 +417,11 @@
         modoOu && p.cone.alvo && p.cone.alvo !== "PV máximos" ? H.campo("Numérico ou PV", H.lista("cone.escolha", C().listas.cone_escolha, { vazio: false, rotulo: "Numérico ou PV" }), "", "estreito") : "",
         H.campo("Sobreposições", H.numero("cone.sobreposicoes", { min: 0, max: 5, rotulo: "Sobreposições" }), "", "estreito"));
       corpo += H.campo("Efeito Condicional", H.texto("cone.efeito", { area: true, rotulo: "Efeito Condicional" }));
-      const partes = [];
-      if (cone.numerico) partes.push("+" + cone.numerico + " em " + (cone.qual || cone.alvo));
-      if (cone.pv) partes.push("+" + cone.pv + " PV máximos");
-      corpo += "<p class='previa'>" + (partes.length ? "Somando na ficha: <b>" + esc(partes.join(" e ")) + "</b>" : "O Cone ainda não soma em nada: escolha o alvo do Bônus Maior.") + "</p>";
+      const somando = F.bonusDoCone(p, R);
+      corpo += "<p class='previa'>" + (somando ? "Somando na ficha: <b>" + esc(somando) + "</b>"
+        : "O Cone ainda não soma em nada: escolha o alvo do Bônus Maior.") + "</p>";
     }
+    corpo += arteEDescricaoDoCone();
     // Relíquias
     const tier = ["I", "II", "III", "IV"][R.tier_reliquia - 1];
     const textoSlot = { "Cabeça": "PV máximos", "Mãos": "de dano no Ataque Básico", "Tronco": "de Defesa", "Botas": "de Velocidade",
@@ -538,6 +593,43 @@
     if (h.nome && !confirm("Remover a Habilidade " + h.nome + "?")) return;
     F.P.habilidades.splice(i, 1);
   };
+  F.acoes["cone-imagem"] = () => {
+    seletorDaArte().click();
+    return false;                              // sem redesenhar: ver seletorDaArte()
+  };
+  F.acoes["cone-imagem-tirar"] = () => {
+    if (EG.ehImagemGuardada(F.P.cone.imagem) && !confirm("Tirar a arte do Cone desta ficha?")) return;
+    F.P.cone.imagem = "";
+  };
+
+  /**
+   * O arquivo de imagem escolhido para o Cone. Ele é lido e encolhido por EG.lerImagem e
+   * guardado na ficha aberta — que pode ser a de um jogador ou a de um NPC, porque este
+   * editor é o mesmo nos dois casos. Se o navegador recusar gravar (espaço cheio), a arte
+   * anterior volta: melhor ficar sem a imagem do que perder o resto da ficha.
+   */
+  document.addEventListener("change", (ev) => {
+    const el = ev.target;
+    if (el.id !== "arquivo-cone-imagem" || !el.files || !el.files[0]) return;
+    const arquivo = el.files[0];
+    el.value = "";
+    if (!F.P) return;
+    const ficha = F.P;
+    EG.lerImagem(arquivo, (erro, url, kb) => {
+      if (erro) { EG.toast(erro, "erro"); return; }
+      if (F.P !== ficha) return;                 // a pessoa trocou de ficha enquanto lia
+      const antes = ficha.cone.imagem;
+      ficha.cone.imagem = url;
+      if (F.salvar()) EG.toast("Arte do Cone guardada na ficha (<b>" + kb + " KB</b>).");
+      else {
+        ficha.cone.imagem = antes;
+        F.salvar();
+        EG.toast("Não cabe mais imagem neste navegador. Tire a arte de alguma ficha ou use um link.", "erro");
+      }
+      F.recalcular();
+      F.redesenhar();
+    });
+  });
 
   EG.registrarTela("editar", tela);
 })();

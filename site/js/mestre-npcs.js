@@ -60,7 +60,7 @@
    */
   function abrirFicha(m) {
     F.P = m.p;
-    F.aoSalvar = function () { G.salvar(); };
+    F.aoSalvar = function () { return G.salvar(); };
     F.recalcular();
   }
 
@@ -153,6 +153,9 @@
         "<span>Dano " + botaoRolar(ab.texto, G.nome(m) + ": dano do Ataque Básico") +
         " <small>média " + ab.media + "</small></span>" +
         "<span class='suave'>" + esc(ab.elemento) + " · " + esc(ab.alcance) + "</span></div>";
+    }
+    if (F.temCone(p)) {
+      corpo += F.coneHTML(p, R, { mini: true, descricaoFechada: true });
     }
     if (R.memo) {
       corpo += "<p class='ajuda'><b>Memoespírito:</b> " + esc(p.memoespirito.nome || "sem nome") +

@@ -187,8 +187,8 @@ select option { background: var(--painel); }
   .grade-jogo .coluna { display: contents; }
   .grade-jogo .vida { order: 1; } .grade-jogo .defesa { order: 2; } .grade-jogo .acoes { order: 3; }
   .grade-jogo .recursos { order: 4; } .grade-jogo .testes { order: 5; } .grade-jogo .condicoes { order: 6; }
-  .grade-jogo .memo { order: 7; } .grade-jogo .bencaos { order: 8; } .grade-jogo .inventario { order: 9; }
-  .grade-jogo .notas { order: 10; }
+  .grade-jogo .memo { order: 7; } .grade-jogo .bencaos { order: 8; } .grade-jogo .cone-cartao { order: 9; }
+  .grade-jogo .inventario { order: 10; } .grade-jogo .notas { order: 11; }
 }
 .pv { margin-bottom: .6rem; }
 .pv-numero { font-size: 2.4rem; font-weight: 800; }
@@ -240,6 +240,44 @@ button.rolar:hover { background: var(--ouro); color: #1a1406; }
 .inventario td, .inventario th { padding: .2rem .3rem; text-align: left; }
 .inventario input.curto { width: 4.5rem; }
 .acoes-item { white-space: nowrap; }
+
+/* ---------- Cone de Luz: a arte, o efeito e a história (25.2) ----------
+   As mesmas classes servem à tela Jogar, à Área do Mestre e ao editor, porque é a mesma
+   função que desenha o Cone nos três lugares (F.coneHTML). */
+.cone-arte { margin: 0 auto .7rem; max-width: 17rem; }
+.cone-arte img { display: block; width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--ouro-escuro); background: #0e1426; box-shadow: var(--sombra); }
+.cone-arte.vazia {
+  display: flex; align-items: center; justify-content: center; min-height: 7rem; border: 1px dashed var(--borda);
+  border-radius: 10px; background: #0e1426; color: var(--suave); font-size: .85rem;
+  padding: .5rem; text-align: center;
+}
+.cone-arte.quebrada { border-color: #6b2a36; color: var(--vermelho); }
+.cone-topo { display: flex; flex-wrap: wrap; gap: .2rem .5rem; align-items: baseline; }
+.cone-topo b { font-size: 1.05rem; color: var(--ouro); }
+.cone-bonus { margin: .35rem 0; font-size: .92rem; }
+.cone-corpo { min-width: 0; }
+.cone-descricao { margin-top: .5rem; border-left: 2px solid var(--ouro-escuro); padding-left: .6rem; }
+.cone-descricao p { margin: .4rem 0; font-size: .9rem; font-style: italic; color: var(--suave); }
+.cone-descricao-fechada { margin-top: .4rem; }
+.cone-descricao-fechada summary { cursor: pointer; font-size: .85rem; color: var(--azul); }
+.cone-descricao-fechada .cone-descricao { margin-top: .2rem; }
+/* Na Área do Mestre a arte vai pequena ao lado do texto: o que ele precisa ler é o gatilho. */
+.cone.mini { display: flex; gap: .7rem; align-items: flex-start; }
+.cone.mini .cone-arte { flex: 0 0 5.5rem; max-width: 5.5rem; margin: 0; }
+.cone.mini .cone-corpo { flex: 1 1 auto; }
+.cone.mini .cone-topo b { font-size: .98rem; }
+/* O bloco de arte dentro do editor da ficha */
+.cone-editor { display: flex; gap: 1rem; align-items: flex-start; flex-wrap: wrap; margin: .4rem 0 .2rem; }
+.cone-editor .arte-editor { flex: 0 0 9rem; max-width: 9rem; margin: 0; }
+.cone-editor-corpo { flex: 1 1 18rem; min-width: 0; }
+.galeria-cones { display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 1rem; align-items: start; }
+.cone-item { background: var(--painel-2); border: 1px solid var(--borda); border-radius: 8px; padding: .75rem; }
+.cone-item-topo { display: flex; gap: .5rem; align-items: center; justify-content: space-between; margin-bottom: .5rem; }
+.cone-item-topo h3 { margin: 0; font-size: 1rem; }
+@media (max-width: 420px) {
+  .cone-editor .arte-editor { flex-basis: 7rem; max-width: 7rem; }
+  .cone.mini .cone-arte { flex-basis: 4.2rem; max-width: 4.2rem; }
+}
 
 /* ---------- Área do Mestre ---------- */
 .aviso-mestre { max-width: 40rem; margin: 3rem auto; }
@@ -492,6 +530,10 @@ body[data-tela=regras] .historico { display: none; }
   input, select, textarea { color: #000; background: #fff; border-color: #999; }
   .suave, .ajuda, small { color: #444; }
   h3, .destaque, .titulo-secao { color: #000; }
+  .cone-arte { max-width: 9rem; }
+  .cone-arte.vazia { display: none !important; }
+  .cone-arte img { border-color: #999; box-shadow: none; }
+  .cone-descricao p { color: #333; }
   .tabela-mestre th { background: #eee; color: #000; }
   .fila-casa.agora { background: #f4f4f4; }
 }

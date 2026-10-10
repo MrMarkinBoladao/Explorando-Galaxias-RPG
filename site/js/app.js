@@ -32,6 +32,18 @@
     return String(texto).split(re).map((p, i) => (i % 2 ? "<mark>" + esc(p) + "</mark>" : esc(p))).join("");
   }
 
+  /**
+   * Texto de várias linhas virando parágrafos, já escapado: linha em branco separa
+   * parágrafo, linha solta vira quebra. É assim que a descrição de um Cone de Luz mantém
+   * na tela a forma com que foi escrita, sem precisar de markdown (que aceitaria HTML).
+   */
+  function paragrafos(texto, classe) {
+    const t = String(texto == null ? "" : texto).replace(/\r\n?/g, "\n").trim();
+    if (!t) return "";
+    const c = classe ? " class='" + classe + "'" : "";
+    return t.split(/\n{2,}/).map((b) => "<p" + c + ">" + esc(b).replace(/\n/g, "<br>") + "</p>").join("");
+  }
+
   // ---------------------------------------------------------------------------
   // Armazenamento (localStorage do navegador)
   // ---------------------------------------------------------------------------
@@ -48,11 +60,12 @@
         return false;
       }
     },
+    /** Devolve false quando o navegador recusou gravar (espaço cheio). */
     salvar(p) {
       const mapa = this.todas();
       p.atualizado = new Date().toISOString();
       mapa[p.id] = p;
-      this.gravarTodas(mapa);
+      return this.gravarTodas(mapa);
     },
     excluir(id) {
       const mapa = this.todas();
@@ -84,6 +97,77 @@
     a.click();
     setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
     return false;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Imagens guardadas na ficha (a arte do Cone de Luz)
+  //
+  // O site não tem servidor: o único lugar para guardar é o localStorage do navegador, que
+  // é pequeno (uns 5 MB para a mesa inteira) e só guarda texto. Então a imagem escolhida é
+  // redesenhada num <canvas> menor e vira um endereço `data:` — o mesmo texto que entra na
+  // ficha, no .json exportado e no backup, e que por isso aparece sozinho na Área do
+  // Mestre. Sem encolher, duas fotos de celular enchem o espaço de todas as fichas.
+  //
+  // Quem preferir não gastar esse espaço pode colar um link (http...) no mesmo campo: a
+  // ficha guarda só o endereço, e aí a imagem depende da internet para aparecer.
+  // ---------------------------------------------------------------------------
+  const IMAGEM_LADO = 560;              // maior lado, em pixels
+  const IMAGEM_LIMITE = 220 * 1024;     // teto do texto final, em caracteres
+
+  /** Quantos KB a imagem tem (o peso do arquivo, não o do texto em base64). */
+  function pesoDaImagem(url) {
+    const s = String(url || ""), i = s.indexOf(",");
+    if (!/^data:/.test(s) || i < 0) return 0;
+    return Math.max(1, Math.round((s.length - i - 1) * 0.75 / 1024));
+  }
+
+  const ehImagemGuardada = (url) => /^data:image\//.test(String(url || ""));
+
+  function encolherImagem(img, lado, qualidade) {
+    const maior = Math.max(img.naturalWidth, img.naturalHeight);
+    const escala = Math.min(1, lado / maior);
+    const tela = document.createElement("canvas");
+    tela.width = Math.max(1, Math.round(img.naturalWidth * escala));
+    tela.height = Math.max(1, Math.round(img.naturalHeight * escala));
+    tela.getContext("2d").drawImage(img, 0, 0, tela.width, tela.height);
+    const url = tela.toDataURL("image/webp", qualidade);
+    // Navegador sem webp devolve png (ignora o formato pedido): aí vai de jpeg.
+    return url.indexOf("data:image/webp") === 0 ? url : tela.toDataURL("image/jpeg", qualidade);
+  }
+
+  /**
+   * Lê o arquivo escolhido e devolve a imagem já encolhida, em `data:`.
+   * `aoPronto(erro, url, kb)` — `erro` é texto pronto para mostrar em um toast.
+   */
+  function lerImagem(arquivo, aoPronto) {
+    if (!arquivo) return;
+    if (!/^image\//.test(arquivo.type || "")) {
+      aoPronto("Esse arquivo não é uma imagem. Escolha um <b>.png</b>, <b>.jpg</b> ou <b>.webp</b>.");
+      return;
+    }
+    const leitor = new FileReader();
+    leitor.onerror = () => aoPronto("Não foi possível ler esse arquivo.");
+    leitor.onload = () => {
+      const img = new Image();
+      img.onerror = () => aoPronto("Não foi possível abrir essa imagem.");
+      img.onload = () => {
+        if (!img.naturalWidth || !img.naturalHeight) { aoPronto("Essa imagem não tem tamanho definido."); return; }
+        let url = "", lado = IMAGEM_LADO, q = 0.82;
+        // Tenta até caber: primeiro baixa a qualidade, depois o tamanho.
+        for (let i = 0; i < 7 && (!url || url.length > IMAGEM_LIMITE); i++) {
+          if (url) { if (q > 0.55) q -= 0.12; else lado = Math.round(lado * 0.8); }
+          url = encolherImagem(img, lado, q);
+        }
+        if (url.length > IMAGEM_LIMITE) {
+          aoPronto("Não deu para encolher essa imagem o bastante. Recorte a arte antes de escolher, " +
+            "ou cole um link dela no campo de endereço.");
+          return;
+        }
+        aoPronto(null, url, pesoDaImagem(url));
+      };
+      img.src = leitor.result;
+    };
+    leitor.readAsDataURL(arquivo);
   }
 
   // ---------------------------------------------------------------------------
@@ -369,7 +453,7 @@
     if (ev.target.id === "arquivo-backup" && ev.target.files[0]) importarTudo(ev.target.files[0]);
   });
 
-  Object.assign(EG, { esc, norm, sinal, uid, clonar, destacar, regexSemAcento, Armazem, toast, rolar, botaoRolar,
-    registrarTela, rotaAtual, navegar, historico, exportarTudo, importarTudo, checarAtualizacao,
-    baixarJSON, fatiarNome, VERSAO });
+  Object.assign(EG, { esc, norm, sinal, uid, clonar, destacar, regexSemAcento, paragrafos, Armazem, toast,
+    rolar, botaoRolar, registrarTela, rotaAtual, navegar, historico, exportarTudo, importarTudo,
+    checarAtualizacao, baixarJSON, fatiarNome, lerImagem, pesoDaImagem, ehImagemGuardada, VERSAO });
 })();

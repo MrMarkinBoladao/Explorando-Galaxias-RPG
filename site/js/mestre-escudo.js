@@ -31,13 +31,44 @@
     if (!slots) falta.push("o primeiro slot de Relíquia");
     return [
       "<b>" + esc(G.nome(m)) + "</b> <span class='suave'>nível " + p.nivel + "</span>",
-      "Nível " + (p.cone.nivel || 0) + " / <b>" + R.cone_maximo + "</b>" +
+      (p.cone.nome ? "<b>" + esc(p.cone.nome) + "</b><br>" : "") +
+        "Nível " + (p.cone.nivel || 0) + " / <b>" + R.cone_maximo + "</b>" +
         (p.cone.sobreposicoes ? " <span class='suave'>+" + p.cone.sobreposicoes + " sobrep.</span>" : ""),
       "<b>Tier " + ROMANOS[R.tier_reliquia - 1] + "</b> <span class='suave'>em " + slots + "/6 slots</span>",
       ress + " / " + liberadas,
       R.verba_marco + " Cr",
       falta.length ? "<span class='ruim'>falta " + esc(falta.join(", ")) + "</span>" : "<span class='bom-texto'>em dia</span>",
     ];
+  }
+
+  /**
+   * A galeria de Cones de Luz da mesa: a arte, o Nome, o Bônus Maior e o Efeito Condicional
+   * de cada personagem do grupo e de cada NPC do banco que já carrega um Cone.
+   *
+   * Não existe cópia disso em lugar nenhum: é a mesma ficha que o jogador tem aberta na aba
+   * Jogar, lida na hora de desenhar. O que ele trocar na arte ou na descrição aparece aqui
+   * no próximo desenho, e o que o Mestre entregar na ficha aparece lá — é o mesmo arquivo.
+   */
+  function galeriaDeCones(g) {
+    const npcs = G.npcs().map((p) => G.npc(p.id)).filter(Boolean);
+    const comCone = g.concat(npcs).filter((m) => F.temCone(m.p));
+    const semCone = g.filter((m) => !F.temCone(m.p));
+    const item = (m) => "<article class='cone-item'><div class='cone-item-topo'><h3>" + esc(G.nome(m)) +
+      (m.npc ? " <span class='etiqueta npc'>NPC</span>" : "") + "</h3>" +
+      "<a class='botao pequeno' href='" + (m.npc ? "#mestre/npcs/" + esc(m.id) : "#mestre/grupo") + "'>ficha</a></div>" +
+      F.coneHTML(m.p, m.R, { descricaoFechada: true }) + "</article>";
+    return H.cartao("Cones de Luz da mesa",
+      (comCone.length
+        ? "<div class='galeria-cones'>" + comCone.map(item).join("") + "</div>"
+        : vazio("Nenhum Cone preenchido ainda. A arte, a descrição e o Efeito Condicional são escritos na " +
+            "ficha — a do jogador, na aba <b>Editar ficha</b>, e a de um NPC, no banco de NPCs.")) +
+      (semCone.length
+        ? "<p class='ajuda'>Sem Cone nenhum na ficha: <b>" + esc(semCone.map(G.nome).join(", ")) + "</b>.</p>"
+        : "") +
+      "<p class='ajuda'>Isto é a ficha de cada um, lida na hora: o que o jogador guardar aparece aqui, e o que " +
+      "você escrever na ficha dele aparece na tela de Jogar. Quem concede o Cone — nome, arte, história e " +
+      "gatilho — é você, como marco. " + link("25", "25.2", "25.2") + "</p>",
+      "galeria-de-cones", "<span class='suave'>" + comCone.length + " com arte e história</span>");
   }
 
   function telaRecompensas() {
@@ -101,7 +132,7 @@
       "</ul><p class='ajuda'>" + link("27", "27.8", "27.8") + " e a lista de efeitos proibidos de " +
       link("27", "27.9", "27.9") + ".</p>", "proibido");
 
-    app().innerHTML = topo("recompensas") + conferencia +
+    app().innerHTML = topo("recompensas") + conferencia + galeriaDeCones(g) +
       "<div class='grade-mestre duas'><div class='coluna'>" + entregas + tesouro + "</div>" +
       "<div class='coluna'>" + proibido + "</div></div>" + calendario;
   }

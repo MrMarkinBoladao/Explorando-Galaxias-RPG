@@ -2,12 +2,45 @@
 
 Uma página só, sem instalação, com quatro abas:
 
-- **Jogar** — a ficha na mesa: PV com dano e cura (já desconta RD e PV temporários), Energia, PH do grupo, ataques e Testes prontos para rolar (clique no valor), Bênçãos com usos, condições, Morrendo, Memoespírito e inventário.
+- **Jogar** — a ficha na mesa: PV com dano e cura (já desconta RD e PV temporários), Energia, PH do grupo, ataques e Testes prontos para rolar (clique no valor), Bênçãos com usos, condições, Morrendo, Memoespírito, inventário e o **Cone de Luz com a arte e a história dele** (abaixo).
 - **Editar ficha** — os doze passos do capítulo 03, mais progressão, equipamento e Memoespírito. Tudo é recalculado na hora, e o que fere uma regra aparece em vermelho na seção.
 - **Regras** — o livro inteiro (v1.2) com pesquisa instantânea, sem acento e sem maiúscula.
 - **Área do Mestre** — a mesa do Mestre, sincronizada com as fichas (abaixo).
 
 As fichas ficam salvas **no navegador** de cada jogador. Para backup ou para mandar ao Mestre: **Mais > Exportar** (gera um arquivo `.json`) e **Mais > Importar**.
+
+## O Cone de Luz: a arte, o efeito e a história
+
+Toda ficha — de jogador ou de NPC — guarda o Cone de Luz inteiro: Nome, Nível, Bônus Maior,
+Sobreposições e Efeito Condicional, mais a **arte** e a **descrição** dele (25.2). Os dois últimos
+são só sabor: não entram em conta nenhuma, nem no motor de regras. Em **Editar ficha > 8 ·
+Equipamento**, embaixo de *A arte e a história do Cone*:
+
+- **Escolher uma imagem…** pega um arquivo do computador ou do celular. Ela é **encolhida** (até
+  560 px no maior lado, em `.webp`) e guardada **dentro da própria ficha**: aparece sem internet,
+  vai no `.json` exportado e no backup, e não depende de nenhum site de fora. O peso final aparece
+  ao lado do botão.
+- **Ou cole um link** no campo *Endereço da imagem*. Não gasta espaço no navegador, mas depende da
+  internet. Se o link não carregar, a moldura diz isso em vez de deixar uma imagem quebrada.
+- **Descrição** é texto livre, do tamanho que você quiser. Linha em branco separa parágrafo, e é
+  assim que ela aparece na tela — serve para a cena inteira que o Cone carrega, com as falas.
+
+Onde isso aparece — e é sempre a **mesma ficha**, lida na hora de desenhar, nunca uma cópia:
+
+| Onde | O que mostra |
+|---|---|
+| **Jogar** | O cartão *Cone de Luz*: a arte grande, Nome e Nível, o Bônus Maior que já está somado nos números da ficha, o Efeito Condicional e a descrição embaixo |
+| **Mestre > Grupo** e o painel de combate | A arte em miniatura no cartão de cada personagem e de cada NPC em cena, com o Efeito Condicional à vista e a descrição em *Ler a descrição* |
+| **Mestre > NPCs** | A mesma miniatura no cartão de cada NPC do banco |
+| **Mestre > Recompensas** | *Cones de Luz da mesa*: a galeria com o Cone de todo mundo, grupo e NPCs lado a lado, e o nome do Cone na conferência de marco |
+
+> **Espaço no navegador.** O `localStorage` tem uns 5 MB para a mesa inteira, e cada arte guardada
+> come um pedaço dele. Se o navegador recusar gravar, o site avisa e **mantém a arte anterior** —
+> nada da ficha se perde. Nesse caso, use um link em vez do arquivo, ou tire a arte de alguma ficha.
+
+**Inimigo não tem Cone de Luz.** Pela regra 25.2 quem equipa um Cone é personagem, e o inimigo sai
+da tabela de âncoras de 28.3 — treze números e nada mais. Um NPC, que é ficha de personagem
+inteira, tem.
 
 ## A Área do Mestre
 
@@ -23,7 +56,7 @@ o botão **Rever o aviso de spoiler**, no fim do Painel, traz ele de volta. Oito
 | **Inimigos** | O bestiário das 32 fichas do capítulo 28 com filtro, o criador pela tabela de âncoras (28.3), os inimigos da campanha e a **importação/exportação de inimigos em `.json`** (abaixo) |
 | **NPCs** | O banco de NPCs: **ficha de personagem completa**, igual à de um jogável, para quem não é do grupo. Criar do zero, copiar de uma ficha salva, filtrar por papel, pôr em cena e a **importação/exportação em `.json`** (abaixo) |
 | **Encontros** | Orçamento de PV (27.4) com a leitura de passagem/típico/pesado, **quem do grupo entra na cena** e **quais NPCs entram** (o orçamento e o contrato da Fraqueza se ajustam a isso), as quatro composições e a DT para descobrir Fraqueza (27.3) |
-| **Recompensas** | O calendário de marco (27.8), a verba (24.5), a conferência do que o nível de cada um já libera e o tesouro do grupo |
+| **Recompensas** | O calendário de marco (27.8), a verba (24.5), a conferência do que o nível de cada um já libera, a **galeria dos Cones de Luz da mesa** (arte, Bônus Maior e Efeito Condicional de cada um) e o tesouro do grupo |
 | **Escudo do Mestre** | As tabelas de consulta, imprimíveis: DTs, Tenacidade e Quebra, Fila, as nove regras de inimigo, âncoras, condições e Energia |
 
 **O que é da ficha fica na ficha.** PV, PV temporário, Energia, PH do grupo, condições e Memoespírito que o

@@ -487,6 +487,15 @@
     return cartao("Inventário", corpo, "inventario", link("24", "24.4", "regra"));
   }
 
+  function cartaoCone() {
+    const p = F.P;
+    if (!F.temCone(p)) return "";
+    return cartao("Cone de Luz", F.coneHTML(p, F.R) +
+      "<p class='ajuda'>O Bônus Maior já está somado nos números desta ficha e fica <b>fora</b> do teto de " +
+      "bônus; o Efeito Condicional <b>entra</b> no teto. " + link("25", "25.2", "regra 25.2") + "</p>",
+      "cone-cartao", "<a class='botao pequeno' href='#editar'>trocar a arte</a>");
+  }
+
   function cartaoNotas() {
     return cartao("Notas", H.texto("notas", { area: true, linhas: 5, rotulo: "Notas", ph: "Anotações da sessão, nomes, pistas…" }), "notas");
   }
@@ -502,7 +511,7 @@
       "<div class='grade-jogo'>" +
       "<div class='coluna'>" + cartaoVida() + cartaoRecursos() + cartaoDefesa() + cartaoCondicoes() + "</div>" +
       "<div class='coluna'>" + cartaoAcoes() + cartaoMemo() + cartaoBencaos() + "</div>" +
-      "<div class='coluna'>" + cartaoTestes() + cartaoInventario() + cartaoNotas() + "</div>" +
+      "<div class='coluna'>" + cartaoTestes() + cartaoCone() + cartaoInventario() + cartaoNotas() + "</div>" +
       "</div>";
   }
 
