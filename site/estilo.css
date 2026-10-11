@@ -297,6 +297,16 @@ button.rolar:hover { background: var(--ouro); color: #1a1406; }
 .banco-cones .colecao-cones .galeria-cones,
 .banco-de-cones .galeria-cones { margin-top: .6rem; grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr)); }
 .banco-cones select { max-width: 100%; }
+/* O botão que recolhe a coleção no banco da Área do Mestre: a grade de Cones é alta, e com o
+   banco cheio ela empurra o resto da aba Recompensas para fora da tela. O rótulo do botão troca
+   com o estado, sem JavaScript, porque abrir um <details> não redesenha a tela. */
+.colecao-banco { margin-top: .6rem; }
+.colecao-banco > summary { list-style: none; }
+.colecao-banco > summary::-webkit-details-marker { display: none; }
+.colecao-banco > summary::after { content: ""; border: 5px solid transparent; border-top-color: currentColor; margin-top: 5px; }
+.colecao-banco[open] > summary::after { margin: 0 0 5px; border-top-color: transparent; border-bottom-color: currentColor; }
+.colecao-banco > summary .so-aberto, .colecao-banco[open] > summary .so-fechado { display: none; }
+.colecao-banco[open] > summary .so-aberto { display: inline; }
 @media (max-width: 420px) {
   .cone-editor .arte-editor { flex-basis: 7rem; max-width: 7rem; }
   .cone.mini .cone-arte { flex-basis: 4.2rem; max-width: 4.2rem; }

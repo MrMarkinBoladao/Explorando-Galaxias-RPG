@@ -53,7 +53,9 @@ mesmo banco nos dois:
   arte de cada um, para equipar ou tirar do banco direto de lá.
 - **Mestre > Recompensas**, no cartão *Banco de Cones de Luz*: **Entregar** um Cone a qualquer
   personagem ou NPC. A entrega **guarda no banco o Cone que a pessoa estava usando** antes de
-  equipar o novo, então nenhum Cone com nome e história se perde numa troca.
+  equipar o novo, então nenhum Cone com nome e história se perde numa troca. O botão
+  *Ver os N Cones do banco* / *Recolher os N Cones* esconde e mostra a galeria: com o banco cheio
+  ela toma a tela inteira, e aí ele já abre a aba recolhido (até 4 Cones ele abre aberto).
 
 - **Equipar copia.** Daí em diante a ficha tem a cópia dela: mudar o Cone na ficha não mexe no
   banco, e tirar um Cone do banco não mexe em ficha nenhuma.

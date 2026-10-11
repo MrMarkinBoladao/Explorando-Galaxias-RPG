@@ -76,6 +76,18 @@
   }
 
   /**
+   * A chave do recolhível da coleção do banco (ver EG.estaAberto, em app.js). Um banco com
+   * dezenas de Cones desenha uma grade mais alta que a tela e empurra o resto da aba
+   * Recompensas para fora dela, então a grade fica atrás de um botão. Até este tanto de Cones
+   * ela já nasce aberta — é pouca coisa na tela e poupa um clique de quem tem banco pequeno.
+   *
+   * O estado mora em memória, não no localStorage: é estado de tela, e por isso a coleção não
+   * se fecha sozinha quando a tela se redesenha (o que acontece a cada campo mexido).
+   */
+  const COLECAO_BANCO = "colecao-banco-cones";
+  const COLECAO_ABRE_ATE = 4;
+
+  /**
    * O banco de Cones de Luz do lado do Mestre: a coleção escrita antes da sessão e a
    * **entrega** ao personagem quando a faixa vira (25.1). Entregar copia o Cone para a
    * ficha de quem recebe — e, se a pessoa já estava com um Cone, ele é guardado no banco
@@ -106,6 +118,9 @@
       H.botao("exportar-um-cone", "Exportar .json", { classe: "pequeno", dados: { id: c.id },
         titulo: "Baixa só este Cone, para passar a um jogador" }) +
       H.botao("excluir-cone-guardado", "Tirar do banco", { classe: "pequeno perigo", dados: { id: c.id } });
+    const um = lista.length === 1;
+    const verOsCones = um ? "Ver o Cone guardado" : "Ver os " + lista.length + " Cones do banco";
+    const recolherOsCones = um ? "Recolher o Cone" : "Recolher os " + lista.length + " Cones";
     return H.cartao("Banco de Cones de Luz",
       "<p class='ajuda'>A coleção de Cones da mesa. <b>Entregar</b> copia o Cone para a ficha da pessoa — " +
       "nome, Nível, Bônus Maior, Efeito Condicional, arte e história — e guarda no banco o Cone que ela " +
@@ -119,7 +134,12 @@
           : "O banco está vazio" }) +
       "</div>" +
       (lista.length
-        ? B.galeriaHtml(botoesDoItem)
+        ? "<details class='colecao-banco'" +
+          EG.atributosAbre(COLECAO_BANCO, lista.length <= COLECAO_ABRE_ATE) + ">" +
+          "<summary class='botao' title='Esconde ou mostra a grade de Cones, sem mexer no banco'>" +
+          "<span class='so-fechado'>" + verOsCones + "</span>" +
+          "<span class='so-aberto'>" + recolherOsCones + "</span></summary>" +
+          B.galeriaHtml(botoesDoItem) + "</details>"
         : vazio("Banco vazio. Um Cone se escreve na <b>ficha</b> de quem vai usar — é lá que estão o " +
           "Bônus Maior, o Efeito Condicional, a arte e a história. Depois é só <b>Guardar no banco</b>, " +
           "na galeria abaixo, e ele fica guardado para qualquer ficha usar.")),
@@ -332,6 +352,7 @@
     if (!m) return false;
     const r = EG.Cones.guardar(EG.Cones.daFicha(m.p));
     if (!r.ok) return false;
+    EG.definirAberto(COLECAO_BANCO, true);     // guardou agora: a coleção abre para ele ver onde foi
     EG.toast("<b>" + esc(r.cone.nome || "Cone sem nome") + "</b> " +
       (r.novo ? "guardado no banco." : "atualizado no banco (mesmo nome)."));
   };
