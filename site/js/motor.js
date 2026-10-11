@@ -612,11 +612,21 @@
     }
 
     // --- Inventário ---
+    // As três parcelas saem separadas porque a ficha lista **o que** ocupa o Espaço, e não só
+    // o total: na mesa a pergunta é "estou em Lentidão, o que eu deixo cair?". Arma e armadura
+    // não estão no inventário (são equipamento), mas pesam, então a tela precisa do número
+    // delas daqui — assim a lista nunca soma diferente do total que decide a Lentidão.
     const capInv = 10 + 2 * bon.Poder + (tem.has("Peso do Juramento") ? 2 : 0);
-    let ocupado = (ab ? ab.espaco : 0) + aEsp;
-    for (const i of e.inventario || []) ocupado += (i.espaco || 0) * (i.qtd == null ? 1 : i.qtd);
+    const espArma = ab ? ab.espaco : 0;
+    let espItens = 0;
+    for (const i of e.inventario || []) espItens += (i.espaco || 0) * (i.qtd == null ? 1 : i.qtd);
+    const ocupado = espArma + aEsp + espItens;
+    s.espaco_arma = espArma;
+    s.espaco_armadura = aEsp;
+    s.espaco_itens = espItens;
     s.capacidade = capInv;
     s.ocupado = ocupado;
+    s.espaco_livre = capInv - ocupado;
     if (ocupado > 2 * capInv) aviso("IMOVEL");
     else if (ocupado > capInv) aviso("SOBRECARGA");
 

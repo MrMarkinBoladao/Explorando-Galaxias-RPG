@@ -298,7 +298,12 @@
     ? "<ul class='avisos'>" + codigos.map((c) => "<li>" + esc(M.AVISOS[c] || c) + "</li>").join("") + "</ul>" : "";
 
   H.dano = (n, face, fixo) => M.textoDano(n, face, fixo);
-  H.espaco = (n) => String(n).replace(".", ",");
+  /**
+   * Espaço com vírgula, como se escreve em português ("0,5"). Arredonda em duas casas porque
+   * o campo de Espaço de um item aceita qualquer número: somar três itens de 0,1 daria
+   * 0,30000000000000004 na tela, e ninguém carrega isso.
+   */
+  H.espaco = (n) => String(Math.round((Number(n) || 0) * 100) / 100).replace(".", ",");
 
   // ---------------------------------------------------------------------------
   // Eventos de formulário (delegados em #app)

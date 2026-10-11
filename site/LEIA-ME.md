@@ -69,6 +69,24 @@ mesmo banco nos dois:
 Um Cone se **escreve na ficha** (é lá que estão o Bônus Maior, o Efeito Condicional, a arte e a
 história, com todos os avisos de regra) e depois vai para o banco. O banco guarda e entrega.
 
+## O Inventário: o que está ocupando o Espaço
+
+Na aba **Jogar**, o cartão *Inventário* lista **tudo o que pesa**, uma linha por coisa, com o nome
+e, encostado na direita, quanto ela ocupa — a coluna se lê de cima a baixo até o *Total ocupado*.
+A conta é a de 24.4: `10 + 2 × bônus de Poder` de capacidade, mais 2 se o personagem tiver a Bênção
+*Peso do Juramento*.
+
+- **Arma e armadura entram na lista**, porque ocupam Espaço. Elas vêm em linha tracejada e **não se
+  editam aqui**: trocar categoria ou propriedade é da aba *Editar ficha*. Uma arma **Dissimulada**
+  aparece com a propriedade no rótulo, que é o motivo de ela ocupar 0,5 em vez do peso da categoria.
+- **Cada item mostra a conta**: `quantidade × Espaço de cada`. Três poções de 1 ocupam 3; duas
+  lanternas de 0,5 ocupam 1. O número da direita é esse produto, não o Espaço unitário.
+- **O topo do cartão diz a folga**: *"ainda cabe 8"*, ou *"6 acima da capacidade"* em vermelho, com
+  a etiqueta **Lentidão** (acima da capacidade) ou **não se move** (acima do dobro).
+- **Créditos não ocupam Espaço**, nem Relíquias, nem o Cone de Luz.
+- Os campos de **quantidade** e de **Espaço de cada** gravam quando você sai do campo ou aperta
+  Enter; o nome do item grava a cada tecla.
+
 ## A história do personagem
 
 Em **Editar ficha > 1 · Personagem** há o campo **História do personagem**: é o texto comprido que
