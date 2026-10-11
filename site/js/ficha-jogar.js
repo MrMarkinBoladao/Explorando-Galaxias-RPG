@@ -464,22 +464,73 @@
     return cartao(esc(memo.nome || "Memoespírito"), corpo, "memo", link("11", "11.4", "ficha dele"));
   }
 
+  /**
+   * O Inventário: o que o personagem carrega e, principalmente, **o que está ocupando o
+   * Espaço dele**. O total sozinho não responde a pergunta que a mesa faz ("estou em
+   * Lentidão, o que eu deixo cair?"), então a lista traz uma linha por coisa carregada, com
+   * nome e com quanto ela ocupa de verdade — a quantidade multiplicada pelo Espaço de cada.
+   *
+   * Arma e armadura entram na lista porque pesam (24.4), mas são **lidas**, não editadas:
+   * trocar uma arma é escolher categoria e propriedade, e isso é da aba Editar ficha. O peso
+   * delas vem do motor (`R.espaco_arma`, `R.espaco_armadura`) junto com o total, e não de uma
+   * conta refeita aqui — é o que garante que a lista some exatamente o que gera a Lentidão.
+   */
   function cartaoInventario() {
     const p = F.P, R = F.R;
-    const estado = R.avisos.includes("IMOVEL") ? "<span class='etiqueta ruim'>não se move</span>"
-      : R.avisos.includes("SOBRECARGA") ? "<span class='etiqueta ruim'>Lentidão</span>" : "";
-    const linhas = p.inventario.map((it, i) => {
+    const imovel = R.avisos.includes("IMOVEL"), sobrecarga = R.avisos.includes("SOBRECARGA");
+    const estado = imovel ? "<span class='etiqueta ruim'>não se move</span>"
+      : sobrecarga ? "<span class='etiqueta ruim'>Lentidão</span>" : "";
+    const sobra = R.espaco_livre;
+    const resto = sobra < 0
+      ? "<span class='ruim'>" + H.espaco(-sobra) + " acima da capacidade</span>"
+      : "<span class='suave'>" + (sobra ? "ainda cabe " + H.espaco(sobra) : "sem folga nenhuma") + "</span>";
+
+    // Cada coisa carregada é uma linha de duas alturas: em cima o nome e, encostado na
+    // direita, **quanto ela ocupa** — é essa coluna que o olho desce para achar o que soltar.
+    // Embaixo, a conta que deu nesse número, com os campos editáveis quando é um item.
+    const linha = (classe, nome, ocupa, pe) =>
+      "<li class='carga-linha" + (classe ? " " + classe : "") + "'>" +
+      "<div class='carga-topo'>" + nome + "<b class='ocupa'>" + H.espaco(ocupa) + "</b></div>" +
+      "<div class='carga-pe'>" + pe + "</div></li>";
+
+    // --- O que está equipado: pesa (24.4), mas se troca em Editar ficha ---
+    // Sem descrição escrita, a categoria vira o nome da linha ("Armadura leve"): repetir
+    // "Armadura Leve · armadura leve" não diz nada a mais a quem está lendo.
+    const equipado = [];
+    if (p.armadura) equipado.push([p.armadura_nome, "armadura " + p.armadura.toLowerCase(), R.espaco_armadura]);
+    if (R.ataque_basico) {
+      equipado.push([p.arma.nome, "arma " + p.arma.categoria.toLowerCase() +
+        (p.arma.propriedade === "Dissimulada" ? ", Dissimulada" : ""), R.espaco_arma]);
+    }
+    const linhasEquipado = equipado.map(([nome, oQue, esp]) => linha("equipado",
+      "<b>" + esc(nome || oQue.charAt(0).toUpperCase() + oQue.slice(1)) + "</b>", esp,
+      "<span class='suave'>" + esc(nome ? oQue : "equipado") + "</span>")).join("");
+
+    // --- Os itens: estes sim se editam aqui ---
+    const linhasItens = p.inventario.map((it, i) => {
       const pocao = acharPocao(it.nome);
-      return "<tr><td>" + H.texto("inventario." + i + ".nome", { rotulo: "Item" }) + "</td>" +
-        "<td>" + H.numero("inventario." + i + ".qtd", { min: 0, rotulo: "Quantidade", classe: "curto" }) + "</td>" +
-        "<td>" + H.numero("inventario." + i + ".espaco", { min: 0, passo: "0.5", rotulo: "Espaço", classe: "curto" }) + "</td>" +
-        "<td class='acoes-item'>" + (pocao ? botao("beber", "Beber +" + pocao.cura, { classe: "pequeno bom", dados: { i: i }, desabilitado: !(it.qtd > 0) }) : "") +
-        botao("tirar-item", "×", { classe: "pequeno", dados: { i: i }, titulo: "Tirar item" }) + "</td></tr>";
+      const qtd = it.qtd == null ? 1 : it.qtd;
+      return linha("", H.texto("inventario." + i + ".nome", { rotulo: "Item", ph: "O que é" }),
+        (Number(it.espaco) || 0) * qtd,
+        H.numero("inventario." + i + ".qtd", { min: 0, rotulo: "Quantidade", classe: "curto" }) +
+        "<span class='suave'>×</span>" +
+        H.numero("inventario." + i + ".espaco", { min: 0, passo: "0.5", rotulo: "Espaço de cada", classe: "curto" }) +
+        "<span class='suave'>de Espaço</span>" +
+        "<span class='carga-botoes'>" +
+        (pocao ? botao("beber", "Beber +" + pocao.cura, { classe: "pequeno bom", dados: { i: i }, desabilitado: !(it.qtd > 0) }) : "") +
+        botao("tirar-item", "×", { classe: "pequeno", dados: { i: i }, titulo: "Tirar item" }) + "</span>");
     }).join("");
+
+    const lista = linhasEquipado || linhasItens
+      ? "<ul class='carga'>" + linhasEquipado + linhasItens + "</ul>" +
+        "<p class='carga-total'><span>Total ocupado</span><b class='ocupa'>" + H.espaco(R.ocupado) + "</b></p>"
+      : "<p class='ajuda'>Nada ocupando Espaço ainda: sem arma, sem armadura e sem item nenhum.</p>";
+
     const opcoes = C().pocoes.map(nomePocao).concat(C().itens.map((x) => x.item));
     const corpo = "<p><b>" + H.espaco(R.ocupado) + " / " + R.capacidade + "</b> de Espaço " + estado +
-      " <span class='suave'>(arma e armadura já contam)</span></p>" +
-      (linhas ? "<div class='tabela'><table class='inventario'><thead><tr><th>Item</th><th>Qtd.</th><th>Espaço</th><th></th></tr></thead><tbody>" + linhas + "</tbody></table></div>" : "") +
+      " · " + resto + "</p>" + lista +
+      (linhasEquipado ? "<p class='ajuda'>Arma e armadura também ocupam Espaço, e se trocam em " +
+        "<a href='#editar'>Editar ficha</a>.</p>" : "") +
       "<div class='linha'><label class='sr-only' for='novo-item'>Item</label><select id='novo-item'><option value='__outro'>Outro item…</option>" +
       opcoes.map((o) => "<option>" + esc(o) + "</option>").join("") + "</select>" + botao("add-item", "Adicionar") + "</div>" +
       "<div class='linha'>" + H.campo("Créditos (Cr)", H.numero("creditos", { min: 0, rotulo: "Créditos", classe: "curto" }), "Não ocupam Espaço", "estreito") + "</div>" +

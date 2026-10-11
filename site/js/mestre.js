@@ -273,7 +273,9 @@
       "</div>" +
       "<p class='ajuda'>Descanso Curto devolve <b>" + Math.max(0, R.descanso_curto) + " PV</b> a ele. " +
       (R.esforco_max ? "Esforço: " + (j.esforco ? "<b>disponível</b>" : "gasto") + ". " : "") +
-      "Capacidade " + R.ocupado + "/" + R.capacidade + " de Espaço.</p>";
+      "Capacidade " + F.H.espaco(R.ocupado) + "/" + R.capacidade + " de Espaço" +
+      (R.avisos.includes("IMOVEL") ? " <span class='etiqueta ruim'>não se move</span>"
+        : R.avisos.includes("SOBRECARGA") ? " <span class='etiqueta ruim'>Lentidão</span>" : "") + ".</p>";
 
     // O Cone de Luz dele, lido da mesma ficha que o jogador tem aberta: a arte, o Bônus
     // Maior que já está nos números acima e o Efeito Condicional, que é o que o Mestre

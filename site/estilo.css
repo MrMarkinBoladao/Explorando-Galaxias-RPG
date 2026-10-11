@@ -236,10 +236,25 @@ button.rolar:hover { background: var(--ouro); color: #1a1406; }
 .bolinha { display: inline-block; width: .9rem; height: .9rem; border-radius: 50%; border: 2px solid var(--suave); margin-right: .2rem; vertical-align: middle; }
 .bolinha.cheia.s { background: var(--verde); border-color: var(--verde); }
 .bolinha.cheia.f { background: var(--vermelho); border-color: var(--vermelho); }
-.inventario { width: 100%; border-collapse: collapse; }
-.inventario td, .inventario th { padding: .2rem .3rem; text-align: left; }
-.inventario input.curto { width: 4.5rem; }
+/* A lista de carga do Inventário: uma linha por coisa que ocupa Espaço, e a soma no pé.
+   Duas alturas por linha de propósito — o cartão vive numa coluna estreita, e nome, quantidade,
+   Espaço de cada, total e botões não cabem lado a lado sem quebrar o nome palavra por palavra.
+   O número do "ocupa" fica encostado na direita nas duas, e por isso a coluna dele se lê de
+   cima a baixo, incluindo o total. */
+.carga { list-style: none; margin: .6rem 0 0; padding: 0; display: grid; gap: .3rem; }
+.carga-linha { display: grid; gap: .15rem; padding: .35rem .5rem; border: 1px solid var(--borda); border-radius: 8px; background: var(--painel-2); }
+.carga-linha.equipado { background: transparent; border-style: dashed; }
+.carga-topo, .carga-pe { display: flex; align-items: center; gap: .35rem; min-width: 0; }
+.carga-pe { font-size: .85rem; flex-wrap: wrap; }
+.carga-topo > b { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
+.carga-pe input.curto { width: 3.4rem; }
+.carga-topo .ocupa, .carga-total .ocupa { flex: 0 0 auto; margin-left: auto; font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; min-width: 2rem; }
+.carga-botoes { display: flex; gap: .25rem; margin-left: auto; }
+/* O +1px à direita é a borda das linhas acima: assim o total fica na mesma prumada que elas. */
+.carga-total { display: flex; align-items: baseline; gap: .5rem; margin: .4rem 0 0; padding: .4rem calc(.5rem + 1px) 0; border-top: 1px solid var(--borda); color: var(--suave); }
+.carga-total .ocupa { color: var(--texto); font-size: 1.05rem; }
 .acoes-item { white-space: nowrap; }
+.acoes-item > * + * { margin-left: .25rem; }
 
 /* ---------- Cone de Luz: a arte, o efeito e a história (25.2) ----------
    As mesmas classes servem à tela Jogar, à Área do Mestre e ao editor, porque é a mesma
@@ -593,6 +608,9 @@ body[data-tela=regras] .historico { display: none; }
   .cone-arte.vazia { display: none !important; }
   .cone-arte img { border-color: #999; box-shadow: none; }
   .cone-descricao p { color: #333; }
+  /* A lista de carga impressa é a ficha de inventário em papel: fundo branco e a soma no fim. */
+  .carga-linha { background: #fff; border-color: #999; break-inside: avoid; }
+  .carga-total { border-top-color: #999; color: #000; }
   .banco-cones, .colecao-cones { display: none !important; }
   /* Imprimir a ficha leva a história inteira, aberta ou não */
   .inimigo-salvo > details > summary h2::before, .cartao.lore > summary h2::before { display: none; }
