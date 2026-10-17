@@ -379,7 +379,12 @@
   const d = (faces) => 1 + Math.floor(Math.random() * faces);
 
   /**
-   * opcoes: {rotulo, vantagem (bool), critico ("20" | "19-20"), teste (bool: é d20)}
+   * opcoes: {rotulo, vantagem, fontes, critico ("20" | "19-20")}
+   *
+   * `vantagem` é true/false ou a lista de quem dá a Vantagem (a Raça, uma Bênção) — lista
+   * vazia é rolagem normal. `fontes` é essa mesma lista em texto, para quem passa true.
+   * Com Vantagem num d20 (02.4) saem os dois dados e fica o maior: o total já vem com ele,
+   * e o outro aparece riscado, para a mesa ver que ele saiu e não contou.
    * Devolve {total, natural} e mostra o resultado.
    */
   function rolar(expr, opcoes) {
@@ -387,13 +392,16 @@
     const m = String(expr).replace(/\s+/g, "").match(/^(\d*)d(\d+)([+-]\d+)?$/i);
     if (!m) return null;
     const qtd = Number(m[1] || 1), faces = Number(m[2]), mod = Number(m[3] || 0);
-    let dados = [], natural = null, extra = "";
+    const emLista = Array.isArray(opcoes.vantagem);
+    const vantagem = emLista ? opcoes.vantagem.length > 0 : !!opcoes.vantagem;
+    const fontes = emLista ? opcoes.vantagem.join(", ") : String(opcoes.fontes || "");
+    let dados = [], natural = null, descartado = null;
     if (qtd === 1 && faces === 20) {
       const a = d(20);
-      if (opcoes.vantagem) {
+      if (vantagem) {
         const b = d(20);
         natural = Math.max(a, b);
-        extra = " <span class='suave'>(Vantagem: " + a + " e " + b + ")</span>";
+        descartado = Math.min(a, b);
       } else natural = a;
       dados = [natural];
     } else {
@@ -403,15 +411,24 @@
     const total = soma + mod;
     let nota = "";
     if (natural !== null) {
+      // Com Vantagem, um 20 em qualquer dos dois é crítico (02.4): é o maior, o que contou.
       const faixaCrit = opcoes.critico === "19-20" ? 19 : 20;
       if (natural >= faixaCrit && opcoes.critico) nota = " <b class='critico'>Crítico!</b>";
       else if (natural === 20) nota = " <b class='critico'>20 natural!</b>";
       else if (natural === 1) nota = " <b class='falha'>1 natural</b>";
     }
-    const detalhe = (qtd > 1 ? "[" + dados.join(", ") + "]" : String(soma)) + (mod ? " " + sinal(mod) : "");
-    const html = "<div class='rolagem-rotulo'>" + esc(opcoes.rotulo || expr) + "</div>" +
+    const modTexto = mod ? " " + sinal(mod) : "";
+    // O dado que não contou vem primeiro, riscado, e o que contou fica encostado no
+    // modificador: "~~4~~ 17 +5" se lê como a conta que deu o total.
+    const detalhe = descartado !== null
+      ? "<s class='dado descartado' title='Não conta: com Vantagem fica o maior'>" + descartado +
+        "<span class='sr-only'> (não conta)</span></s><b class='dado usado'>" + natural + "</b>" + esc(modTexto)
+      : esc((qtd > 1 ? "[" + dados.join(", ") + "]" : String(soma)) + modTexto);
+    const marcaVantagem = descartado === null ? ""
+      : " <span class='etiqueta'>Vantagem</span>" + (fontes ? " " + esc(fontes) : "");
+    const html = "<div class='rolagem-rotulo'>" + esc(opcoes.rotulo || expr) + marcaVantagem + "</div>" +
       "<div><span class='rolagem-total'>" + total + "</span> <span class='suave'>" + esc(expr) + " = " +
-      esc(detalhe) + "</span>" + extra + nota + "</div>";
+      detalhe + "</span>" + nota + "</div>";
     historico.unshift(html);
     historico.length = Math.min(historico.length, 15);
     toast(html, "rolagem");
@@ -426,17 +443,26 @@
     if (!alvo) return;
     ev.preventDefault();
     rolar(alvo.dataset.rolar, {
-      rotulo: alvo.dataset.rotulo, vantagem: alvo.dataset.vantagem === "1", critico: alvo.dataset.critico,
+      rotulo: alvo.dataset.rotulo, vantagem: alvo.dataset.vantagem === "1", fontes: alvo.dataset.fontes,
+      critico: alvo.dataset.critico,
     });
   });
 
-  /** Botão de rolagem pronto. */
+  /**
+   * Botão de rolagem pronto.
+   * extra: {vantagem, critico}. `vantagem` é true/false ou a lista de quem dá a Vantagem
+   * (`vantagem_fontes` do motor): com ela, o clique já rola os dois d20.
+   */
   function botaoRolar(expr, rotulo, extra) {
     if (!expr || !/d\d/.test(expr)) return "<span class='valor'>" + esc(expr || "—") + "</span>";
     extra = extra || {};
-    return "<button type='button' class='rolar' data-rolar='" + esc(expr) + "' data-rotulo='" + esc(rotulo || "") +
-      "'" + (extra.vantagem ? " data-vantagem='1'" : "") + (extra.critico ? " data-critico='" + esc(extra.critico) + "'" : "") +
-      " title='Clique para rolar'>" + esc(expr) + "</button>";
+    const fontes = Array.isArray(extra.vantagem) ? extra.vantagem : [];
+    const vantagem = Array.isArray(extra.vantagem) ? fontes.length > 0 : !!extra.vantagem;
+    return "<button type='button' class='rolar' data-rolar='" + esc(expr) + "' data-rotulo='" + esc(rotulo || "") + "'" +
+      (vantagem ? " data-vantagem='1'" + (fontes.length ? " data-fontes='" + esc(fontes.join(", ")) + "'" : "") : "") +
+      (extra.critico ? " data-critico='" + esc(extra.critico) + "'" : "") +
+      " title='" + (vantagem ? "Clique para rolar com Vantagem: 2d20, fica o maior" : "Clique para rolar") + "'>" +
+      esc(expr) + "</button>";
   }
 
   // ---------------------------------------------------------------------------

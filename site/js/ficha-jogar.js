@@ -175,7 +175,7 @@
   A["morrendo"] = () => {
     const j = J(), R = F.R;
     const r = EG.rolar("d20" + (R.morrendo_bonus >= 0 ? "+" : "") + R.morrendo_bonus,
-      { rotulo: "Teste de Morrendo (DT 10)", vantagem: R.morrendo_vantagem });
+      { rotulo: "Teste de Morrendo (DT 10)", vantagem: R.morrendo_vantagem, fontes: F.P.raca });
     if (!r) return;
     if (r.natural === 20) { j.pv = 1; j.morrendo = { s: 0, f: 0 }; EG.toast("20 natural: você se levanta com 1 PV!"); return; }
     if (r.natural === 1) j.morrendo.f += 2;
@@ -385,18 +385,24 @@
     return cartao("Ações", corpo, "acoes");
   }
 
+  /** O "V" ao lado do Teste, dizendo de onde a Vantagem vem (a Raça, a Bênção). */
+  const marcaVantagem = (fontes) => (fontes && fontes.length
+    ? " <span class='etiqueta' title='Vantagem: " + esc(fontes.join(", ")) + "'>V</span>" : "");
+
   function cartaoTestes() {
     const R = F.R;
+    // `vantagem_fontes` é a Raça e as Bênçãos: com ela o clique já rola 2d20 e fica o maior.
     const tr = Object.entries(R.testes_resistencia).map(([nome, t]) =>
-      "<li><span>" + esc(nome) + (t.vantagem ? " <span class='etiqueta' title='Vantagem'>V</span>" : "") + "</span>" +
-      botaoRolar(t.rolagem, nome, { vantagem: t.vantagem }) + "</li>").join("");
+      "<li><span>" + esc(nome) + marcaVantagem(t.vantagem_fontes) + "</span>" +
+      botaoRolar(t.rolagem, nome, { vantagem: t.vantagem_fontes || [] }) + "</li>").join("");
     const pericias = Object.entries(R.pericias).map(([nome, x]) =>
       "<li class='" + (x.eficiencia ? "treinada" : "") + "'><span>" + (x.eficacia ? "<i class='marcador eficacia' title='Eficácia'></i>" : x.eficiencia ? "<i class='marcador' title='Eficiência'></i>" : "") + esc(nome) +
-      (x.vantagem ? " <span class='etiqueta' title='Vantagem'>V</span>" : "") + (x.penalidade ? " <small class='ruim'>" + x.penalidade + "</small>" : "") + "</span>" +
-      botaoRolar(x.rolagem, nome, { vantagem: x.vantagem }) + "</li>").join("");
+      marcaVantagem(x.vantagem_fontes) + (x.penalidade ? " <small class='ruim'>" + x.penalidade + "</small>" : "") + "</span>" +
+      botaoRolar(x.rolagem, nome, { vantagem: x.vantagem_fontes || [] }) + "</li>").join("");
     return cartao("Testes", "<div class='duas-colunas'><div><h3>Testes de Resistência</h3><ul class='lista-testes'>" + tr + "</ul>" +
       "<p class='ajuda'>Sem crítico e sempre rolados. " + link("22", "Testes de Resistência", "capítulo 22") + "</p></div>" +
-      "<div><h3>Perícias</h3><ul class='lista-testes'>" + pericias + "</ul><p class='ajuda'><i class='marcador'></i> Eficiência · <i class='marcador eficacia'></i> Eficácia · <span class='etiqueta'>V</span> Vantagem</p></div></div>", "testes");
+      "<div><h3>Perícias</h3><ul class='lista-testes'>" + pericias + "</ul><p class='ajuda'><i class='marcador'></i> Eficiência · <i class='marcador eficacia'></i> Eficácia · " +
+      "<span class='etiqueta'>V</span> Vantagem: o clique já rola 2d20 e fica o maior " + link("02", "2.4", "2.4") + "</p></div></div>", "testes");
   }
 
   function cartaoBencaos() {
