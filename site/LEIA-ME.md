@@ -162,7 +162,9 @@ do Google. O plano grátis (Spark) não pede cartão e sobra para uma mesa: 100 
 
 1. Em <https://console.firebase.google.com>, **Criar um projeto** (o Google Analytics pode ficar
    desligado).
-2. **Authentication > Começar > Método de login > Google**: ativar e salvar.
+2. **Authentication > Começar > Método de login > Google**: ligar a chave **Ativar**, escolher o
+   **e-mail de suporte do projeto** e clicar em **Salvar**. A linha do Google tem que aparecer como
+   *Ativado* na lista; sem isso, *Entrar com Google* avisa que o login não está ativado.
 3. **Authentication > Configurações > Domínios autorizados > Adicionar domínio**:
    `mrmarkinboladao.github.io`.
 4. **Realtime Database > Criar banco de dados**, no **modo bloqueado**.
@@ -170,16 +172,19 @@ do Google. O plano grátis (Spark) não pede cartão e sobra para uma mesa: 100 
    [`firebase/database.rules.json`](../firebase/database.rules.json) e **Publicar**. São as regras
    que decidem quem lê o quê; sem elas, o banco recusa tudo.
 6. **Configurações do projeto (engrenagem) > Seus apps > Web (`</>`)**: registrar o app (sem
-   Firebase Hosting) e copiar o `firebaseConfig`. Se ele vier sem `databaseURL`, o endereço está no
-   topo da página do Realtime Database.
-7. Colar o `firebaseConfig` em [`site/js/mesa-online-config.js`](js/mesa-online-config.js), no
-   lugar do `null`, e rodar `python site/gerar_site.py`.
+   Firebase Hosting) e copiar o `firebaseConfig`. O console mostra junto um `npm install` e umas
+   linhas de `import`; elas não são para este site, que carrega o Firebase sozinho — o que serve é
+   só o objeto `firebaseConfig = { ... }`. Se ele vier sem `databaseURL`, o endereço está no topo
+   da página do Realtime Database.
+7. Colar os campos do `firebaseConfig` em [`site/js/mesa-online-config.js`](js/mesa-online-config.js)
+   e rodar `python site/gerar_site.py`. (O `measurementId` é do Analytics e pode ficar de fora.)
 
 **A configuração do passo 6 não é senha.** No Firebase ela é pública de propósito e vai no site de
 quem usa o serviço; o que protege os dados são as regras do passo 5, que rodam no servidor do Google.
 Se as regras mudarem no repositório, cole de novo (passo 5).
 
-O SDK do Firebase (uns 330 KB) só carrega para quem está numa mesa ou abre a tela dela.
+O SDK do Firebase (uns 330 KB) só carrega para quem está numa mesa, abre a tela *Mesa online* ou
+o Painel da Área do Mestre. Para desligar a mesa, troque a configuração por `null`.
 
 ## A história do personagem
 
@@ -390,7 +395,7 @@ Os **números das fórmulas** (PV, Defesa, dano, tetos...) moram em `site/js/mot
 | `js/regras.js` | A aba Regras (pesquisa e leitura) |
 | `js/app.js` | Rolador de dados, avisos e navegação |
 | `js/mesa-online.js` | A mesa online: login, convite, fichas ao vivo, PH do grupo, o retrato do combate para os jogadores, pedidos, rolagens e quem está conectado |
-| `js/mesa-online-config.js` | A configuração do projeto Firebase da mesa (`null` = desligada) |
+| `js/mesa-online-config.js` | A configuração do projeto Firebase da mesa (projeto `explorando-galaxias-rpg`; `null` = desligada) |
 | `../firebase/database.rules.json` | As regras do banco da mesa online: quem lê e quem grava o quê. Coladas no console do Firebase |
 | `../firebase/firebase.json` | Para rodar a mesa no emulador do Firebase, nos testes |
 | `js/vendor/marked.umd.js` | Biblioteca que transforma o texto do livro em página (licença MIT) |
