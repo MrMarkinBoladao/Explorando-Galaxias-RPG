@@ -1,0 +1,118 @@
+{
+  "rules": {
+    "usuarios": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null && auth.uid === $uid",
+        "mesas": {
+          "$mesa": { ".validate": "newData.val() === 'mestre' || newData.val() === 'jogador'" }
+        },
+        "$outro": { ".validate": false }
+      }
+    },
+    "mesas": {
+      "$mesa": {
+        "info": {
+          ".read": "auth != null && (data.child('mestre').val() === auth.uid || root.child('mesas/' + $mesa + '/membros/' + auth.uid).exists())",
+          ".write": "auth != null && (data.exists() ? data.child('mestre').val() === auth.uid : newData.child('mestre').val() === auth.uid)",
+          ".validate": "newData.hasChildren(['nome', 'mestre']) && (!data.exists() || newData.child('mestre').val() === data.child('mestre').val())",
+          "nome": { ".validate": "newData.isString() && newData.val().length <= 80" },
+          "mestre": { ".validate": "newData.isString()" },
+          "criada": { ".validate": "newData.isNumber()" },
+          "$outro": { ".validate": false }
+        },
+        "convite": {
+          ".read": "auth != null && root.child('mesas/' + $mesa + '/info/mestre').val() === auth.uid",
+          ".write": "auth != null && root.child('mesas/' + $mesa + '/info/mestre').val() === auth.uid",
+          "codigo": { ".validate": "newData.isString() && newData.val().length >= 16 && newData.val().length <= 64" },
+          "$outro": { ".validate": false }
+        },
+        "membros": {
+          ".read": "auth != null && root.child('mesas/' + $mesa + '/info/mestre').val() === auth.uid",
+          "$uid": {
+            ".read": "auth != null && auth.uid === $uid",
+            ".write": "auth != null && (root.child('mesas/' + $mesa + '/info/mestre').val() === auth.uid || (auth.uid === $uid && (data.exists() || (newData.child('codigo').isString() && newData.child('codigo').val() === root.child('mesas/' + $mesa + '/convite/codigo').val()))))",
+            ".validate": "newData.hasChildren(['nome'])",
+            "nome": { ".validate": "newData.isString() && newData.val().length <= 80" },
+            "codigo": { ".validate": "newData.isString() && newData.val().length <= 64" },
+            "entrou": { ".validate": "newData.isNumber()" },
+            "fichas": {
+              "$ficha": { ".validate": "newData.val() === true" }
+            },
+            "$outro": { ".validate": false }
+          }
+        },
+        "fichas": {
+          ".read": "auth != null && root.child('mesas/' + $mesa + '/info/mestre').val() === auth.uid",
+          "$ficha": {
+            ".read": "auth != null && data.child('dono').val() === auth.uid",
+            ".write": "auth != null && (root.child('mesas/' + $mesa + '/info/mestre').val() === auth.uid || (root.child('mesas/' + $mesa + '/membros/' + auth.uid).exists() && (data.exists() ? data.child('dono').val() === auth.uid : newData.child('dono').val() === auth.uid)))",
+            ".validate": "newData.hasChildren(['dono', 'f']) && (!data.exists() || newData.child('dono').val() === data.child('dono').val() || root.child('mesas/' + $mesa + '/info/mestre').val() === auth.uid)",
+            "dono": { ".validate": "newData.isString()" },
+            "f": { ".validate": "newData.hasChildren()" },
+            "$outro": { ".validate": false }
+          }
+        },
+        "grupo": {
+          ".read": "auth != null && (root.child('mesas/' + $mesa + '/info/mestre').val() === auth.uid || root.child('mesas/' + $mesa + '/membros/' + auth.uid).exists())",
+          ".write": "auth != null && (root.child('mesas/' + $mesa + '/info/mestre').val() === auth.uid || root.child('mesas/' + $mesa + '/membros/' + auth.uid).exists())",
+          "ph": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 99" },
+          "$outro": { ".validate": false }
+        },
+        "combate": {
+          ".read": "auth != null && (root.child('mesas/' + $mesa + '/info/mestre').val() === auth.uid || root.child('mesas/' + $mesa + '/membros/' + auth.uid).exists())",
+          ".write": "auth != null && root.child('mesas/' + $mesa + '/info/mestre').val() === auth.uid",
+          "json": { ".validate": "newData.isString() && newData.val().length <= 200000" },
+          "em": { ".validate": "newData.isNumber()" },
+          "$outro": { ".validate": false }
+        },
+        "pedidos": {
+          ".read": "auth != null && root.child('mesas/' + $mesa + '/info/mestre').val() === auth.uid",
+          ".write": "auth != null && root.child('mesas/' + $mesa + '/info/mestre').val() === auth.uid",
+          "$pedido": {
+            ".write": "auth != null && !data.exists() && root.child('mesas/' + $mesa + '/membros/' + auth.uid).exists() && newData.child('uid').val() === auth.uid && root.child('mesas/' + $mesa + '/fichas/' + newData.child('ficha').val() + '/dono').val() === auth.uid",
+            ".validate": "newData.hasChildren(['uid', 'ficha', 'tipo'])",
+            "uid": { ".validate": "newData.isString()" },
+            "ficha": { ".validate": "newData.isString() && newData.val().length <= 64" },
+            "tipo": { ".validate": "newData.val() === 'agiu' || newData.val() === 'ultimate'" },
+            "ciclo": { ".validate": "newData.isNumber()" },
+            "em": { ".validate": "newData.isNumber()" },
+            "$outro": { ".validate": false }
+          }
+        },
+        "rolagens": {
+          ".read": "auth != null && (root.child('mesas/' + $mesa + '/info/mestre').val() === auth.uid || root.child('mesas/' + $mesa + '/membros/' + auth.uid).exists())",
+          ".write": "auth != null && root.child('mesas/' + $mesa + '/info/mestre').val() === auth.uid",
+          "$rolagem": {
+            ".write": "auth != null && !data.exists() && newData.child('uid').val() === auth.uid && (root.child('mesas/' + $mesa + '/info/mestre').val() === auth.uid || root.child('mesas/' + $mesa + '/membros/' + auth.uid).exists())",
+            ".validate": "newData.hasChildren(['uid', 'quem', 'expr', 'total'])",
+            "uid": { ".validate": "newData.isString()" },
+            "quem": { ".validate": "newData.isString() && newData.val().length <= 80" },
+            "rotulo": { ".validate": "newData.isString() && newData.val().length <= 160" },
+            "expr": { ".validate": "newData.isString() && newData.val().length <= 32" },
+            "total": { ".validate": "newData.isNumber()" },
+            "natural": { ".validate": "newData.isNumber()" },
+            "descartado": { ".validate": "newData.isNumber()" },
+            "dados": { ".validate": "newData.isString() && newData.val().length <= 200" },
+            "mod": { ".validate": "newData.isNumber()" },
+            "nota": { ".validate": "newData.isString() && newData.val().length <= 8" },
+            "fontes": { ".validate": "newData.isString() && newData.val().length <= 160" },
+            "em": { ".validate": "newData.isNumber()" },
+            "$outro": { ".validate": false }
+          }
+        },
+        "presenca": {
+          ".read": "auth != null && (root.child('mesas/' + $mesa + '/info/mestre').val() === auth.uid || root.child('mesas/' + $mesa + '/membros/' + auth.uid).exists())",
+          "$uid": {
+            ".write": "auth != null && auth.uid === $uid && (root.child('mesas/' + $mesa + '/info/mestre').val() === auth.uid || root.child('mesas/' + $mesa + '/membros/' + auth.uid).exists())",
+            "nome": { ".validate": "newData.isString() && newData.val().length <= 80" },
+            "papel": { ".validate": "newData.val() === 'mestre' || newData.val() === 'jogador'" },
+            "em": { ".validate": "newData.isNumber()" },
+            "$outro": { ".validate": false }
+          }
+        },
+        "$outro": { ".validate": false }
+      }
+    }
+  }
+}

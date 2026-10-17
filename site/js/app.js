@@ -132,18 +132,30 @@
         return false;
       }
     },
-    /** Devolve false quando o navegador recusou gravar (espaço cheio). */
+    /**
+     * Devolve false quando o navegador recusou gravar (espaço cheio).
+     * A mesa online pendura em `EG.aoSalvarFicha` o envio do que mudou. Quem aplica aqui
+     * uma mudança que veio de fora grava com gravarTodas(), que não chama o gancho — senão
+     * a mudança voltaria para a mesa como se fosse nova.
+     */
     salvar(p) {
       const mapa = this.todas();
       p.atualizado = new Date().toISOString();
       mapa[p.id] = p;
-      return this.gravarTodas(mapa);
+      const ok = this.gravarTodas(mapa);
+      if (ok && typeof EG.aoSalvarFicha === "function") {
+        try { EG.aoSalvarFicha(p); } catch (e) { console.error(e); }
+      }
+      return ok;
     },
     excluir(id) {
       const mapa = this.todas();
       delete mapa[id];
       this.gravarTodas(mapa);
       if (this.atualId() === id) localStorage.removeItem(CHAVE_ATUAL);
+      if (typeof EG.aoExcluirFicha === "function") {
+        try { EG.aoExcluirFicha(id); } catch (e) { console.error(e); }
+      }
     },
     atualId() { return localStorage.getItem(CHAVE_ATUAL); },
     definirAtual(id) { localStorage.setItem(CHAVE_ATUAL, id); },
@@ -219,6 +231,29 @@
     recolhidos.forEach((d) => { d.open = false; });
     recolhidos = [];
   });
+
+  /**
+   * Guarda o foco e o cursor antes de a tela ser refeita, e devolve quem põe os dois de
+   * volta. A tela inteira é trocada a cada redesenho; sem o cursor, quem acabou de clicar
+   * no meio de um texto voltaria a digitar do começo dele.
+   */
+  function guardarFoco() {
+    const a = document.activeElement;
+    const id = a && a.id;
+    if (!id) return () => {};
+    let sel = null;
+    try {
+      if (typeof a.selectionStart === "number") sel = [a.selectionStart, a.selectionEnd, a.selectionDirection, a.value];
+    } catch (_) { sel = null; }
+    return () => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.focus({ preventScroll: true });
+      if (sel && el.value === sel[3]) {
+        try { el.setSelectionRange(sel[0], sel[1], sel[2] || "none"); } catch (_) { /* campo sem cursor */ }
+      }
+    };
+  }
 
   /** Redesenha a tela que está aberta, preservando foco e rolagem. */
   function redesenharTela() {
@@ -407,34 +442,61 @@
     } else {
       for (let i = 0; i < qtd; i++) dados.push(d(faces));
     }
-    const soma = dados.reduce((x, y) => x + y, 0);
-    const total = soma + mod;
+    const total = dados.reduce((x, y) => x + y, 0) + mod;
     let nota = "";
     if (natural !== null) {
       // Com Vantagem, um 20 em qualquer dos dois é crítico (02.4): é o maior, o que contou.
       const faixaCrit = opcoes.critico === "19-20" ? 19 : 20;
-      if (natural >= faixaCrit && opcoes.critico) nota = " <b class='critico'>Crítico!</b>";
-      else if (natural === 20) nota = " <b class='critico'>20 natural!</b>";
-      else if (natural === 1) nota = " <b class='falha'>1 natural</b>";
+      if (natural >= faixaCrit && opcoes.critico) nota = "critico";
+      else if (natural === 20) nota = "20";
+      else if (natural === 1) nota = "1";
     }
+    const r = { rotulo: String(opcoes.rotulo || expr), expr: String(expr), total: total, natural: natural,
+      descartado: descartado, dados: qtd > 1 ? dados : null, mod: mod, nota: nota,
+      fontes: descartado !== null ? fontes : "" };
+    mostrarRolagem(r);
+    // A mesa online pendura aqui o envio da rolagem para os outros aparelhos.
+    if (typeof EG.aoRolar === "function") { try { EG.aoRolar(r); } catch (e) { console.error(e); } }
+    return { total: total, natural: natural };
+  }
+
+  const NOTAS = { critico: " <b class='critico'>Crítico!</b>", 20: " <b class='critico'>20 natural!</b>",
+    1: " <b class='falha'>1 natural</b>" };
+
+  /**
+   * Uma rolagem desenhada. Ela é montada aqui a partir dos números, e nunca de um HTML
+   * pronto, porque a mesa online desenha com esta mesma função a rolagem que veio do
+   * aparelho de outra pessoa: tudo o que é texto passa por esc(), e os números por Number().
+   * `quem` é o nome de quem rolou, quando não foi neste aparelho.
+   */
+  function htmlDaRolagem(r, quem) {
+    const num = (v) => (Number.isFinite(Number(v)) ? Number(v) : 0);
+    const mod = num(r.mod);
     const modTexto = mod ? " " + sinal(mod) : "";
+    const temDescarte = r.descartado != null && Number.isFinite(Number(r.descartado));
+    const dados = Array.isArray(r.dados) ? r.dados.map(num) : null;
     // O dado que não contou vem primeiro, riscado, e o que contou fica encostado no
     // modificador: "~~4~~ 17 +5" se lê como a conta que deu o total.
-    const detalhe = descartado !== null
-      ? "<s class='dado descartado' title='Não conta: com Vantagem fica o maior'>" + descartado +
-        "<span class='sr-only'> (não conta)</span></s><b class='dado usado'>" + natural + "</b>" + esc(modTexto)
-      : esc((qtd > 1 ? "[" + dados.join(", ") + "]" : String(soma)) + modTexto);
-    const marcaVantagem = descartado === null ? ""
-      : " <span class='etiqueta'>Vantagem</span>" + (fontes ? " " + esc(fontes) : "");
-    const html = "<div class='rolagem-rotulo'>" + esc(opcoes.rotulo || expr) + marcaVantagem + "</div>" +
-      "<div><span class='rolagem-total'>" + total + "</span> <span class='suave'>" + esc(expr) + " = " +
-      detalhe + "</span>" + nota + "</div>";
+    const detalhe = temDescarte
+      ? "<s class='dado descartado' title='Não conta: com Vantagem fica o maior'>" + num(r.descartado) +
+        "<span class='sr-only'> (não conta)</span></s><b class='dado usado'>" + num(r.natural) + "</b>" + esc(modTexto)
+      : esc((dados && dados.length > 1 ? "[" + dados.join(", ") + "]" : String(num(r.total) - mod)) + modTexto);
+    const marcaVantagem = temDescarte
+      ? " <span class='etiqueta'>Vantagem</span>" + (r.fontes ? " " + esc(r.fontes) : "") : "";
+    return "<div class='rolagem-rotulo'>" + (quem ? "<b class='quem-rolou'>" + esc(quem) + "</b> · " : "") +
+      esc(r.rotulo || r.expr) + marcaVantagem + "</div>" +
+      "<div><span class='rolagem-total'>" + num(r.total) + "</span> <span class='suave'>" + esc(r.expr) + " = " +
+      detalhe + "</span>" + (NOTAS[r.nota] || "") + "</div>";
+  }
+
+  /** Mostra a rolagem no aviso e no histórico de Rolagens. `aviso: false` só guarda. */
+  function mostrarRolagem(r, quem, o) {
+    const html = htmlDaRolagem(r, quem);
     historico.unshift(html);
     historico.length = Math.min(historico.length, 15);
-    toast(html, "rolagem");
+    if (!o || o.aviso !== false) toast(html, "rolagem");
     const lista = document.getElementById("historico-lista");
     if (lista) lista.innerHTML = historico.map((h) => "<li>" + h + "</li>").join("");
-    return { total: total, natural: natural };
   }
 
   // Qualquer elemento com data-rolar="expr" vira um botão de rolagem
@@ -626,7 +688,8 @@
 
   Object.assign(EG, { esc, norm, sinal, uid, clonar, destacar, regexSemAcento, paragrafos, markdown,
     limparHtml, palavras, Armazem, toast, rolar, botaoRolar, registrarTela, rotaAtual, navegar, historico,
+    mostrarRolagem, htmlDaRolagem,
     exportarTudo, importarTudo, checarAtualizacao, baixarJSON, fatiarNome, seletorDeArquivo,
-    redesenharTela, estaAberto, definirAberto, atributosAbre, lerImagem, pesoDaImagem,
+    redesenharTela, guardarFoco, estaAberto, definirAberto, atributosAbre, lerImagem, pesoDaImagem,
     ehImagemGuardada, VERSAO });
 })();

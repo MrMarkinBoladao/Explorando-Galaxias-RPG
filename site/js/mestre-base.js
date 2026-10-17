@@ -78,13 +78,20 @@
     return E;
   };
 
-  /** Devolve false quando o navegador recusou gravar (espaço cheio). */
+  /**
+   * Devolve false quando o navegador recusou gravar (espaço cheio). A mesa online pendura
+   * em `EG.aoSalvarMesa` a publicação do retrato do combate para os jogadores.
+   */
   G.salvar = function () {
     if (!E) return false;
-    try { localStorage.setItem(CHAVE, JSON.stringify(E)); return true; } catch (_) {
+    try { localStorage.setItem(CHAVE, JSON.stringify(E)); } catch (_) {
       EG.toast("Não foi possível salvar a mesa do Mestre neste navegador. Use <b>Exportar</b>.", "erro");
       return false;
     }
+    if (typeof EG.aoSalvarMesa === "function") {
+      try { EG.aoSalvarMesa(); } catch (e) { console.error(e); }
+    }
+    return true;
   };
 
   G.zerar = function () { E = modeloVazio(); E.semeado = true; G.salvar(); };
@@ -1262,11 +1269,11 @@
     pendente = true;
     requestAnimationFrame(() => {
       pendente = false;
-      const foco = document.activeElement && document.activeElement.id;
+      const voltarFoco = EG.guardarFoco();
       const y = window.scrollY;
       EG.navegar();
       window.scrollTo(0, y);
-      if (foco) { const el = document.getElementById(foco); if (el) el.focus({ preventScroll: true }); }
+      voltarFoco();
     });
   };
 
@@ -1332,6 +1339,8 @@
     EG.Ficha.P = null;
     EG.Ficha.R = null;
     EG.Ficha.aoSalvar = null;
+    // Quem está numa mesa online como jogador não usa a Área do Mestre neste aparelho.
+    if (EG.MesaOnline && EG.MesaOnline.ehJogador()) { G.app().innerHTML = EG.MesaOnline.telaSemMestre(); return; }
     if (!G.estado().aviso_lido) { telaAviso(); return; }
     const qual = (r && r.partes && r.partes[0]) || "painel";
     (G.telas[qual] || G.telas.painel)(r);

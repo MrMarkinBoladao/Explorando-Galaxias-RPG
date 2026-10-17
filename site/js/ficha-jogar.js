@@ -143,6 +143,8 @@
     if ((j.energia || 0) < custo) { EG.toast("Faltam " + (custo - (j.energia || 0)) + " de Energia para a Ultimate.", "erro"); return; }
     j.energia -= custo;
     EG.toast("<b>" + esc(F.P.ultimate.nome || "Ultimate") + "!</b> −" + custo + " de Energia.");
+    // Na mesa online, a Fila do Mestre marca a Ultimate do Ciclo (uma por Ciclo, 17.1).
+    if (EG.MesaOnline) EG.MesaOnline.pedir("ultimate", F.P.id);
   };
 
   A["ph"] = (b) => { const j = J(); j.ph = Math.max(0, Math.min(F.R.ph_max, (j.ph || 0) + Number(b.dataset.v))); };
@@ -374,7 +376,8 @@
       "<div class='acao-numeros'>" + (p.ultimate.resolucao === "Teste de Ataque" ? "<span>Ataque " + botaoRolar(M.rolagem(R.ataque_habilidade), "Ultimate: ataque") + "</span>" :
         p.ultimate.resolucao === "Teste de Resistência" ? "<span>DT " + R.dt + "</span>" : "") +
       (u.texto ? "<span>" + (p.ultimate.tipo === "Cura" ? "Cura " : "Dano ") + botaoRolar(u.texto, "Ultimate") + " <small>média " + u.media + "</small></span>" : "") + "</div>" +
-      "<p class='ajuda'>Não gasta ação · 1 por Ciclo · Tenacidade " + u.rt + (u.alvos > 1 ? " · " + u.alvos + " alvos" : "") + "</p>" +
+      "<p class='ajuda'>Não gasta ação · 1 por Ciclo · Tenacidade " + u.rt + (u.alvos > 1 ? " · " + u.alvos + " alvos" : "") +
+      (EG.MesaOnline && EG.MesaOnline.ultimateUsada(p.id) ? " · <span class='etiqueta'>já usada neste Ciclo</span>" : "") + "</p>" +
       (p.ultimate.efeito ? "<p class='efeito'>" + esc(p.ultimate.efeito) + "</p>" : "") +
       "<div class='botoes compactos'>" + botao("ultimate", "Ativar a Ultimate (−" + u.custo + ")", { classe: "primario", desabilitado: energia < u.custo || !!bloqU }) + "</div></div>";
     if (R.quebra) {
@@ -580,6 +583,7 @@
     const app = document.getElementById("app");
     if (!F.P) { location.hash = "#editar"; return; }
     app.innerHTML = F.barra() + cabecalho() +
+      (EG.MesaOnline ? EG.MesaOnline.faixaJogador(F.P) : "") +
       "<div class='grade-jogo'>" +
       "<div class='coluna'>" + cartaoVida() + cartaoRecursos() + cartaoDefesa() + cartaoCondicoes() + "</div>" +
       "<div class='coluna'>" + cartaoAcoes() + cartaoMemo() + cartaoBencaos() + "</div>" +
