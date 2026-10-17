@@ -276,8 +276,13 @@
         EG.toast(/popup-blocked/.test(c)
           ? "O navegador bloqueou a janela de login. Clique de novo em Entrar com Google (e, se continuar, permita pop-ups deste site)."
           : /unauthorized-domain/.test(c)
-            ? "Este endereço não está autorizado no Firebase (Authentication &gt; Settings &gt; Authorized domains)."
-            : "Não deu para entrar: " + esc(e && e.message ? e.message : c), "erro");
+            ? "Este endereço não está autorizado no Firebase (Authentication &gt; Configurações &gt; Domínios autorizados)."
+            : /operation-not-allowed/.test(c)
+              ? "O login com Google ainda não está ativado no Firebase: Authentication &gt; Método de login &gt; Google &gt; " +
+                "<b>Ativar</b> e <b>Salvar</b>."
+              : /network-request-failed/.test(c)
+                ? "Sem conexão com o Google agora. Confira a internet e tente de novo."
+                : "Não deu para entrar: " + esc(e && e.message ? e.message : c), "erro");
       });
     };
     if (auth) return janela();
