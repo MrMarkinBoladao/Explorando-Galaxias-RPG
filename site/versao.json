@@ -1,5 +1,5 @@
 {
- "versao": "19a9c145439f",
+ "versao": "5fc6889676be",
  "livro": "1.2",
  "arquivos": [
   "estilo.css",
@@ -16,6 +16,8 @@
   "js/mestre-base.js",
   "js/mestre.js",
   "js/mestre-npcs.js",
-  "js/mestre-escudo.js"
+  "js/mestre-escudo.js",
+  "js/mesa-online-config.js",
+  "js/mesa-online.js"
  ]
 }

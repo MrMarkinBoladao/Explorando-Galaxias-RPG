@@ -459,7 +459,8 @@ button.rolar:hover { background: var(--ouro); color: #1a1406; }
 .casa-vital .rotulo { font-size: .7rem; }
 .casa-vital b { font-variant-numeric: tabular-nums; }
 .casa-vital small { color: var(--suave); font-weight: 400; }
-.casa-vital .barra-pv, .casa-vital .barra-tenacidade { grid-column: 1 / -1; }
+.casa-vital .barra-pv, .casa-vital .barra-tenacidade, .casa-vital .barra-energia { grid-column: 1 / -1; }
+.casa-vital b .etiqueta { margin-left: .35rem; font-weight: 700; }
 .casa-botoes { display: flex; flex-wrap: wrap; gap: .25rem; justify-content: flex-end; }
 @media (max-width: 900px) {
   .fila-casa { grid-template-columns: 2.2rem minmax(0, 1fr); }
@@ -591,6 +592,29 @@ mark { background: rgba(230, 195, 106, .3); color: inherit; border-radius: 3px; 
 .historico summary { cursor: pointer; padding: .4rem .8rem; font-weight: 600; font-size: .9rem; }
 .historico ol { margin: 0; padding: .2rem .8rem .6rem 2rem; max-height: 40vh; overflow-y: auto; font-size: .88rem; }
 .historico .rolagem-total { font-size: 1.1rem; }
+.quem-rolou { color: var(--texto); }
+
+/* ---------- Mesa online ---------- */
+.ponto-online { display: inline-block; width: .6rem; height: .6rem; border-radius: 50%; background: var(--suave); opacity: .6; vertical-align: middle; }
+.ponto-online.sim { background: var(--verde); opacity: 1; box-shadow: 0 0 0 3px rgba(124, 224, 164, .18); }
+.faixa-mesa { margin: -.4rem 0 1rem; padding: .45rem .8rem; border: 1px solid var(--borda); border-radius: var(--raio);
+  background: var(--painel); font-size: .9rem; }
+.faixa-mesa .botao { margin-left: .4rem; }
+.lista-mesa { list-style: none; margin: .3rem 0 .6rem; padding: 0; }
+.lista-mesa li { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .5rem; padding: .35rem 0; border-bottom: 1px solid var(--borda); }
+.lista-mesa li:last-child { border-bottom: 0; }
+.convite { flex-wrap: nowrap; align-items: center; }
+.convite input { flex: 1 1 auto; min-width: 0; font-size: .82rem; }
+.tela-mesa { max-width: 44rem; margin: 0 auto; }
+.combate-jogador { margin-bottom: 1rem; border-color: var(--ouro-escuro); }
+.combate-jogador .fila-casa { grid-template-columns: 2.4rem minmax(0, 1.6fr) minmax(0, 1fr); }
+.combate-jogador .fila-casa.minha .casa-quem b { color: var(--ouro); }
+.sua-vez { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1rem; margin: 0 0 .6rem;
+  padding: .6rem .9rem; border: 1px solid var(--ouro); border-radius: var(--raio); background: rgba(230, 195, 106, .12); }
+.sua-vez b { font-size: 1.15rem; color: var(--ouro); }
+@media (max-width: 900px) {
+  .combate-jogador .fila-casa { grid-template-columns: 2.2rem minmax(0, 1fr); }
+}
 body[data-tela=regras] .historico { display: none; }
 .rodape { text-align: center; font-size: .8rem; color: var(--suave); padding: 2rem 1rem 5rem; }
 

@@ -314,11 +314,11 @@
     renderPendente = true;
     requestAnimationFrame(() => {
       renderPendente = false;
-      const foco = document.activeElement && document.activeElement.id;
+      const voltarFoco = EG.guardarFoco();
       const y = window.scrollY;
       EG.navegar();
       window.scrollTo(0, y);
-      if (foco) { const el = document.getElementById(foco); if (el) el.focus({ preventScroll: true }); }
+      voltarFoco();
     });
   };
 
@@ -393,6 +393,7 @@
       "<button type='button' data-acao='exportar-tudo'>Exportar tudo (backup)</button>" +
       "<button type='button' data-acao='importar-tudo'>Restaurar um backup</button>" +
       "<hr>" +
+      (EG.MesaOnline && EG.MesaOnline.configurada() ? "<button type='button' data-acao='mesa-online'>Mesa online…</button><hr>" : "") +
       "<button type='button' data-acao='exemplo'>Abrir o exemplo (Nadir, 29.7)</button>" +
       (F.P ? "<button type='button' data-acao='imprimir'>Imprimir</button>" : "") +
       (F.P ? "<button type='button' class='perigo' data-acao='excluir'>Excluir esta ficha</button>" : "") +
@@ -455,7 +456,9 @@
     else if (acao === "importar-tudo") document.getElementById("arquivo-backup").click();
     else if (acao === "imprimir") { location.hash = "#jogar"; setTimeout(() => window.print(), 300); }
     else if (acao === "excluir") {
-      if (confirm("Excluir a ficha de " + (F.P.nome || "personagem sem nome") + "? Isso não tem volta (a não ser que você tenha exportado).")) {
+      const naMesa = EG.MesaOnline && EG.MesaOnline.estaNaMesa(F.P.id);
+      if (confirm("Excluir a ficha de " + (F.P.nome || "personagem sem nome") + "? Isso não tem volta (a não ser que você tenha exportado)." +
+        (naMesa ? "\n\nEla também sai da mesa online. A cópia que estiver em outro aparelho continua lá." : ""))) {
         EG.Armazem.excluir(F.P.id);
         F.abrirAtual();
         F.redesenhar();

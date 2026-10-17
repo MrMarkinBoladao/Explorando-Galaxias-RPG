@@ -7,7 +7,7 @@ Uma página só, sem instalação, com quatro abas:
 - **Regras** — o livro inteiro (v1.2) com pesquisa instantânea, sem acento e sem maiúscula.
 - **Área do Mestre** — a mesa do Mestre, sincronizada com as fichas (abaixo).
 
-As fichas ficam salvas **no navegador** de cada jogador. Para backup ou para mandar ao Mestre: **Mais > Exportar** (gera um arquivo `.json`) e **Mais > Importar**.
+As fichas ficam salvas **no navegador** de cada jogador. Para backup ou para mandar ao Mestre: **Mais > Exportar** (gera um arquivo `.json`) e **Mais > Importar**. Com a **mesa online** ligada, as fichas do grupo, o PH, o combate e as rolagens aparecem ao vivo no aparelho de cada um (abaixo).
 
 ## O Cone de Luz: a arte, o efeito e a história
 
@@ -118,6 +118,68 @@ A Vantagem que **depende da cena** — *contra veneno e doença*, *contra efeito
 condições*, *o próximo Teste de Ataque*, a Sorte do tolo — não entra sozinha, porque a ficha não
 sabe o que está acontecendo na mesa. E a Vantagem das Bênçãos é só do site (`vantagem_fontes`, em
 `motor.js`): o oráculo e a planilha continuam com a Vantagem racial.
+
+## Mesa online
+
+Com a mesa online, cada um usa o site no próprio aparelho e tudo aparece ao vivo para quem deve ver:
+o jogador toma 10 de dano na ficha dele e o PV muda na Área do Mestre; o Mestre cura pela Área do
+Mestre e a ficha muda na tela do jogador. Sem importar nada. Quem não entra numa mesa usa o site como
+sempre, inclusive sem internet.
+
+| Quem | O que vê e mexe |
+|---|---|
+| **Mestre** | Todas as fichas da mesa (edita tudo, igual ao jogador), o PH, a Fila, as rolagens, quem está conectado e o convite. A Área do Mestre — inimigos, encontros, NPCs, notas — **continua só no navegador dele** e não vai para a nuvem |
+| **Jogador** | A **própria ficha** (edita tudo), o **PH do grupo**, as **rolagens de todo mundo** e, em combate, a **Fila de Ação**: a ordem, quem está agindo, quem já agiu, o PV, a Energia e a Ultimate pronta dos aliados, as condições, e as barras de PV e Tenacidade dos inimigos (sem número; o Mestre pode desligar). A ficha dos outros jogadores e a Área do Mestre, não: a aba some, e o servidor recusa |
+
+**Como usar.** O Mestre vai em **Área do Mestre > Painel > Mesa online**, entra com a conta Google,
+cria a mesa e copia o convite. Cada jogador abre o link, entra com a conta Google, aceita e leva a
+ficha dele para a mesa (um clique). Na mesa:
+
+- **No combate, a vez de cada um aparece na tela dele**, com o botão **Terminei meu turno**: a Fila
+  do Mestre marca *já agiu* sozinha (e desconta as condições, como o botão do Mestre). Ativar a
+  Ultimate marca *Ultimate usada* no Ciclo (uma por Ciclo, 17.1). Atacar, acertar o Básico, gastar
+  PH, tomar dano: os botões de sempre da ficha, e o Mestre vê na hora.
+- **O PH é um número só da mesa**: quando dois gastam no mesmo instante, os dois gastos contam.
+- **Rolagens**: todo mundo vê as de todo mundo, com o nome de quem rolou. O Mestre tem a caixa
+  **Rolar escondido** para quando quiser segredo.
+- **Sem internet**, a ficha continua funcionando e o que mudar fica pendente. Na volta, as duas
+  versões se juntam campo a campo: vale o que cada lado mudou. Mesmo que a página tenha fechado.
+- **Ninguém perde ficha.** Sair da mesa, ser tirado dela ou trocar de conta só para a sincronia: a
+  cópia de cada aparelho fica. *Excluir* uma ficha que está na mesa tira ela da mesa também (o site
+  avisa antes).
+- **Outro aparelho** (o celular, além do computador): entre com a mesma conta, e as fichas da mesa
+  chegam sozinhas.
+
+> **Ficha importada antes da mesa.** Se o Mestre tinha importado a ficha de um jogador pelo `.json`,
+> a do jogador chega pela mesa e substitui a cópia (quando é a mesma ficha) ou aparece ao lado dela
+> (quando foi importada como cópia). Nesse segundo caso, tire a cópia velha do grupo.
+
+### Ligar a mesa online (uma vez só)
+
+O site continua no GitHub Pages; quem guarda e espalha os dados é o **Firebase Realtime Database**,
+do Google. O plano grátis (Spark) não pede cartão e sobra para uma mesa: 100 conexões ao mesmo tempo,
+1 GB guardado e 10 GB por mês de download.
+
+1. Em <https://console.firebase.google.com>, **Criar um projeto** (o Google Analytics pode ficar
+   desligado).
+2. **Authentication > Começar > Método de login > Google**: ativar e salvar.
+3. **Authentication > Configurações > Domínios autorizados > Adicionar domínio**:
+   `mrmarkinboladao.github.io`.
+4. **Realtime Database > Criar banco de dados**, no **modo bloqueado**.
+5. **Realtime Database > Regras**: apagar o que estiver lá, colar o conteúdo de
+   [`firebase/database.rules.json`](../firebase/database.rules.json) e **Publicar**. São as regras
+   que decidem quem lê o quê; sem elas, o banco recusa tudo.
+6. **Configurações do projeto (engrenagem) > Seus apps > Web (`</>`)**: registrar o app (sem
+   Firebase Hosting) e copiar o `firebaseConfig`. Se ele vier sem `databaseURL`, o endereço está no
+   topo da página do Realtime Database.
+7. Colar o `firebaseConfig` em [`site/js/mesa-online-config.js`](js/mesa-online-config.js), no
+   lugar do `null`, e rodar `python site/gerar_site.py`.
+
+**A configuração do passo 6 não é senha.** No Firebase ela é pública de propósito e vai no site de
+quem usa o serviço; o que protege os dados são as regras do passo 5, que rodam no servidor do Google.
+Se as regras mudarem no repositório, cole de novo (passo 5).
+
+O SDK do Firebase (uns 330 KB) só carrega para quem está numa mesa ou abre a tela dela.
 
 ## A história do personagem
 
@@ -327,6 +389,10 @@ Os **números das fórmulas** (PV, Defesa, dano, tetos...) moram em `site/js/mot
 | `js/mestre-escudo.js` | As telas de consulta: Recompensas e Escudo do Mestre |
 | `js/regras.js` | A aba Regras (pesquisa e leitura) |
 | `js/app.js` | Rolador de dados, avisos e navegação |
+| `js/mesa-online.js` | A mesa online: login, convite, fichas ao vivo, PH do grupo, o retrato do combate para os jogadores, pedidos, rolagens e quem está conectado |
+| `js/mesa-online-config.js` | A configuração do projeto Firebase da mesa (`null` = desligada) |
+| `../firebase/database.rules.json` | As regras do banco da mesa online: quem lê e quem grava o quê. Coladas no console do Firebase |
+| `../firebase/firebase.json` | Para rodar a mesa no emulador do Firebase, nos testes |
 | `js/vendor/marked.umd.js` | Biblioteca que transforma o texto do livro em página (licença MIT) |
 | `inimigos/*.json` | As coleções de inimigos prontas para importar na aba Inimigos |
 | `npcs/*.json` | As coleções de NPCs prontas para importar na aba NPCs |

@@ -130,7 +130,8 @@
         "<div class='botoes'><a class='botao' href='#mestre/grupo'>Abrir o grupo</a>" +
         (g.length ? H.botao("descanso-curto", "Descanso Curto") + H.botao("descanso-longo", "Descanso Longo") : "") +
         "</div>", "grupo-resumo", link("23", "23.6", "descansos")) + "</div>" +
-      "<div class='coluna'>" + cartaoPH(g) + cartaoCombate + cartaoDTdaFaixa() + "</div>" +
+      "<div class='coluna'>" + (EG.MesaOnline ? EG.MesaOnline.cartaoMestre() : "") + cartaoPH(g) + cartaoCombate +
+        cartaoDTdaFaixa() + "</div>" +
       "<div class='coluna'>" + cartaoRolador() + checklist + "</div>" +
       "</div>" +
       "<p class='ajuda rodape-mestre'>PV, Energia, PH, condições e Memoespírito que você mexer aqui " +
@@ -420,6 +421,7 @@
       "<div class='casa-num'>" + i.casa + (i.agora ? "<span class='sr-only'> (agindo agora)</span>" : "") + "</div>" +
       "<div class='casa-quem'><div><b>" + esc(i.nome) + "</b> " + etiqueta +
       (i.agora ? " <span class='etiqueta pronta'>agindo agora</span>" : "") +
+      (cc.ultimate ? " <span class='etiqueta' title='Uma Ultimate por Ciclo por personagem (17.1)'>Ultimate usada</span>" : "") +
       (quebrado ? " <span class='etiqueta ruim'>Quebrado</span>" : "") +
       (i.pv === 0 ? " <span class='etiqueta ruim'>" + (i.kind === "pj" || i.kind === "npc" ? "Morrendo"
         : i.kind === "memo" || i.kind === "npcmemo" ? "caiu" : "derrotado") + "</span>" : "") +
