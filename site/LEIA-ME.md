@@ -2,7 +2,7 @@
 
 Uma página só, sem instalação, com quatro abas:
 
-- **Jogar** — a ficha na mesa: PV com dano e cura (já desconta RD e PV temporários), Energia, PH do grupo, ataques e Testes prontos para rolar (clique no valor), Bênçãos com usos, condições, Morrendo, Memoespírito, inventário e o **Cone de Luz com a arte e a história dele** (abaixo).
+- **Jogar** — a ficha na mesa: PV com dano e cura (já desconta RD e PV temporários), Energia, PH do grupo, ataques e Testes prontos para rolar (clique no valor — **com Vantagem, já rola os dois d20**, abaixo), Bênçãos com usos, condições, Morrendo, Memoespírito, inventário e o **Cone de Luz com a arte e a história dele** (abaixo).
 - **Editar ficha** — os doze passos do capítulo 03, mais progressão, equipamento e Memoespírito. Tudo é recalculado na hora, e o que fere uma regra aparece em vermelho na seção.
 - **Regras** — o livro inteiro (v1.2) com pesquisa instantânea, sem acento e sem maiúscula.
 - **Área do Mestre** — a mesa do Mestre, sincronizada com as fichas (abaixo).
@@ -88,6 +88,36 @@ A conta é a de 24.4: `10 + 2 × bônus de Poder` de capacidade, mais 2 se o per
 - **Créditos não ocupam Espaço**, nem Relíquias, nem o Cone de Luz.
 - Os campos de **quantidade** e de **Espaço de cada** gravam quando você sai do campo ou aperta
   Enter; o nome do item grava a cada tecla.
+
+## Rolagem com Vantagem
+
+Teste com **V** do lado rola com Vantagem sozinho: o clique já tira os dois d20, o total sai com o
+**maior** e o outro aparece **riscado**, para a mesa ver que ele saiu e não contou — ~~6~~ **15** +3
+= 18. O aviso diz de onde a Vantagem veio, e o histórico de **Rolagens** guarda os dois dados. Um
+20 em qualquer dos dois é 20 natural; o 1 natural só sai quando os dois são 1 (02.4). Vale também
+no Teste de Morrendo e na Área do Mestre (a Surpresa e o Morrendo de cada um).
+
+O que dá Vantagem sozinho é o que vale **sempre**, no Teste que o livro nomeia. Várias fontes no
+mesmo Teste ainda são 2d20:
+
+| Fonte | Testes |
+|---|---|
+| **Xianzhouíta** | os seis Testes de Resistência |
+| **Avginiano** | Resistência Mental, Percepção Mental e Força de Vontade |
+| **Vulpes** | Força de Vontade, Persuasão, Intimidação, Enganação e Liderança |
+| **Intellitron** | Tecnologia e Mecânica |
+| **Harmonia Interior** | Força de Vontade e Resistência Mental |
+| **Laço Inquebrável** | Força de Vontade e Resistência Mental, enquanto o Memoespírito está em campo e os dois estão de pé |
+| **Acrobata do Caos** | Reflexos |
+| **Passos de Sombra** | Furtividade |
+| **Peso do Juramento** | Potência Física e Resistência Física |
+
+O Teste de Morrendo segue a lista de 23.5: Xianzhouíta, Vulpes e Avginiano.
+
+A Vantagem que **depende da cena** — *contra veneno e doença*, *contra efeitos que apliquem
+condições*, *o próximo Teste de Ataque*, a Sorte do tolo — não entra sozinha, porque a ficha não
+sabe o que está acontecendo na mesa. E a Vantagem das Bênçãos é só do site (`vantagem_fontes`, em
+`motor.js`): o oráculo e a planilha continuam com a Vantagem racial.
 
 ## A história do personagem
 

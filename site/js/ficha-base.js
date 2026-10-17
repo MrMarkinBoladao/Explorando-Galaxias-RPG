@@ -146,7 +146,7 @@
       reliquias: reliquias, esfera_elemento: ou(p.esfera_elemento), conjuntos: conjuntos,
       ressonancias: Object.fromEntries(Object.entries(p.ressonancias).filter(([, v]) => v)),
       inventario: p.inventario.map((i) => ({ espaco: Number(i.espaco) || 0, qtd: i.qtd == null ? 1 : i.qtd })),
-      pv_atual: p.jogo.pv, memo_ativo: !!p.jogo.memo_ativo,
+      pv_atual: p.jogo.pv, memo_ativo: !!p.jogo.memo_ativo, memo_pv: p.jogo.memo_pv,
       forma_avatar: ou(p.forma_avatar), fragmento: ou(p.fragmento), acumulos: p.jogo.acumulos,
       memoespirito: p.caminho === "A Recordação" ? {
         pontos: memo.pontos, atributo_ataque: ou(memo.atributo_ataque), funcao: ou(memo.funcao),

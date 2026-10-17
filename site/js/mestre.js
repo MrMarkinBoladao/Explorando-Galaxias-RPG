@@ -344,9 +344,11 @@
       "Teste de Furtividade dele substitui a DT 13 para o lado todo. " + link("19", "19.3", "19.3") + "</p>" +
       (g.length ? "<div class='botoes compactos'>" + g.map((m) => {
         const tr = (m.R.testes_resistencia || {})["Percepção Mental"] || {};
-        return "<span class='rolagem-pj'>" + esc(G.nome(m).split(" ")[0]) + " " +
+        const fontes = tr.vantagem_fontes || [];
+        return "<span class='rolagem-pj'>" + esc(G.nome(m).split(" ")[0]) +
+          (fontes.length ? " <span class='etiqueta' title='Vantagem: " + esc(fontes.join(", ")) + "'>V</span>" : "") + " " +
           botaoRolar(tr.rolagem || "d20", G.nome(m) + ": Percepção Mental (Surpresa, DT 13)",
-            { vantagem: !!tr.vantagem }) + "</span>";
+            { vantagem: fontes }) + "</span>";
       }).join(" ") + "</div>" : ""),
       "cobertura");
 
@@ -1380,7 +1382,7 @@
     if (!m) return false;
     const j = m.p.jogo, R = m.R;
     const r = EG.rolar(M.rolagem(R.morrendo_bonus), { rotulo: G.nome(m) + ": Teste de Morrendo (DT 10)",
-      vantagem: R.morrendo_vantagem });
+      vantagem: R.morrendo_vantagem, fontes: m.p.raca });
     if (!r) return false;
     if (r.natural === 20) { j.pv = 1; j.morrendo = { s: 0, f: 0 }; EG.toast("20 natural: " + esc(G.nome(m)) + " se levanta com 1 PV!"); }
     else {

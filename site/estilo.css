@@ -578,6 +578,13 @@ mark { background: rgba(230, 195, 106, .3); color: inherit; border-radius: 3px; 
 .toast.saindo { opacity: 0; transform: translateY(6px); }
 .rolagem-rotulo { font-size: .8rem; color: var(--suave); }
 .rolagem-total { font-size: 1.6rem; font-weight: 800; color: var(--ouro); }
+/* Vantagem (02.4): os dois d20 lado a lado; o que não contou vem riscado */
+.dado {
+  display: inline-block; min-width: 1.9em; margin-right: .3rem; padding: 0 .25em; border: 1px solid var(--borda);
+  border-radius: 5px; text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.35;
+}
+.dado.usado { color: var(--texto); border-color: var(--ouro-escuro); }
+.dado.descartado { text-decoration: line-through; text-decoration-thickness: 2px; text-decoration-color: var(--vermelho); opacity: .8; }
 .critico { color: var(--verde); }
 .falha { color: var(--vermelho); }
 .historico { position: fixed; right: 1rem; bottom: 1rem; z-index: 40; max-width: min(24rem, calc(100vw - 2rem)); background: var(--painel); border: 1px solid var(--borda); border-radius: 8px; box-shadow: var(--sombra); }

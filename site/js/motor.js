@@ -115,6 +115,20 @@
   const VANTAGEM_TR_CONDICIONAL = {};                                               // 05 (v1.2): vazio
   const VANTAGEM_MORRENDO = ["Xianzhouíta", "Vulpes", "Avginiano"];               // 23.5
 
+  // Vantagem de Bênção: só as que valem sempre, no Teste que o texto nomeia. As que dependem
+  // da cena ("contra veneno e doença", "contra efeitos que apliquem condições", "o próximo
+  // Teste de Ataque") ficam de fora: a ficha não sabe o que está acontecendo na mesa.
+  // Isto é só do site, que rola a Vantagem sozinho e por isso precisa saber de todas. O
+  // oráculo e a planilha têm apenas a Vantagem racial — que continua sendo `vantagem`, igual
+  // a eles; a lista completa sai em `vantagem_fontes`.
+  const VANTAGEM_BENCAO_PERICIA = { "Passos de Sombra": ["Furtividade"] };            // 14
+  const VANTAGEM_BENCAO_TR = {
+    "Harmonia Interior": ["Força de Vontade", "Resistência Mental"],                  // 09
+    "Acrobata do Caos": ["Reflexos"],                                                 // 13
+    "Peso do Juramento": ["Potência Física", "Resistência Física"],                   // 15
+  };
+  const VANTAGEM_LACO = ["Força de Vontade", "Resistência Mental"];                   // 11, Laço Inquebrável
+
   // Mensagens dos avisos, em linguagem de mesa
   const AVISOS = {
     NIVEL_FORA: "O nível precisa estar entre 1 e 20.",
@@ -448,6 +462,13 @@
     if (escolhidas.some((p) => perCam.includes(p))) aviso("PERICIA_DO_CAMINHO_ESCOLHIDA");
     const eficP = (e.eficacia_pericias || []).slice();
     if (eficP.length > pSlots) aviso("EFICACIA_PERICIAS_A_MAIS");
+    // Quem dá Vantagem neste Teste (02.4): a Raça e as Bênçãos que o personagem tem. Várias
+    // fontes ainda são 2d20 — a lista serve para a mesa ver de onde a Vantagem veio.
+    const fontesDeVantagem = (nome, daRaca, dasBencaos) => {
+      const fontes = (daRaca[raca] || []).includes(nome) ? [raca] : [];
+      for (const [b, testes] of Object.entries(dasBencaos)) if (tem.has(b) && testes.includes(nome)) fontes.push(b);
+      return fontes;
+    };
     const pericias = {};
     const comEf = new Set(perCam.concat(escolhidas.slice(0, permitidas)));
     for (const [nome, at0] of PERICIAS) {
@@ -462,7 +483,8 @@
       const total = b + prof + pen + extra;
       pericias[nome] = { atributo: at, bonus_atributo: b, eficiencia: temEf, eficacia: usaEfc,
         penalidade: pen, total: total, rolagem: rolagem(total),
-        vantagem: (VANTAGEM_PERICIA[raca] || []).includes(nome) };
+        vantagem: (VANTAGEM_PERICIA[raca] || []).includes(nome),
+        vantagem_fontes: fontesDeVantagem(nome, VANTAGEM_PERICIA, VANTAGEM_BENCAO_PERICIA) };
     }
     s.pericias = pericias;
     s.pericias_com_eficiencia = Object.values(pericias).filter((p) => p.eficiencia).length;
@@ -470,6 +492,10 @@
     // --- Testes de Resistência ---
     const eficTr = (e.eficacia_tr || []).slice();
     if (eficTr.length > trSlots) aviso("EFICACIA_TR_A_MAIS");
+    // Laço Inquebrável (11) vale "enquanto os dois estiverem de pé": o Memoespírito em campo
+    // e com PV, e você fora de Morrendo. PV em branco é PV cheio.
+    const dePe = (pv) => !(ehInt(pv) && pv <= 0);
+    const laco = tem.has("Laço Inquebrável") && memoAtivo && dePe(e.memo_pv) && dePe(e.pv_atual);
     const trs = {};
     for (const [nome, at] of TESTES_RESISTENCIA) {
       const prof = eficTr.slice(0, trSlots).includes(nome) ? 2 * ef : ef;
@@ -482,9 +508,12 @@
       temp += contar(conjRolagens, nome);
       if (temp > s.teto_bonus) aviso("BONUS_TEMPORARIO_NO_TETO");
       const total = bon[at] + prof + pen + Math.min(s.teto_bonus, temp) + coneEm("Um Teste de Resistência", nome);
+      const fontes = fontesDeVantagem(nome, VANTAGEM_TR, VANTAGEM_BENCAO_TR);
+      if (laco && VANTAGEM_LACO.includes(nome)) fontes.push("Laço Inquebrável");
       trs[nome] = { atributo: at, total: total, rolagem: rolagem(total),
         vantagem: (VANTAGEM_TR[raca] || []).includes(nome),
-        vantagem_condicional: (VANTAGEM_TR_CONDICIONAL[raca] || []).includes(nome) };
+        vantagem_condicional: (VANTAGEM_TR_CONDICIONAL[raca] || []).includes(nome),
+        vantagem_fontes: fontes };
     }
     s.testes_resistencia = trs;
 
