@@ -138,6 +138,12 @@ Memoespírito** (ou direto no cartão dele, na aba Jogar, enquanto não houver u
 | **Marca do Passado** | alvo único | normal; ao acertar, Marcado ou Vulnerável |
 | **Ataque Evolutivo** | alvo único | +1 por uso no combate, até +5 (o cartão conta) |
 
+**O Memoespírito é chamado pelo nome** que está na ficha dele: *Ataque Básico de Gwen Fallon*,
+*Gwen Fallon atacou (+10 Energia para você)*, *Técnica Principal de Gwen Fallon* (ou *Sick ·
+Técnica Principal de Gwen Fallon*, quando a Técnica tem nome próprio), *PV de Gwen Fallon agora*,
+*Invocar Gwen Fallon* — na aba Jogar, no painel e no registro de Energia, nas rolagens e na Área do
+Mestre. Sem nome, a ficha diz *do Memoespírito*.
+
 Com a Evolução **Forma Completa** a Técnica tem um **segundo acréscimo**; com Golpe Ancestral e
 Explosão de Memória juntos, o cartão mostra **Alvo único (+1 dado)** e **Em área (até 3 alvos)**, e o
 dano rolado muda com o botão aceso. Com **Memória Devastadora** os Fragmentos já entram no dano, e no
