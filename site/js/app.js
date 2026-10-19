@@ -408,10 +408,58 @@
   }
 
   // ---------------------------------------------------------------------------
-  // Rolador de dados: "d20+6", "6d6+4", "2d20" ...
+  // Rolador de dados: "d20+6", "6d6+4", "2d20", "1d8+1d6+2" ...
   // ---------------------------------------------------------------------------
   const historico = [];
-  const d = (faces) => 1 + Math.floor(Math.random() * faces);
+  const HISTORICO_MAX = 30;
+
+  /**
+   * Um dado. O sorteio vem do `crypto.getRandomValues` do navegador — o mesmo gerador que
+   * cria senhas e chaves —, e não do `Math.random`, que é estatisticamente bom mas é um
+   * gerador de sequência. O "módulo" sozinho daria um viés minúsculo nas faces baixas
+   * (2^32 não é múltiplo de 20); por isso o número que cai na sobra é descartado e
+   * sorteado de novo: toda face sai com a mesma chance, exatamente.
+   */
+  const cripto = typeof window !== "undefined" && window.crypto && window.crypto.getRandomValues ? window.crypto : null;
+  const sorteio = new Uint32Array(1);
+  function d(faces) {
+    if (!cripto) return 1 + Math.floor(Math.random() * faces);
+    const limite = Math.floor(0x100000000 / faces) * faces;
+    let x;
+    do { cripto.getRandomValues(sorteio); x = sorteio[0]; } while (x >= limite);
+    return 1 + (x % faces);
+  }
+
+  /**
+   * Lê a expressão de uma rolagem: "d20+6", "6d6+4", "2d6+1d8+3", "d20-1". Devolve
+   * {grupos: [{n, f}], mod} ou null se não entendeu. Grupo de dado só soma; o número solto
+   * soma ou subtrai. O teto (200 dados, d1000) é para um erro de digitação não travar a página.
+   */
+  function lerExpressao(expr) {
+    const s = String(expr == null ? "" : expr).replace(/\s+/g, "").toLowerCase();
+    if (!s || s.length > 40 || !/^[+-]?[\dd+-]+$/.test(s)) return null;
+    const termos = s.match(/[+-]?[^+-]+/g) || [];
+    if (termos.join("") !== s) return null;
+    const grupos = [];
+    let mod = 0, quantos = 0;
+    for (const t of termos) {
+      const neg = t[0] === "-", corpo = t.replace(/^[+-]/, "");
+      const m = corpo.match(/^(\d*)d(\d+)$/);
+      if (m) {
+        const n = m[1] === "" ? 1 : Number(m[1]), f = Number(m[2]);
+        if (neg || !(n >= 1) || !(f >= 1) || f > 1000) return null;
+        quantos += n;
+        grupos.push({ n: n, f: f });
+      } else if (/^\d+$/.test(corpo)) {
+        mod += (neg ? -1 : 1) * Number(corpo);
+      } else return null;
+    }
+    if (!grupos.length || quantos > 200) return null;
+    return { grupos: grupos, mod: mod };
+  }
+
+  /** É um d20 só (com ou sem modificador)? É nele que a Vantagem vale (02.4). */
+  const ehUmD20 = (e) => !!e && e.grupos.length === 1 && e.grupos[0].n === 1 && e.grupos[0].f === 20;
 
   /**
    * opcoes: {rotulo, vantagem, fontes, critico ("20" | "19-20")}
@@ -424,14 +472,15 @@
    */
   function rolar(expr, opcoes) {
     opcoes = opcoes || {};
-    const m = String(expr).replace(/\s+/g, "").match(/^(\d*)d(\d+)([+-]\d+)?$/i);
-    if (!m) return null;
-    const qtd = Number(m[1] || 1), faces = Number(m[2]), mod = Number(m[3] || 0);
+    const e = lerExpressao(expr);
+    if (!e) return null;
+    const texto = String(expr).replace(/\s+/g, "");
+    const mod = e.mod;
     const emLista = Array.isArray(opcoes.vantagem);
     const vantagem = emLista ? opcoes.vantagem.length > 0 : !!opcoes.vantagem;
     const fontes = emLista ? opcoes.vantagem.join(", ") : String(opcoes.fontes || "");
     let dados = [], natural = null, descartado = null;
-    if (qtd === 1 && faces === 20) {
+    if (ehUmD20(e)) {
       const a = d(20);
       if (vantagem) {
         const b = d(20);
@@ -440,7 +489,7 @@
       } else natural = a;
       dados = [natural];
     } else {
-      for (let i = 0; i < qtd; i++) dados.push(d(faces));
+      for (const g of e.grupos) for (let i = 0; i < g.n; i++) dados.push(d(g.f));
     }
     const total = dados.reduce((x, y) => x + y, 0) + mod;
     let nota = "";
@@ -451,12 +500,12 @@
       else if (natural === 20) nota = "20";
       else if (natural === 1) nota = "1";
     }
-    const r = { rotulo: String(opcoes.rotulo || expr), expr: String(expr), total: total, natural: natural,
-      descartado: descartado, dados: qtd > 1 ? dados : null, mod: mod, nota: nota,
+    const r = { rotulo: String(opcoes.rotulo || texto), expr: texto, total: total, natural: natural,
+      descartado: descartado, dados: dados.length > 1 ? dados : null, mod: mod, nota: nota,
       fontes: descartado !== null ? fontes : "" };
     mostrarRolagem(r);
     // A mesa online pendura aqui o envio da rolagem para os outros aparelhos.
-    if (typeof EG.aoRolar === "function") { try { EG.aoRolar(r); } catch (e) { console.error(e); } }
+    if (typeof EG.aoRolar === "function") { try { EG.aoRolar(r); } catch (erro) { console.error(erro); } }
     return { total: total, natural: natural };
   }
 
@@ -493,7 +542,7 @@
   function mostrarRolagem(r, quem, o) {
     const html = htmlDaRolagem(r, quem);
     historico.unshift(html);
-    historico.length = Math.min(historico.length, 15);
+    historico.length = Math.min(historico.length, HISTORICO_MAX);
     if (!o || o.aviso !== false) toast(html, "rolagem");
     const lista = document.getElementById("historico-lista");
     if (lista) lista.innerHTML = historico.map((h) => "<li>" + h + "</li>").join("");
@@ -526,6 +575,101 @@
       " title='" + (vantagem ? "Clique para rolar com Vantagem: 2d20, fica o maior" : "Clique para rolar") + "'>" +
       esc(expr) + "</button>";
   }
+
+  /**
+   * Teste de Ataque com o botão de Vantagem do lado (02.4). A Vantagem num ataque quase
+   * sempre vem da cena — "Vantagem no próximo Teste de Ataque", um alvo que não vê, uma
+   * Bênção que acabou de disparar —, e a ficha não tem como saber disso sozinha. Quem sabe
+   * é a mesa: o botão do lado rola os dois d20 na hora e fica o maior. Um 20 em qualquer
+   * dos dois é crítico, como em toda rolagem com Vantagem.
+   */
+  function botoesAtaque(expr, rotulo, extra) {
+    extra = extra || {};
+    if (!expr || !/^d20(?:[+-]\d+)?$/i.test(String(expr).replace(/\s+/g, ""))) return botaoRolar(expr, rotulo, extra);
+    return "<span class='rolar-par'>" + botaoRolar(expr, rotulo, extra) +
+      "<button type='button' class='rolar vantagem' data-rolar='" + esc(expr) + "' data-rotulo='" + esc(rotulo || "") +
+      "' data-vantagem='1'" + (extra.critico ? " data-critico='" + esc(extra.critico) + "'" : "") +
+      " title='Rolar com Vantagem: 2d20, fica o maior (2.4)' aria-label='" + esc((rotulo || expr) + " com Vantagem") + "'>" +
+      "Vantagem</button></span>";
+  }
+
+  // ---------------------------------------------------------------------------
+  // Rolagem livre: qualquer expressão, para qualquer pessoa, em qualquer tela
+  //
+  // Há uma caixa no painel Rolagens (no canto, em toda tela), uma na aba Jogar e uma no
+  // Painel do Mestre. Todas passam pelo mesmo `rolar`, então a rolagem livre do jogador vai
+  // para a mesa online com o nome dele, igual a qualquer outra.
+  // ---------------------------------------------------------------------------
+  const ultimaLivre = {};          // o que estava escrito em cada caixa, para o redesenho não apagar
+
+  function rolarLivre(texto, o) {
+    o = o || {};
+    const expr = String(texto == null ? "" : texto).replace(/\s+/g, "");
+    if (!expr) { toast("Escreva a rolagem, como <code>2d6+3</code> ou <code>d20+5</code>.", "erro"); return null; }
+    const e = lerExpressao(expr);
+    if (!e) {
+      toast("Não entendi <b>" + esc(expr) + "</b>. Use <code>NdF+M</code>: <code>d20+5</code>, <code>2d6+3</code>, " +
+        "<code>1d8+1d6+2</code>.", "erro");
+      return null;
+    }
+    const vantagem = !!o.vantagem && ehUmD20(e);
+    if (o.vantagem && !vantagem) toast("A Vantagem vale para um d20 só (2.4): <b>" + esc(expr) + "</b> foi rolado normal.");
+    return rolar(expr, { rotulo: (o.prefixo || "Rolagem livre") + ": " + expr, vantagem: vantagem });
+  }
+
+  /**
+   * A caixa de rolagem livre: a expressão, a Vantagem e os dados mais usados num clique.
+   * `id` identifica a caixa; `o.prefixo` é o começo do rótulo no histórico ("Mestre").
+   */
+  function formRolagemLivre(id, o) {
+    o = o || {};
+    const rapidos = o.rapidos || ["d20", "d4", "d6", "d8", "d10", "d12", "d100"];
+    return "<div class='rolagem-livre' data-livre-caixa='" + esc(id) + "' data-prefixo='" + esc(o.prefixo || "Rolagem livre") + "'>" +
+      "<div class='rolagem-livre-linha'><label class='sr-only' for='" + esc(id) + "'>Rolagem livre</label>" +
+      "<input type='text' id='" + esc(id) + "' data-livre='" + esc(id) + "' autocomplete='off' spellcheck='false' " +
+      "placeholder='" + esc(o.ph || "2d6+3") + "' value='" + esc(ultimaLivre[id] || "") + "'>" +
+      "<label class='marca' title='2d20, fica o maior (2.4)'><input type='checkbox' id='" + esc(id) + "-v' data-livre-v='" +
+      esc(id) + "'" + (ultimaLivre[id + "-v"] ? " checked" : "") + "> <span>Vantagem</span></label>" +
+      "<button type='button' class='botao primario' data-livre-rolar='" + esc(id) + "'>Rolar</button></div>" +
+      "<div class='botoes compactos'>" + rapidos.map((x) => "<button type='button' class='rolar' data-livre-rapido='" +
+        esc(x) + "' data-livre-de='" + esc(id) + "' title='Rolar " + esc(x) + "'>" + esc(x) + "</button>").join("") + "</div></div>";
+  }
+
+  function caixaLivre(id) {
+    const c = document.querySelector("[data-livre-caixa='" + id + "']");
+    const v = document.getElementById(id + "-v");
+    return { prefixo: c ? c.dataset.prefixo : "", vantagem: !!(v && v.checked), input: document.getElementById(id) };
+  }
+
+  document.addEventListener("input", (ev) => {
+    const id = ev.target && ev.target.dataset && ev.target.dataset.livre;
+    if (id) ultimaLivre[id] = ev.target.value;
+  });
+  document.addEventListener("change", (ev) => {
+    const id = ev.target && ev.target.dataset && ev.target.dataset.livreV;
+    if (id) ultimaLivre[id + "-v"] = !!ev.target.checked;
+  });
+
+  document.addEventListener("click", (ev) => {
+    const b = ev.target.closest("[data-livre-rolar], [data-livre-rapido]");
+    if (!b) return;
+    ev.preventDefault();
+    if (b.dataset.livreRolar) {
+      const c = caixaLivre(b.dataset.livreRolar);
+      rolarLivre(c.input ? c.input.value : "", { prefixo: c.prefixo, vantagem: c.vantagem });
+    } else {
+      const c = caixaLivre(b.dataset.livreDe), dado = b.dataset.livreRapido;
+      rolarLivre(dado, { prefixo: c.prefixo, vantagem: c.vantagem && dado === "d20" });
+    }
+  });
+
+  document.addEventListener("keydown", (ev) => {
+    const id = ev.key === "Enter" && ev.target && ev.target.dataset && ev.target.dataset.livre;
+    if (!id) return;
+    ev.preventDefault();
+    const c = caixaLivre(id);
+    rolarLivre(ev.target.value, { prefixo: c.prefixo, vantagem: c.vantagem });
+  });
 
   // ---------------------------------------------------------------------------
   // Rotas: #jogar, #editar, #regras, #regras?q=..., #regras/capitulo/bloco
@@ -675,6 +819,10 @@
       return;
     }
     document.getElementById("versao-livro").textContent = "Livro v" + window.CATALOGO.versao;
+    // A caixa de rolagem livre do painel Rolagens: fica fora de #app, então vale em toda tela
+    // e nenhum redesenho de tela mexe nela.
+    const caixa = document.getElementById("rolagem-livre-painel");
+    if (caixa) caixa.innerHTML = formRolagemLivre("rolagem-livre-global", { rapidos: ["d20", "d6", "d8", "d10", "d12", "d100"] });
     const selo = document.getElementById("selo-versao");
     if (selo && VERSAO && VERSAO !== "dev") selo.textContent = "Versão do site: " + VERSAO + ".";
     navegar();
@@ -687,7 +835,8 @@
   });
 
   Object.assign(EG, { esc, norm, sinal, uid, clonar, destacar, regexSemAcento, paragrafos, markdown,
-    limparHtml, palavras, Armazem, toast, rolar, botaoRolar, registrarTela, rotaAtual, navegar, historico,
+    limparHtml, palavras, Armazem, toast, rolar, botaoRolar, botoesAtaque, rolarLivre, formRolagemLivre, lerExpressao,
+    registrarTela, rotaAtual, navegar, historico,
     mostrarRolagem, htmlDaRolagem,
     exportarTudo, importarTudo, checarAtualizacao, baixarJSON, fatiarNome, seletorDeArquivo,
     redesenharTela, guardarFoco, estaAberto, definirAberto, atributosAbre, lerImagem, pesoDaImagem,

@@ -27,9 +27,11 @@
   // ---------------------------------------------------------------------------
   // Modelo e armazenamento
   // ---------------------------------------------------------------------------
+  // `inicio` identifica o combate: é com ele (e o Ciclo) que as fontes de Energia "1 vez por
+  // Ciclo" e "1 vez por combate" (17.2) sabem em que combate já contaram, aqui e na mesa online.
   function combateVazio() {
     return { nome: "", ciclo: 1, ativo: false, inimigos: [], npcs: [], cc: {}, alvo: "",
-      rt: { quem: "", fonte: "basico", elemento: "" } };
+      rt: { quem: "", fonte: "basico", elemento: "" }, inicio: Date.now() };
   }
 
   function modeloVazio() {
@@ -265,10 +267,15 @@
     j.temp = (j.temp || 0) - absorvido;
     j.pv = Math.max(0, antes - (depoisRd - absorvido));
     if (j.pv === 0) j.morrendo = { s: 0, f: 0 };
+    // 17.2: sofrer dano dá +10 de Energia, 1 vez por Ciclo — em combate, vai junto com o dano.
+    const e = G.estado().combate.ativo
+      ? EG.Ficha.mudarEnergia(m.p, m.R, "dano", { quem: "Mestre", chaves: G.chavesDe(m) }) : null;
     G.gravarFicha(m);
     return { msg: esc(G.nome(m)) + ": dano " + bruto + (continuo ? " (Contínuo, ignora RD)" : m.R.rd ? " − RD " + m.R.rd : "") +
       " = <b>" + depoisRd + "</b>" + (absorvido ? " · " + absorvido + " no temporário" : "") +
-      " · PV " + j.pv + "/" + m.R.pv_max + (j.pv === 0 ? " · <b>Morrendo!</b>" : "") };
+      " · PV " + j.pv + "/" + m.R.pv_max + (j.pv === 0 ? " · <b>Morrendo!</b>" : "") +
+      (e ? (e.bloqueado ? "<br><span class='suave'>A Energia de sofrer dano já veio neste Ciclo.</span>"
+        : "<br>+" + e.aplicado + " de Energia por sofrer dano (1 vez por Ciclo) · " + e.energia + "/100") : "") };
   };
 
   G.curar = function (m, v) {
@@ -281,10 +288,50 @@
       (antes === 0 ? " · saiu de Morrendo" : "") };
   };
 
+  /** Os botões de Energia do Mestre: um ajuste, que entra no registro da ficha como dele. */
   G.energia = function (m, delta) {
-    const j = m.p.jogo;
-    j.energia = Math.max(0, Math.min(100, (j.energia || 0) + delta));
+    EG.Ficha.mudarEnergia(m.p, m.R, "ajuste", { valor: delta, quem: "Mestre", chaves: G.chavesDe(m) });
     G.gravarFicha(m);
+  };
+
+  /** Uma fonte da tabela de 17.2 aplicada pelo Mestre (a Quebra, o dano). Devolve o resultado. */
+  G.energiaPorFonte = function (m, fonte) {
+    const r = EG.Ficha.mudarEnergia(m.p, m.R, fonte, { quem: "Mestre", chaves: G.chavesDe(m) });
+    G.gravarFicha(m);
+    return r;
+  };
+
+  /**
+   * O Ciclo e o combate em curso na mesa do Mestre, no formato de F.chavesDeCombate. A
+   * mesa online publica o mesmo `inicio` e o mesmo Ciclo no retrato do combate, então a
+   * marca "já contou neste Ciclo" é a mesma no aparelho do Mestre e no do jogador.
+   */
+  G.chavesDoCombate = function (cb) {
+    cb = cb || G.estado().combate;
+    const id = Number(cb.inicio) || 0, n = Math.max(1, Number(cb.ciclo) || 1);
+    return { ciclo: "m:" + id + ":" + n, combate: "m:" + id, n: n, origem: "mestre" };
+  };
+
+  /** As chaves para a ficha de um membro (ou NPC): as do combate, se há combate; senão as da ficha. */
+  G.chavesDe = function (m) {
+    const cb = G.estado().combate;
+    return cb.ativo ? G.chavesDoCombate(cb) : EG.Ficha.chavesDeCombate(m.p);
+  };
+
+  /**
+   * Para a aba Jogar: se este navegador tem um combate aberto na Área do Mestre e a ficha
+   * está nele, as chaves dele. Lê o que está salvo sem criar a mesa do Mestre — quem nunca
+   * abriu a Área do Mestre não ganha uma mesa só por abrir a ficha.
+   */
+  G.chavesSeEmCombate = function (id) {
+    let est = E;
+    if (!est) {
+      try { est = JSON.parse(localStorage.getItem(CHAVE)); } catch (_) { est = null; }
+    }
+    const cb = est && est.combate;
+    if (!cb || !cb.ativo) return null;
+    const naCena = (est.grupo || []).indexOf(id) >= 0 || (cb.npcs || []).indexOf(id) >= 0;
+    return naCena ? G.chavesDoCombate(cb) : null;
   };
 
   /** 23.6: Descanso Curto (+2×nível+Vigor) e Longo (tudo de volta) para o grupo inteiro. */
@@ -307,14 +354,21 @@
   };
 
   // --- PH do grupo: um recurso só, guardado em todas as fichas (16.2) ---------
+  /**
+   * O PH do grupo. Na mesa online ele é um número só da mesa (`mesa`), e é ele que vale —
+   * mesmo que o grupo deste navegador tenha uma ficha fora da mesa (uma cópia importada
+   * antes, um teste) com um PH velho. Antes, o menor PH das fichas era o "atual": com uma
+   * cópia velha no grupo, o +1 do Mestre só alcançava a cópia e não mudava nada na mesa.
+   */
   G.recursoPH = function (g) {
     g = g || G.grupo();
     if (!g.length) return null;
     const ref = g[0];
     const valores = g.map((m) => (m.p.jogo.ph == null ? ref.R.ph_inicio : m.p.jogo.ph));
+    const daMesa = EG.MesaOnline && EG.MesaOnline.phDaMesa ? EG.MesaOnline.phDaMesa(g) : null;
     return {
-      atual: Math.min(...valores), max: ref.R.ph_max, inicio: ref.R.ph_inicio,
-      geracao: ref.R.ph_geracao,
+      atual: daMesa != null ? daMesa : Math.min(...valores), max: ref.R.ph_max, inicio: ref.R.ph_inicio,
+      geracao: ref.R.ph_geracao, mesa: daMesa != null,
       divergente: g.some((m) => m.R.ph_max !== ref.R.ph_max) || new Set(valores).size > 1,
     };
   };
@@ -883,11 +937,15 @@
     }
     for (const x of cb.inimigos) {
       const chave = "i:" + x.uid, cc = G.cc(chave);
+      const pv = x.pv == null ? x.pv_max : x.pv;
       itens.push({
         chave: chave, kind: "inimigo", tipo: x.tipo, nome: x.nome || "Inimigo sem nome",
         sub: [x.faccao, "faixa " + x.faixa].filter(Boolean).join(" · "),
         vel: x.vel || 10, agi: 0, dis: 0, jogador: false, cc: cc, x: x,
-        pv: x.pv == null ? x.pv_max : x.pv, pv_max: x.pv_max, condicoes: x.condicoes || [],
+        pv: pv, pv_max: x.pv_max, condicoes: x.condicoes || [],
+        // Inimigo a 0 PV está derrotado: a vez dele passa sozinha, sem "Já agiu". Não é
+        // marca guardada — é lida do PV a cada Fila —, então se ele for curado volta a agir.
+        derrotado: pv === 0,
       });
     }
     const dentro = itens.filter((i) => i.cc.participa !== false);
@@ -906,13 +964,15 @@
     const total = dentro.filter((i) => i.cc.avanco_total);
     if (total.length) {
       const resto = dentro.filter((i) => !i.cc.avanco_total);
-      const i0 = resto.findIndex((i) => !i.cc.agiu);
+      const i0 = resto.findIndex((i) => !i.cc.agiu && !i.derrotado);
       resto.splice(i0 < 0 ? resto.length : i0 + 1, 0, ...total);
       dentro.length = 0;
       dentro.push(...resto);
     }
     dentro.forEach((i, n) => { i.casa = n + 1; });
-    const agora = dentro.find((i) => !i.cc.agiu && !i.cc.surpreso);
+    // Quem age agora: o primeiro que ainda não agiu, pulando o Surpreso (19.3) e o inimigo
+    // derrotado — esse não age mais, e a Fila não espera um "Já agiu" por ele.
+    const agora = dentro.find((i) => !i.cc.agiu && !i.cc.surpreso && !i.derrotado);
     if (agora) agora.agora = true;
     return { casas: dentro, fora: itens.filter((i) => i.cc.participa === false), agora: agora || null };
   };
@@ -958,7 +1018,11 @@
     est.combate.nome = nome || "";
     est.combate.ativo = true;
     const g = G.grupo();
-    for (const m of g) { m.p.jogo.ph = m.R.ph_inicio; m.p.jogo.acumulos = {}; G.gravarFicha(m); }
+    for (const m of g) {
+      m.p.jogo.ph = m.R.ph_inicio; m.p.jogo.acumulos = {};
+      EG.Ficha.zerarEnergiaDoCombate(m.p.jogo);          // os limites de Energia de 17.2 recomeçam
+      G.gravarFicha(m);
+    }
     G.salvar();
     return g.length;
   };
@@ -1185,7 +1249,8 @@
       "<a href='#mestre" + (id === "painel" ? "" : "/" + id) + "' class='sub-aba" + (id === atual ? " ativa" : "") +
       "'>" + esc(rotulo) + (id === "combate" && cb.ativo ? " <span class='etiqueta pronta'>Ciclo " + cb.ciclo + "</span>" : "") +
       "</a>").join("");
-    return "<div class='barra-mestre'>" +
+    const comoJogador = EG.MesaOnline && EG.MesaOnline.faixaMestreDoJogador ? EG.MesaOnline.faixaMestreDoJogador() : "";
+    return comoJogador + "<div class='barra-mestre'>" +
       "<div><strong>" + esc(est.campanha.nome || "Campanha sem nome") + "</strong> " +
       "<span class='suave'>sessão " + esc(est.campanha.sessao || 1) + " · nível " + G.nivel() +
       " · faixa " + esc(G.faixaTexto()) + "</span></div>" +
@@ -1339,8 +1404,9 @@
     EG.Ficha.P = null;
     EG.Ficha.R = null;
     EG.Ficha.aoSalvar = null;
-    // Quem está numa mesa online como jogador não usa a Área do Mestre neste aparelho.
-    if (EG.MesaOnline && EG.MesaOnline.ehJogador()) { G.app().innerHTML = EG.MesaOnline.telaSemMestre(); return; }
+    // Quem é jogador numa mesa online continua com a Área do Mestre: ela é a mesa *deste
+    // navegador* (a campanha que ele mestrar um dia), e nada da mesa do Mestre de lá chega
+    // aqui — os inimigos, encontros e NPCs de cada Mestre nunca saem do navegador dele.
     if (!G.estado().aviso_lido) { telaAviso(); return; }
     const qual = (r && r.partes && r.partes[0]) || "painel";
     (G.telas[qual] || G.telas.painel)(r);

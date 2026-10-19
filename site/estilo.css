@@ -185,11 +185,64 @@ select option { background: var(--painel); }
   /* No celular, uma coluna só, na ordem em que se usa na mesa */
   .grade-jogo { grid-template-columns: 1fr; gap: 0; }
   .grade-jogo .coluna { display: contents; }
-  .grade-jogo .vida { order: 1; } .grade-jogo .defesa { order: 2; } .grade-jogo .acoes { order: 3; }
-  .grade-jogo .recursos { order: 4; } .grade-jogo .testes { order: 5; } .grade-jogo .condicoes { order: 6; }
-  .grade-jogo .memo { order: 7; } .grade-jogo .bencaos { order: 8; } .grade-jogo .cone-cartao { order: 9; }
-  .grade-jogo .inventario { order: 10; } .grade-jogo .notas { order: 11; }
+  .grade-jogo .vida { order: 1; } .grade-jogo .energia { order: 2; } .grade-jogo .acoes { order: 3; }
+  .grade-jogo .memo { order: 4; } .grade-jogo .defesa { order: 5; } .grade-jogo .recursos { order: 6; }
+  .grade-jogo .testes { order: 7; } .grade-jogo .rolagem-livre-cartao { order: 8; } .grade-jogo .condicoes { order: 9; }
+  .grade-jogo .bencaos { order: 10; } .grade-jogo .cone-cartao { order: 11; }
+  .grade-jogo .inventario { order: 12; } .grade-jogo .notas { order: 13; }
 }
+
+/* Os seis Atributos à vista, embaixo do nome: valor final e o Bônus que entra nas rolagens */
+.atributos-faixa { list-style: none; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: .4rem; margin: -.4rem 0 1rem; padding: 0; }
+.atributos-faixa li { display: flex; flex-direction: column; align-items: center; padding: .35rem .3rem; background: var(--painel);
+  border: 1px solid var(--borda); border-radius: 8px; text-align: center; min-width: 0; }
+.atributos-faixa li.usado { border-color: var(--ouro-escuro); }
+.atributos-faixa .rotulo { font-size: .68rem; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.atributos-faixa b { font-size: 1.35rem; font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.atributos-faixa .bonus { font-size: .85rem; font-weight: 700; color: var(--ouro); font-variant-numeric: tabular-nums; }
+.atributos-faixa small { font-size: .66rem; color: var(--suave); }
+.atributos-faixa.compacta { margin: .1rem 0 .6rem; gap: .25rem; }
+.atributos-faixa.compacta li { flex-direction: row; justify-content: center; gap: .25rem; padding: .2rem .3rem; background: var(--painel-2); }
+.atributos-faixa.compacta b { font-size: .95rem; }
+.atributos-faixa.compacta .bonus { font-size: .78rem; }
+@media (max-width: 600px) {
+  .atributos-faixa { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .atributos-faixa.compacta { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* Teste de Ataque com o botão de Vantagem do lado (02.4) */
+.rolar-par { display: inline-flex; align-items: center; gap: .25rem; flex-wrap: wrap; }
+button.rolar.vantagem { font-size: .74rem; font-weight: 700; color: var(--azul); border-color: var(--borda); padding: .1rem .4rem; }
+button.rolar.vantagem:hover { background: var(--azul); color: #0b1020; }
+
+/* O painel de Energia: tudo o que muda a Energia num lugar só (17.2) */
+.energia { border-color: #34508f; }
+.energia-topo { display: flex; align-items: baseline; justify-content: space-between; gap: .5rem; flex-wrap: wrap; }
+.energia-numero b { font-size: 2.1rem; font-weight: 800; color: var(--azul); font-variant-numeric: tabular-nums; }
+.energia-numero small { font-size: 1rem; color: var(--suave); }
+.barra-energia.grande { height: .9rem; margin: .3rem 0 .4rem; }
+.energia-ciclo { display: flex; align-items: center; justify-content: space-between; gap: .5rem; flex-wrap: wrap; font-size: .9rem; }
+.energia h3 { margin-top: .7rem; }
+.fontes-energia { display: grid; grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr)); gap: .35rem; }
+.botao.fonte-energia { justify-content: space-between; gap: .5rem; text-align: left; font-weight: 500; padding: .45rem .6rem; }
+.botao.fonte-energia > span { min-width: 0; }
+.botao.fonte-energia > span small { display: block; font-size: .72rem; color: var(--suave); }
+.botao.fonte-energia > b { flex: none; color: var(--azul); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.botao.fonte-energia.feito { opacity: .7; border-style: dashed; }
+.botao.fonte-energia.feito > b { color: var(--verde); font-size: .8rem; }
+.log-energia { list-style: none; margin: .2rem 0 .4rem; padding: 0; font-size: .88rem; }
+.log-energia li { padding: .15rem 0; border-bottom: 1px dashed var(--borda); }
+.log-energia li:last-child { border-bottom: 0; }
+.log-energia b { display: inline-block; min-width: 2.6rem; font-variant-numeric: tabular-nums; }
+
+/* Alvo único / em área do Memoespírito: dois botões, um aceso */
+.alternar { display: inline-flex; gap: .25rem; flex-wrap: wrap; margin: .2rem 0 .1rem; }
+
+/* Rolagem livre: a caixa da aba Jogar, a do Painel do Mestre e a do painel Rolagens */
+.rolagem-livre-linha { display: flex; align-items: center; gap: .4rem; flex-wrap: wrap; }
+.rolagem-livre-linha input[type=text] { flex: 1 1 9rem; width: auto; font-family: ui-monospace, Consolas, monospace; }
+.rolagem-livre-linha .marca { margin: 0; font-size: .9rem; }
+.rolagem-livre .botoes.compactos button.rolar { padding: .1rem .5rem; }
 .pv { margin-bottom: .6rem; }
 .pv-numero { font-size: 2.4rem; font-weight: 800; }
 .pv-numero small { font-size: 1.1rem; color: var(--suave); }
@@ -449,6 +502,7 @@ button.rolar:hover { background: var(--ouro); color: #1a1406; }
 .fila-casa.agora { background: rgba(230, 195, 106, .1); border-left: 3px solid var(--ouro); padding-left: .5rem; }
 .fila-casa.agiu { opacity: .6; }
 .fila-casa.caiu .casa-quem b { text-decoration: line-through; }
+.fila-casa.pulado { opacity: .5; }
 .fila-casa.quebrado { background: rgba(124, 224, 164, .07); }
 .casa-num { font-size: 1.4rem; font-weight: 800; color: var(--suave); text-align: center; font-variant-numeric: tabular-nums; }
 .fila-casa.agora .casa-num { color: var(--ouro); }
@@ -592,6 +646,9 @@ mark { background: rgba(230, 195, 106, .3); color: inherit; border-radius: 3px; 
 .historico summary { cursor: pointer; padding: .4rem .8rem; font-weight: 600; font-size: .9rem; }
 .historico ol { margin: 0; padding: .2rem .8rem .6rem 2rem; max-height: 40vh; overflow-y: auto; font-size: .88rem; }
 .historico .rolagem-total { font-size: 1.1rem; }
+.historico .rolagem-livre { padding: .1rem .8rem .5rem; border-bottom: 1px solid var(--borda); }
+.historico .rolagem-livre input[type=text] { padding: .3rem .5rem; font-size: .9rem; }
+.historico .rolagem-livre .botao { padding: .25rem .6rem; font-size: .85rem; }
 .quem-rolou { color: var(--texto); }
 
 /* ---------- Mesa online ---------- */
@@ -637,7 +694,9 @@ body[data-tela=regras] .historico { display: none; }
 @media print {
   body { background: #fff; color: #000; }
   .topo, .barra-personagem, .historico, #toasts, .rodape, .botoes, .botao, .controles-pv, .status-ficha, .atalhos,
-  .sub-abas, .barra-mestre, .casa-botoes, .rodape-mestre { display: none !important; }
+  .sub-abas, .barra-mestre, .casa-botoes, .rodape-mestre, .rolagem-livre-cartao, .fontes-energia { display: none !important; }
+  .atributos-faixa li { background: #fff; border-color: #999; color: #000; }
+  .atributos-faixa .bonus, .energia-numero b { color: #000; }
   .cartao, .acao, .numero { box-shadow: none; background: #fff; border-color: #999; color: #000; break-inside: avoid; }
   .grade-jogo, .grade-mestre { grid-template-columns: 1fr 1fr; }
   .grade-membros, .grade-bichos { grid-template-columns: 1fr 1fr; }

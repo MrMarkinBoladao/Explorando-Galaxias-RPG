@@ -46,7 +46,8 @@
   function cartaoPH(g) {
     const r = G.recursoPH(g);
     if (!r) return "";
-    return H.cartao("PH do grupo", "<div class='recurso-topo'><b class='ph-grande'>" + r.atual + " / " + r.max + "</b>" +
+    return H.cartao("PH do grupo", "<div class='recurso-topo'><b class='ph-grande' data-ph-grupo data-ph-max='" + r.max + "'>" +
+      r.atual + " / " + r.max + "</b>" + (r.mesa ? " <span class='etiqueta'>da mesa online</span>" : "") +
       "<span class='suave'>começa o combate com " + r.inicio + " · gera " + r.geracao + " por Ataque Básico que acerta</span></div>" +
       "<div class='botoes compactos'>" +
       H.botao("ph", "−1", { dados: { v: -1 } }) + H.botao("ph", "+1", { dados: { v: 1 } }) +
@@ -72,15 +73,11 @@
   }
 
   function cartaoRolador() {
-    const atalhos = ["d20", "d100", "2d6", "1d6", "1d8", "1d10", "1d12"];
-    return H.cartao("Rolar", "<div class='botoes compactos'>" +
-      atalhos.map((d) => botaoRolar(d, "Mestre: " + d)).join(" ") + "</div>" +
-      "<div class='linha'>" + H.campo("Rolagem livre",
-        "<input type='text' id='rolagem-livre' placeholder='3d8+2' aria-label='Rolagem livre'>",
-        "Formato <code>NdF+M</code>", "estreito") +
-      H.botao("rolar-livre", "Rolar", { classe: "primario" }) + "</div>" +
-      "<p class='ajuda'>Qualquer valor em dourado na tela toda é clicável e rola. O histórico fica no " +
-      "canto, em <b>Rolagens</b>.</p>", "rolador");
+    return H.cartao("Rolar", EG.formRolagemLivre("rolagem-livre", { prefixo: "Mestre", ph: "3d8+2",
+      rapidos: ["d20", "d100", "2d6", "1d6", "1d8", "1d10", "1d12"] }) +
+      "<p class='ajuda'>Rolagem livre no formato <code>NdF+M</code> (dá para somar dados: <code>2d6+1d8+3</code>). " +
+      "Qualquer valor em dourado na tela toda é clicável e rola. O histórico fica no canto, em <b>Rolagens</b>, " +
+      "e lá também tem uma caixa de rolagem livre — a mesma que os jogadores têm.</p>", "rolador");
   }
 
   function telaPainel() {
@@ -170,6 +167,7 @@
   function cartaoMemoDoPJ(m) {
     if (!m.R.memo || m.p.caminho !== "A Recordação") return "";
     const memo = m.p.memoespirito, mm = m.R.memo, j = m.p.jogo;
+    const atq = F.ataquesDoMemo(m.p, m.R);
     const pv = j.memo_pv == null ? mm.pv : Math.min(j.memo_pv, mm.pv);
     // O PH é recurso dos jogadores (16.2): o Memoespírito de um NPC não tira PH da mesa.
     const invocar = m.npc ? "Invocar (Ação Complementar)" : "Invocar (Ação Complementar + 1 PH)";
@@ -187,8 +185,13 @@
       H.num("Tenacidade", mm.rt, "reduz") + "</div>" +
       "<div class='linha'>" + H.campo("PV dele agora", H.numero(m.id, "jogo.memo_pv", { min: 0, max: mm.pv, rotulo: "PV do Memoespírito" }), "", "estreito") +
       "<div class='campo estreito'><span class='rotulo'>Ataque e dano</span><span>" +
-      botaoRolar(M.rolagem(mm.ataque), (memo.nome || "Memoespírito") + ": ataque") + " " +
-      botaoRolar(mm.texto, (memo.nome || "Memoespírito") + ": dano") + " <small>média " + mm.media + "</small></span></div></div>" +
+      EG.botoesAtaque(M.rolagem(mm.ataque), (memo.nome || "Memoespírito") + ": ataque") + " " +
+      botaoRolar(atq.basico.texto, (memo.nome || "Memoespírito") + ": dano") + " <small>média " + atq.basico.media + ", alvo único</small></span></div></div>" +
+      (atq.tecnica.acrescimos.length ? "<p class='ajuda'><b>" + esc(atq.tecnica.nome || "Técnica Principal") + "</b>: " +
+        atq.tecnica.modos.map((x) => botaoRolar(x.texto, (atq.tecnica.nome || "Técnica Principal") + ": dano" + (x.alvos > 1 ? " (em área)" : "")) +
+          " " + (x.alvos > 1 ? "até 3 alvos" : "alvo único")).join(" · ") + "</p>" : "") +
+      (atq.devastadora ? "<p class='ajuda'><b>5 Fragmentos:</b> " + botaoRolar(atq.devastadora.texto, (memo.nome || "Memoespírito") +
+        ": dano em área (5 Fragmentos)") + " até 3 alvos</p>" : "") +
       "<p class='ajuda'>Casa própria na Fila pela VEL dele, 1 ação por turno. A 0 PV ele cai e só volta no " +
       "próximo Descanso Curto. " + link("11", "11.5", "11.5") + "</p></div>";
   }
@@ -239,7 +242,8 @@
       (falta.length ? "<div class='status-ficha pendente'>" +
         (m.npc ? "Em branco na ficha: <b>" + esc(falta.join(", ")) + "</b> " +
           "<span class='suave'>— num NPC isso não é erro, mas o que falta não entra nas contas.</span>"
-          : "Falta escolher na ficha: <b>" + esc(falta.join(", ")) + "</b>") + "</div>" : "");
+          : "Falta escolher na ficha: <b>" + esc(falta.join(", ")) + "</b>") + "</div>" : "") +
+      F.atributosHTML(m.p, R, { compacta: true });
 
     corpo += "<div class='pv'><span class='pv-numero'>" + pv + "<small> / " + R.pv_max + "</small></span>" +
       H.barraPV(pv, R.pv_max, "PV de " + G.nome(m)) + "</div>" +
@@ -417,7 +421,7 @@
     }
     const conds = (i.condicoes || []).filter((c) => c.nome !== "Quebrado");
     return "<li class='fila-casa" + (i.agora ? " agora" : "") + (cc.agiu ? " agiu" : "") +
-      (i.pv === 0 ? " caiu" : "") + (quebrado ? " quebrado" : "") + "'>" +
+      (i.pv === 0 ? " caiu" : "") + (i.derrotado ? " pulado" : "") + (quebrado ? " quebrado" : "") + "'>" +
       "<div class='casa-num'>" + i.casa + (i.agora ? "<span class='sr-only'> (agindo agora)</span>" : "") + "</div>" +
       "<div class='casa-quem'><div><b>" + esc(i.nome) + "</b> " + etiqueta +
       (i.agora ? " <span class='etiqueta pronta'>agindo agora</span>" : "") +
@@ -436,11 +440,14 @@
       "</div>" +
       "<div class='casa-vitais'>" + vitais + "</div>" +
       "<div class='casa-botoes'>" +
-      H.botao("agiu", cc.agiu ? "Desfazer o turno" : "Já agiu", { classe: "pequeno" + (cc.agiu ? "" : " primario"), dados: { k: i.chave } }) +
-      H.botao("atrasar", "Atrasar +1", { classe: "pequeno", dados: { k: i.chave, v: 1 }, titulo: "Soma 1 casa bruta no Ciclo (19.4)" }) +
-      H.botao("atrasar", "−1", { classe: "pequeno", dados: { k: i.chave, v: -1 }, desabilitado: !cc.atraso }) +
-      H.botao("avancar", "Avançar +1", { classe: "pequeno", dados: { k: i.chave, v: 1 }, desabilitado: cc.agiu, titulo: "Só funciona em quem ainda não agiu (19.5)" }) +
-      H.botao("avanco-total", cc.avanco_total ? "Avanço Total: ligado" : "Avanço Total", { classe: "pequeno", dados: { k: i.chave }, titulo: "Age logo depois do turno atual, 1× por Ciclo (19.5)" }) +
+      // Inimigo derrotado não age: a vez dele passa sozinha. Curado, ele volta a ter os botões.
+      (i.derrotado
+        ? "<span class='etiqueta' title='A 0 PV ele não age: a Fila pula a vez dele. Curado, ele volta.'>pula a vez</span>"
+        : H.botao("agiu", cc.agiu ? "Desfazer o turno" : "Já agiu", { classe: "pequeno" + (cc.agiu ? "" : " primario"), dados: { k: i.chave } }) +
+          H.botao("atrasar", "Atrasar +1", { classe: "pequeno", dados: { k: i.chave, v: 1 }, titulo: "Soma 1 casa bruta no Ciclo (19.4)" }) +
+          H.botao("atrasar", "−1", { classe: "pequeno", dados: { k: i.chave, v: -1 }, desabilitado: !cc.atraso }) +
+          H.botao("avancar", "Avançar +1", { classe: "pequeno", dados: { k: i.chave, v: 1 }, desabilitado: cc.agiu, titulo: "Só funciona em quem ainda não agiu (19.5)" }) +
+          H.botao("avanco-total", cc.avanco_total ? "Avanço Total: ligado" : "Avanço Total", { classe: "pequeno", dados: { k: i.chave }, titulo: "Age logo depois do turno atual, 1× por Ciclo (19.5)" })) +
       H.botao("escolher-alvo", cb.alvo === i.chave ? "Fechar" : "Abrir", { classe: "pequeno", dados: { k: i.chave } }) +
       H.botao("fora-da-fila", "Fora", { classe: "pequeno perigo", dados: { k: i.chave }, titulo: "Tira da Fila deste combate" }) +
       "</div></li>";
@@ -504,13 +511,13 @@
       corpo += "<h3>Ataques</h3><ul class='lista-acoes'>" + x.ataques.map((a) =>
         "<li><div><b>" + esc(a.nome) + "</b> <span class='suave'>" +
         esc([a.alcance, a.elemento, a.nota].filter(Boolean).join(", ")) + "</span></div>" +
-        "<div class='acao-numeros'><span>Ataque " + botaoRolar(M.rolagem(x.ataque || 0), (x.nome || "Inimigo") + ": " + a.nome) + "</span>" +
+        "<div class='acao-numeros'><span>Ataque " + EG.botoesAtaque(M.rolagem(x.ataque || 0), (x.nome || "Inimigo") + ": " + a.nome) + "</span>" +
         (a.dados ? "<span>Dano " + botaoRolar(a.dados, (x.nome || "Inimigo") + ": dano de " + a.nome) +
           (a.media ? " <small>média " + a.media + "</small>" : "") + "</span>" : "") +
         (a.elemento ? "<span class='suave'>" + esc(a.elemento) + "</span>" : "") + "</div></li>").join("") + "</ul>";
     } else {
       corpo += "<h3>Ataque</h3><div class='acao-numeros'>" +
-        "<span>Ataque " + botaoRolar(M.rolagem(x.ataque || 0), (x.nome || "Inimigo") + ": ataque") + "</span>" +
+        "<span>Ataque " + EG.botoesAtaque(M.rolagem(x.ataque || 0), (x.nome || "Inimigo") + ": ataque") + "</span>" +
         (x.dano ? "<span>Dano " + botaoRolar(x.dano, (x.nome || "Inimigo") + ": dano") +
           (x.dano_media ? " <small>média " + x.dano_media + "</small>" : "") + "</span>" : "") +
         "</div><p class='ajuda'>Se preferir não rolar, use a média direto: é o número do orçamento (" +
@@ -674,8 +681,14 @@
       fila = H.cartao("Fila de Ação", vazio("A Fila está vazia. Ponha o grupo em " +
         "<a href='#mestre/grupo'>Grupo</a> e um inimigo em cena abaixo."), "fila-vazia");
     } else {
-      fila = H.cartao("Fila de Ação",
+      const derrotados = f.casas.filter((i) => i.derrotado).length;
+      const fimDoCiclo = !f.agora && f.casas.some((i) => !i.derrotado)
+        ? "<div class='sua-vez'><b>Todo mundo já agiu neste Ciclo.</b>" +
+          H.botao("avancar-ciclo", "Avançar o Ciclo »", { classe: "primario" }) + "</div>" : "";
+      fila = H.cartao("Fila de Ação", fimDoCiclo +
         "<ol class='fila'>" + f.casas.map((i) => casaDaFila(i, cb)).join("") + "</ol>" +
+        (derrotados ? "<p class='ajuda'>" + derrotados + (derrotados === 1 ? " inimigo derrotado pula" : " inimigos derrotados pulam") +
+          " a vez sozinho" + (derrotados === 1 ? "" : "s") + ": a Fila não espera <b>Já agiu</b> por quem está a 0 PV. Curado, ele volta.</p>" : "") +
         (f.fora.length ? "<p class='ajuda'>Fora desta Fila: " + f.fora.map((i) => esc(i.nome) + " " +
           H.botao("voltar-pra-fila", "voltar", { classe: "pequeno", dados: { k: i.chave } })).join(" · ") + "</p>" : "") +
         "<p class='ajuda'>Ordem por VEL, com os desempates de 19.3. Atrasar soma casas brutas do Ciclo: " +
@@ -690,7 +703,8 @@
     const ph = G.recursoPH(g);
     const npcs = G.cartaoNpcsEmCena ? G.cartaoNpcsEmCena() : "";
     app().innerHTML = topo("combate") + barra +
-      (ph ? "<div class='faixa-ph'><span class='rotulo'>PH do grupo</span><b>" + ph.atual + " / " + ph.max + "</b>" +
+      (ph ? "<div class='faixa-ph'><span class='rotulo'>PH do grupo" + (ph.mesa ? " · mesa online" : "") + "</span>" +
+        "<b data-ph-grupo data-ph-max='" + ph.max + "'>" + ph.atual + " / " + ph.max + "</b>" +
         "<div class='botoes compactos'>" + H.botao("ph", "−1", { classe: "pequeno", dados: { v: -1 } }) +
         H.botao("ph", "+1", { classe: "pequeno", dados: { v: 1 } }) +
         H.botao("ph", "+" + ph.geracao + " (acertou o Básico)", { classe: "pequeno", dados: { v: ph.geracao } }) +
@@ -1299,13 +1313,6 @@
     if (n) G.estado().campanha.nivel = n;
   };
 
-  A["rolar-livre"] = () => {
-    const v = lerVal("rolagem-livre").trim();
-    if (!v) { EG.toast("Escreva a rolagem, como <code>3d8+2</code>.", "erro"); return false; }
-    if (!EG.rolar(v, { rotulo: "Mestre: " + v })) EG.toast("Não entendi <b>" + esc(v) + "</b>. Use <code>NdF+M</code>.", "erro");
-    return false;
-  };
-
   // --- Grupo -----------------------------------------------------------------
   A["ph"] = (b) => {
     const r = G.recursoPH();
@@ -1490,6 +1497,7 @@
     cb.npcs = [];
     cb.cc = {};
     cb.alvo = "";
+    cb.inicio = Date.now();          // o próximo combate é outro: os limites de Energia recomeçam
     EG.toast("Combate encerrado. As fichas dos NPCs continuam no banco, como ficaram. " +
       "Vá em <b>Recompensas</b> para o que a cena entrega.");
   };
@@ -1552,14 +1560,20 @@
     if (!x || !v) { EG.toast("Digite o dano bruto.", "erro"); return false; }
     const r = G.danoNoInimigo(x, v, { continuo: marcado("cont-i-" + b.dataset.uid) });
     EG.toast(esc(x.nome || "Inimigo") + ": " + v + (r.rd ? " − RD " + r.rd : "") + " = <b>" + r.entrou + "</b> · PV " +
-      x.pv + "/" + x.pv_max + (r.caiu ? " · <b>derrotado</b> (+10 de Energia para quem derrubou)" : ""));
+      x.pv + "/" + x.pv_max + (r.caiu ? " · <b>derrotado</b> (+10 de Energia para quem derrubou). A vez dele na Fila " +
+        "passa sozinha a partir de agora." : ""));
   };
 
   A["curar-inimigo"] = (b) => {
     const x = inimigoPorUid(b.dataset.uid);
     const v = lerNum("dano-i-" + b.dataset.uid);
     if (!x || !v) return false;
-    x.pv = Math.min(x.pv_max, (x.pv == null ? x.pv_max : x.pv) + v);
+    const antes = x.pv == null ? x.pv_max : x.pv;
+    x.pv = Math.min(x.pv_max, antes + v);
+    if (antes === 0 && x.pv > 0) {
+      EG.toast("<b>" + esc(x.nome || "Inimigo") + "</b> voltou com " + x.pv + " PV e volta a agir na Fila" +
+        (G.cc("i:" + x.uid).agiu ? " (no próximo Ciclo: ele já tinha agido neste)." : "."));
+    }
   };
 
   A["aplicar-rt"] = (b) => {
@@ -1584,12 +1598,14 @@
       const q = G.quebrar(x, elemento, ef);
       const cc = G.cc("i:" + x.uid);
       cc.atraso = (cc.atraso || 0) + 1;
-      if (m) G.energia(m, 10);
+      // +10 de Energia para quem quebrou, 1 vez por Ciclo (17.2): a mesma marca da ficha dele.
+      const e = m ? G.energiaPorFonte(m, "quebra") : null;
       msg += "<br><b>Quebra!</b> " + (q
         ? "Dano de " + esc(elemento) + ": " + botaoRolar(q.texto, "Dano de Quebra de " + elemento) +
           " (média " + q.media + ", sofre RD) + <b>" + esc(q.efeito) + "</b>. "
         : "") + "Atraso de 1 casa e <b>Quebrado</b> até o fim do próximo turno dele" +
-        (m ? ". <b>+10 de Energia</b> para " + esc(G.nome(m)) + "."
+        (e ? (e.bloqueado ? ". " + esc(G.nome(m)) + " já ganhou a Energia de Quebra neste Ciclo (1 vez por Ciclo)."
+          : ". <b>+" + e.aplicado + " de Energia</b> para " + esc(G.nome(m)) + ".")
           : ". Diga em <b>Quem reduziu</b> quem quebrou para os <b>+10 de Energia</b> entrarem na ficha dele.");
     }
     EG.toast(msg, "rolagem");
@@ -2029,8 +2045,7 @@
   document.addEventListener("keydown", (ev) => {
     if (ev.key !== "Enter") return;
     const id = ev.target.id || "";
-    if (id === "rolagem-livre") { ev.preventDefault(); A["rolar-livre"](); }
-    else if (/^dano-i-/.test(id)) {
+    if (/^dano-i-/.test(id)) {
       ev.preventDefault();
       const b = document.querySelector("[data-m='dano-inimigo'][data-uid='" + id.slice(7) + "']");
       if (b) b.click();

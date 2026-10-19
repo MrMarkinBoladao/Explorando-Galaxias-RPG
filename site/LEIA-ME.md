@@ -2,10 +2,10 @@
 
 Uma página só, sem instalação, com quatro abas:
 
-- **Jogar** — a ficha na mesa: PV com dano e cura (já desconta RD e PV temporários), Energia, PH do grupo, ataques e Testes prontos para rolar (clique no valor — **com Vantagem, já rola os dois d20**, abaixo), Bênçãos com usos, condições, Morrendo, Memoespírito, inventário e o **Cone de Luz com a arte e a história dele** (abaixo).
+- **Jogar** — a ficha na mesa: os **seis Atributos** no topo (valor final e Bônus), PV com dano e cura (já desconta RD e PV temporários), o **painel de Energia** (abaixo), PH do grupo, ataques e Testes prontos para rolar (clique no valor — **com Vantagem, já rola os dois d20**, e todo Teste de Ataque tem o botão **Vantagem** do lado, abaixo), a **rolagem livre**, Bênçãos com usos, condições, Morrendo, Memoespírito (**alvo único ou em área**, abaixo), inventário e o **Cone de Luz com a arte e a história dele** (abaixo).
 - **Editar ficha** — os doze passos do capítulo 03, mais progressão, equipamento e Memoespírito. Tudo é recalculado na hora, e o que fere uma regra aparece em vermelho na seção.
 - **Regras** — o livro inteiro (v1.2) com pesquisa instantânea, sem acento e sem maiúscula.
-- **Área do Mestre** — a mesa do Mestre, sincronizada com as fichas (abaixo).
+- **Área do Mestre** — a mesa do Mestre, sincronizada com as fichas (abaixo). Fica para todo mundo, inclusive para quem é jogador numa mesa online: é a mesa *daquele navegador*.
 
 As fichas ficam salvas **no navegador** de cada jogador. Para backup ou para mandar ao Mestre: **Mais > Exportar** (gera um arquivo `.json`) e **Mais > Importar**. Com a **mesa online** ligada, as fichas do grupo, o PH, o combate e as rolagens aparecem ao vivo no aparelho de cada um (abaixo).
 
@@ -89,6 +89,43 @@ A conta é a de 24.4: `10 + 2 × bônus de Poder` de capacidade, mais 2 se o per
 - Os campos de **quantidade** e de **Espaço de cada** gravam quando você sai do campo ou aperta
   Enter; o nome do item grava a cada tecla.
 
+## O painel de Energia
+
+Na aba **Jogar**, o cartão **Energia** junta tudo o que muda a Energia (a tabela fechada de 17.2),
+para o jogador acompanhar o combate sem fazer conta: a barra com a marca da Ultimate, um botão por
+fonte — **Atacou e acertou** (+20 e o PH do grupo), **Atacou e errou** (+20), **Usou** cada
+Habilidade (+30, paga o PH), **Sofreu dano** (+10), **Derrotou um inimigo** (+10), **Quebrou a
+Tenacidade** (+10), as ações do **Memoespírito** (+10 e +15, a metade), a **Corda de Ligação** e o
+**Cone de Luz** de Nível 3+ quando a ficha tem — e o **Registro** das últimas mudanças, com
+**Desfazer a última** para o clique errado.
+
+- **Os limites valem sozinhos.** O que é *1 vez por Ciclo* (sofrer dano, Quebrar, o Cone) fica
+  marcado como feito até o Ciclo virar; a Corda, até o combate acabar. Na mesa online o Ciclo é o do
+  Mestre — avançou lá, libera aqui. Sem a mesa, o próprio cartão tem **Próximo Ciclo**, e **Novo
+  combate** (em Recursos) libera tudo.
+- **Sofrer dano já dá a Energia.** O botão *Sofrer dano* do cartão Vida soma os +10 junto (se ainda
+  não vieram neste Ciclo), e o dano que o Mestre aplica em combate pela Área do Mestre também.
+- **O 1 natural não dá Energia** (17.2): nesse caso, não clique. Acima de 100 se perde, e o registro
+  guarda o que entrou de fato.
+
+## O Memoespírito: alvo único ou em área
+
+O ataque normal do Memoespírito é em **alvo único**. O que decide se a **Técnica Principal** dele é
+em alvo único ou em área é o **acréscimo** dela (11.3, passo 5), escolhido em **Editar ficha > 10 ·
+Memoespírito** (ou direto no cartão dele, na aba Jogar, enquanto não houver um):
+
+| Acréscimo | Alvo | Dano |
+|---|---|---|
+| **Golpe Ancestral** | alvo único | **+1 dado** |
+| **Explosão de Memória** | **até 3 alvos** | **metade dos dados** (mínimo 1) |
+| **Marca do Passado** | alvo único | normal; ao acertar, Marcado ou Vulnerável |
+| **Ataque Evolutivo** | alvo único | +1 por uso no combate, até +5 (o cartão conta) |
+
+Com a Evolução **Forma Completa** a Técnica tem um **segundo acréscimo**; com Golpe Ancestral e
+Explosão de Memória juntos, o cartão mostra **Alvo único (+1 dado)** e **Em área (até 3 alvos)**, e o
+dano rolado muda com o botão aceso. Com **Memória Devastadora** os Fragmentos já entram no dano, e no
+quinto aparece o ataque em área que ela dá (11.2).
+
 ## Rolagem com Vantagem
 
 Teste com **V** do lado rola com Vantagem sozinho: o clique já tira os dois d20, o total sai com o
@@ -96,6 +133,20 @@ Teste com **V** do lado rola com Vantagem sozinho: o clique já tira os dois d20
 = 18. O aviso diz de onde a Vantagem veio, e o histórico de **Rolagens** guarda os dois dados. Um
 20 em qualquer dos dois é 20 natural; o 1 natural só sai quando os dois são 1 (02.4). Vale também
 no Teste de Morrendo e na Área do Mestre (a Surpresa e o Morrendo de cada um).
+
+**Teste de Ataque com Vantagem da cena.** Todo Teste de Ataque — o Ataque Básico, as Habilidades,
+a Ultimate, o Memoespírito e os inimigos na Área do Mestre — tem o botão **Vantagem** do lado do
+valor: ele rola os dois d20 na hora, para quando a mesa diz que o ataque tem Vantagem.
+
+## Rolagem livre
+
+Qualquer pessoa rola qualquer coisa: o cartão **Rolagem livre** da aba Jogar, a caixa no topo do
+painel **Rolagens** (no canto, em toda tela) e o cartão **Rolar** do Painel do Mestre. Aceita
+`d20+5`, `2d6+3` e somas de dados (`1d8+1d6+2`), com **Vantagem** quando é um d20 só, e os dados
+mais usados num clique. Na mesa online a rolagem livre do jogador aparece para todos com o nome dele.
+
+**Os dados são sorteados pelo `crypto.getRandomValues` do navegador** (o gerador de senhas e chaves),
+com descarte da sobra para que toda face tenha exatamente a mesma chance.
 
 O que dá Vantagem sozinho é o que vale **sempre**, no Teste que o livro nomeia. Várias fontes no
 mesmo Teste ainda são 2d20:
@@ -129,7 +180,7 @@ sempre, inclusive sem internet.
 | Quem | O que vê e mexe |
 |---|---|
 | **Mestre** | Todas as fichas da mesa (edita tudo, igual ao jogador), o PH, a Fila, as rolagens, quem está conectado e o convite. A Área do Mestre — inimigos, encontros, NPCs, notas — **continua só no navegador dele** e não vai para a nuvem |
-| **Jogador** | A **própria ficha** (edita tudo), o **PH do grupo**, as **rolagens de todo mundo** e, em combate, a **Fila de Ação**: a ordem, quem está agindo, quem já agiu, o PV, a Energia e a Ultimate pronta dos aliados, as condições, e as barras de PV e Tenacidade dos inimigos (sem número; o Mestre pode desligar). A ficha dos outros jogadores e a Área do Mestre, não: a aba some, e o servidor recusa |
+| **Jogador** | A **própria ficha** (edita tudo), o **PH do grupo**, as **rolagens de todo mundo** e, em combate, a **Fila de Ação**: a ordem, quem está agindo, quem já agiu, o PV, a Energia e a Ultimate pronta dos aliados, as condições, e as barras de PV e Tenacidade dos inimigos (sem número; o Mestre pode desligar). A ficha dos outros jogadores e a mesa do Mestre, não: o servidor recusa. A **Área do Mestre continua na aba** — é a mesa do navegador *dele*, para o dia em que ele mestrar, e nada da campanha do Mestre aparece nela |
 
 **Como usar.** O Mestre vai em **Área do Mestre > Painel > Mesa online**, entra com a conta Google,
 cria a mesa e copia o convite. Cada jogador abre o link, entra com a conta Google, aceita e leva a
@@ -139,7 +190,13 @@ ficha dele para a mesa (um clique). Na mesa:
   do Mestre marca *já agiu* sozinha (e desconta as condições, como o botão do Mestre). Ativar a
   Ultimate marca *Ultimate usada* no Ciclo (uma por Ciclo, 17.1). Atacar, acertar o Básico, gastar
   PH, tomar dano: os botões de sempre da ficha, e o Mestre vê na hora.
-- **O PH é um número só da mesa**: quando dois gastam no mesmo instante, os dois gastos contam.
+- **O PH é um número só da mesa**: quando dois gastam no mesmo instante, os dois gastos contam, e a
+  Área do Mestre mostra e mexe nesse número — mesmo que o grupo do navegador dele tenha uma ficha
+  fora da mesa (uma cópia importada antes) com um PH velho. Sem internet, o que mudar no PH fica
+  guardado no aparelho e vai na volta, mesmo com a página fechada no meio.
+- **A Área do Mestre de quem é jogador** é dele: ela não recebe nada da mesa do Mestre, e o que ele
+  rola lá não vai para a mesa. Para mestrar online, o cartão *Mesa online* do Painel tem **Sair da
+  mesa de jogador para mestrar** (um aparelho fica numa mesa por vez; as fichas não saem de lugar).
 - **Rolagens**: todo mundo vê as de todo mundo, com o nome de quem rolou. O Mestre tem a caixa
   **Rolar escondido** para quando quiser segredo.
 - **Sem internet**, a ficha continua funcionando e o que mudar fica pendente. Na volta, as duas
@@ -219,7 +276,7 @@ o botão **Rever o aviso de spoiler**, no fim do Painel, traz ele de volta. Oito
 |---|---|
 | **Painel** | Campanha, faixa, PH do grupo, a tira do grupo com PV e Energia, o Ciclo em curso, a DT da faixa (27.2), rolador e checklist de abertura de sessão |
 | **Grupo** | Tamanho do grupo com o PH resultante (16.2); por jogador: PV com dano e cura já descontando RD, PV temporário, Energia, Defesa/Esquiva/RD/VEL/DT, condições com turnos, Memoespírito (invocar, dispensar, PV) e o painel de Morrendo; cobertura de Elementos, ordem de VEL e os descansos do grupo |
-| **Combate** | A Fila de Ação (19.3) com PJs, Memoespíritos em campo, NPCs e inimigos; Ciclo com os quatro passos de avanço; Atrasar e Avançar com Firmeza e teto (19.4); Tenacidade com a calculadora de redução (20.3) e a Quebra com dano e efeito por Elemento (20.5); virada de fase de Boss (28.5); condições com turnos |
+| **Combate** | A Fila de Ação (19.3) com PJs, Memoespíritos em campo, NPCs e inimigos; Ciclo com os quatro passos de avanço; Atrasar e Avançar com Firmeza e teto (19.4); Tenacidade com a calculadora de redução (20.3) e a Quebra com dano e efeito por Elemento (20.5); virada de fase de Boss (28.5); condições com turnos. **Inimigo a 0 PV pula a vez sozinho** — a Fila não espera *Já agiu* por ele —, e curado ele volta |
 | **Inimigos** | O bestiário das 32 fichas do capítulo 28 com filtro, o criador pela tabela de âncoras (28.3), **os inimigos da campanha com filtro, ordem e agrupamento** (abaixo) e a **importação/exportação de inimigos em `.json`** |
 | **NPCs** | O banco de NPCs: **ficha de personagem completa**, igual à de um jogável, para quem não é do grupo. Criar do zero, copiar de uma ficha salva, filtrar por papel, pôr em cena e a **importação/exportação em `.json`** (abaixo) |
 | **Encontros** | Orçamento de PV (27.4) com a leitura de passagem/típico/pesado, **quem do grupo entra na cena** e **quais NPCs entram** (o orçamento e o contrato da Fraqueza se ajustam a isso), as quatro composições e a DT para descobrir Fraqueza (27.3) |
