@@ -592,20 +592,54 @@
   // Vigor?"), então a ficha os mostra prontos — o valor final (Raça e Aumentos já somados)
   // e o Bônus que entra nas rolagens. A mesma função serve à aba Jogar e à Área do Mestre.
   // ---------------------------------------------------------------------------
+
+  /**
+   * Qual Atributo a arma e as Habilidades usam de verdade — o que o motor soma nas rolagens,
+   * e não o que está escrito num campo da ficha. A arma segue a categoria (18.5): Leve e os
+   * dois Disparos usam Agilidade, Pesada usa Poder, Energia usa Sincronia, e só a Média usa o
+   * Atributo escolhido na ficha (o campo `arma.atributo`, que fica "Poder" nas outras e por
+   * isso não serve para saber). As Habilidades, a Ultimate e a DT usam o Atributo de
+   * Habilidade, e só quando ele é um dos do Caminho — senão o motor não soma nada.
+   * Devolve {arma, habilidade}: o nome do Atributo, ou "" quando não há.
+   */
+  F.usosDosAtributos = function (p, R) {
+    const cam = M.CAMINHOS[p.caminho];
+    const ah = R.atributo_habilidade;
+    return {
+      arma: R.ataque_basico ? R.ataque_basico.atributo || "" : "",
+      habilidade: cam && ah && cam[0].includes(ah) ? ah : "",
+    };
+  };
+
+  /** A etiqueta de quem usa o Atributo: "Arma" (dourada) ou "Habilidade" (azul). */
+  F.etiquetaDeUso = (qual, texto, titulo) => "<span class='uso uso-" + (qual === "arma" ? "arma" : "hab") + "'" +
+    (titulo ? " title='" + esc(titulo) + "'" : "") + ">" + esc(texto) + "</span>";
+
   F.atributosHTML = function (p, R, o) {
     o = o || {};
-    const ah = R.atributo_habilidade;
-    const daArma = p.arma && p.arma.categoria ? p.arma.atributo : "";
+    const u = F.usosDosAtributos(p, R);
+    const arma = p.arma.nome || ("arma " + String(p.arma.categoria || "").toLowerCase());
+    const praQue = { arma: "Ataque Básico (" + arma + ")", habilidade: "Habilidades, Ultimate e DT" };
+    const lista = M.ATRIBUTOS.map((a) => {
+      const escolhido = Number.isInteger(p.atributos[a]);
+      const usos = ["arma", "habilidade"].filter((q) => u[q] === a);
+      const titulo = a + (usos.length ? " — " + usos.map((q) => praQue[q]).join(" e ") : "");
+      return "<li data-atributo='" + esc(a) + "'" + (usos.length ? " class='" + usos.join(" ") + "'" : "") +
+        " title='" + esc(titulo) + "'><span class='rotulo'>" + esc(o.compacta ? a.slice(0, 3) : a) + "</span>" +
+        (escolhido ? "<b>" + R.atributos[a] + "</b><span class='bonus'>" + EG.sinal(R.bonus[a]) + "</span>"
+          : "<b class='suave'>—</b>") +
+        (usos.length && !o.compacta ? "<span class='usos'>" + usos.map((q) =>
+          F.etiquetaDeUso(q, q === "arma" ? "Arma" : "Habilidade", praQue[q])).join("") + "</span>" : "") + "</li>";
+    }).join("");
+    // Na versão compacta (Área do Mestre) não cabe etiqueta dentro da caixa: a cor marca a
+    // caixa, e uma linha embaixo diz qual é qual.
+    const legenda = o.compacta && (u.arma || u.habilidade)
+      ? "<p class='atributos-legenda'>" + [u.arma ? F.etiquetaDeUso("arma", "Arma", praQue.arma) + " " + esc(u.arma) +
+          " " + EG.sinal(R.bonus[u.arma]) : "",
+        u.habilidade ? F.etiquetaDeUso("habilidade", "Habilidade", praQue.habilidade) + " " + esc(u.habilidade) +
+          " " + EG.sinal(R.bonus[u.habilidade]) : ""].filter(Boolean).join(" · ") + "</p>" : "";
     return "<ul class='atributos-faixa" + (o.compacta ? " compacta" : "") + "' aria-label='Atributos de " +
-      esc(p.nome || "personagem") + "'>" + M.ATRIBUTOS.map((a) => {
-        const escolhido = Number.isInteger(p.atributos[a]);
-        const usos = [a === ah ? "Habilidade" : "", a === daArma ? "Arma" : ""].filter(Boolean);
-        return "<li" + (usos.length ? " class='usado'" : "") + " title='" + esc(a + (usos.length ? " — atributo de " +
-          usos.join(" e de ") : "")) + "'><span class='rotulo'>" + esc(o.compacta ? a.slice(0, 3) : a) + "</span>" +
-          (escolhido ? "<b>" + R.atributos[a] + "</b><span class='bonus'>" + EG.sinal(R.bonus[a]) + "</span>"
-            : "<b class='suave'>—</b>") +
-          (usos.length && !o.compacta ? "<small>" + esc(usos.join(" · ")) + "</small>" : "") + "</li>";
-      }).join("") + "</ul>";
+      esc(p.nome || "personagem") + "'>" + lista + "</ul>" + legenda;
   };
 
   // ---------------------------------------------------------------------------

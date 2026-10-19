@@ -475,11 +475,28 @@
     return "";
   }
 
+  /**
+   * "Agilidade +4" na cor de quem usa — dourado-laranja para a arma, violeta para a
+   * Habilidade —, a mesma cor do destaque na faixa de Atributos. Sem Atributo de Habilidade
+   * válido (Caminho de dois Atributos sem escolha), avisa: aí o motor não soma nada.
+   */
+  function usaAtributo(qual) {
+    const a = F.usosDosAtributos(F.P, F.R)[qual];
+    if (!a) {
+      return qual === "habilidade" && M.CAMINHOS[F.P.caminho]
+        ? " <span class='etiqueta ruim' title='Escolha o Atributo de Habilidade em Editar ficha: sem ele, nada é somado'>sem Atributo de Habilidade</span>"
+        : "";
+    }
+    return " " + F.etiquetaDeUso(qual, a + " " + sinal(F.R.bonus[a]),
+      qual === "arma" ? "O Atributo que esta arma usa no ataque e no dano (18.5)" : "O seu Atributo de Habilidade, no ataque, na DT e no dano");
+  }
+
   function cartaoAcoes() {
     const p = F.P, R = F.R, ab = R.ataque_basico;
     let corpo = "";
     if (ab) {
-      corpo += "<div class='acao'><div class='acao-topo'><b>Ataque Básico</b> <span class='suave'>" + esc(p.arma.nome || p.arma.categoria) + "</span></div>" +
+      corpo += "<div class='acao'><div class='acao-topo'><b>Ataque Básico</b>" + usaAtributo("arma") +
+        " <span class='suave'>" + esc(p.arma.nome || p.arma.categoria) + "</span></div>" +
         "<div class='acao-numeros'><span>Ataque " + EG.botoesAtaque(M.rolagem(ab.ataque), "Ataque Básico", { critico: ab.critico }) + "</span>" +
         "<span>Dano " + botaoRolar(ab.texto, "Dano do Ataque Básico") + " <small>média " + ab.media + "</small></span>" +
         "<span>Fraqueza " + botaoRolar(ab.texto_fraqueza, "Dano com Fraqueza") + "</span></div>" +
@@ -496,7 +513,8 @@
         ? (out.rolagem.startsWith("DT") ? "<span>" + esc(out.rolagem) + " <small>(o alvo rola)</small></span>"
           : "<span>Ataque " + EG.botoesAtaque(out.rolagem, (h.nome || "Habilidade") + ": ataque", { critico: ab ? ab.critico : "20" }) + "</span>") : "";
       const dano = out.texto ? "<span>" + (h.tipo === "Cura" ? "Cura " : "Dano ") + botaoRolar(out.texto, (h.nome || "Habilidade") + ": " + h.tipo.toLowerCase()) + " <small>média " + out.media + "</small></span>" : "";
-      corpo += "<div class='acao" + (bloq ? " bloqueada" : "") + "'><div class='acao-topo'><b>" + esc(h.nome || "Habilidade " + (i + 1)) + "</b> <span class='suave'>" +
+      corpo += "<div class='acao" + (bloq ? " bloqueada" : "") + "'><div class='acao-topo'><b>" + esc(h.nome || "Habilidade " + (i + 1)) + "</b>" +
+        (out.rolagem || out.texto ? usaAtributo("habilidade") : "") + " <span class='suave'>" +
         esc(h.tipo) + " · Nível " + out.nivel_efetivo + (h.tipo === "Passiva" ? "" : " · " + out.ph + " PH") + "</span>" +
         (bloq ? " <span class='etiqueta ruim'>bloqueada: " + bloq + "</span>" : "") + "</div>" +
         (rol || dano ? "<div class='acao-numeros'>" + rol + dano + "</div>" : "") +
@@ -505,7 +523,9 @@
         (h.tipo === "Passiva" ? "" : "<div class='botoes compactos'>" + botao("usar-habilidade", "Usar (−" + out.ph + " PH, +30 Energia)", { dados: { i: i }, desabilitado: !!bloq }) + "</div>") + "</div>";
     });
     const u = R.ultimate, energia = J().energia || 0, bloqU = bloqueio(0, true);
-    corpo += "<div class='acao ultimate" + (bloqU ? " bloqueada" : "") + "'><div class='acao-topo'><b>" + esc(p.ultimate.nome || "Ultimate") + "</b> <span class='suave'>Ultimate · Nível equivalente " + u.equivalente + " · " + u.custo + " de Energia</span>" +
+    const ultRola = !!u.texto || ["Teste de Ataque", "Teste de Resistência"].includes(p.ultimate.resolucao);
+    corpo += "<div class='acao ultimate" + (bloqU ? " bloqueada" : "") + "'><div class='acao-topo'><b>" + esc(p.ultimate.nome || "Ultimate") + "</b>" +
+      (ultRola ? usaAtributo("habilidade") : "") + " <span class='suave'>Ultimate · Nível equivalente " + u.equivalente + " · " + u.custo + " de Energia</span>" +
       (bloqU ? " <span class='etiqueta ruim'>bloqueada: " + bloqU + "</span>" : "") + "</div>" +
       "<div class='acao-numeros'>" + (p.ultimate.resolucao === "Teste de Ataque" ? "<span>Ataque " + EG.botoesAtaque(M.rolagem(R.ataque_habilidade), "Ultimate: ataque") + "</span>" :
         p.ultimate.resolucao === "Teste de Resistência" ? "<span>DT " + R.dt + "</span>" : "") +
