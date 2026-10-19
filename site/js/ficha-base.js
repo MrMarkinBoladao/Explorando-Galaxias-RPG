@@ -52,10 +52,20 @@
       ressonancias: { I: "", II: "", III: "", IV: "" },
       tecnica: "",
       inventario: [], creditos: 0,
+      // `acrescimo` (e `acrescimo2`, com a Evolução Forma Completa) é o modelo da Técnica
+      // Principal (11.3, passo 5): é ele que decide se ela é em alvo único ou em área.
       memoespirito: { nome: "", conceito: "", funcao: "", elemento: "", pontos: {}, atributo_ataque: "Poder",
-        bonus_menores: [], evolucoes: [], memoria_desperta: "", hab_ofensiva: "", hab_auxiliar: "" },
+        bonus_menores: [], evolucoes: [], memoria_desperta: "", hab_ofensiva: "", hab_auxiliar: "",
+        tecnica_nome: "", acrescimo: "", acrescimo2: "" },
+      // O que muda na mesa. `energia_marcas` lembra as fontes de Energia que só valem 1 vez por
+      // Ciclo ou por combate (17.2) e em qual Ciclo/combate elas já contaram; `energia_log`
+      // são as últimas mudanças de Energia, para conferir e desfazer. `ciclo_local` e
+      // `combate_local` contam o Ciclo de quem joga sem a mesa online.
       jogo: { pv: null, temp: 0, energia: 0, ph: null, esforco: 1, memo_ativo: false, memo_pv: null,
-        acumulos: {}, condicoes: [], usos: {}, morrendo: { s: 0, f: 0 }, presa: "" },
+        acumulos: {}, condicoes: [], usos: {}, morrendo: { s: 0, f: 0 }, presa: "",
+        memo_modo: "unico", memo_evolutivo: 0,
+        energia_marcas: { ciclo: "", combate: "", dano: false, quebra: false, cone: false, corda: false },
+        energia_log: [], ciclo_local: 1, combate_local: 1 },
     };
   }
 
@@ -573,6 +583,205 @@
     if (!p.ultimate.nome) falta.push("Ultimate");
     if (!p.bencaos[0]) falta.push("primeira Bênção");
     return falta;
+  };
+
+  // ---------------------------------------------------------------------------
+  // Os seis Atributos, à vista
+  //
+  // Os Atributos se escolhem em Editar ficha, mas se consultam na mesa ("quanto você tem de
+  // Vigor?"), então a ficha os mostra prontos — o valor final (Raça e Aumentos já somados)
+  // e o Bônus que entra nas rolagens. A mesma função serve à aba Jogar e à Área do Mestre.
+  // ---------------------------------------------------------------------------
+  F.atributosHTML = function (p, R, o) {
+    o = o || {};
+    const ah = R.atributo_habilidade;
+    const daArma = p.arma && p.arma.categoria ? p.arma.atributo : "";
+    return "<ul class='atributos-faixa" + (o.compacta ? " compacta" : "") + "' aria-label='Atributos de " +
+      esc(p.nome || "personagem") + "'>" + M.ATRIBUTOS.map((a) => {
+        const escolhido = Number.isInteger(p.atributos[a]);
+        const usos = [a === ah ? "Habilidade" : "", a === daArma ? "Arma" : ""].filter(Boolean);
+        return "<li" + (usos.length ? " class='usado'" : "") + " title='" + esc(a + (usos.length ? " — atributo de " +
+          usos.join(" e de ") : "")) + "'><span class='rotulo'>" + esc(o.compacta ? a.slice(0, 3) : a) + "</span>" +
+          (escolhido ? "<b>" + R.atributos[a] + "</b><span class='bonus'>" + EG.sinal(R.bonus[a]) + "</span>"
+            : "<b class='suave'>—</b>") +
+          (usos.length && !o.compacta ? "<small>" + esc(usos.join(" · ")) + "</small>" : "") + "</li>";
+      }).join("") + "</ul>";
+  };
+
+  // ---------------------------------------------------------------------------
+  // Energia (17.2): a tabela fechada de fontes, com os limites dela
+  //
+  // Tudo o que muda a Energia passa por aqui — os botões da aba Jogar, o painel de Energia,
+  // o dano que o Mestre aplica, a Quebra. Assim os limites "1 vez por Ciclo" e "1 vez por
+  // combate" valem do mesmo jeito em todo lugar, e cada mudança fica no registro da ficha,
+  // que é o que deixa conferir de onde veio a Energia ("alguém está somando duas vezes?").
+  // ---------------------------------------------------------------------------
+  F.ENERGIA = {
+    basico: { rotulo: "Ataque Básico", v: 20 },
+    habilidade: { rotulo: "Habilidade", v: 30 },
+    dano: { rotulo: "Sofreu dano", v: 10, limite: "ciclo" },
+    derrotou: { rotulo: "Derrotou um inimigo", v: 10 },
+    quebra: { rotulo: "Quebrou a Tenacidade", v: 10, limite: "ciclo" },
+    memo_basico: { rotulo: "Memoespírito: Ataque Básico", v: 10 },
+    memo_hab: { rotulo: "Memoespírito: Habilidade", v: 15 },
+    cone: { rotulo: "Cone de Luz", v: 5, limite: "ciclo" },
+    corda: { rotulo: "Corda de Ligação", limite: "combate" },
+    ultimate: { rotulo: "Ultimate" },
+    ajuste: { rotulo: "Ajuste" },
+  };
+
+  /** A Energia da Corda de Ligação pelo tier do personagem (25.3); 0 sem a Corda. */
+  F.valorCorda = function (p, R) {
+    const r = p.reliquias && p.reliquias["Corda de Ligação"];
+    return r && r.tem ? M.RELIQUIAS["Corda de Ligação"][M.tierReliquia(R.nivel) - 1] : 0;
+  };
+
+  /** O Cone de Nível 3 ou mais traz o "pequeno ganho de Energia": +5, 1 vez por Ciclo (25.2). */
+  F.coneDaEnergia = (p) => (Number(p.cone && p.cone.nivel) || 0) >= 3;
+
+  /**
+   * O Ciclo e o combate em que a ficha está, para os limites de 17.2. Na mesa online vale o
+   * combate do Mestre (o retrato que chega); no navegador do Mestre, o combate da Área do
+   * Mestre, se a ficha está nele; sozinho, o Ciclo que o próprio jogador conta.
+   * {ciclo, combate, n, origem: "mesa" | "mestre" | "local"}
+   */
+  F.chavesDeCombate = function (p) {
+    const N = EG.MesaOnline;
+    const cb = N && N.combate ? N.combate() : null;
+    if (cb && cb.ativo && N.estaNaMesa(p.id)) {
+      const id = Number(cb.id) || 0, n = Math.max(1, Number(cb.ciclo) || 1);
+      return { ciclo: "m:" + id + ":" + n, combate: "m:" + id, n: n, origem: "mesa" };
+    }
+    const g = EG.Mestre && EG.Mestre.chavesSeEmCombate ? EG.Mestre.chavesSeEmCombate(p.id) : null;
+    if (g) return g;
+    const j = p.jogo, c = Math.max(1, Number(j.combate_local) || 1), n = Math.max(1, Number(j.ciclo_local) || 1);
+    return { ciclo: "l:" + c + ":" + n, combate: "l:" + c, n: n, origem: "local" };
+  };
+
+  /** Quais fontes limitadas já contaram neste Ciclo / neste combate. */
+  F.marcasDeEnergia = function (j, chaves) {
+    const m = j.energia_marcas || {};
+    const noCiclo = m.ciclo === chaves.ciclo, noCombate = m.combate === chaves.combate;
+    return { dano: noCiclo && !!m.dano, quebra: noCiclo && !!m.quebra, cone: noCiclo && !!m.cone,
+      corda: noCombate && !!m.corda };
+  };
+
+  /**
+   * Muda a Energia por uma fonte da tabela. Devolve {aplicado, energia, bloqueado, msg}.
+   * o: {chaves (de F.chavesDeCombate), valor (para "ajuste"), quem ("Mestre", quando é ele)}.
+   * Energia acima de 100 se perde e abaixo de 0 não existe (17.1); o registro guarda o que
+   * de fato entrou, então "desfazer" devolve exatamente o que saiu.
+   */
+  F.mudarEnergia = function (p, R, fonte, o) {
+    o = o || {};
+    const def = F.ENERGIA[fonte];
+    if (!def) return null;
+    const j = p.jogo, chaves = o.chaves || F.chavesDeCombate(p);
+    const v = fonte === "ultimate" ? -R.ultimate.custo : fonte === "corda" ? F.valorCorda(p, R)
+      : fonte === "ajuste" ? Math.round(Number(o.valor) || 0) : def.v;
+    if (def.limite && F.marcasDeEnergia(j, chaves)[fonte]) {
+      return { aplicado: 0, energia: j.energia || 0, bloqueado: true,
+        msg: "<b>" + esc(def.rotulo) + "</b> já deu Energia " + (def.limite === "ciclo" ? "neste Ciclo" : "neste combate") +
+          " (" + (def.limite === "ciclo" ? "1 vez por Ciclo" : "1 vez por combate") + ", 17.2)." };
+    }
+    const antes = j.energia || 0, depois = Math.max(0, Math.min(100, antes + v));
+    j.energia = depois;
+    if (def.limite) {
+      const m = Object.assign({ ciclo: "", combate: "" }, j.energia_marcas || {});
+      if (m.ciclo !== chaves.ciclo) Object.assign(m, { ciclo: chaves.ciclo, dano: false, quebra: false, cone: false });
+      if (m.combate !== chaves.combate) Object.assign(m, { combate: chaves.combate, corda: false });
+      m[fonte] = true;
+      j.energia_marcas = m;
+    }
+    const log = Array.isArray(j.energia_log) ? j.energia_log.slice() : [];
+    log.push({ f: fonte, v: depois - antes, c: chaves.n || 0, k: chaves.ciclo, q: o.quem || "" });
+    j.energia_log = log.slice(-12);
+    const perdeu = v > 0 && depois - antes < v ? " (" + (v - (depois - antes)) + " acima de 100 se perdeu)" : "";
+    return { aplicado: depois - antes, energia: depois, bloqueado: false,
+      msg: "<b>" + esc(def.rotulo) + "</b>: " + (v >= 0 ? "+" : "−") + Math.abs(depois - antes) + " de Energia" + perdeu +
+        " · " + depois + "/100" };
+  };
+
+  /** Desfaz a última mudança de Energia do registro (e solta o limite que ela tinha marcado). */
+  F.desfazerEnergia = function (p) {
+    const j = p.jogo, log = Array.isArray(j.energia_log) ? j.energia_log.slice() : [];
+    const e = log.pop();
+    if (!e) return null;
+    j.energia = Math.max(0, Math.min(100, (j.energia || 0) - (Number(e.v) || 0)));
+    j.energia_log = log;
+    const def = F.ENERGIA[e.f];
+    const m = j.energia_marcas;
+    if (def && def.limite && m && (def.limite === "combate" || m.ciclo === e.k)) m[e.f] = false;
+    return e;
+  };
+
+  /** O começo de um combate para a Energia: limpa os limites e o registro (17.2). */
+  F.zerarEnergiaDoCombate = function (j) {
+    j.energia_marcas = { ciclo: "", combate: "", dano: false, quebra: false, cone: false, corda: false };
+    j.energia_log = [];
+    j.memo_evolutivo = 0;
+  };
+
+  // ---------------------------------------------------------------------------
+  // O ataque do Memoespírito: alvo único ou em área (11.3 e 11.4)
+  //
+  // O ataque normal dele é em alvo único: `(seus dados de Ataque Básico)d6 + pontos`. O que
+  // muda isso é o acréscimo da Técnica Principal: Golpe Ancestral põe +1 dado contra um alvo
+  // só, e Explosão de Memória atinge até 3 alvos com metade dos dados (mínimo 1). Com a
+  // Evolução Forma Completa a Técnica tem dois acréscimos — e, se forem esses dois, quem
+  // joga escolhe na hora entre o alvo único com o dado a mais e a área.
+  // ---------------------------------------------------------------------------
+  F.ACRESCIMOS_MEMO = [
+    { nome: "Golpe Ancestral", alvo: "unico", resumo: "alvo único, +1 dado base" },
+    { nome: "Explosão de Memória", alvo: "area", resumo: "em área: até 3 alvos, metade dos dados" },
+    { nome: "Marca do Passado", alvo: "", resumo: "alvo único, ao acertar aplica Marcado ou Vulnerável" },
+    { nome: "Ataque Evolutivo", alvo: "", resumo: "alvo único, +1 de dano por uso no combate (até +5)" },
+  ];
+
+  /** Os acréscimos que valem na ficha: o segundo só com Forma Completa, sem repetir. */
+  F.acrescimosDoMemo = function (memo) {
+    const validos = F.ACRESCIMOS_MEMO.map((a) => a.nome);
+    const forma = (memo.evolucoes || []).includes("Forma Completa");
+    return [memo.acrescimo, forma ? memo.acrescimo2 : ""]
+      .filter((a, i, l) => a && validos.includes(a) && l.indexOf(a) === i);
+  };
+
+  /**
+   * Os ataques do Memoespírito prontos para rolar: o básico (alvo único), a Técnica
+   * Principal (com os modos que os acréscimos dela permitem) e, com Memória Devastadora no
+   * quinto Fragmento, o ataque em área que ela dá. Os Fragmentos já entram no dano (+1 cada,
+   * dentro do teto de bônus somado da faixa, 11.2).
+   */
+  F.ataquesDoMemo = function (p, R) {
+    const mm = R.memo;
+    if (!mm) return null;
+    const memo = p.memoespirito, j = p.jogo;
+    const possuidas = (p.bencaos || []).slice(0, Math.floor((R.nivel + 1) / 2)).filter(Boolean);
+    const frag = possuidas.includes("Memória Devastadora")
+      ? Math.max(0, Math.min(5, Number((j.acumulos || {})["Fragmentos de Memória"]) || 0)) : 0;
+    const fixo = mm.fixo + Math.min(frag, R.teto_bonus);
+    const dano = (n, extra) => {
+      const f = fixo + (extra || 0);
+      return { n: n, fixo: f, texto: M.textoDano(n, 6, f), media: M.media(n, 6) + f };
+    };
+    const metade = Math.max(1, Math.floor(mm.n / 2));
+    const acr = F.acrescimosDoMemo(memo);
+    const golpe = acr.includes("Golpe Ancestral"), explosao = acr.includes("Explosão de Memória");
+    const evolutivo = acr.includes("Ataque Evolutivo");
+    const usos = evolutivo ? Math.max(0, Math.min(5, Number(j.memo_evolutivo) || 0)) : 0;
+    const bonusEvo = evolutivo ? Math.min(5, usos + 1) : 0;
+    const modos = [];
+    if (!explosao || golpe) modos.push(Object.assign({ id: "unico", rotulo: "Alvo único" + (golpe ? " (+1 dado)" : ""),
+      alvos: 1 }, dano(mm.n + (golpe ? 1 : 0), bonusEvo)));
+    if (explosao) modos.push(Object.assign({ id: "area", rotulo: "Em área (até 3 alvos)", alvos: 3 }, dano(metade, bonusEvo)));
+    const modo = modos.find((x) => x.id === j.memo_modo) || modos[0];
+    return {
+      basico: Object.assign(dano(mm.n), { fraqueza: dano(mm.n + 2) }),
+      tecnica: { nome: memo.tecnica_nome || "", acrescimos: acr, modos: modos, modo: modo,
+        marca: acr.includes("Marca do Passado"), evolutivo: evolutivo, usos: usos, bonus_evolutivo: bonusEvo },
+      devastadora: frag >= 5 ? dano(metade) : null,
+      fragmentos: frag, bonus_fragmentos: Math.min(frag, R.teto_bonus),
+    };
   };
 
   Object.assign(F, { SLOTS_RELIQUIA, LETRAS_CONJUNTO, ROTULO_CONE, novaHabilidade, novoPersonagem, exemploNadir,

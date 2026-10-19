@@ -553,11 +553,26 @@
     if (m.evolucoes.includes("Memória Desperta")) {
       corpo += linha(H.campo("Memória Desperta: +2 em", H.lista("memoespirito.memoria_desperta", ["Defesa", "Velocidade"], { rotulo: "Memória Desperta" }), "", "estreito"));
     }
-    corpo += H.campo("Habilidade ofensiva", H.texto("memoespirito.hab_ofensiva", { area: true, rotulo: "Habilidade ofensiva" })) +
-      H.campo("Habilidade auxiliar", H.texto("memoespirito.hab_auxiliar", { area: true, rotulo: "Habilidade auxiliar" }));
+    // A Técnica Principal (11.3, passo 5): o acréscimo dela decide se ela é em alvo único ou
+    // em área, e o dano que a aba Jogar mostra muda junto.
+    const forma = m.evolucoes.includes("Forma Completa");
+    const opcoes = F.ACRESCIMOS_MEMO.map((a) => [a.nome, a.nome + " — " + a.resumo]);
+    corpo += "<h3>Técnica Principal</h3>" + linha(
+      H.campo("Nome", H.texto("memoespirito.tecnica_nome", { rotulo: "Nome da Técnica Principal", ph: "Nevasca Ancestral" }), "", "estreito"),
+      H.campo("Acréscimo", H.lista("memoespirito.acrescimo", opcoes, { rotulo: "Acréscimo da Técnica Principal" }),
+        "Golpe Ancestral é <b>alvo único</b> (+1 dado); Explosão de Memória é <b>em área</b> (até 3 alvos, metade dos dados)"),
+      forma ? H.campo("Segundo acréscimo (Forma Completa)", H.lista("memoespirito.acrescimo2",
+        opcoes.filter(([n]) => n !== m.acrescimo), { rotulo: "Segundo acréscimo", vazio: "— nenhum —" }),
+        "Com Golpe Ancestral e Explosão de Memória, você escolhe na hora: alvo único ou área") : "");
+    corpo += H.campo("Técnica Principal (o que ela faz)", H.texto("memoespirito.hab_ofensiva", { area: true, rotulo: "Técnica Principal" })) +
+      H.campo("Técnica Auxiliar", H.texto("memoespirito.hab_auxiliar", { area: true, rotulo: "Técnica Auxiliar" }));
+    const atq = F.ataquesDoMemo(p, R);
+    const tecnica = atq.tecnica.acrescimos.length
+      ? atq.tecnica.modos.map((x) => (x.alvos > 1 ? "em área (até 3 alvos) " : "alvo único ") + "<b>" + esc(x.texto) + "</b> (média " + x.media + ")").join(" ou ")
+      : "<span class='suave'>escolha o acréscimo</span>";
     corpo += "<p class='previa'>PV <b>" + memo.pv + "</b> · Defesa <b>" + memo.defesa + "</b> · VEL <b>" + memo.velocidade + "</b> · ataque <b>" +
-      M.rolagem(memo.ataque) + "</b> · dano <b>" + esc(memo.texto) + "</b> (média " + memo.media + ")" + (memo.predador_d8 ? " +1d8" : "") +
-      " · Tenacidade " + memo.rt + (memo.rd ? " · RD " + memo.rd : "") + "</p>";
+      M.rolagem(memo.ataque) + "</b> · dano <b>" + esc(memo.texto) + "</b> (média " + memo.media + ", alvo único)" + (memo.predador_d8 ? " +1d8" : "") +
+      " · Tenacidade " + memo.rt + (memo.rd ? " · RD " + memo.rd : "") + "<br>Técnica Principal: " + tecnica + "</p>";
     return secao("memo", "10 · Memoespírito", corpo);
   }
 

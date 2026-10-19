@@ -71,6 +71,13 @@
     return Number.isFinite(n) && n > 0 ? n : 0;
   };
 
+  /** Muda a Energia por uma fonte de 17.2 e avisa. Os limites por Ciclo valem aqui também. */
+  const energia = (fonte, o) => {
+    const r = F.mudarEnergia(F.P, F.R, fonte, o);
+    if (r) EG.toast(r.msg, r.bloqueado ? "erro" : "");
+    return r;
+  };
+
   A["sofrer-dano"] = () => {
     const bruto = lerValor();
     if (!bruto) { EG.toast("Digite quanto de dano você sofreu.", "erro"); return; }
@@ -90,6 +97,10 @@
     if (absorvido) msg += " · " + absorvido + " no PV temporário";
     msg += " · PV " + j.pv + "/" + F.R.pv_max;
     if (j.pv === 0) { msg += " · <b>Morrendo!</b>"; j.morrendo = { s: 0, f: 0 }; }
+    // 17.2: sofrer dano dá +10 de Energia, 1 vez por Ciclo. Vem junto, sem outro clique.
+    const e = F.mudarEnergia(F.P, F.R, "dano");
+    msg += e && !e.bloqueado ? "<br>+" + e.aplicado + " de Energia por sofrer dano (1 vez por Ciclo) · " + e.energia + "/100"
+      : "<br><span class='suave'>A Energia de sofrer dano já veio neste Ciclo.</span>";
     EG.toast(msg);
   };
 
@@ -129,19 +140,40 @@
     const j = J();
     j.ph = F.R.ph_inicio;
     j.acumulos = {};
+    // Combate novo: os limites de Energia "por Ciclo" e "por combate" começam do zero.
+    j.combate_local = (Number(j.combate_local) || 1) + 1;
+    j.ciclo_local = 1;
+    F.zerarEnergiaDoCombate(j);
     recarregar(["combate"]);
-    EG.toast("Novo combate: PH do grupo em " + j.ph + ", acúmulos zerados, usos \"por combate\" e \"por cena\" de volta.");
+    EG.toast("Novo combate: PH do grupo em " + j.ph + ", acúmulos zerados, usos \"por combate\" e \"por cena\" de volta, " +
+      "e a Energia do Ciclo e do combate liberada (17.2).");
   };
 
-  A["energia"] = (b) => {
+  // Os botões de ajuste (−10, +10) da Energia, fora da tabela de fontes.
+  A["energia"] = (b) => { energia("ajuste", { valor: Number(b.dataset.v) }); };
+
+  // Uma fonte da tabela de 17.2 (sofrer dano, derrotar, Quebrar, Memoespírito, Corda, Cone).
+  A["energia-fonte"] = (b) => { energia(b.dataset.fonte); };
+
+  A["desfazer-energia"] = () => {
+    const e = F.desfazerEnergia(F.P);
+    if (!e) { EG.toast("Nada para desfazer no registro de Energia.", "erro"); return; }
+    const def = F.ENERGIA[e.f] || { rotulo: "Energia" };
+    EG.toast("Desfeito: <b>" + esc(def.rotulo) + "</b> (" + (e.v >= 0 ? "−" + e.v : "+" + -e.v) + " de Energia) · " +
+      (J().energia || 0) + "/100");
+  };
+
+  // Sem a mesa online, quem conta o Ciclo é o jogador: virar o Ciclo libera o que é 1×/Ciclo.
+  A["proximo-ciclo"] = () => {
     const j = J();
-    j.energia = Math.max(0, Math.min(100, (j.energia || 0) + Number(b.dataset.v)));
+    j.ciclo_local = (Number(j.ciclo_local) || 1) + 1;
+    EG.toast("<b>Ciclo " + j.ciclo_local + "</b>: sofrer dano, Quebrar e o Cone voltam a dar Energia (1 vez por Ciclo, 17.2).");
   };
 
   A["ultimate"] = () => {
     const j = J(), custo = F.R.ultimate.custo;
     if ((j.energia || 0) < custo) { EG.toast("Faltam " + (custo - (j.energia || 0)) + " de Energia para a Ultimate.", "erro"); return; }
-    j.energia -= custo;
+    F.mudarEnergia(F.P, F.R, "ultimate");
     EG.toast("<b>" + esc(F.P.ultimate.nome || "Ultimate") + "!</b> −" + custo + " de Energia.");
     // Na mesa online, a Fila do Mestre marca a Ultimate do Ciclo (uma por Ciclo, 17.1).
     if (EG.MesaOnline) EG.MesaOnline.pedir("ultimate", F.P.id);
@@ -153,20 +185,24 @@
     const i = Number(b.dataset.i), h = F.P.habilidades[i], out = F.R.habilidades[i], j = J();
     if (out.ph > (j.ph || 0)) { EG.toast("Sem PH suficiente: " + esc(h.nome || "a Habilidade") + " custa " + out.ph + " PH e o grupo tem " + (j.ph || 0) + ".", "erro"); return; }
     j.ph -= out.ph;
-    j.energia = Math.min(100, (j.energia || 0) + 30);
-    EG.toast("<b>" + esc(h.nome || "Habilidade") + "</b>: −" + out.ph + " PH, +30 de Energia.");
+    const e = F.mudarEnergia(F.P, F.R, "habilidade");
+    EG.toast("<b>" + esc(h.nome || "Habilidade") + "</b>: −" + out.ph + " PH, +" + e.aplicado + " de Energia · " + e.energia + "/100.");
   };
 
+  // O Ataque Básico dá +20 de Energia acertando ou não (17.2); o PH é só do acerto (16.2).
   A["ataque-basico"] = () => {
-    const j = J();
-    j.energia = Math.min(100, (j.energia || 0) + 20);
-    EG.toast("Ataque Básico: +20 de Energia (acertando ou não; o 1 natural não dá).");
+    const e = F.mudarEnergia(F.P, F.R, "basico");
+    EG.toast("Ataque Básico (errou): +" + e.aplicado + " de Energia · " + e.energia + "/100. Errar não corta a Energia; só o 1 natural.");
   };
 
   A["acertou"] = () => {
-    const j = J();
-    j.ph = Math.min(F.R.ph_max, (j.ph || 0) + F.R.ph_geracao);
-    EG.toast("Acertou o Ataque Básico: +" + F.R.ph_geracao + " PH para o grupo.");
+    const j = J(), antes = j.ph || 0;
+    j.ph = Math.min(F.R.ph_max, antes + F.R.ph_geracao);
+    const e = F.mudarEnergia(F.P, F.R, "basico");
+    const ph = j.ph - antes;
+    EG.toast("Acertou o Ataque Básico: +" + e.aplicado + " de Energia (" + e.energia + "/100) e " +
+      (ph ? "<b>+" + ph + " PH</b> para o grupo (" + j.ph + "/" + F.R.ph_max + ")."
+        : "o PH do grupo já está no máximo (" + F.R.ph_max + "): não sobe mais."));
   };
 
   A["acumulo"] = (b) => {
@@ -207,6 +243,29 @@
     EG.toast("Memoespírito invocado: Ação Complementar e −1 PH.");
   };
   A["dispensar"] = () => { J().memo_ativo = false; };
+
+  // A Técnica Principal com dois acréscimos (Forma Completa): alvo único ou em área, na hora.
+  A["memo-modo"] = (b) => { J().memo_modo = b.dataset.v === "area" ? "area" : "unico"; };
+
+  A["memo-evolutivo"] = (b) => {
+    const j = J();
+    j.memo_evolutivo = b.dataset.v === "0" ? 0 : Math.max(0, Math.min(5, (Number(j.memo_evolutivo) || 0) + Number(b.dataset.v)));
+  };
+
+  // O Memoespírito agiu: metade da Energia da ação vai para o dono (17.2 e 11.5).
+  A["memo-acao"] = (b) => {
+    const j = J();
+    const e = F.mudarEnergia(F.P, F.R, b.dataset.fonte === "memo_hab" ? "memo_hab" : "memo_basico");
+    let extra = "";
+    if (b.dataset.tecnica === "1") {
+      const atq = F.ataquesDoMemo(F.P, F.R);
+      if (atq && atq.tecnica.evolutivo) {
+        j.memo_evolutivo = Math.min(5, (Number(j.memo_evolutivo) || 0) + 1);
+        extra = " Ataque Evolutivo: o próximo uso tem +" + Math.min(5, j.memo_evolutivo + 1) + " de dano.";
+      }
+    }
+    EG.toast(e.msg + " (metade da ação do Memoespírito vai para você)." + extra);
+  };
 
   const nomePocao = (x) => (/^Poção/i.test(x.pocao) ? x.pocao : "Poção de Vida " + x.pocao);
   const acharPocao = (nome) => C().pocoes.find((x) => nomePocao(x) === nome);
@@ -251,6 +310,7 @@
     return "<div class='cabecalho-personagem'><div><h1>" + esc(p.nome || "Personagem sem nome") + "</h1><p class='suave'>" + esc(partes.join(" · ")) +
       (p.proposito ? "<br><i>Propósito de Vida:</i> " + esc(p.proposito) : "") + "</p></div>" +
       "<div class='cabecalho-botoes'><a class='botao' href='#editar'>Editar ficha</a></div></div>" +
+      F.atributosHTML(p, R) +
       (falta.length || avisos.length ? "<div class='status-ficha pendente'>" +
         (falta.length ? "Falta escolher: <b>" + esc(falta.join(", ")) + "</b>. " : "") +
         (avisos.length ? avisos.length + (avisos.length > 1 ? " avisos" : " aviso") + " de regra. " : "") +
@@ -289,18 +349,90 @@
     return cartao("Vida", corpo, "vida");
   }
 
+  /**
+   * O painel de Energia: tudo o que muda a Energia num lugar só (17.2), pronto para o
+   * combate. Cada botão é uma linha da tabela fechada do livro, com o limite dela — o que é
+   * "1 vez por Ciclo" fica marcado como feito até o Ciclo virar —, e o registro embaixo
+   * mostra de onde veio cada ponto, com o desfazer para o clique errado.
+   */
+  function cartaoEnergia() {
+    const p = F.P, R = F.R, j = J();
+    const e = j.energia || 0, custo = R.ultimate.custo;
+    const chaves = F.chavesDeCombate(p);
+    const marcas = F.marcasDeEnergia(j, chaves);
+    const bloqU = bloqueio(0, true);
+    // Um botão de fonte: o que aconteceu à esquerda, quanto dá à direita.
+    const fonte = (acao, texto, ganho, o) => {
+      o = o || {};
+      const feito = o.feito;
+      return "<button type='button' class='botao fonte-energia" + (feito ? " feito" : "") + (o.classe ? " " + o.classe : "") +
+        "' data-acao='" + acao + "'" + Object.entries(o.dados || {}).map(([k, v]) => " data-" + k + "='" + esc(v) + "'").join("") +
+        (feito || o.desabilitado ? " disabled" : "") + (o.titulo ? " title='" + esc(o.titulo) + "'" : "") + "><span>" + texto +
+        (o.limite ? " <small>" + o.limite + "</small>" : "") + "</span><b>" + (feito ? "✓ " + esc(feito) : ganho) + "</b></button>";
+    };
+    const limite = (id, texto, ganho, por) => fonte("energia-fonte", texto, ganho,
+      { dados: { fonte: id }, limite: "1×/" + por, feito: marcas[id] ? "neste " + por : "" });
+
+    let fontes = fonte("acertou", "Atacou e <b>acertou</b>", "+20 · +" + R.ph_geracao + " PH",
+      { titulo: "Ataque Básico que acerta: +20 de Energia e +" + R.ph_geracao + " PH para o grupo (16.2, 17.2)", desabilitado: !R.ataque_basico }) +
+      fonte("ataque-basico", "Atacou e <b>errou</b>", "+20",
+        { titulo: "Ataque Básico que erra: a Energia vem igual; o PH, não", desabilitado: !R.ataque_basico });
+    p.habilidades.forEach((h, i) => {
+      const out = R.habilidades[i];
+      if (!out || h.tipo === "Passiva") return;
+      const bloq = bloqueio(out.nivel_efetivo);
+      fontes += fonte("usar-habilidade", "Usou <b>" + esc(h.nome || "Habilidade " + (i + 1)) + "</b>", "+30 · −" + out.ph + " PH",
+        { dados: { i: i }, desabilitado: !!bloq || out.ph > (j.ph || 0),
+          titulo: bloq ? "Bloqueada: " + bloq : out.ph > (j.ph || 0) ? "O grupo tem " + (j.ph || 0) + " PH" : "Paga o PH e dá +30 de Energia" });
+    });
+    fontes += limite("dano", "Sofreu dano", "+10", "Ciclo") +
+      fonte("energia-fonte", "Derrotou um inimigo", "+10", { dados: { fonte: "derrotou" }, titulo: "Para quem desferiu o golpe" }) +
+      limite("quebra", "Quebrou a Tenacidade", "+10", "Ciclo");
+    if (R.memo && j.memo_ativo) {
+      fontes += fonte("memo-acao", "Memoespírito atacou", "+10", { dados: { fonte: "memo_basico" } }) +
+        fonte("memo-acao", "Memoespírito usou Técnica", "+15", { dados: { fonte: "memo_hab", tecnica: "1" } });
+    }
+    const corda = F.valorCorda(p, R);
+    if (corda) fontes += limite("corda", "Corda de Ligação", "+" + corda, "combate");
+    if (F.coneDaEnergia(p)) fontes += limite("cone", "Cone de Luz", "+5", "Ciclo");
+
+    const origem = chaves.origem === "mesa" ? "da mesa online" : chaves.origem === "mestre" ? "da Área do Mestre" : "";
+    const ciclo = "<div class='energia-ciclo'><span>Ciclo <b>" + chaves.n + "</b>" + (origem ? " <span class='suave'>· " + origem + "</span>" : "") +
+      "</span>" + (chaves.origem === "local" ? botao("proximo-ciclo", "Próximo Ciclo", { classe: "pequeno",
+        titulo: "Libera de novo o que é 1 vez por Ciclo: sofrer dano, Quebrar e o Cone" }) : "") + "</div>";
+
+    const log = (Array.isArray(j.energia_log) ? j.energia_log : []).slice(-6).reverse();
+    const registro = log.length
+      ? "<ol class='log-energia'>" + log.map((x) => {
+          const def = F.ENERGIA[x.f] || { rotulo: x.f };
+          const v = Number(x.v) || 0;
+          return "<li><b class='" + (v < 0 ? "ruim" : "bom-texto") + "'>" + (v >= 0 ? "+" : "−") + Math.abs(v) + "</b> " +
+            esc(def.rotulo) + (x.q ? " <span class='suave'>(" + esc(x.q) + ")</span>" : "") +
+            (x.c ? " <span class='suave'>· Ciclo " + Number(x.c) + "</span>" : "") + "</li>";
+        }).join("") + "</ol>" + botao("desfazer-energia", "Desfazer a última", { classe: "pequeno", titulo: "Devolve a Energia da última linha" })
+      : "<p class='ajuda'>Nada ainda neste combate.</p>";
+
+    const corpo = "<div class='energia-topo'><span class='energia-numero'><b data-energia>" + e + "</b><small> / 100</small></span>" +
+      (e >= custo ? "<span class='etiqueta pronta'>Ultimate pronta</span>" : "<span class='suave'>Ultimate a " + custo + "</span>") + "</div>" +
+      "<div class='barra-energia grande' role='progressbar' aria-label='Energia' aria-valuemin='0' aria-valuemax='100' aria-valuenow='" + e + "'>" +
+      "<span style='width:" + e + "%'></span><i style='left:" + custo + "%'></i></div>" + ciclo +
+      "<h3>O que aconteceu?</h3><div class='fontes-energia'>" + fontes + "</div>" +
+      "<p class='ajuda'>Errar o ataque não corta a Energia; só o <b>1 natural</b> corta (aí não clique). Acima de 100 se perde. " +
+      link("17", "17.2", "tabela 17.2") + "</p>" +
+      "<div class='botoes compactos'>" + botao("ultimate", "Ativar a Ultimate (−" + custo + ")", { classe: "primario", desabilitado: e < custo || !!bloqU }) +
+      botao("energia", "−10", { dados: { v: -10 } }) + botao("energia", "+10", { dados: { v: 10 } }) +
+      H.numero("jogo.energia", { min: 0, max: 100, rotulo: "Energia", classe: "curto" }) + "</div>" +
+      "<h3>Registro</h3>" + registro;
+    return cartao("Energia", corpo, "energia");
+  }
+
   function cartaoRecursos() {
     const R = F.R, j = J(), p = F.P;
-    const energia = j.energia || 0, custo = R.ultimate.custo;
-    let corpo = "<div class='recurso'><div class='recurso-topo'><span class='rotulo'>Energia</span><b>" + energia + " / 100</b>" +
-      (energia >= custo ? " <span class='etiqueta pronta'>Ultimate pronta</span>" : "") + "</div>" +
-      "<div class='barra-energia'><span style='width:" + energia + "%'></span><i style='left:" + custo + "%'></i></div>" +
-      "<div class='botoes compactos'>" + [10, 20, 30].map((v) => botao("energia", "+" + v, { dados: { v: v }, titulo: v === 10 ? "Sofrer dano, derrotar ou Quebrar" : v === 20 ? "Ataque Básico" : "Habilidade" })).join("") +
-      botao("energia", "−10", { dados: { v: -10 } }) + H.numero("jogo.energia", { min: 0, max: 100, rotulo: "Energia", classe: "curto" }) + "</div></div>";
-    corpo += "<div class='recurso'><div class='recurso-topo'><span class='rotulo'>PH do grupo</span><b>" + (j.ph || 0) + " / " + R.ph_max + "</b>" +
-      " <span class='suave'>começa o combate com " + R.ph_inicio + "</span></div>" +
+    let corpo = "<div class='recurso'><div class='recurso-topo'><span class='rotulo'>PH do grupo</span><b data-ph-grupo data-ph-max='" + R.ph_max + "'>" +
+      (j.ph || 0) + " / " + R.ph_max + "</b>" +
+      " <span class='suave'>começa o combate com " + R.ph_inicio + " · +" + R.ph_geracao + " por Ataque Básico que acerta</span></div>" +
       "<div class='botoes compactos'>" + botao("ph", "−1", { dados: { v: -1 } }) + botao("ph", "+1", { dados: { v: 1 } }) +
-      botao("novo-combate", "Novo combate", { titulo: "PH volta ao início, zera acúmulos e recarrega usos por combate/cena" }) + "</div></div>";
+      botao("novo-combate", "Novo combate", { titulo: "PH volta ao início, zera acúmulos, recarrega usos por combate/cena e libera a Energia do combate" }) + "</div></div>";
     if (R.esforco_max) {
       corpo += "<div class='recurso'>" + H.marca("jogo.esforco", "<b>Esforço</b> disponível — re-rola um dado que você acabou de rolar") +
         (p.crenca ? "<p class='ajuda'>Volta no Descanso Longo ou agindo pelo que você acredita: <i>" + esc(p.crenca) + "</i></p>" : "") + "</div>";
@@ -348,11 +480,13 @@
     let corpo = "";
     if (ab) {
       corpo += "<div class='acao'><div class='acao-topo'><b>Ataque Básico</b> <span class='suave'>" + esc(p.arma.nome || p.arma.categoria) + "</span></div>" +
-        "<div class='acao-numeros'><span>Ataque " + botaoRolar(M.rolagem(ab.ataque), "Ataque Básico", { critico: ab.critico }) + "</span>" +
+        "<div class='acao-numeros'><span>Ataque " + EG.botoesAtaque(M.rolagem(ab.ataque), "Ataque Básico", { critico: ab.critico }) + "</span>" +
         "<span>Dano " + botaoRolar(ab.texto, "Dano do Ataque Básico") + " <small>média " + ab.media + "</small></span>" +
         "<span>Fraqueza " + botaoRolar(ab.texto_fraqueza, "Dano com Fraqueza") + "</span></div>" +
         "<p class='ajuda'>" + esc(ab.elemento) + " · " + esc(ab.alcance) + " · Tenacidade " + ab.rt + " · crítico " + ab.critico + " (dobra só os dados base)</p>" +
-        "<div class='botoes compactos'>" + botao("ataque-basico", "Atacar (+20 Energia)") + botao("acertou", "Acertou (+" + R.ph_geracao + " PH)") + "</div></div>";
+        "<div class='botoes compactos'>" + botao("acertou", "Acertou (+20 Energia, +" + R.ph_geracao + " PH)", { classe: "primario",
+          titulo: "Acertou: +20 de Energia para você e +" + R.ph_geracao + " PH para o grupo" }) +
+        botao("ataque-basico", "Errou (+20 Energia)", { titulo: "Errou: a Energia vem igual (17.2); só o 1 natural corta" }) + "</div></div>";
     }
     p.habilidades.forEach((h, i) => {
       const out = R.habilidades[i];
@@ -360,7 +494,7 @@
       const bloq = h.tipo === "Passiva" ? "" : bloqueio(out.nivel_efetivo);
       const rol = out.rolagem
         ? (out.rolagem.startsWith("DT") ? "<span>" + esc(out.rolagem) + " <small>(o alvo rola)</small></span>"
-          : "<span>Ataque " + botaoRolar(out.rolagem, (h.nome || "Habilidade") + ": ataque", { critico: ab ? ab.critico : "20" }) + "</span>") : "";
+          : "<span>Ataque " + EG.botoesAtaque(out.rolagem, (h.nome || "Habilidade") + ": ataque", { critico: ab ? ab.critico : "20" }) + "</span>") : "";
       const dano = out.texto ? "<span>" + (h.tipo === "Cura" ? "Cura " : "Dano ") + botaoRolar(out.texto, (h.nome || "Habilidade") + ": " + h.tipo.toLowerCase()) + " <small>média " + out.media + "</small></span>" : "";
       corpo += "<div class='acao" + (bloq ? " bloqueada" : "") + "'><div class='acao-topo'><b>" + esc(h.nome || "Habilidade " + (i + 1)) + "</b> <span class='suave'>" +
         esc(h.tipo) + " · Nível " + out.nivel_efetivo + (h.tipo === "Passiva" ? "" : " · " + out.ph + " PH") + "</span>" +
@@ -373,7 +507,7 @@
     const u = R.ultimate, energia = J().energia || 0, bloqU = bloqueio(0, true);
     corpo += "<div class='acao ultimate" + (bloqU ? " bloqueada" : "") + "'><div class='acao-topo'><b>" + esc(p.ultimate.nome || "Ultimate") + "</b> <span class='suave'>Ultimate · Nível equivalente " + u.equivalente + " · " + u.custo + " de Energia</span>" +
       (bloqU ? " <span class='etiqueta ruim'>bloqueada: " + bloqU + "</span>" : "") + "</div>" +
-      "<div class='acao-numeros'>" + (p.ultimate.resolucao === "Teste de Ataque" ? "<span>Ataque " + botaoRolar(M.rolagem(R.ataque_habilidade), "Ultimate: ataque") + "</span>" :
+      "<div class='acao-numeros'>" + (p.ultimate.resolucao === "Teste de Ataque" ? "<span>Ataque " + EG.botoesAtaque(M.rolagem(R.ataque_habilidade), "Ultimate: ataque") + "</span>" :
         p.ultimate.resolucao === "Teste de Resistência" ? "<span>DT " + R.dt + "</span>" : "") +
       (u.texto ? "<span>" + (p.ultimate.tipo === "Cura" ? "Cura " : "Dano ") + botaoRolar(u.texto, "Ultimate") + " <small>média " + u.media + "</small></span>" : "") + "</div>" +
       "<p class='ajuda'>Não gasta ação · 1 por Ciclo · Tenacidade " + u.rt + (u.alvos > 1 ? " · " + u.alvos + " alvos" : "") +
@@ -454,23 +588,84 @@
     return cartao("Condições", corpo, "condicoes");
   }
 
+  /**
+   * O Memoespírito em campo: a ficha dele (11.4) e os ataques prontos para rolar. O ataque
+   * normal é em alvo único; a Técnica Principal segue o acréscimo escolhido — Golpe Ancestral
+   * (+1 dado, alvo único) ou Explosão de Memória (até 3 alvos, metade dos dados) — e, com os
+   * dois (Forma Completa), quem joga escolhe na hora. O dano na tela muda junto.
+   */
   function cartaoMemo() {
     const p = F.P, R = F.R, j = J(), m = R.memo;
     if (p.caminho !== "A Recordação" || !m) return "";
     const pv = j.memo_pv == null ? m.pv : Math.min(j.memo_pv, m.pv);
-    const memo = p.memoespirito;
+    const memo = p.memoespirito, nome = memo.nome || "Memoespírito";
+    const atq = F.ataquesDoMemo(p, R), t = atq.tecnica;
+    const predador = m.predador_d8 ? " + " + botaoRolar("1d8", nome + ": Predador") : "";
+    const fragmentos = atq.bonus_fragmentos ? " <small>(+" + atq.bonus_fragmentos + " dos Fragmentos)</small>" : "";
+
+    // O ataque normal dele: sempre em alvo único.
+    let ataques = "<div class='acao'><div class='acao-topo'><b>Ataque Básico dele</b> <span class='suave'>alvo único</span></div>" +
+      "<div class='acao-numeros'><span>Ataque " + EG.botoesAtaque(M.rolagem(m.ataque), nome + ": ataque") + "</span>" +
+      "<span>Dano " + botaoRolar(atq.basico.texto, nome + ": dano") + predador + " <small>média " + atq.basico.media + "</small>" + fragmentos + "</span>" +
+      "<span>Fraqueza " + botaoRolar(atq.basico.fraqueza.texto, nome + ": dano com Fraqueza") + "</span></div>" +
+      "<div class='botoes compactos'>" + botao("memo-acao", "Ele atacou (+10 Energia para você)", { classe: "pequeno", dados: { fonte: "memo_basico" }, desabilitado: !j.memo_ativo, titulo: j.memo_ativo ? "" : "Invoque o Memoespírito primeiro" }) + "</div></div>";
+
+    // A Técnica Principal: o acréscimo decide alvo único ou área (11.3, passo 5).
+    const titulo = "<b>" + esc(t.nome || "Técnica Principal") + "</b> <span class='suave'>Técnica Principal · 1 vez por Ciclo</span>";
+    let tecnica;
+    if (!t.acrescimos.length) {
+      tecnica = "<p class='ajuda'>Ela é <b>em alvo único ou em área</b>? Escolha o acréscimo dela — é ele que muda o dano " +
+        "(" + link("11", "Passo 5 — As duas Habilidades dele", "11.3") + "):</p>" +
+        H.campo("Acréscimo da Técnica Principal", H.lista("memoespirito.acrescimo",
+          F.ACRESCIMOS_MEMO.map((a) => [a.nome, a.nome + " — " + a.resumo]), { rotulo: "Acréscimo da Técnica Principal" }));
+    } else {
+      const modo = t.modo;
+      const escolha = t.modos.length > 1 ? "<div class='alternar' role='group' aria-label='Alvo da Técnica Principal'>" +
+        t.modos.map((x) => botao("memo-modo", x.rotulo, { classe: "pequeno" + (x.id === modo.id ? " primario" : ""),
+          dados: { v: x.id }, titulo: x.id === "area" ? "Até 3 alvos a até uma Distância um do outro, com metade dos dados (mínimo 1)"
+            : "+1 dado base contra um alvo só" })).join("") + "</div>" : "";
+      tecnica = escolha +
+        "<div class='acao-numeros'><span>Ataque " + EG.botoesAtaque(M.rolagem(m.ataque), (t.nome || "Técnica Principal") + ": ataque") + "</span>" +
+        "<span>Dano " + botaoRolar(modo.texto, (t.nome || "Técnica Principal") + ": dano" + (modo.alvos > 1 ? " (em área)" : "")) + predador +
+        " <small>média " + modo.media + "</small></span>" +
+        "<span class='etiqueta" + (modo.alvos > 1 ? " pronta" : "") + "'>" + (modo.alvos > 1 ? "até 3 alvos" : "alvo único") + "</span></div>" +
+        "<p class='ajuda'>" + esc(t.acrescimos.map((a) => (F.ACRESCIMOS_MEMO.find((x) => x.nome === a) || {}).nome + ": " +
+          (F.ACRESCIMOS_MEMO.find((x) => x.nome === a) || {}).resumo).join(" · ")) + "</p>" +
+        (t.marca ? "<p class='efeito'><b>Marca do Passado:</b> ao acertar, aplica Marcado ou Vulnerável até o fim do próximo turno do alvo.</p>" : "") +
+        (t.evolutivo ? "<div class='linha'><span class='ajuda'><b>Ataque Evolutivo:</b> este uso tem <b>+" + t.bonus_evolutivo +
+          "</b> de dano (já na conta acima) · " + t.usos + (t.usos === 1 ? " uso" : " usos") + " neste combate</span>" +
+          botao("memo-evolutivo", "−1", { classe: "pequeno", dados: { v: -1 } }) + botao("memo-evolutivo", "zerar", { classe: "pequeno", dados: { v: 0 } }) + "</div>" : "");
+    }
+    ataques += "<div class='acao'><div class='acao-topo'>" + titulo + "</div>" + tecnica +
+      (memo.hab_ofensiva ? "<p class='efeito'>" + esc(memo.hab_ofensiva) + "</p>" : "") +
+      "<div class='botoes compactos'>" + botao("memo-acao", "Ele usou a Técnica (+15 Energia para você)", { classe: "pequeno",
+        dados: { fonte: "memo_hab", tecnica: "1" }, desabilitado: !j.memo_ativo, titulo: j.memo_ativo ? "" : "Invoque o Memoespírito primeiro" }) + "</div></div>";
+
+    // Memória Devastadora: no quinto Fragmento o próximo ataque dele é em área (11.2).
+    if (atq.devastadora) {
+      ataques += "<div class='acao ultimate'><div class='acao-topo'><b>5 Fragmentos de Memória</b> <span class='suave'>Memória Devastadora</span></div>" +
+        "<div class='acao-numeros'><span>Dano " + botaoRolar(atq.devastadora.texto, nome + ": dano em área (5 Fragmentos)") +
+        " <small>média " + atq.devastadora.media + "</small></span><span class='etiqueta pronta'>até 3 alvos</span></div>" +
+        "<p class='ajuda'>O próximo ataque dele atinge até 3 alvos com metade dos dados. Depois os Fragmentos zeram (em Recursos).</p></div>";
+    }
+
     const corpo = "<p class='suave'>" + esc([memo.conceito, memo.funcao, memo.elemento].filter(Boolean).join(" · ")) + "</p>" +
       "<div class='linha'>" + (j.memo_ativo ? "<span class='etiqueta pronta'>em campo</span> " + botao("dispensar", "Dispensar", { classe: "pequeno" })
         : botao("invocar", "Invocar (Ação Complementar + 1 PH)", { classe: "primario" })) + "</div>" +
       "<div class='numeros'>" + num("PV", pv + "<small>/" + m.pv + "</small>") + num("Defesa", m.defesa) + num("VEL", m.velocidade) + num("RD", m.rd) + "</div>" +
       "<div class='linha'>" + H.campo("PV dele agora", H.numero("jogo.memo_pv", { min: 0, max: m.pv, rotulo: "PV do Memoespírito", classe: "curto" }), "", "estreito") + "</div>" +
-      "<div class='acao-numeros'><span>Ataque " + botaoRolar(M.rolagem(m.ataque), "Memoespírito: ataque") + "</span><span>Dano " +
-      botaoRolar(m.texto, "Memoespírito: dano") + (m.predador_d8 ? " + " + botaoRolar("1d8", "Predador") : "") + " <small>média " + m.media + "</small></span></div>" +
+      ataques +
       "<p class='ajuda'>Tenacidade " + m.rt + " · Testes de Resistência: " + Object.entries(m.tr).map(([a, v]) => esc(a) + " " + sinal(v)).join(", ") +
       " · a Energia das ações dele vem pela metade para você.</p>" +
-      (memo.hab_ofensiva ? "<p class='efeito'><b>Ofensiva:</b> " + esc(memo.hab_ofensiva) + "</p>" : "") +
-      (memo.hab_auxiliar ? "<p class='efeito'><b>Auxiliar:</b> " + esc(memo.hab_auxiliar) + "</p>" : "");
-    return cartao(esc(memo.nome || "Memoespírito"), corpo, "memo", link("11", "11.4", "ficha dele"));
+      (memo.hab_auxiliar ? "<p class='efeito'><b>Técnica Auxiliar:</b> " + esc(memo.hab_auxiliar) + "</p>" : "");
+    return cartao(esc(nome), corpo, "memo", link("11", "11.4", "ficha dele"));
+  }
+
+  /** Rolagem livre do jogador: qualquer expressão, com ou sem Vantagem, e vai para a mesa. */
+  function cartaoRolagemLivre() {
+    return cartao("Rolagem livre", EG.formRolagemLivre("rolagem-livre-jogar", { ph: "2d6+3 · d20+5 · 1d8+1d6" }) +
+      "<p class='ajuda'>Escreva qualquer rolagem (<code>NdF+M</code>, e dá para somar dados: <code>1d8+1d6+2</code>). " +
+      "Vantagem vale num d20. Na mesa online, todo mundo vê com o seu nome.</p>", "rolagem-livre-cartao");
   }
 
   /**
@@ -585,9 +780,9 @@
     app.innerHTML = F.barra() + cabecalho() +
       (EG.MesaOnline ? EG.MesaOnline.faixaJogador(F.P) : "") +
       "<div class='grade-jogo'>" +
-      "<div class='coluna'>" + cartaoVida() + cartaoRecursos() + cartaoDefesa() + cartaoCondicoes() + "</div>" +
+      "<div class='coluna'>" + cartaoVida() + cartaoEnergia() + cartaoRecursos() + cartaoDefesa() + cartaoCondicoes() + "</div>" +
       "<div class='coluna'>" + cartaoAcoes() + cartaoMemo() + cartaoBencaos() + "</div>" +
-      "<div class='coluna'>" + cartaoTestes() + cartaoCone() + cartaoInventario() + cartaoNotas() + "</div>" +
+      "<div class='coluna'>" + cartaoTestes() + cartaoRolagemLivre() + cartaoCone() + cartaoInventario() + cartaoNotas() + "</div>" +
       "</div>" + cartaoLore();
   }
 

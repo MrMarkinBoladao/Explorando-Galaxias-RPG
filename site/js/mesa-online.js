@@ -48,9 +48,11 @@
   // uma queda de internet, quem mudou o quê. `sujas`: as fichas com gravação ainda não
   // confirmada pelo servidor.
   // ---------------------------------------------------------------------------
+  // `ph_valor` é o último PH da mesa que este aparelho conheceu e `ph_pendente`, a soma do
+  // que mudou aqui e ainda não chegou ao servidor (sem internet, ou com a página fechada).
   function localVazio() {
     return { mesa: "", papel: "", uid: "", nome_mesa: "", ligadas: {}, base: {}, sujas: {},
-      barras: true, escondido: false };
+      barras: true, escondido: false, ph_valor: null, ph_pendente: 0 };
   }
 
   function lerLocal() {
@@ -224,6 +226,8 @@
       db.ref(".info/connected").on("value", (s) => {
         const antes = online;
         online = s.val() === true;
+        // Voltou a conexão: o PH que mudou sem internet vai agora.
+        if (online && !antes && (ph.pendente || ph.absoluto != null)) agendarEnvioPH();
         if (antes !== online) redesenhar();
       });
       return new Promise((ok) => {
@@ -302,6 +306,7 @@
       // Outra conta neste aparelho: as ligações eram da conta de antes. As fichas ficam.
       const op = { barras: L.barras, escondido: L.escondido };
       L = Object.assign(localVazio(), op);
+      zerarPH();
       EG.toast("Você entrou com outra conta. As fichas deste aparelho continuam salvas, fora da mesa.");
     }
     L.uid = u.uid;
@@ -328,13 +333,15 @@
   }
 
   /** Para de ouvir a mesa. Devolve quando a presença deste aparelho já saiu da lista. */
+  // O PH conhecido e o pendente sobrevivem a parar de ouvir: reconectar à mesma mesa não pode
+  // perder o +1 que alguém clicou enquanto a conexão caía. Quem zera é trocar de mesa ou sair.
   function pararTudo() {
     for (const o of ouvintes.splice(0)) o.r.off(o.evento, o.fn);
     for (const id of Object.keys(sync)) { sync[id].r.off("value", sync[id].fn); delete sync[id]; }
     const p = presencaRef;
     presencaRef = null;
     clearTimeout(combateTimer);
-    combate = null; combateEnviado = ""; membros = {}; presentes = {}; ph.valor = null; convite = null;
+    combate = null; combateEnviado = ""; membros = {}; presentes = {}; convite = null;
     pedidoFeito = null;
     return p ? p.remove().catch(() => {}) : Promise.resolve();
   }
@@ -352,6 +359,7 @@
   function soltarMesa() {
     const op = { barras: L.barras, escondido: L.escondido, uid: L.uid };
     L = Object.assign(localVazio(), op);
+    zerarPH();
     gravarLocal();
     fase = usuario ? "sem-mesa" : "sem-login";
     mostrarAbaDoMestre();
@@ -366,7 +374,7 @@
       const info = s.val();
       if (!info) throw new Error("mesa sumiu");
       const mudouDeMesa = L.mesa && L.mesa !== mesa;
-      if (mudouDeMesa) { L.ligadas = {}; L.base = {}; L.sujas = {}; }
+      if (mudouDeMesa) { L.ligadas = {}; L.base = {}; L.sujas = {}; zerarPH(); }
       L.mesa = mesa;
       L.nome_mesa = info.nome || "Mesa sem nome";
       L.papel = info.mestre === usuario.uid ? "mestre" : "jogador";
@@ -610,6 +618,9 @@
   /** O gancho de EG.Armazem.salvar: manda para a mesa só o que mudou. */
   EG.aoSalvarFicha = function (p) {
     if (aplicando || !p || !L.ligadas[p.id]) return;
+    // O PH é do grupo (grupo/ph), não desta ficha: a mudança dele vale mesmo que a ficha
+    // ainda não tenha chegado da mesa ou que a internet tenha caído — fica pendente e vai.
+    registrarPH(p);
     const st = sync[p.id];
     if (!conectada() || !st || !st.pronto) {
       // Sem conexão, ou a ficha ainda não chegou: fica marcada, e junta quando chegar.
@@ -621,7 +632,6 @@
     const mud = diferenca(st.enviado, plano);
     st.enviado = plano;
     if (Object.keys(mud).length) enviar(p.id, semSobreposicao(mud, plano));
-    if (p.jogo && Number.isFinite(p.jogo.ph) && p.jogo.ph !== ph.valor) agendarPH(p.jogo.ph, p);
     aposMudarFichas(false);
   };
 
@@ -704,47 +714,132 @@
 
   // ---------------------------------------------------------------------------
   // PH do grupo: um número só, somado no servidor (16.2)
+  //
+  // Cada mudança vira uma **diferença**, calculada na hora do clique contra o PH que este
+  // aparelho conhece (`valor`), e as diferenças vão somadas numa transação: dois jogadores
+  // gastando no mesmo instante, os dois gastos contam. A diferença não pode ser calculada
+  // depois — se o PH de outra pessoa chegasse no meio, o clique daqui viraria outra conta.
+  // O que ainda não foi (`pendente`) fica guardado no aparelho e vai quando a mesa voltar,
+  // mesmo que a página tenha fechado nesse meio-tempo.
   // ---------------------------------------------------------------------------
-  const ph = { valor: null, alvo: null, max: 99, timer: 0 };
+  // `emVoo` é o que já foi numa transação que o servidor ainda não confirmou. No aparelho
+  // fica guardada a soma de `pendente` e `emVoo`: se a página fechar antes da confirmação,
+  // a mudança vai de novo na volta, em vez de sumir.
+  const ph = {
+    valor: L.mesa && Number.isFinite(L.ph_valor) ? L.ph_valor : null,
+    pendente: L.mesa && Number.isFinite(L.ph_pendente) ? L.ph_pendente : 0,
+    emVoo: 0,
+    absoluto: null,                 // mudança feita antes de conhecer o PH da mesa
+    max: 99, timer: 0,
+  };
 
-  function aoChegarPH(snap) {
-    const v = snap.val();
-    if (v == null) return;
-    ph.valor = v;
+  function zerarPH() {
+    clearTimeout(ph.timer);
+    Object.assign(ph, { valor: null, pendente: 0, emVoo: 0, absoluto: null, max: 99, timer: 0 });
+    L.ph_valor = null;
+    L.ph_pendente = 0;
+  }
+
+  function guardarPH() {
+    L.ph_valor = ph.valor;
+    L.ph_pendente = ph.pendente + ph.emVoo;
+    gravarLocal();
+  }
+
+  /**
+   * Põe o PH da mesa em todas as fichas deste aparelho que estão nela, sem chamar o gancho
+   * (senão a mudança voltaria para a mesa como se fosse nova). Devolve se algo mudou.
+   */
+  function espalharPH(v) {
     const mapa = EG.Armazem.todas();
     let mudou = false;
     for (const id of Object.keys(L.ligadas)) {
       const p = mapa[id];
       if (p && p.jogo && p.jogo.ph !== v) { p.jogo.ph = v; mudou = true; }
     }
-    if (!mudou) return;
-    aplicando++;
-    try { EG.Armazem.gravarTodas(mapa); } finally { aplicando--; }
-    if (F.P && L.ligadas[F.P.id] && !F.aoSalvar) F.P.jogo.ph = v;
+    if (mudou) {
+      aplicando++;
+      try { EG.Armazem.gravarTodas(mapa); } finally { aplicando--; }
+    }
+    if (F.P && L.ligadas[F.P.id] && !F.aoSalvar && F.P.jogo.ph !== v) { F.P.jogo.ph = v; mudou = true; }
+    return mudou;
+  }
+
+  /**
+   * O número do PH na tela, trocado no lugar. A tela inteira só se redesenha quando ninguém
+   * está digitando; o PH do grupo não pode esperar isso — quem acabou de digitar o dano e
+   * ficou com o cursor no campo veria o PH velho até clicar em outro lugar.
+   */
+  function mostrarPHNaTela(v) {
+    document.querySelectorAll("[data-ph-grupo]").forEach((el) => {
+      const max = el.getAttribute("data-ph-max");
+      el.textContent = v + (max ? " / " + max : "");
+    });
+  }
+
+  function aoChegarPH(snap) {
+    const v = snap.val();
+    if (v == null) { if (ph.pendente || ph.absoluto != null) agendarEnvioPH(); return; }
+    // O que mudou aqui e ainda não foi continua valendo por cima do que chegou. (O que está
+    // em voo já vem dentro de `v`: a transação mostra o valor dela aqui antes de confirmar.)
+    ph.valor = Math.max(0, v + ph.pendente);
+    guardarPH();
+    if (ph.pendente || ph.absoluto != null) agendarEnvioPH();
+    if (!espalharPH(ph.valor)) return;
+    mostrarPHNaTela(ph.valor);
     aposMudarFichas();
+  }
+
+  /** Uma ficha da mesa foi gravada aqui: se o PH dela mudou, a diferença vai para o grupo. */
+  function registrarPH(p) {
+    const v = p && p.jogo && Number.isFinite(p.jogo.ph) ? p.jogo.ph : null;
+    if (v == null || v === ph.valor) return;
+    ph.max = resultadoDe(p).ph_max || 99;
+    if (ph.valor == null) ph.absoluto = v;           // ainda não conheço o PH da mesa
+    else ph.pendente += v - ph.valor;
+    ph.valor = v;
+    guardarPH();
+    espalharPH(v);                                   // as outras fichas da mesa, neste aparelho
+    agendarEnvioPH();
   }
 
   /**
    * Várias fichas gravando o mesmo PH no mesmo instante (o Mestre ajustando o grupo todo)
-   * são uma mudança só: o envio espera o fim da rodada e manda a diferença uma vez.
+   * são uma mudança só: o envio espera o fim da rodada e manda a soma uma vez.
    */
-  function agendarPH(valor, p) {
-    ph.alvo = valor;
-    ph.max = resultadoDe(p).ph_max || 99;
+  function agendarEnvioPH() {
     if (!ph.timer) ph.timer = setTimeout(enviarPH, 0);
   }
 
   function enviarPH() {
     ph.timer = 0;
-    if (ph.alvo == null || !conectada()) return;
-    const alvo = ph.alvo, antes = ph.valor, max = ph.max;
-    ph.alvo = null;
-    ph.valor = alvo;                          // já vale aqui; o servidor confirma ou corrige
-    const delta = antes == null ? null : alvo - antes;
+    // Sem conexão a transação ficaria só na memória e sumiria se a página fechasse: a mudança
+    // espera aqui, guardada, e vai quando a conexão voltar (`.info/connected`).
+    if (!conectada() || !online) return;
+    const d = ph.pendente, absoluto = ph.absoluto, local = ph.valor, max = ph.max;
+    if (!d && absoluto == null) return;
+    ph.pendente = 0;
+    ph.absoluto = null;
+    ph.emVoo += d;
+    guardarPH();
     const limitar = (x) => Math.max(0, Math.min(max, Math.round(x)));
-    ref("grupo/ph").transaction((cur) => (cur == null || delta == null ? limitar(alvo) : limitar(cur + delta)))
-      .catch((e) => avisarErro(e, "o PH"));
+    const fim = () => { ph.emVoo -= d; guardarPH(); };
+    ref("grupo/ph").transaction((cur) => {
+      if (cur == null) return limitar(absoluto != null ? absoluto : local);   // a mesa ainda não tinha PH
+      if (!d) return undefined;                      // só um valor solto e a mesa já tem o dela: vale o da mesa
+      return limitar(cur + d);
+    }).then(fim, (e) => { fim(); avisarErro(e, "o PH"); });
   }
+
+  /**
+   * O PH da mesa, para a Área do Mestre: com uma ficha do grupo na mesa online, o PH que
+   * vale é o da mesa — e não o menor PH das fichas deste navegador. Nulo fora da mesa.
+   */
+  N.phDaMesa = function (g) {
+    if (!configurada() || !L.mesa || ph.valor == null) return null;
+    if (g && !g.some((m) => L.ligadas[m.id])) return null;
+    return ph.valor;
+  };
 
   // ---------------------------------------------------------------------------
   // O combate: o Mestre publica o retrato, o jogador lê
@@ -768,7 +863,7 @@
         ((i.kind === "npc" || i.kind === "npcmemo") && i.papel === "Aliado");
       const o = { k: i.chave, n: i.nome, t: i.kind, tipo: i.kind === "inimigo" ? i.tipo : i.papel || "",
         c: i.casa, agora: !!i.agora, agiu: !!i.cc.agiu, ult: !!i.cc.ultimate, sur: !!i.cc.surpreso,
-        atr: i.atraso_casas || 0, ava: i.avanco_casas || 0, caiu: i.pv === 0, aliado: aliado,
+        atr: i.atraso_casas || 0, ava: i.avanco_casas || 0, caiu: i.pv === 0, pula: !!i.derrotado, aliado: aliado,
         cond: (i.condicoes || []).filter((c) => c.nome !== "Quebrado").map((c) =>
           ({ n: c.nome, t: c.turnos == null ? null : c.turnos, a: c.acumulos > 1 ? c.acumulos : 0 })) };
       if (i.x) o.qb = !!i.x.quebrado;
@@ -787,7 +882,9 @@
       }
       return o;
     };
-    return { v: 1, ativo: true, nome: cb.nome || "", ciclo: cb.ciclo || 1, fila: f.casas.map(casa) };
+    // `id` é o começo do combate: com o Ciclo, ele diz à ficha de cada jogador em que combate e
+    // em que Ciclo a Energia "1 vez por Ciclo" (17.2) já contou.
+    return { v: 1, ativo: true, id: Number(cb.inicio) || 0, nome: cb.nome || "", ciclo: cb.ciclo || 1, fila: f.casas.map(casa) };
   }
 
   EG.aoSalvarMesa = () => agendarCombate();
@@ -867,6 +964,8 @@
 
   EG.aoRolar = function (r) {
     if (!conectada() || (L.papel === "mestre" && L.escondido)) return;
+    // A Área do Mestre de quem é jogador é a mesa dele, não esta: o que ele rola lá não vai.
+    if (L.papel === "jogador" && EG.rotaAtual().tela === "mestre") return;
     const quem = L.papel === "mestre" ? "Mestre" : (F.P && F.P.nome) || nomeDoUsuario();
     const d = { uid: usuario.uid, quem: corta(quem, 80), rotulo: corta(r.rotulo, 160), expr: corta(r.expr, 32),
       total: Number(r.total) || 0, mod: Number(r.mod) || 0, em: ts() };
@@ -878,12 +977,19 @@
     ref("rolagens").push(d).catch(() => {});
   };
 
+  // As rolagens que já entraram no histórico deste aparelho. Reconectar recarrega as últimas
+  // 20 da mesa, e sem isto cada queda de conexão repetia todas elas no histórico.
+  const rolagensVistas = new Set();
+
   function ouvirRolagens() {
     const q = ref("rolagens").orderByKey().limitToLast(20);
     let carregou = false;
     ouvir(q, "child_added", (s) => {
       const r = s.val() || {};
       if (!usuario || r.uid === usuario.uid) return;          // a própria já apareceu aqui
+      const chave = L.mesa + "/" + s.key;
+      if (rolagensVistas.has(chave)) return;
+      rolagensVistas.add(chave);
       let dados = null;
       try { dados = r.dados ? JSON.parse(r.dados) : null; } catch (_) { dados = null; }
       EG.mostrarRolagem({ rotulo: r.rotulo, expr: r.expr, total: r.total, natural: r.natural,
@@ -962,20 +1068,30 @@
   }
 
   // ---------------------------------------------------------------------------
-  // A aba Área do Mestre some para quem é jogador numa mesa
+  // A Área do Mestre de quem é jogador numa mesa
+  //
+  // Ela continua aberta: é a mesa *deste navegador*, para a campanha que a pessoa mestrar um
+  // dia. Nada da mesa do Mestre de lá chega aqui — inimigos, encontros, NPCs e notas nunca
+  // saem do navegador de quem mestra, e as regras do banco não deixam jogador ler o que é do
+  // Mestre. O que ela tem em comum com a mesa online são as fichas desta pessoa que estão
+  // nela: mexer nelas aqui é mexer na ficha, igual à aba Jogar.
   // ---------------------------------------------------------------------------
   N.ehJogador = () => configurada() && !!L.mesa && L.papel === "jogador";
 
+  /** A aba fica para todo mundo. (Até a versão anterior, ela sumia para os jogadores.) */
   function mostrarAbaDoMestre() {
     const aba = document.querySelector("[data-aba='mestre']");
-    if (aba) aba.hidden = N.ehJogador();
+    if (aba) aba.hidden = false;
   }
 
-  N.telaSemMestre = () =>
-    "<section class='cartao aviso-mestre'><h1>Área do Mestre</h1>" +
-    "<p>Este aparelho está na mesa online <b>" + esc(L.nome_mesa) + "</b> como jogador, e a Área do Mestre fica " +
-    "com o Mestre da mesa.</p><div class='botoes'><a class='botao primario' href='#jogar'>Voltar para a ficha</a>" +
-    "<a class='botao' href='#mesa'>Mesa online</a></div></section>";
+  /** A faixa no topo da Área do Mestre de quem está como jogador numa mesa online. */
+  N.faixaMestreDoJogador = function () {
+    if (!N.ehJogador()) return "";
+    return "<p class='faixa-mesa'>" + pontoOnline(online) + " Você está na mesa online <b>" + esc(L.nome_mesa) +
+      "</b> como <b>jogador</b>. Esta Área do Mestre é <b>sua</b>, só deste navegador: nela não aparece nada da " +
+      "campanha do Mestre de lá, e o que você fizer aqui não vai para ele — só as suas fichas que estão na mesa " +
+      "continuam sincronizadas. Para mestrar a sua própria mesa online, veja <b>Mesa online</b> no Painel.</p>";
+  };
 
   // ---------------------------------------------------------------------------
   // Pedaços de tela
@@ -1019,7 +1135,15 @@
         "aplica aqui aparece no celular dele —, o PH do grupo é um só, e o combate e as rolagens são da mesa toda.</p>" +
         "<div class='botoes'>" + botao("entrar", "Entrar com Google", { classe: "primario" }) + "</div>";
     } else if (!corpo && L.mesa && L.papel === "jogador") {
-      corpo = "<p class='ajuda'>Este aparelho está na mesa <b>" + esc(L.nome_mesa) + "</b> como jogador.</p>";
+      const minhas = Object.entries(mesasDoUsuario).filter(([, papel]) => papel === "mestre");
+      corpo = "<p>" + pontoOnline(online) + " Este aparelho está na mesa <b>" + esc(L.nome_mesa) + "</b> como <b>jogador</b>.</p>" +
+        "<p class='ajuda'>Um aparelho fica numa mesa online por vez. Para criar e mestrar a sua, saia da mesa de jogador " +
+        "aqui: as fichas continuam salvas neste aparelho e na mesa, e você volta para ela pelo convite ou pela tela " +
+        "<a href='#mesa'>Mesa online</a>.</p>" +
+        (minhas.length ? "<p class='ajuda'>Mesas que você mestra: " + minhas.map(([id]) =>
+          botao("conectar", "abrir " + esc(id.slice(-6)), { classe: "pequeno", dados: { mesa: id } })).join(" ") + "</p>" : "") +
+        "<div class='botoes'>" + botao("soltar", "Sair da mesa de jogador para mestrar", { classe: "pequeno",
+          titulo: "As fichas ficam aqui e na mesa; depois é só criar a sua mesa neste cartão" }) + "</div>";
     } else if (!corpo && !(L.mesa && L.papel === "mestre" && fase === "conectada")) {
       const outras = Object.entries(mesasDoUsuario).filter(([, papel]) => papel === "mestre");
       corpo = "<p class='ajuda'>Conta: <b>" + esc(nomeDoUsuario()) + "</b>. Crie a mesa e mande o convite para o grupo.</p>" +
@@ -1132,7 +1256,7 @@
         (c && c.t != null ? " " + num(c.t) + "t" : "") + (c && c.a ? " ×" + num(c.a) : "") + "</span>").join(" ");
       const caiu = x.caiu ? etiq(x.t === "pj" || x.t === "npc"
         ? "Morrendo" + (x.mo ? " " + num(x.mo.s) + "✓ " + num(x.mo.f) + "✗" : "")
-        : x.t === "inimigo" ? "derrotado" : "caiu", "ruim") : "";
+        : x.t === "inimigo" ? "derrotado" + (x.pula ? " · pula a vez" : "") : "caiu", "ruim") : "";
       const atr = num(x.atr), ava = num(x.ava);
       return "<li class='fila-casa" + (x.agora ? " agora" : "") + (x.agiu ? " agiu" : "") + (x.caiu ? " caiu" : "") +
         (x.qb ? " quebrado" : "") + (x.k === minha ? " minha" : "") + "'>" +
