@@ -86,7 +86,7 @@ main { max-width: 1400px; margin: 0 auto; padding: 1rem; outline: none; }
 .botao.perigo { color: var(--vermelho); }
 .botao.bom { color: var(--verde); }
 .botao.pequeno { padding: .2rem .55rem; font-size: .82rem; }
-.botoes { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .6rem; }
+.botoes { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .6rem; align-items: center; }
 .botoes.compactos { gap: .35rem; margin-top: .4rem; }
 
 input[type=text], input[type=number], input[type=search], select, textarea {
@@ -103,7 +103,15 @@ select option { background: var(--painel); }
 .campo.estreito { flex: 0 1 13rem; }
 .rotulo { font-size: .8rem; font-weight: 600; color: var(--suave); text-transform: uppercase; letter-spacing: .04em; }
 .ajuda { font-size: .85rem; color: var(--suave); }
-.linha { display: flex; flex-wrap: wrap; gap: .3rem 1rem; align-items: flex-end; }
+/* Linha de campos. Alinhada por cima, e não por baixo: um campo com texto de ajuda embaixo
+   (ou de rótulo mais comprido que o do vizinho) empurrava o controle do vizinho para baixo. Um
+   botão ou uma caixa soltos no meio dos campos descem até a altura dos controles — o controle de
+   um .campo começa depois da margem (.3rem), do rótulo (.8rem × 1,5) e do espaço (.2rem). */
+.linha { display: flex; flex-wrap: wrap; gap: .3rem 1rem; align-items: flex-start; }
+.linha:not(:has(> .campo)) { align-items: center; }
+.linha:has(> .campo) > :is(.botao, button):not(.pequeno) { margin-top: 1.75rem; }
+.linha:has(> .campo) > :is(.botao, button).pequeno { margin-top: 2.1rem; }
+.linha:has(> .campo) > .marca { margin-top: 2.15rem; }
 .marca { display: inline-flex; align-items: center; gap: .4rem; cursor: pointer; margin: .2rem 0; }
 .marca input { flex: none; width: 1.1rem; height: 1.1rem; accent-color: var(--ouro); }
 .marca.travada { opacity: .85; cursor: default; }
@@ -135,6 +143,8 @@ select option { background: var(--painel); }
   position: absolute; z-index: 30; top: calc(100% + .3rem); left: 0; min-width: 15rem;
   background: var(--painel); border: 1px solid var(--borda); border-radius: 8px; box-shadow: var(--sombra); padding: .3rem;
 }
+/* O "Mais" da Área do Mestre fica no canto direito: o menu abre para dentro da tela. */
+.barra-mestre .menu-itens { left: auto; right: 0; }
 .menu-itens button { display: block; width: 100%; text-align: left; font: inherit; color: var(--texto); background: none; border: 0; padding: .5rem .7rem; border-radius: 6px; cursor: pointer; }
 .menu-itens button:hover { background: var(--painel-2); }
 .menu-itens .perigo { color: var(--vermelho); }
@@ -170,7 +180,7 @@ select option { background: var(--painel); }
 .traco summary { cursor: pointer; }
 .texto-livro { font-size: .93rem; }
 .texto-livro blockquote { margin: .4rem 0; padding-left: .8rem; border-left: 3px solid var(--ouro-escuro); color: var(--suave); }
-.reliquias { display: grid; grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr)); gap: .5rem; }
+.reliquias { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(20rem, 100%), 1fr)); gap: .5rem; }
 .reliquia { background: var(--painel-2); border: 1px solid var(--borda); border-radius: 8px; padding: .5rem .7rem; }
 .reliquia.ativa { border-color: var(--ouro-escuro); }
 .bencao-slot { border-bottom: 1px solid var(--borda); padding-bottom: .4rem; margin-bottom: .4rem; }
@@ -206,10 +216,10 @@ select option { background: var(--painel); }
 .atributos-faixa li.arma.habilidade { border-color: var(--cor-arma) var(--cor-hab) var(--cor-hab) var(--cor-arma);
   background: linear-gradient(90deg, var(--cor-arma) 50%, var(--cor-hab) 50%) top / 100% 4px no-repeat,
     linear-gradient(100deg, rgba(242, 166, 90, .16), rgba(185, 162, 255, .16) 70%, var(--painel)); }
-.atributos-faixa .rotulo { font-size: .68rem; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.atributos-faixa .rotulo { font-size: .72rem; letter-spacing: .02em; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .atributos-faixa b { font-size: 1.35rem; font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }
 .atributos-faixa .bonus { font-size: .85rem; font-weight: 700; color: var(--ouro); font-variant-numeric: tabular-nums; }
-.atributos-faixa .usos { display: flex; flex-wrap: wrap; justify-content: center; gap: .2rem; margin-top: .25rem; }
+.atributos-faixa .selos-uso { display: flex; flex-wrap: wrap; justify-content: center; gap: .2rem; margin-top: .25rem; }
 .atributos-faixa.compacta { margin: .1rem 0 .3rem; gap: .25rem; }
 .atributos-faixa.compacta li { flex-direction: row; justify-content: center; gap: .25rem; padding: .2rem .3rem; background-color: var(--painel-2); }
 .atributos-faixa.compacta li:not(.arma):not(.habilidade) { background: var(--painel-2); }
@@ -217,11 +227,11 @@ select option { background: var(--painel); }
 .atributos-faixa.compacta .bonus { font-size: .78rem; }
 .atributos-legenda { margin: 0 0 .6rem; font-size: .82rem; color: var(--suave); }
 /* A etiqueta de quem usa o Atributo: na faixa ("ARMA", "HABILIDADE") e nas Ações ("Agilidade +4") */
-.uso { display: inline-block; font-size: .72rem; font-weight: 800; line-height: 1.35; padding: .02rem .45rem; border-radius: 999px;
+.selo-uso { display: inline-block; font-size: .72rem; font-weight: 800; line-height: 1.35; padding: .02rem .45rem; border-radius: 999px;
   color: #1a1406; white-space: nowrap; vertical-align: middle; }
-.uso-arma { background: var(--cor-arma); }
-.uso-hab { background: var(--cor-hab); }
-.atributos-faixa .uso { font-size: .62rem; letter-spacing: .03em; text-transform: uppercase; padding: .02rem .4rem; }
+.selo-arma { background: var(--cor-arma); }
+.selo-hab { background: var(--cor-hab); }
+.atributos-faixa .selo-uso { font-size: .7rem; letter-spacing: .03em; text-transform: uppercase; padding: .02rem .4rem; }
 @media (max-width: 600px) {
   .atributos-faixa { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .atributos-faixa.compacta { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -270,11 +280,12 @@ button.rolar.vantagem:hover { background: var(--azul); color: #0b1020; }
 .barra-energia span { display: block; height: 100%; background: linear-gradient(90deg, #4a6fd8, var(--azul)); }
 .barra-energia i { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--ouro); }
 .controles-pv { align-items: center; margin: .3rem 0; }
-.controles-pv input { width: 7rem; flex: 0 0 auto; }
+.controles-pv input:not([type=checkbox]) { width: 8.5rem; flex: 0 0 auto; }
 .recurso { padding: .5rem 0; border-bottom: 1px solid var(--borda); }
 .recurso:last-child { border-bottom: 0; }
 .recurso-topo { display: flex; align-items: baseline; gap: .5rem; flex-wrap: wrap; }
 .recurso .botoes input { width: 5rem; }
+.recurso-topo b[data-ph-grupo] { font-size: 1.5rem; font-weight: 800; color: var(--ouro); font-variant-numeric: tabular-nums; }
 .numeros { display: grid; grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr)); gap: .5rem; }
 .numero { background: var(--painel-2); border: 1px solid var(--borda); border-radius: 8px; padding: .4rem .6rem; display: flex; flex-direction: column; }
 .numero .rotulo { font-size: .72rem; }
@@ -300,9 +311,13 @@ button.rolar:hover { background: var(--ouro); color: #1a1406; }
 .lista-testes li:not(.treinada) span:first-child { color: var(--suave); }
 .lista-bencaos, .lista-condicoes { list-style: none; margin: 0; padding: 0; }
 .lista-bencaos li, .lista-condicoes li { padding: .45rem 0; border-bottom: 1px solid var(--borda); }
-.lista-bencaos .uso { font-size: .85rem; margin-right: 1rem; }
+.lista-bencaos .marca-uso { font-size: .85rem; margin-right: 1rem; }
 .morrendo { margin-top: .8rem; padding: .7rem; border: 1px solid #6b2a36; background: var(--vermelho-fundo); border-radius: 8px; }
 .morrendo h3 { color: var(--vermelho); margin-top: 0; }
+/* O quadro de Morrendo vive em coluna estreita: o botão de rolar fica numa linha só dele, e
+   Sucessos e Falhas (de 0 a 3) lado a lado embaixo, em vez de cada um numa linha. */
+.morrendo .linha > .botao { flex: 1 0 100%; margin-top: 0; justify-content: center; }
+.morrendo .linha > .campo.estreito { flex: 0 1 7rem; }
 .bolinha { display: inline-block; width: .9rem; height: .9rem; border-radius: 50%; border: 2px solid var(--suave); margin-right: .2rem; vertical-align: middle; }
 .bolinha.cheia.s { background: var(--verde); border-color: var(--verde); }
 .bolinha.cheia.f { background: var(--vermelho); border-color: var(--vermelho); }
@@ -355,7 +370,7 @@ button.rolar:hover { background: var(--ouro); color: #1a1406; }
 .cone-editor { display: flex; gap: 1rem; align-items: flex-start; flex-wrap: wrap; margin: .4rem 0 .2rem; }
 .cone-editor .arte-editor { flex: 0 0 9rem; max-width: 9rem; margin: 0; }
 .cone-editor-corpo { flex: 1 1 18rem; min-width: 0; }
-.galeria-cones { display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 1rem; align-items: start; }
+.galeria-cones { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(17rem, 100%), 1fr)); gap: 1rem; align-items: start; }
 .cone-item, .cone-guardado { background: var(--painel-2); border: 1px solid var(--borda); border-radius: 8px; padding: .75rem; }
 .cone-item-topo { display: flex; gap: .5rem; align-items: center; justify-content: space-between; margin-bottom: .5rem; }
 .cone-item-topo h3 { margin: 0; font-size: 1rem; }
@@ -365,7 +380,7 @@ button.rolar:hover { background: var(--ouro); color: #1a1406; }
 .banco-cones .colecao-cones { margin-top: .6rem; }
 .banco-cones .colecao-cones > summary { cursor: pointer; font-size: .9rem; color: var(--azul); }
 .banco-cones .colecao-cones .galeria-cones,
-.banco-de-cones .galeria-cones { margin-top: .6rem; grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr)); }
+.banco-de-cones .galeria-cones { margin-top: .6rem; grid-template-columns: repeat(auto-fill, minmax(min(20rem, 100%), 1fr)); }
 .banco-cones select { max-width: 100%; }
 /* O botão que recolhe a coleção no banco da Área do Mestre: a grade de Cones é alta, e com o
    banco cheio ela empurra o resto da aba Recompensas para fora da tela. O rótulo do botão troca
@@ -458,7 +473,7 @@ button.rolar:hover { background: var(--ouro); color: #1a1406; }
 .grade-mestre.duas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 @media (max-width: 1150px) { .grade-mestre { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 760px) { .grade-mestre, .grade-mestre.duas { grid-template-columns: 1fr; } .grade-mestre .coluna { display: contents; } }
-.grade-membros { display: grid; grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr)); gap: 1rem; align-items: start; }
+.grade-membros { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(30rem, 100%), 1fr)); gap: 1rem; align-items: start; }
 @media (max-width: 560px) { .grade-membros { grid-template-columns: 1fr; } }
 .rolagem-pj { font-size: .85rem; color: var(--suave); white-space: nowrap; }
 .grade-bichos { display: grid; grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr)); gap: 1rem; align-items: start; }
@@ -467,7 +482,8 @@ button.rolar:hover { background: var(--ouro); color: #1a1406; }
 .ph-grande { font-size: 1.8rem; font-weight: 800; color: var(--ouro); }
 .destaque { color: var(--ouro); }
 .bom-texto { color: var(--verde); }
-.numeros.compactos { grid-template-columns: repeat(auto-fill, minmax(5.2rem, 1fr)); gap: .35rem; }
+.numeros.compactos { grid-template-columns: repeat(auto-fill, minmax(5.8rem, 1fr)); gap: .35rem; }
+.numeros.compactos .numero .rotulo { letter-spacing: .02em; }
 .numeros.compactos .numero { padding: .3rem .45rem; }
 .numeros.compactos .grande { font-size: 1.2rem; }
 
@@ -518,7 +534,7 @@ button.rolar:hover { background: var(--ouro); color: #1a1406; }
 .fila-casa:last-child { border-bottom: 0; }
 .fila-casa.agora { background: rgba(230, 195, 106, .1); border-left: 3px solid var(--ouro); padding-left: .5rem; }
 .fila-casa.agiu { opacity: .6; }
-.fila-casa.caiu .casa-quem b { text-decoration: line-through; }
+.fila-casa.fora .casa-quem b { text-decoration: line-through; }
 .fila-casa.pulado { opacity: .5; }
 .fila-casa.quebrado { background: rgba(124, 224, 164, .07); }
 .casa-num { font-size: 1.4rem; font-weight: 800; color: var(--suave); text-align: center; font-variant-numeric: tabular-nums; }
@@ -576,7 +592,7 @@ button.rolar:hover { background: var(--ouro); color: #1a1406; }
 .lista-avisos li { padding: .1rem 0; }
 
 /* Banco de NPCs */
-.grade-npcs { display: grid; grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr)); gap: 1rem; align-items: start; }
+.grade-npcs { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(26rem, 100%), 1fr)); gap: 1rem; align-items: start; }
 .npc-cartao.em-cena { border-color: var(--ouro-escuro); }
 .npc-cartao .campo.estreito { flex: 0 1 9rem; }
 .npc-cabeca { border-color: var(--ouro-escuro); }
@@ -694,6 +710,9 @@ body[data-tela=regras] .historico { display: none; }
 
 @media (max-width: 600px) {
   main { padding: .7rem; }
+  .sub-abas { flex-wrap: wrap; overflow-x: visible; }
+  .historico { right: .5rem; bottom: .5rem; }
+  .historico summary { padding: .3rem .65rem; font-size: .85rem; }
   .tabela-atributos th, .tabela-atributos td { padding: .25rem .15rem; font-size: .9rem; }
   .tabela-atributos select, .tabela-atributos input { width: 4.4rem; padding: .35rem .3rem; }
   .tabela-atributos .opcional { display: none; }
@@ -714,7 +733,7 @@ body[data-tela=regras] .historico { display: none; }
   .sub-abas, .barra-mestre, .casa-botoes, .rodape-mestre, .rolagem-livre-cartao, .fontes-energia { display: none !important; }
   .atributos-faixa li { background: #fff; border-color: #999; color: #000; }
   .atributos-faixa li.arma, .atributos-faixa li.habilidade { border-width: 2px; border-color: #000; }
-  .uso { border: 1px solid #000; }
+  .selo-uso { border: 1px solid #000; }
   .atributos-faixa .bonus, .energia-numero b { color: #000; }
   .cartao, .acao, .numero { box-shadow: none; background: #fff; border-color: #999; color: #000; break-inside: avoid; }
   .grade-jogo, .grade-mestre { grid-template-columns: 1fr 1fr; }

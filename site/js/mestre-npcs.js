@@ -275,7 +275,7 @@
       "com turnos, o painel de Morrendo e o Memoespírito — tudo pelos mesmos controles do grupo.</p>" +
       (emCena.length
         ? "<p><b>Em cena agora:</b> " + emCena.map((m) => esc(G.nome(m)) + " " +
-            H.botao("tirar-npc-da-cena", "tirar", { classe: "pequeno", dados: { mid: m.id } })).join(" · ") +
+            H.botao("tirar-npc-da-cena", "Tirar", { classe: "pequeno", dados: { mid: m.id } })).join(" · ") +
           " <a href='#mestre/combate'>abrir o combate »</a></p>"
         : ""),
       "explicacao-npcs");
@@ -354,7 +354,7 @@
       (emCena.length
         ? "<ul class='tira-grupo'>" + emCena.map((m) => {
             const pv = G.pvAtual(m), j = m.p.jogo;
-            return "<li><div class='tira-topo'><b>" + esc(G.nome(m)) + "</b> " + etiquetaPapel(m.p.npc.papel) +
+            return "<li><div class='tira-topo'><span><b>" + esc(G.nome(m)) + "</b> " + etiquetaPapel(m.p.npc.papel) + "</span>" +
               "<span class='suave'>" + esc(resumoDe(m.p)) + "</span></div>" +
               "<div class='tira-pv'><span>" + pv + "<small>/" + m.R.pv_max + "</small></span>" +
               H.barraPV(pv, m.R.pv_max, "PV de " + G.nome(m)) + "</div>" +
@@ -368,7 +368,7 @@
               "</div>" +
               "<div class='botoes compactos'>" +
               H.botao("escolher-alvo", "Abrir o painel", { classe: "pequeno", dados: { k: "n:" + m.id } }) +
-              "<a class='botao pequeno' href='#mestre/npcs/" + esc(m.id) + "'>abrir a ficha</a>" +
+              "<a class='botao pequeno' href='#mestre/npcs/" + esc(m.id) + "'>Abrir a ficha</a>" +
               H.botao("tirar-npc-da-cena", "Tirar da cena", { classe: "pequeno perigo", dados: { mid: m.id } }) +
               "</div></li>";
           }).join("") + "</ul>"

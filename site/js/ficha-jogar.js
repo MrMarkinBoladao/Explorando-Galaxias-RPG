@@ -15,48 +15,11 @@
   const link = (n, t, r) => EG.Regras.link(n, t, r);
 
   // ---------------------------------------------------------------------------
-  // Frequências: o que dá para marcar como "usado" e quando volta
+  // Frequências: o que dá para marcar como "usado" e quando volta (a regra mora em ficha-base,
+  // para os descansos da Área do Mestre recarregarem as mesmas caixas)
   // ---------------------------------------------------------------------------
-  function recarga(texto) {
-    const t = texto.toLowerCase();
-    if (/por alvo|turno|ciclo/.test(t)) return null;          // muda rápido demais para marcar
-    if (/descanso curto/.test(t)) return "curto";
-    if (/descanso longo|dia/.test(t)) return "longo";
-    if (/combate|cena/.test(t)) return "combate";
-    if (/sessão/.test(t)) return "sessao";
-    return null;
-  }
-  const quantasVezes = (texto) => (/duas|2 vezes/i.test(texto) ? 2 : 1);
-
-  /** Usos marcáveis: [{chave, rotulo, recarga}] das Bênçãos possuídas e do traço ativável da Raça. */
-  function usosMarcaveis() {
-    const usos = [];
-    const chave = (...partes) => partes.join(":").replace(/\./g, "");
-    for (const nome of F.bencaosPossuidas()) {
-      const b = F.bencaoInfo(nome);
-      if (!b) continue;
-      b.frequencia.split(" · ").forEach((fr) => {
-        const r = recarga(fr);
-        if (!r) return;
-        for (let i = 0; i < quantasVezes(fr); i++) usos.push({ chave: chave("b", nome, fr, i), dono: nome, rotulo: fr, recarga: r });
-      });
-    }
-    const traco = tracoAtivavel();
-    if (traco && F.P.raca !== "Humano") {
-      const r = recarga(traco.desc) || "combate";
-      for (let i = 0; i < quantasVezes(traco.desc); i++) usos.push({ chave: chave("r", traco.nome, i), dono: traco.nome, rotulo: traco.desc.split(",")[0], recarga: r });
-    }
-    return usos;
-  }
-
-  function tracosResumo() {
-    const r = F.racaInfo();
-    if (!r) return [];
-    return r.tracos.split(" · ").map((t) => {
-      const m = t.match(/^(.+?) \((ativável|passivo): (.+)\)$/);
-      return m ? { nome: m[1], tipo: m[2], desc: m[3] } : { nome: t, tipo: "", desc: "" };
-    });
-  }
+  const usosMarcaveis = () => F.usosMarcaveisDe(F.P, F.R);
+  const tracosResumo = () => F.tracosDe(F.P);
   const tracoAtivavel = () => tracosResumo().find((t) => t.tipo === "ativável");
 
   // ---------------------------------------------------------------------------
@@ -113,10 +76,7 @@
     EG.toast("Curou " + (j.pv - antes) + " · PV " + j.pv + "/" + F.R.pv_max + (antes === 0 ? " · saiu de Morrendo" : ""));
   };
 
-  function recarregar(tipos) {
-    const usos = J().usos;
-    for (const u of usosMarcaveis()) if (tipos.includes(u.recarga)) delete usos[u.chave];
-  }
+  const recarregar = (tipos) => F.recarregarUsos(F.P, F.R, tipos);
 
   A["descanso-curto"] = () => {
     const j = J(), antes = pvAtual();
@@ -138,6 +98,9 @@
 
   A["novo-combate"] = () => {
     const j = J();
+    if (EG.MesaOnline && EG.MesaOnline.estaNaMesa(F.P.id) && !confirm("Começar um combate novo?\n\n" +
+      "O PH do grupo volta para " + F.R.ph_inicio + " para todo mundo da mesa online, e os seus acúmulos zeram. " +
+      "Quem costuma fazer isso é o Mestre, ao abrir o combate.")) return false;
     j.ph = F.R.ph_inicio;
     j.acumulos = {};
     // Combate novo: os limites de Energia "por Ciclo" e "por combate" começam do zero.
@@ -336,7 +299,7 @@
       "<p class='ajuda'>O dano já desconta a sua RD (" + R.rd + ") e depois o PV temporário. Mínimo 1. " + link("23", "23.1", "regra 23.1") + "</p>" +
       "<div class='linha'>" + H.campo(nomeTemp, H.numero("jogo.temp", { min: 0, max: tetoTemp, rotulo: nomeTemp, classe: "curto" }),
         "Teto " + tetoTemp + ". Não somam entre fontes: fica o maior.", "estreito") +
-      H.campo("Ajustar PV", H.numero("jogo.pv", { min: 0, max: R.pv_max, rotulo: "PV atual", classe: "curto" }).replace("<input", "<input placeholder='" + pv + "'"), "Digite direto, se preferir", "estreito") + "</div>" +
+      H.campo("Ajustar PV", H.numero("jogo.pv", { min: 0, max: R.pv_max, rotulo: "PV atual", classe: "curto", ph: pv }), "Digite direto, se preferir", "estreito") + "</div>" +
       "<div class='botoes'>" + botao("descanso-curto", "Descanso Curto (+" + Math.max(0, R.descanso_curto) + " PV)", { titulo: "1 hora, até 2 por dia (23.6)" }) +
       botao("descanso-longo", "Descanso Longo", { titulo: "8 horas, 1 por dia: PV cheios, remove condições, recarrega tudo (23.6)" }) + "</div>";
     if (j.temp > tetoTemp) corpo += H.avisos(["BONUS_TEMPORARIO_NO_TETO"]);
@@ -543,7 +506,9 @@
       "<div class='botoes compactos'>" + botao("ultimate", "Ativar a Ultimate (−" + u.custo + ")", { classe: "primario", desabilitado: energia < u.custo || !!bloqU }) + "</div></div>";
     if (R.quebra) {
       const el = C().elementos.find((x) => x.elemento === p.elemento);
-      corpo += "<p class='ajuda'><b>Quebra (" + esc(p.elemento) + "):</b> " + botaoRolar(R.quebra.texto, "Dano de Quebra") + " (média " + R.quebra.media + ")" +
+      const fixo = !/d\d/.test(R.quebra.texto);
+      corpo += "<p class='ajuda'><b>Quebra (" + esc(p.elemento) + "):</b> " + botaoRolar(R.quebra.texto, "Dano de Quebra") +
+        (fixo ? " de dano (fixo)" : " (média " + R.quebra.media + ")") +
         (el ? " + " + esc(el.efeito_quebra) : "") + " · Atrasa 1 casa · +10 Energia. " + link("20", "20.4", "regra") + "</p>";
     }
     return cartao("Ações", corpo, "acoes");
@@ -572,7 +537,7 @@
   function cartaoBencaos() {
     const p = F.P, R = F.R, usos = J().usos, marcaveis = usosMarcaveis();
     const caixasDe = (dono) => marcaveis.filter((u) => u.dono === dono).map((u) =>
-      "<label class='marca uso'><input type='checkbox' data-p='jogo.usos." + esc(u.chave) + "' data-t='bool' id='" + F.idDe("jogo.usos." + u.chave) + "'" +
+      "<label class='marca marca-uso'><input type='checkbox' data-p='jogo.usos." + esc(u.chave) + "' data-t='bool' id='" + F.idDe("jogo.usos." + u.chave) + "'" +
       (usos[u.chave] ? " checked" : "") + "> <span>usado (" + esc(u.rotulo.toLowerCase()) + ")</span></label>").join("");
     let corpo = "";
     const possuidas = F.bencaosPossuidas();
@@ -669,7 +634,7 @@
         (t.marca ? "<p class='efeito'><b>Marca do Passado:</b> ao acertar, aplica Marcado ou Vulnerável até o fim do próximo turno do alvo.</p>" : "") +
         (t.evolutivo ? "<div class='linha'><span class='ajuda'><b>Ataque Evolutivo:</b> este uso tem <b>+" + t.bonus_evolutivo +
           "</b> de dano (já na conta acima) · " + t.usos + (t.usos === 1 ? " uso" : " usos") + " neste combate</span>" +
-          botao("memo-evolutivo", "−1", { classe: "pequeno", dados: { v: -1 } }) + botao("memo-evolutivo", "zerar", { classe: "pequeno", dados: { v: 0 } }) + "</div>" : "");
+          botao("memo-evolutivo", "−1", { classe: "pequeno", dados: { v: -1 } }) + botao("memo-evolutivo", "Zerar", { classe: "pequeno", dados: { v: 0 } }) + "</div>" : "");
     }
     ataques += "<div class='acao'><div class='acao-topo'>" + titulo + "</div>" + tecnica +
       (memo.hab_ofensiva ? "<p class='efeito'>" + esc(memo.hab_ofensiva) + "</p>" : "") +
@@ -690,7 +655,8 @@
           titulo: "Sai de campo, de graça, no seu turno (11.5)" })
         : botao("invocar", (nm.tem ? "Invocar " + esc(nome) : "Invocar o Memoespírito") + " (Ação Complementar + 1 PH)", { classe: "primario" })) + "</div>" +
       "<div class='numeros'>" + num("PV", pv + "<small>/" + m.pv + "</small>") + num("Defesa", m.defesa) + num("VEL", m.velocidade) + num("RD", m.rd) + "</div>" +
-      "<div class='linha'>" + H.campo("PV " + esc(nm.de) + " agora", H.numero("jogo.memo_pv", { min: 0, max: m.pv, rotulo: "PV " + nm.de, classe: "curto" }), "", "estreito") + "</div>" +
+      "<div class='linha'>" + H.campo("PV " + esc(nm.de) + " agora", H.numero("jogo.memo_pv", { min: 0, max: m.pv, rotulo: "PV " + nm.de, classe: "curto", ph: pv }),
+        "Em branco = cheio", "estreito") + "</div>" +
       ataques +
       "<p class='ajuda'>Tenacidade " + m.rt + " · Testes de Resistência: " + Object.entries(m.tr).map(([a, v]) => esc(a) + " " + sinal(v)).join(", ") +
       " · a Energia das ações " + esc(nm.de) + " vem pela metade para você.</p>" +
@@ -785,7 +751,7 @@
     return cartao("Cone de Luz", F.coneHTML(p, F.R) +
       "<p class='ajuda'>O Bônus Maior já está somado nos números desta ficha e fica <b>fora</b> do teto de " +
       "bônus; o Efeito Condicional <b>entra</b> no teto. " + link("25", "25.2", "regra 25.2") + "</p>",
-      "cone-cartao", "<a class='botao pequeno' href='#editar'>trocar a arte</a>");
+      "cone-cartao", "<a class='botao pequeno' href='#editar'>Trocar a arte</a>");
   }
 
   function cartaoNotas() {

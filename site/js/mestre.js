@@ -120,7 +120,7 @@
       "<li>O encontro cumpre o <b>contrato da Fraqueza</b>? <a href='#mestre/encontros'>Conferir</a> (" + link("27", "27.5", "27.5") + ")</li>" +
       "<li>Os <b>PV e o PH</b> do grupo estão como terminou a sessão passada? <a href='#mestre/grupo'>Ver o grupo</a></li>" +
       "<li>Alguma condição ficou pendurada de antes? O Descanso Longo limpa tudo (" + link("23", "23.6", "23.6") + ")</li>" +
-      "</ul>", "checklist");
+      "</ul>", "checklist-sessao");
 
     app().innerHTML = topo("painel") +
       "<div class='grade-mestre'>" +
@@ -184,7 +184,7 @@
       "</div>" +
       "<div class='numeros compactos'>" + H.num("PV", pv + "<small>/" + mm.pv + "</small>") +
       H.num("Defesa", mm.defesa) + H.num("VEL", mm.velocidade) + H.num("RD", mm.rd) +
-      H.num("Tenacidade", mm.rt, "reduz") + "</div>" +
+      H.num("Reduz", mm.rt, "de Tenacidade") + "</div>" +
       "<div class='linha'>" + H.campo("PV " + esc(nm.de) + " agora", H.numero(m.id, "jogo.memo_pv", { min: 0, max: mm.pv, rotulo: "PV " + nm.de }), "", "estreito") +
       "<div class='campo'><span class='rotulo'>Ataque Básico " + esc(nm.de) + "</span><span>" +
       EG.botoesAtaque(M.rolagem(mm.ataque), nome + ": Ataque Básico") + " " +
@@ -227,7 +227,7 @@
         esc([m.p.npc.papel, m.p.npc.faccao, m.p.raca, m.p.caminho, "nível " + m.p.nivel, m.p.elemento]
           .filter(Boolean).join(" · ")) + "</p></div>" +
         "<div class='botoes compactos'>" +
-        "<a class='botao pequeno' href='#mestre/npcs/" + esc(m.id) + "'>abrir a ficha</a>" +
+        "<a class='botao pequeno' href='#mestre/npcs/" + esc(m.id) + "'>Abrir a ficha</a>" +
         H.botao("descanso-npc", "Descanso Longo", { classe: "pequeno", dados: { mid: m.id, t: "longo" },
           titulo: "PV cheios, condições removidas e Memoespírito dispensado (23.6)" }) +
         H.botao("tirar-npc-da-cena", "Tirar da cena", { classe: "pequeno perigo", dados: { mid: m.id } }) +
@@ -235,9 +235,9 @@
       : "<div><h3>" + esc(G.nome(m)) + "</h3><p class='suave'>" +
         esc([m.p.jogador && "jogador: " + m.p.jogador, m.p.raca, m.p.caminho, "nível " + m.p.nivel, m.p.elemento].filter(Boolean).join(" · ")) + "</p></div>" +
         "<div class='botoes compactos'>" +
-        "<a class='botao pequeno' href='#jogar'>abrir a ficha</a>" +
-        H.botao("subir", "subir", { classe: "pequeno", dados: { mid: m.id, v: -1 }, titulo: "Subir na ordem da mesa" }) +
-        H.botao("subir", "descer", { classe: "pequeno", dados: { mid: m.id, v: 1 }, titulo: "Descer na ordem da mesa" }) +
+        H.botao("abrir-ficha", "Abrir a ficha", { classe: "pequeno", dados: { mid: m.id }, titulo: "Abre esta ficha na aba Jogar" }) +
+        H.botao("subir", "Subir", { classe: "pequeno", dados: { mid: m.id, v: -1 }, titulo: "Subir na ordem da mesa" }) +
+        H.botao("subir", "Descer", { classe: "pequeno", dados: { mid: m.id, v: 1 }, titulo: "Descer na ordem da mesa" }) +
         H.botao("tirar-do-grupo", "Tirar do grupo", { classe: "pequeno perigo", dados: { mid: m.id } }) +
         "</div>";
     let corpo = "<div class='membro-topo'>" + cabeca + "</div>" +
@@ -423,7 +423,8 @@
     }
     const conds = (i.condicoes || []).filter((c) => c.nome !== "Quebrado");
     return "<li class='fila-casa" + (i.agora ? " agora" : "") + (cc.agiu ? " agiu" : "") +
-      (i.pv === 0 ? " caiu" : "") + (i.derrotado ? " pulado" : "") + (quebrado ? " quebrado" : "") + "'>" +
+      (i.pv === 0 ? " caiu" : "") + (i.pv === 0 && i.kind !== "pj" && i.kind !== "npc" ? " fora" : "") +
+      (i.derrotado ? " pulado" : "") + (quebrado ? " quebrado" : "") + "'>" +
       "<div class='casa-num'>" + i.casa + (i.agora ? "<span class='sr-only'> (agindo agora)</span>" : "") + "</div>" +
       "<div class='casa-quem'><div><b>" + esc(i.nome) + "</b> " + etiqueta +
       (i.agora ? " <span class='etiqueta pronta'>agindo agora</span>" : "") +
@@ -445,7 +446,7 @@
       // Inimigo derrotado não age: a vez dele passa sozinha. Curado, ele volta a ter os botões.
       (i.derrotado
         ? "<span class='etiqueta' title='A 0 PV ele não age: a Fila pula a vez dele. Curado, ele volta.'>pula a vez</span>"
-        : H.botao("agiu", cc.agiu ? "Desfazer o turno" : "Já agiu", { classe: "pequeno" + (cc.agiu ? "" : " primario"), dados: { k: i.chave } }) +
+        : H.botao("agiu", cc.agiu ? "Desfazer o turno" : "Já agiu", { classe: "pequeno" + (i.agora ? " primario" : ""), dados: { k: i.chave } }) +
           H.botao("atrasar", "Atrasar +1", { classe: "pequeno", dados: { k: i.chave, v: 1 }, titulo: "Soma 1 casa bruta no Ciclo (19.4)" }) +
           H.botao("atrasar", "−1", { classe: "pequeno", dados: { k: i.chave, v: -1 }, desabilitado: !cc.atraso }) +
           H.botao("avancar", "Avançar +1", { classe: "pequeno", dados: { k: i.chave, v: 1 }, desabilitado: cc.agiu, titulo: "Só funciona em quem ainda não agiu (19.5)" }) +
@@ -692,7 +693,7 @@
         (derrotados ? "<p class='ajuda'>" + derrotados + (derrotados === 1 ? " inimigo derrotado pula" : " inimigos derrotados pulam") +
           " a vez sozinho" + (derrotados === 1 ? "" : "s") + ": a Fila não espera <b>Já agiu</b> por quem está a 0 PV. Curado, ele volta.</p>" : "") +
         (f.fora.length ? "<p class='ajuda'>Fora desta Fila: " + f.fora.map((i) => esc(i.nome) + " " +
-          H.botao("voltar-pra-fila", "voltar", { classe: "pequeno", dados: { k: i.chave } })).join(" · ") + "</p>" : "") +
+          H.botao("voltar-pra-fila", "Voltar", { classe: "pequeno", dados: { k: i.chave } })).join(" · ") + "</p>" : "") +
         "<p class='ajuda'>Ordem por VEL, com os desempates de 19.3. Atrasar soma casas brutas do Ciclo: " +
         "Elite e Boss dividem por 2 pela <b>Firmeza</b> (mínimo 1, teto 2) e Comum tem teto 3. " +
         "O que não couber vira pendente para a remontagem. " + link("19", "19.4", "19.4") + "</p>",
@@ -1222,7 +1223,7 @@
       "<div><span class='rotulo'>Dano do grupo por Ciclo</span><b>" + conta.dpc_ajustado + "</b>" +
       "<span class='sub'>" + (conta.ajustado ? "de " + conta.dpc + " com " + conta.referencia + " personagens"
         : "o orçamento é esse dano em 4 Ciclos") + "</span></div>" +
-      "<div><span class='rotulo'>Ações agressivas contra o grupo por Ciclo</span><b>" + conta.acoes + "</b>" +
+      "<div><span class='rotulo'>Ações agressivas contra o grupo por Ciclo</span><b>" + String(Math.round(conta.acoes * 10) / 10).replace(".", ",") + "</b>" +
       "<span class='sub'>" + conta.n + (conta.n === 1 ? " na cena" : " na cena") +
       (conta.npc_adversarios ? ", " + conta.npc_adversarios + " de ficha de NPC" : "") + "</span></div>" +
       "</div>" +
@@ -1309,6 +1310,15 @@
   };
 
   A["imprimir"] = () => { window.print(); return false; };
+
+  // O "Abrir a ficha" de um jogador abre a ficha dele na aba Jogar (antes ia para a aba Jogar
+  // com a ficha que estivesse selecionada, que podia ser de outra pessoa).
+  A["abrir-ficha"] = (b) => {
+    if (!EG.Armazem.todas()[b.dataset.mid]) return false;
+    EG.Armazem.definirAtual(b.dataset.mid);
+    location.hash = "#jogar";
+    return false;
+  };
 
   A["usar-nivel-do-grupo"] = () => {
     const n = G.nivelGrupo();
@@ -1604,7 +1614,9 @@
       const e = m ? G.energiaPorFonte(m, "quebra") : null;
       msg += "<br><b>Quebra!</b> " + (q
         ? "Dano de " + esc(elemento) + ": " + botaoRolar(q.texto, "Dano de Quebra de " + elemento) +
-          " (média " + q.media + ", sofre RD) + <b>" + esc(q.efeito) + "</b>. "
+          (q.fixo ? " (fixo, sofre RD)" : " (média " + q.media + ", sofre RD)") + " + <b>" + esc(q.efeito) + "</b>" +
+          (q.condicao !== q.efeito ? " (condição <b>" + esc(q.condicao) + "</b>)" : "") +
+          " por " + q.turnos + (q.turnos === 1 ? " turno" : " turnos") + ". "
         : "") + "Atraso de 1 casa e <b>Quebrado</b> até o fim do próximo turno dele" +
         (e ? (e.bloqueado ? ". " + esc(G.nome(m)) + " já ganhou a Energia de Quebra neste Ciclo (1 vez por Ciclo)."
           : ". <b>+" + e.aplicado + " de Energia</b> para " + esc(G.nome(m)) + ".")
