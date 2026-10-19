@@ -1141,7 +1141,7 @@
         "aqui: as fichas continuam salvas neste aparelho e na mesa, e você volta para ela pelo convite ou pela tela " +
         "<a href='#mesa'>Mesa online</a>.</p>" +
         (minhas.length ? "<p class='ajuda'>Mesas que você mestra: " + minhas.map(([id]) =>
-          botao("conectar", "abrir " + esc(id.slice(-6)), { classe: "pequeno", dados: { mesa: id } })).join(" ") + "</p>" : "") +
+          botao("conectar", "Abrir a mesa " + esc(id.slice(-6)), { classe: "pequeno", dados: { mesa: id } })).join(" ") + "</p>" : "") +
         "<div class='botoes'>" + botao("soltar", "Sair da mesa de jogador para mestrar", { classe: "pequeno",
           titulo: "As fichas ficam aqui e na mesa; depois é só criar a sua mesa neste cartão" }) + "</div>";
     } else if (!corpo && !(L.mesa && L.papel === "mestre" && fase === "conectada")) {
@@ -1152,7 +1152,7 @@
         "' placeholder='O Lacre do Poço Sete' aria-label='Nome da mesa'></div>" +
         botao("criar", "Criar mesa online", { classe: "primario" }) + "</div>" +
         (outras.length ? "<p class='ajuda'>Ou volte para uma mesa sua: " + outras.map(([id]) =>
-          botao("conectar", "abrir " + esc(id.slice(-6)), { classe: "pequeno", dados: { mesa: id } })).join(" ") + "</p>" : "") +
+          botao("conectar", "Abrir a mesa " + esc(id.slice(-6)), { classe: "pequeno", dados: { mesa: id } })).join(" ") + "</p>" : "") +
         "<div class='botoes'>" + botao("sair", "Sair da conta", { classe: "pequeno" }) + "</div>";
     } else if (!corpo) {
       lerConvite();
@@ -1161,7 +1161,7 @@
         const fichas = Object.keys((mb && mb.fichas) || {}).map((id) => {
           const p = EG.Armazem.todas()[id];
           return "<span class='etiqueta'>" + esc((p && p.nome) || "ficha chegando…") + "</span> " +
-            botao("tirar", "tirar da mesa", { classe: "pequeno perigo", dados: { ficha: id },
+            botao("tirar", "Tirar da mesa", { classe: "pequeno perigo", dados: { ficha: id },
               titulo: "A ficha sai da mesa e do grupo. A cópia do jogador fica no aparelho dele." });
         }).join(" ");
         return "<li>" + pontoOnline(!!presentes[uid]) + " <b>" + esc((mb && mb.nome) || "Jogador") + "</b> " +
@@ -1259,6 +1259,7 @@
         : x.t === "inimigo" ? "derrotado" + (x.pula ? " · pula a vez" : "") : "caiu", "ruim") : "";
       const atr = num(x.atr), ava = num(x.ava);
       return "<li class='fila-casa" + (x.agora ? " agora" : "") + (x.agiu ? " agiu" : "") + (x.caiu ? " caiu" : "") +
+        (x.caiu && x.t !== "pj" && x.t !== "npc" ? " fora" : "") + (x.pula ? " pulado" : "") +
         (x.qb ? " quebrado" : "") + (x.k === minha ? " minha" : "") + "'>" +
         "<div class='casa-num'>" + num(x.c) + (x.agora ? "<span class='sr-only'> (agindo agora)</span>" : "") + "</div>" +
         "<div class='casa-quem'><div><b>" + esc(x.n) + "</b>" + tipo +
@@ -1309,7 +1310,7 @@
       const ids = Object.keys(mesasDoUsuario);
       corpo = "<p>Conta: <b>" + esc(nomeDoUsuario()) + "</b>.</p>" +
         (ids.length ? "<p>Suas mesas: " + ids.map((id) => botao("conectar", (mesasDoUsuario[id] === "mestre" ? "Mestre · " : "") +
-          "abrir " + esc(id.slice(-6)), { classe: "pequeno", dados: { mesa: id } })).join(" ") + "</p>"
+          "Abrir a mesa " + esc(id.slice(-6)), { classe: "pequeno", dados: { mesa: id } })).join(" ") + "</p>"
           : "<p class='ajuda'>Você ainda não está em nenhuma mesa. Peça o link de convite ao Mestre e abra neste aparelho.</p>") +
         "<div class='botoes'>" + botao("sair", "Sair da conta") + "</div>";
     } else if (L.papel === "mestre") {

@@ -264,7 +264,8 @@
     const v = obter(F.P, caminho);
     return "<input type='number' inputmode='numeric' id='" + idDe(caminho) + "' data-p='" + esc(caminho) + "' data-t='num'" +
       (o.min != null ? " min='" + o.min + "'" : "") + (o.max != null ? " max='" + o.max + "'" : "") +
-      (o.passo ? " step='" + o.passo + "'" : "") + " value='" + (v == null ? "" : esc(v)) + "'" +
+      (o.passo ? " step='" + o.passo + "'" : "") + (o.ph != null ? " placeholder='" + esc(o.ph) + "'" : "") +
+      " value='" + (v == null ? "" : esc(v)) + "'" +
       " aria-label='" + esc(o.rotulo || caminho) + "'" + (o.classe ? " class='" + o.classe + "'" : "") + ">";
   };
 
@@ -611,8 +612,12 @@
     };
   };
 
-  /** A etiqueta de quem usa o Atributo: "Arma" (dourada) ou "Habilidade" (azul). */
-  F.etiquetaDeUso = (qual, texto, titulo) => "<span class='uso uso-" + (qual === "arma" ? "arma" : "hab") + "'" +
+  /**
+   * A etiqueta de quem usa o Atributo: "Arma" (laranja) ou "Habilidade" (violeta). A classe é
+   * `selo-uso`, e não `uso`: `uso` já é a caixa "usado" das Bênçãos e dos traços de Raça, e a
+   * cor escura do selo deixava aquele texto quase invisível.
+   */
+  F.etiquetaDeUso = (qual, texto, titulo) => "<span class='selo-uso selo-" + (qual === "arma" ? "arma" : "hab") + "'" +
     (titulo ? " title='" + esc(titulo) + "'" : "") + ">" + esc(texto) + "</span>";
 
   F.atributosHTML = function (p, R, o) {
@@ -628,7 +633,7 @@
         " title='" + esc(titulo) + "'><span class='rotulo'>" + esc(o.compacta ? a.slice(0, 3) : a) + "</span>" +
         (escolhido ? "<b>" + R.atributos[a] + "</b><span class='bonus'>" + EG.sinal(R.bonus[a]) + "</span>"
           : "<b class='suave'>—</b>") +
-        (usos.length && !o.compacta ? "<span class='usos'>" + usos.map((q) =>
+        (usos.length && !o.compacta ? "<span class='selos-uso'>" + usos.map((q) =>
           F.etiquetaDeUso(q, q === "arma" ? "Arma" : "Habilidade", praQue[q])).join("") + "</span>" : "") + "</li>";
     }).join("");
     // Na versão compacta (Área do Mestre) não cabe etiqueta dentro da caixa: a cor marca a
@@ -640,6 +645,78 @@
           " " + EG.sinal(R.bonus[u.habilidade]) : ""].filter(Boolean).join(" · ") + "</p>" : "";
     return "<ul class='atributos-faixa" + (o.compacta ? " compacta" : "") + "' aria-label='Atributos de " +
       esc(p.nome || "personagem") + "'>" + lista + "</ul>" + legenda;
+  };
+
+  // ---------------------------------------------------------------------------
+  // Os usos marcáveis: as caixas "usado" das Bênçãos e do traço ativável da Raça
+  //
+  // Mora aqui, e não na aba Jogar, porque os descansos e o "Novo combate" da Área do Mestre
+  // também recarregam essas caixas — e têm de recarregar exatamente as mesmas que os botões
+  // da ficha recarregam.
+  // ---------------------------------------------------------------------------
+
+  /** Quando um uso volta: "curto", "longo", "combate", "sessao" ou null (muda rápido demais para marcar). */
+  F.recargaDe = function (texto) {
+    const t = String(texto || "").toLowerCase();
+    if (/por alvo|turno|ciclo/.test(t)) return null;
+    if (/descanso curto/.test(t)) return "curto";
+    if (/descanso longo|dia/.test(t)) return "longo";
+    if (/combate|cena/.test(t)) return "combate";
+    if (/sessão/.test(t)) return "sessao";
+    return null;
+  };
+  F.vezesDe = (texto) => (/duas|2 vezes/i.test(String(texto || "")) ? 2 : 1);
+
+  /**
+   * A frequência do traço ativável da Raça, lida na descrição dele: "1 por cena", "2 vezes por
+   * dia", "1 por Descanso Curto". Procura o trecho "N (vezes) por X" em vez de pegar a primeira
+   * vírgula — a do Intellitron é "Fraqueza com Vantagem e duas por sucesso; 1 informação por
+   * cena", e o "duas por sucesso" não é quantas vezes ele usa o traço.
+   */
+  F.frequenciaDoTraco = function (desc) {
+    const m = String(desc || "").match(/\b(1|2|uma|duas)\s+(?:vez(?:es)?\s+)?(?:[a-zà-ú]+\s+)?por\s+(cena|combate|descanso curto|descanso longo|dia|sessão)/i);
+    if (!m) return null;
+    const vezes = /^(2|duas)$/i.test(m[1]) ? 2 : 1;
+    return { rotulo: (vezes === 2 ? "2 vezes" : "1") + " por " + m[2], vezes: vezes, recarga: F.recargaDe("por " + m[2]) || "combate" };
+  };
+
+  /** Os traços da Raça da ficha: [{nome, tipo ("ativável" | "passivo"), desc}]. */
+  F.tracosDe = function (p) {
+    const r = C().racas.find((x) => x.raca === (p && p.raca));
+    if (!r) return [];
+    return r.tracos.split(" · ").map((t) => {
+      const m = t.match(/^(.+?) \((ativável|passivo): (.+)\)$/);
+      return m ? { nome: m[1], tipo: m[2], desc: m[3] } : { nome: t, tipo: "", desc: "" };
+    });
+  };
+
+  /** Usos marcáveis da ficha: [{chave, dono, rotulo, recarga}]. A chave é a mesma desde sempre. */
+  F.usosMarcaveisDe = function (p, R) {
+    const usos = [];
+    const chave = (...partes) => partes.join(":").replace(/\./g, "");
+    const possuidas = (p.bencaos || []).slice(0, Math.floor((R.nivel + 1) / 2)).filter(Boolean);
+    for (const nome of possuidas) {
+      const b = C().bencaos.find((x) => x.bencao === nome);
+      if (!b) continue;
+      b.frequencia.split(" · ").forEach((fr) => {
+        const r = F.recargaDe(fr);
+        if (!r) return;
+        for (let i = 0; i < F.vezesDe(fr); i++) usos.push({ chave: chave("b", nome, fr, i), dono: nome, rotulo: fr, recarga: r });
+      });
+    }
+    const traco = F.tracosDe(p).find((t) => t.tipo === "ativável");
+    if (traco && p.raca !== "Humano") {                      // o do Humano é o Esforço, que tem caixa própria
+      const fr = F.frequenciaDoTraco(traco.desc) ||
+        { rotulo: traco.desc.split(",")[0], vezes: 1, recarga: F.recargaDe(traco.desc) || "combate" };
+      for (let i = 0; i < fr.vezes; i++) usos.push({ chave: chave("r", traco.nome, i), dono: traco.nome, rotulo: fr.rotulo, recarga: fr.recarga });
+    }
+    return usos;
+  };
+
+  /** Desmarca os usos que voltam com `tipos` (["curto"], ["curto", "longo", "combate"]...). */
+  F.recarregarUsos = function (p, R, tipos) {
+    const usos = (p.jogo.usos = p.jogo.usos || {});
+    for (const u of F.usosMarcaveisDe(p, R)) if (tipos.includes(u.recarga)) delete usos[u.chave];
   };
 
   // ---------------------------------------------------------------------------

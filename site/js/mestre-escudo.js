@@ -55,7 +55,8 @@
     const semCone = g.filter((m) => !F.temCone(m.p));
     const item = (m) => "<article class='cone-item'><div class='cone-item-topo'><h3>" + esc(G.nome(m)) +
       (m.npc ? " <span class='etiqueta npc'>NPC</span>" : "") + "</h3>" +
-      "<a class='botao pequeno' href='" + (m.npc ? "#mestre/npcs/" + esc(m.id) : "#mestre/grupo") + "'>ficha</a></div>" +
+      (m.npc ? "<a class='botao pequeno' href='#mestre/npcs/" + esc(m.id) + "'>Abrir a ficha</a>"
+        : H.botao("abrir-ficha", "Abrir a ficha", { classe: "pequeno", dados: { mid: m.id }, titulo: "Abre esta ficha na aba Jogar" })) + "</div>" +
       F.coneHTML(m.p, m.R, { descricaoFechada: true }) +
       "<div class='botoes compactos'>" +
       H.botao("guardar-cone-no-banco", "Guardar no banco", { classe: "pequeno", dados: { mid: m.id },
@@ -241,8 +242,8 @@
         C().elementos.map((e) => {
           const q = G.quebraDe(e.elemento, M.eficiencia(G.nivel()));
           return ["<b>" + esc(e.elemento) + "</b>", esc(e.dano_quebra),
-            botaoRolar(q.texto, "Dano de Quebra de " + e.elemento) + " <small>média " + q.media + "</small>",
-            link("21", e.efeito_quebra, e.efeito_quebra)];
+            botaoRolar(q.texto, "Dano de Quebra de " + e.elemento) + (q.fixo ? " <small>fixo</small>" : " <small>média " + q.media + "</small>"),
+            link("21", q.condicao, e.efeito_quebra) + " <small>" + q.turnos + (q.turnos === 1 ? " turno" : " turnos") + "</small>"];
         })) +
       "<p class='ajuda'>A Tenacidade a 0 é Quebra: dano do Elemento, a condição dele, <b>1 casa de Atraso</b>, " +
       "<b>Quebrado</b> até o fim do próximo turno dele (−2 de Defesa e +1 dado de dano de qualquer fonte) e " +

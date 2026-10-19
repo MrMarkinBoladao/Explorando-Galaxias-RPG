@@ -235,13 +235,17 @@
   /** 23.6: o Descanso do grupo não alcança NPC, então cada um descansa sozinho. */
   G.descansoDoNpc = function (m, tipo) {
     const j = m.p.jogo, antes = G.pvAtual(m);
+    // Os usos voltam como na ficha: o Longo recarrega o que é por Descanso Curto, por Descanso
+    // Longo e por combate; o que é "por sessão" fica marcado (23.6).
     if (tipo === "longo") {
       j.pv = m.R.pv_max; j.temp = 0; j.condicoes = []; j.morrendo = { s: 0, f: 0 };
-      j.esforco = m.R.esforco_max; j.usos = {}; j.energia = 0;
+      j.esforco = m.R.esforco_max; j.energia = 0;
+      EG.Ficha.recarregarUsos(m.p, m.R, ["curto", "longo", "combate"]);
       if (m.R.memo) { j.memo_pv = m.R.memo.pv; j.memo_ativo = false; }
     } else {
       j.pv = Math.min(m.R.pv_max, antes + Math.max(0, m.R.descanso_curto));
       if (antes === 0 && j.pv > 0) j.morrendo = { s: 0, f: 0 };
+      EG.Ficha.recarregarUsos(m.p, m.R, ["curto"]);
       if (m.R.memo) j.memo_pv = m.R.memo.pv;
     }
     G.gravarFicha(m);
@@ -339,13 +343,15 @@
     const g = G.grupo();
     for (const m of g) {
       const j = m.p.jogo, antes = G.pvAtual(m);
+      // As caixas "usado" voltam exatamente como nos botões de descanso da ficha do jogador.
       if (tipo === "longo") {
         j.pv = m.R.pv_max; j.temp = 0; j.condicoes = []; j.morrendo = { s: 0, f: 0 };
         j.esforco = m.R.esforco_max;
-        j.usos = {};
+        EG.Ficha.recarregarUsos(m.p, m.R, ["curto", "longo", "combate"]);
       } else {
         j.pv = Math.min(m.R.pv_max, antes + Math.max(0, m.R.descanso_curto));
         if (antes === 0 && j.pv > 0) j.morrendo = { s: 0, f: 0 };
+        EG.Ficha.recarregarUsos(m.p, m.R, ["curto"]);
       }
       if (m.R.memo) { j.memo_pv = m.R.memo.pv; if (tipo === "longo") j.memo_ativo = false; }
       G.gravarFicha(m);
@@ -827,15 +833,39 @@
     return "Neutro";
   };
 
-  /** 20.5: dano e efeito de Quebra do Elemento, com a Eficiência de quem quebrou. */
+  /**
+   * A condição do capítulo 21 que um efeito de Quebra aplica. Quase sempre é o mesmo nome; a
+   * exceção é o Gelo, cujo efeito o livro chama de Congelamento (20.5) e cuja condição é
+   * Congelado (21.2).
+   */
+  G.condicaoDoEfeito = function (efeito) {
+    const cs = C().condicoes, n = EG.norm(efeito);
+    return cs.find((c) => EG.norm(c.condicao) === n) ||
+      cs.find((c) => n.length >= 6 && EG.norm(c.condicao).slice(0, 6) === n.slice(0, 6)) || null;
+  };
+
+  /** "2 turnos" → 2, "1 turno" → 1; o que não é contado em turnos (fonte, fim do combate) → null. */
+  G.turnosDe = function (duracao) {
+    const m = String(duracao || "").match(/^(\d+)\s+turnos?$/i);
+    return m ? Number(m[1]) : null;
+  };
+
+  /**
+   * 20.5: dano e efeito de Quebra do Elemento, com a Eficiência de quem quebrou. `condicao` e
+   * `turnos` vêm da tabela de 21.5 — Choque dura 3 turnos, Embaraço, Aprisionamento e Congelado
+   * duram 1, os outros 2 —, e `fixo` diz que o dano não tem dado (Gelo, Quântico e Imaginário).
+   */
   G.quebraDe = function (elemento, eficiencia) {
     const el = C().elementos.find((x) => x.elemento === elemento);
     if (!el) return null;
     const fixo = (el.quebra_mult_ef || 1) * (eficiencia || 2);
+    const cond = G.condicaoDoEfeito(el.efeito_quebra);
+    const turnos = cond ? G.turnosDe(cond.duracao) : null;
     return {
       elemento: elemento, texto: M.textoDano(el.quebra_n, el.quebra_f, fixo),
-      media: M.media(el.quebra_n, el.quebra_f) + fixo,
-      efeito: el.efeito_quebra, formula: el.dano_quebra,
+      media: M.media(el.quebra_n, el.quebra_f) + fixo, fixo: !el.quebra_n,
+      efeito: el.efeito_quebra, condicao: cond ? cond.condicao : el.efeito_quebra,
+      turnos: turnos == null ? 2 : turnos, formula: el.dano_quebra,
     };
   };
 
@@ -854,7 +884,7 @@
     const q = G.quebraDe(elemento, eficiencia);
     x.quebrado = true;
     x.reducao = x.tenacidade;
-    if (q && q.efeito) G.porCondicao(x.condicoes, q.efeito, 2, "Quebra de " + elemento);
+    if (q && q.condicao) G.porCondicao(x.condicoes, q.condicao, q.turnos, "Quebra de " + elemento);
     G.porCondicao(x.condicoes, "Quebrado", 1, "Quebra");
     return q;
   };
@@ -1021,6 +1051,7 @@
     for (const m of g) {
       m.p.jogo.ph = m.R.ph_inicio; m.p.jogo.acumulos = {};
       EG.Ficha.zerarEnergiaDoCombate(m.p.jogo);          // os limites de Energia de 17.2 recomeçam
+      EG.Ficha.recarregarUsos(m.p, m.R, ["combate"]);    // o que é "por combate" e "por cena" volta
       G.gravarFicha(m);
     }
     G.salvar();

@@ -333,7 +333,7 @@
     const p = F.P, R = F.R;
     if (!p.caminho) return secao("bencaos", "7 · Bênçãos", info("Escolha um Caminho primeiro."));
     const doCaminho = C().bencaos.filter((b) => b.caminho === p.caminho);
-    let corpo = info("Uma Bênção a cada nível ímpar (1, 3, 5... 19): você tem <b>" + R.bencaos_possuidas + " de 10</b>. " +
+    let corpo = info("Uma Bênção a cada nível ímpar (1, 3, 5 … 19): você tem <b>" + R.bencaos_possuidas + " de 10</b>. " +
       "Tier I abre no nível 1, Tier II no 9, Tier III no 17. A escolha é permanente.");
     for (let k = 0; k < R.bencaos_possuidas; k++) {
       const nivelSlot = 2 * k + 1;
