@@ -2,7 +2,7 @@
 
 Uma página só, sem instalação, com quatro abas:
 
-- **Jogar** — a ficha na mesa: os **seis Atributos** no topo (valor final e Bônus), PV com dano e cura (já desconta RD e PV temporários), o **painel de Energia** (abaixo), PH do grupo, ataques e Testes prontos para rolar (clique no valor — **com Vantagem, já rola os dois d20**, e todo Teste de Ataque tem o botão **Vantagem** do lado, abaixo), a **rolagem livre**, Bênçãos com usos, condições, Morrendo, Memoespírito (**alvo único ou em área**, abaixo), inventário e o **Cone de Luz com a arte e a história dele** (abaixo).
+- **Jogar** — a ficha na mesa: os **seis Atributos** no topo (valor final e Bônus, com o da **arma** em laranja e o de **Habilidade** em violeta, abaixo), PV com dano e cura (já desconta RD e PV temporários), o **painel de Energia** (abaixo), PH do grupo, ataques e Testes prontos para rolar (clique no valor — **com Vantagem, já rola os dois d20**, e todo Teste de Ataque tem o botão **Vantagem** do lado, abaixo), a **rolagem livre**, Bênçãos com usos, condições, Morrendo, Memoespírito (**alvo único ou em área**, abaixo), inventário e o **Cone de Luz com a arte e a história dele** (abaixo).
 - **Editar ficha** — os doze passos do capítulo 03, mais progressão, equipamento e Memoespírito. Tudo é recalculado na hora, e o que fere uma regra aparece em vermelho na seção.
 - **Regras** — o livro inteiro (v1.2) com pesquisa instantânea, sem acento e sem maiúscula.
 - **Área do Mestre** — a mesa do Mestre, sincronizada com as fichas (abaixo). Fica para todo mundo, inclusive para quem é jogador numa mesa online: é a mesa *daquele navegador*.
@@ -89,6 +89,23 @@ A conta é a de 24.4: `10 + 2 × bônus de Poder` de capacidade, mais 2 se o per
 - Os campos de **quantidade** e de **Espaço de cada** gravam quando você sai do campo ou aperta
   Enter; o nome do item grava a cada tecla.
 
+## Os Atributos da arma e da Habilidade
+
+A faixa de Atributos da aba Jogar destaca sozinha qual Atributo cada coisa usa: **laranja** com a
+etiqueta **ARMA** para o do Ataque Básico, **violeta** com **HABILIDADE** para o das Habilidades, da
+Ultimate e da DT. O que serve aos dois leva as duas cores. No cartão de Ações, cada ataque traz o
+mesmo selo com o Bônus (`Agilidade +4`), e na Área do Mestre a faixa compacta tem uma linha que diz
+qual é qual.
+
+O destaque é o Atributo que o motor **soma de verdade**, e não um campo da ficha:
+
+- **A arma segue a categoria** (18.5): Leve, Disparo curto e Disparo longo usam **Agilidade**,
+  Pesada usa **Poder**, Energia usa **Sincronia**, e só a **Média** usa o Atributo escolhido em
+  Editar ficha (Poder ou Agilidade).
+- **A Habilidade usa o Atributo de Habilidade do Caminho.** Num Caminho de dois Atributos sem
+  escolha, nada é destacado e as Ações avisam *sem Atributo de Habilidade* — aí o motor não soma
+  Atributo nenhum, e a escolha se faz em Editar ficha > 3 · Caminho.
+
 ## O painel de Energia
 
 Na aba **Jogar**, o cartão **Energia** junta tudo o que muda a Energia (a tabela fechada de 17.2),
@@ -120,6 +137,12 @@ Memoespírito** (ou direto no cartão dele, na aba Jogar, enquanto não houver u
 | **Explosão de Memória** | **até 3 alvos** | **metade dos dados** (mínimo 1) |
 | **Marca do Passado** | alvo único | normal; ao acertar, Marcado ou Vulnerável |
 | **Ataque Evolutivo** | alvo único | +1 por uso no combate, até +5 (o cartão conta) |
+
+**O Memoespírito é chamado pelo nome** que está na ficha dele: *Ataque Básico de Gwen Fallon*,
+*Gwen Fallon atacou (+10 Energia para você)*, *Técnica Principal de Gwen Fallon* (ou *Sick ·
+Técnica Principal de Gwen Fallon*, quando a Técnica tem nome próprio), *PV de Gwen Fallon agora*,
+*Invocar Gwen Fallon* — na aba Jogar, no painel e no registro de Energia, nas rolagens e na Área do
+Mestre. Sem nome, a ficha diz *do Memoespírito*.
 
 Com a Evolução **Forma Completa** a Técnica tem um **segundo acréscimo**; com Golpe Ancestral e
 Explosão de Memória juntos, o cartão mostra **Alvo único (+1 dado)** e **Em área (até 3 alvos)**, e o

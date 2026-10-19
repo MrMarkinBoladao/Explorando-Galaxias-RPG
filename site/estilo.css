@@ -192,19 +192,36 @@ select option { background: var(--painel); }
   .grade-jogo .inventario { order: 12; } .grade-jogo .notas { order: 13; }
 }
 
-/* Os seis Atributos à vista, embaixo do nome: valor final e o Bônus que entra nas rolagens */
+/* Os seis Atributos à vista, embaixo do nome: valor final e o Bônus que entra nas rolagens.
+   O Atributo da arma vem em laranja e o de Habilidade em violeta — as mesmas cores das
+   etiquetas "Agilidade +4" no cartão de Ações —, e o que serve aos dois leva as duas. */
+:root { --cor-arma: #f2a65a; --cor-hab: #b9a2ff; }
 .atributos-faixa { list-style: none; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: .4rem; margin: -.4rem 0 1rem; padding: 0; }
 .atributos-faixa li { display: flex; flex-direction: column; align-items: center; padding: .35rem .3rem; background: var(--painel);
   border: 1px solid var(--borda); border-radius: 8px; text-align: center; min-width: 0; }
-.atributos-faixa li.usado { border-color: var(--ouro-escuro); }
+.atributos-faixa li.arma { border-color: var(--cor-arma);
+  background: linear-gradient(var(--cor-arma), var(--cor-arma)) top / 100% 4px no-repeat, linear-gradient(rgba(242, 166, 90, .16), var(--painel) 75%); }
+.atributos-faixa li.habilidade { border-color: var(--cor-hab);
+  background: linear-gradient(var(--cor-hab), var(--cor-hab)) top / 100% 4px no-repeat, linear-gradient(rgba(185, 162, 255, .16), var(--painel) 75%); }
+.atributos-faixa li.arma.habilidade { border-color: var(--cor-arma) var(--cor-hab) var(--cor-hab) var(--cor-arma);
+  background: linear-gradient(90deg, var(--cor-arma) 50%, var(--cor-hab) 50%) top / 100% 4px no-repeat,
+    linear-gradient(100deg, rgba(242, 166, 90, .16), rgba(185, 162, 255, .16) 70%, var(--painel)); }
 .atributos-faixa .rotulo { font-size: .68rem; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .atributos-faixa b { font-size: 1.35rem; font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }
 .atributos-faixa .bonus { font-size: .85rem; font-weight: 700; color: var(--ouro); font-variant-numeric: tabular-nums; }
-.atributos-faixa small { font-size: .66rem; color: var(--suave); }
-.atributos-faixa.compacta { margin: .1rem 0 .6rem; gap: .25rem; }
-.atributos-faixa.compacta li { flex-direction: row; justify-content: center; gap: .25rem; padding: .2rem .3rem; background: var(--painel-2); }
+.atributos-faixa .usos { display: flex; flex-wrap: wrap; justify-content: center; gap: .2rem; margin-top: .25rem; }
+.atributos-faixa.compacta { margin: .1rem 0 .3rem; gap: .25rem; }
+.atributos-faixa.compacta li { flex-direction: row; justify-content: center; gap: .25rem; padding: .2rem .3rem; background-color: var(--painel-2); }
+.atributos-faixa.compacta li:not(.arma):not(.habilidade) { background: var(--painel-2); }
 .atributos-faixa.compacta b { font-size: .95rem; }
 .atributos-faixa.compacta .bonus { font-size: .78rem; }
+.atributos-legenda { margin: 0 0 .6rem; font-size: .82rem; color: var(--suave); }
+/* A etiqueta de quem usa o Atributo: na faixa ("ARMA", "HABILIDADE") e nas Ações ("Agilidade +4") */
+.uso { display: inline-block; font-size: .72rem; font-weight: 800; line-height: 1.35; padding: .02rem .45rem; border-radius: 999px;
+  color: #1a1406; white-space: nowrap; vertical-align: middle; }
+.uso-arma { background: var(--cor-arma); }
+.uso-hab { background: var(--cor-hab); }
+.atributos-faixa .uso { font-size: .62rem; letter-spacing: .03em; text-transform: uppercase; padding: .02rem .4rem; }
 @media (max-width: 600px) {
   .atributos-faixa { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .atributos-faixa.compacta { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -696,6 +713,8 @@ body[data-tela=regras] .historico { display: none; }
   .topo, .barra-personagem, .historico, #toasts, .rodape, .botoes, .botao, .controles-pv, .status-ficha, .atalhos,
   .sub-abas, .barra-mestre, .casa-botoes, .rodape-mestre, .rolagem-livre-cartao, .fontes-energia { display: none !important; }
   .atributos-faixa li { background: #fff; border-color: #999; color: #000; }
+  .atributos-faixa li.arma, .atributos-faixa li.habilidade { border-width: 2px; border-color: #000; }
+  .uso { border: 1px solid #000; }
   .atributos-faixa .bonus, .energia-numero b { color: #000; }
   .cartao, .acao, .numero { box-shadow: none; background: #fff; border-color: #999; color: #000; break-inside: avoid; }
   .grade-jogo, .grade-mestre { grid-template-columns: 1fr 1fr; }

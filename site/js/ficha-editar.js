@@ -535,15 +535,17 @@
     const p = F.P, R = F.R, m = p.memoespirito, memo = R.memo;
     if (p.caminho !== "A Recordação") return "";
     const MM = C().memo;
-    let corpo = info("O seu companheiro: as estatísticas dele são lidas de você. " + link("11", "11.3", "como criar (11.3)"));
-    corpo += linha(H.campo("Nome", H.texto("memoespirito.nome", { rotulo: "Nome do Memoespírito" })),
+    const nm = F.nomeDoMemo(p);
+    let corpo = info("O seu companheiro: as estatísticas " + esc(nm.de) + " são lidas de você. " + link("11", "11.3", "como criar (11.3)"));
+    // O nome redesenha ao sair do campo: é ele que aparece nos rótulos ("Ataque Básico de …").
+    corpo += linha(H.campo("Nome", H.texto("memoespirito.nome", { rotulo: "Nome do Memoespírito", redesenha: true })),
       H.campo("Conceito", H.lista("memoespirito.conceito", MM.conceitos.map((x) => x.nome), { rotulo: "Conceito" })),
       H.campo("Elemento", H.lista("memoespirito.elemento", C().elementos.map((x) => x.elemento), { rotulo: "Elemento do Memoespírito" }), "", "estreito"));
     const funcao = MM.funcoes.find((x) => x.nome === m.funcao);
     corpo += H.campo("Função", H.lista("memoespirito.funcao", MM.funcoes.map((x) => x.nome), { rotulo: "Função" }), funcao ? esc(funcao.texto) : "");
     corpo += "<p class='rotulo'>Pontos: <b>" + memo.pontos_gastos + " de " + memo.pontos_total + "</b> (máximo 5 por Atributo)</p><div class='linha pontos-memo'>" +
       M.ATRIBUTOS.map((a) => H.campo(a, H.numero("memoespirito.pontos." + a, { min: 0, max: 5, rotulo: "Pontos em " + a, classe: "curto" }), "", "estreito")).join("") + "</div>";
-    corpo += linha(H.campo("Atributo de ataque dele", H.lista("memoespirito.atributo_ataque", M.ATRIBUTOS, { vazio: false, rotulo: "Atributo de ataque" }), "", "estreito"));
+    corpo += linha(H.campo("Atributo de ataque " + esc(nm.de), H.lista("memoespirito.atributo_ataque", M.ATRIBUTOS, { vazio: false, rotulo: "Atributo de ataque " + nm.de }), "", "estreito"));
     const menores = m.bonus_menores;
     corpo += "<p class='rotulo'>Bônus menores (" + menores.length + " de 3)</p><div class='grade-marcas'>" +
       MM.bonus_menores.map((x) => "<span title='" + esc(x.texto) + "'>" + H.naLista("memoespirito.bonus_menores", x.nome, esc(x.nome), { desabilitado: menores.length >= 3 }) + "</span>").join("") + "</div>";
@@ -557,7 +559,7 @@
     // em área, e o dano que a aba Jogar mostra muda junto.
     const forma = m.evolucoes.includes("Forma Completa");
     const opcoes = F.ACRESCIMOS_MEMO.map((a) => [a.nome, a.nome + " — " + a.resumo]);
-    corpo += "<h3>Técnica Principal</h3>" + linha(
+    corpo += "<h3>Técnica Principal " + esc(nm.de) + "</h3>" + linha(
       H.campo("Nome", H.texto("memoespirito.tecnica_nome", { rotulo: "Nome da Técnica Principal", ph: "Nevasca Ancestral" }), "", "estreito"),
       H.campo("Acréscimo", H.lista("memoespirito.acrescimo", opcoes, { rotulo: "Acréscimo da Técnica Principal" }),
         "Golpe Ancestral é <b>alvo único</b> (+1 dado); Explosão de Memória é <b>em área</b> (até 3 alvos, metade dos dados)"),

@@ -592,20 +592,54 @@
   // Vigor?"), então a ficha os mostra prontos — o valor final (Raça e Aumentos já somados)
   // e o Bônus que entra nas rolagens. A mesma função serve à aba Jogar e à Área do Mestre.
   // ---------------------------------------------------------------------------
+
+  /**
+   * Qual Atributo a arma e as Habilidades usam de verdade — o que o motor soma nas rolagens,
+   * e não o que está escrito num campo da ficha. A arma segue a categoria (18.5): Leve e os
+   * dois Disparos usam Agilidade, Pesada usa Poder, Energia usa Sincronia, e só a Média usa o
+   * Atributo escolhido na ficha (o campo `arma.atributo`, que fica "Poder" nas outras e por
+   * isso não serve para saber). As Habilidades, a Ultimate e a DT usam o Atributo de
+   * Habilidade, e só quando ele é um dos do Caminho — senão o motor não soma nada.
+   * Devolve {arma, habilidade}: o nome do Atributo, ou "" quando não há.
+   */
+  F.usosDosAtributos = function (p, R) {
+    const cam = M.CAMINHOS[p.caminho];
+    const ah = R.atributo_habilidade;
+    return {
+      arma: R.ataque_basico ? R.ataque_basico.atributo || "" : "",
+      habilidade: cam && ah && cam[0].includes(ah) ? ah : "",
+    };
+  };
+
+  /** A etiqueta de quem usa o Atributo: "Arma" (dourada) ou "Habilidade" (azul). */
+  F.etiquetaDeUso = (qual, texto, titulo) => "<span class='uso uso-" + (qual === "arma" ? "arma" : "hab") + "'" +
+    (titulo ? " title='" + esc(titulo) + "'" : "") + ">" + esc(texto) + "</span>";
+
   F.atributosHTML = function (p, R, o) {
     o = o || {};
-    const ah = R.atributo_habilidade;
-    const daArma = p.arma && p.arma.categoria ? p.arma.atributo : "";
+    const u = F.usosDosAtributos(p, R);
+    const arma = p.arma.nome || ("arma " + String(p.arma.categoria || "").toLowerCase());
+    const praQue = { arma: "Ataque Básico (" + arma + ")", habilidade: "Habilidades, Ultimate e DT" };
+    const lista = M.ATRIBUTOS.map((a) => {
+      const escolhido = Number.isInteger(p.atributos[a]);
+      const usos = ["arma", "habilidade"].filter((q) => u[q] === a);
+      const titulo = a + (usos.length ? " — " + usos.map((q) => praQue[q]).join(" e ") : "");
+      return "<li data-atributo='" + esc(a) + "'" + (usos.length ? " class='" + usos.join(" ") + "'" : "") +
+        " title='" + esc(titulo) + "'><span class='rotulo'>" + esc(o.compacta ? a.slice(0, 3) : a) + "</span>" +
+        (escolhido ? "<b>" + R.atributos[a] + "</b><span class='bonus'>" + EG.sinal(R.bonus[a]) + "</span>"
+          : "<b class='suave'>—</b>") +
+        (usos.length && !o.compacta ? "<span class='usos'>" + usos.map((q) =>
+          F.etiquetaDeUso(q, q === "arma" ? "Arma" : "Habilidade", praQue[q])).join("") + "</span>" : "") + "</li>";
+    }).join("");
+    // Na versão compacta (Área do Mestre) não cabe etiqueta dentro da caixa: a cor marca a
+    // caixa, e uma linha embaixo diz qual é qual.
+    const legenda = o.compacta && (u.arma || u.habilidade)
+      ? "<p class='atributos-legenda'>" + [u.arma ? F.etiquetaDeUso("arma", "Arma", praQue.arma) + " " + esc(u.arma) +
+          " " + EG.sinal(R.bonus[u.arma]) : "",
+        u.habilidade ? F.etiquetaDeUso("habilidade", "Habilidade", praQue.habilidade) + " " + esc(u.habilidade) +
+          " " + EG.sinal(R.bonus[u.habilidade]) : ""].filter(Boolean).join(" · ") + "</p>" : "";
     return "<ul class='atributos-faixa" + (o.compacta ? " compacta" : "") + "' aria-label='Atributos de " +
-      esc(p.nome || "personagem") + "'>" + M.ATRIBUTOS.map((a) => {
-        const escolhido = Number.isInteger(p.atributos[a]);
-        const usos = [a === ah ? "Habilidade" : "", a === daArma ? "Arma" : ""].filter(Boolean);
-        return "<li" + (usos.length ? " class='usado'" : "") + " title='" + esc(a + (usos.length ? " — atributo de " +
-          usos.join(" e de ") : "")) + "'><span class='rotulo'>" + esc(o.compacta ? a.slice(0, 3) : a) + "</span>" +
-          (escolhido ? "<b>" + R.atributos[a] + "</b><span class='bonus'>" + EG.sinal(R.bonus[a]) + "</span>"
-            : "<b class='suave'>—</b>") +
-          (usos.length && !o.compacta ? "<small>" + esc(usos.join(" · ")) + "</small>" : "") + "</li>";
-      }).join("") + "</ul>";
+      esc(p.nome || "personagem") + "'>" + lista + "</ul>" + legenda;
   };
 
   // ---------------------------------------------------------------------------
@@ -668,7 +702,8 @@
 
   /**
    * Muda a Energia por uma fonte da tabela. Devolve {aplicado, energia, bloqueado, msg}.
-   * o: {chaves (de F.chavesDeCombate), valor (para "ajuste"), quem ("Mestre", quando é ele)}.
+   * o: {chaves (de F.chavesDeCombate), valor (para "ajuste"), quem ("Mestre", quando é ele),
+   *     rotulo (o nome no aviso e no registro, no lugar do da tabela: "Gwen Fallon: Ataque Básico")}.
    * Energia acima de 100 se perde e abaixo de 0 não existe (17.1); o registro guarda o que
    * de fato entrou, então "desfazer" devolve exatamente o que saiu.
    */
@@ -677,11 +712,12 @@
     const def = F.ENERGIA[fonte];
     if (!def) return null;
     const j = p.jogo, chaves = o.chaves || F.chavesDeCombate(p);
+    const rotulo = String(o.rotulo || def.rotulo).slice(0, 120);
     const v = fonte === "ultimate" ? -R.ultimate.custo : fonte === "corda" ? F.valorCorda(p, R)
       : fonte === "ajuste" ? Math.round(Number(o.valor) || 0) : def.v;
     if (def.limite && F.marcasDeEnergia(j, chaves)[fonte]) {
       return { aplicado: 0, energia: j.energia || 0, bloqueado: true,
-        msg: "<b>" + esc(def.rotulo) + "</b> já deu Energia " + (def.limite === "ciclo" ? "neste Ciclo" : "neste combate") +
+        msg: "<b>" + esc(rotulo) + "</b> já deu Energia " + (def.limite === "ciclo" ? "neste Ciclo" : "neste combate") +
           " (" + (def.limite === "ciclo" ? "1 vez por Ciclo" : "1 vez por combate") + ", 17.2)." };
     }
     const antes = j.energia || 0, depois = Math.max(0, Math.min(100, antes + v));
@@ -694,11 +730,13 @@
       j.energia_marcas = m;
     }
     const log = Array.isArray(j.energia_log) ? j.energia_log.slice() : [];
-    log.push({ f: fonte, v: depois - antes, c: chaves.n || 0, k: chaves.ciclo, q: o.quem || "" });
+    const linha = { f: fonte, v: depois - antes, c: chaves.n || 0, k: chaves.ciclo, q: o.quem || "" };
+    if (o.rotulo) linha.r = rotulo;            // "Gwen Fallon: Ataque Básico", no lugar do da tabela
+    log.push(linha);
     j.energia_log = log.slice(-12);
     const perdeu = v > 0 && depois - antes < v ? " (" + (v - (depois - antes)) + " acima de 100 se perdeu)" : "";
     return { aplicado: depois - antes, energia: depois, bloqueado: false,
-      msg: "<b>" + esc(def.rotulo) + "</b>: " + (v >= 0 ? "+" : "−") + Math.abs(depois - antes) + " de Energia" + perdeu +
+      msg: "<b>" + esc(rotulo) + "</b>: " + (v >= 0 ? "+" : "−") + Math.abs(depois - antes) + " de Energia" + perdeu +
         " · " + depois + "/100" };
   };
 
@@ -737,6 +775,17 @@
     { nome: "Marca do Passado", alvo: "", resumo: "alvo único, ao acertar aplica Marcado ou Vulnerável" },
     { nome: "Ataque Evolutivo", alvo: "", resumo: "alvo único, +1 de dano por uso no combate (até +5)" },
   ];
+
+  /**
+   * O Memoespírito pelo nome, para os textos da tela: {nome: "Gwen Fallon", de: "de Gwen
+   * Fallon", ele: "Gwen Fallon"} — ou "Memoespírito", "do Memoespírito" e "o Memoespírito"
+   * enquanto ele não tem nome. O nome no lugar do "ele/dele" deixa claro de quem é cada
+   * ataque e resolve o gênero de quebra: a Gwen não é "ele". Texto cru: quem usa passa por esc().
+   */
+  F.nomeDoMemo = function (p) {
+    const n = String(((p && p.memoespirito) || {}).nome || "").trim();
+    return { nome: n || "Memoespírito", de: n ? "de " + n : "do Memoespírito", ele: n || "o Memoespírito", tem: !!n };
+  };
 
   /** Os acréscimos que valem na ficha: o segundo só com Forma Completa, sem repetir. */
   F.acrescimosDoMemo = function (memo) {

@@ -37,7 +37,8 @@
         "<span title='Velocidade'>VEL " + m.R.velocidade + "</span>" +
         "<span title='Defesa'>DEF " + m.R.defesa_com_temporarios + "</span>" +
         (conds ? "<span class='ruim'>" + conds + (conds > 1 ? " condições" : " condição") + "</span>" : "") +
-        (m.R.memo ? "<span>" + (j.memo_ativo ? "<span class='etiqueta pronta'>Memo em campo</span>" : "Memo fora") + "</span>" : "") +
+        (m.R.memo ? "<span>" + (j.memo_ativo ? "<span class='etiqueta pronta'>" + esc(F.nomeDoMemo(m.p).nome) + " em campo</span>"
+          : esc(F.nomeDoMemo(m.p).nome) + " fora") + "</span>" : "") +
         (pv === 0 ? "<span class='etiqueta ruim'>Morrendo " + j.morrendo.s + " sucesso(s) e " + j.morrendo.f + " falha(s)</span>" : "") +
         "</div></li>";
     }).join("") + "</ul>";
@@ -167,13 +168,14 @@
   function cartaoMemoDoPJ(m) {
     if (!m.R.memo || m.p.caminho !== "A Recordação") return "";
     const memo = m.p.memoespirito, mm = m.R.memo, j = m.p.jogo;
-    const atq = F.ataquesDoMemo(m.p, m.R);
+    const atq = F.ataquesDoMemo(m.p, m.R), nm = F.nomeDoMemo(m.p), nome = nm.nome;
     const pv = j.memo_pv == null ? mm.pv : Math.min(j.memo_pv, mm.pv);
     // O PH é recurso dos jogadores (16.2): o Memoespírito de um NPC não tira PH da mesa.
-    const invocar = m.npc ? "Invocar (Ação Complementar)" : "Invocar (Ação Complementar + 1 PH)";
+    const invocar = (nm.tem ? "Invocar " + esc(nome) : "Invocar o Memoespírito") +
+      (m.npc ? " (Ação Complementar)" : " (Ação Complementar + 1 PH)");
     return "<div class='subcartao memo-mestre'>" +
-      "<div class='subcartao-topo'><b>" + esc(memo.nome || "Memoespírito") + "</b>" +
-      "<span class='suave'>de " + esc(G.nome(m)) + " · " + esc([memo.funcao, memo.elemento].filter(Boolean).join(" · ")) + "</span></div>" +
+      "<div class='subcartao-topo'><b>" + esc(nome) + "</b>" +
+      "<span class='suave'>" + esc(["Memoespírito de " + G.nome(m), memo.funcao, memo.elemento].filter(Boolean).join(" · ")) + "</span></div>" +
       "<div class='linha'>" +
       (j.memo_ativo
         ? "<span class='etiqueta pronta'>em campo</span> " +
@@ -183,17 +185,17 @@
       "<div class='numeros compactos'>" + H.num("PV", pv + "<small>/" + mm.pv + "</small>") +
       H.num("Defesa", mm.defesa) + H.num("VEL", mm.velocidade) + H.num("RD", mm.rd) +
       H.num("Tenacidade", mm.rt, "reduz") + "</div>" +
-      "<div class='linha'>" + H.campo("PV dele agora", H.numero(m.id, "jogo.memo_pv", { min: 0, max: mm.pv, rotulo: "PV do Memoespírito" }), "", "estreito") +
-      "<div class='campo estreito'><span class='rotulo'>Ataque e dano</span><span>" +
-      EG.botoesAtaque(M.rolagem(mm.ataque), (memo.nome || "Memoespírito") + ": ataque") + " " +
-      botaoRolar(atq.basico.texto, (memo.nome || "Memoespírito") + ": dano") + " <small>média " + atq.basico.media + ", alvo único</small></span></div></div>" +
-      (atq.tecnica.acrescimos.length ? "<p class='ajuda'><b>" + esc(atq.tecnica.nome || "Técnica Principal") + "</b>: " +
-        atq.tecnica.modos.map((x) => botaoRolar(x.texto, (atq.tecnica.nome || "Técnica Principal") + ": dano" + (x.alvos > 1 ? " (em área)" : "")) +
+      "<div class='linha'>" + H.campo("PV " + esc(nm.de) + " agora", H.numero(m.id, "jogo.memo_pv", { min: 0, max: mm.pv, rotulo: "PV " + nm.de }), "", "estreito") +
+      "<div class='campo'><span class='rotulo'>Ataque Básico " + esc(nm.de) + "</span><span>" +
+      EG.botoesAtaque(M.rolagem(mm.ataque), nome + ": Ataque Básico") + " " +
+      botaoRolar(atq.basico.texto, nome + ": dano do Ataque Básico") + " <small>média " + atq.basico.media + ", alvo único</small></span></div></div>" +
+      (atq.tecnica.acrescimos.length ? "<p class='ajuda'><b>" + esc(atq.tecnica.nome || "Técnica Principal " + nm.de) + "</b>: " +
+        atq.tecnica.modos.map((x) => botaoRolar(x.texto, nome + " · " + (atq.tecnica.nome || "Técnica Principal") + ": dano" + (x.alvos > 1 ? " (em área)" : "")) +
           " " + (x.alvos > 1 ? "até 3 alvos" : "alvo único")).join(" · ") + "</p>" : "") +
-      (atq.devastadora ? "<p class='ajuda'><b>5 Fragmentos:</b> " + botaoRolar(atq.devastadora.texto, (memo.nome || "Memoespírito") +
+      (atq.devastadora ? "<p class='ajuda'><b>5 Fragmentos:</b> " + botaoRolar(atq.devastadora.texto, nome +
         ": dano em área (5 Fragmentos)") + " até 3 alvos</p>" : "") +
-      "<p class='ajuda'>Casa própria na Fila pela VEL dele, 1 ação por turno. A 0 PV ele cai e só volta no " +
-      "próximo Descanso Curto. " + link("11", "11.5", "11.5") + "</p></div>";
+      "<p class='ajuda'>Casa própria na Fila pela VEL " + esc(nm.de) + ", 1 ação por turno. A 0 PV, " + esc(nm.ele) +
+      " cai e só volta no próximo Descanso Curto. " + link("11", "11.5", "11.5") + "</p></div>";
   }
 
   /**
@@ -604,8 +606,8 @@
     const m = i.m;
     if (i.kind === "memo" || i.kind === "npcmemo") {
       return H.cartao(esc(i.nome), cartaoMemoDoPJ(m) +
-        "<p class='ajuda'>Memoespírito não tem Tenacidade, não fica Quebrado nem Congelado, e o dano nele se " +
-        "aplica no campo <b>PV dele agora</b>. " + link("20", "20.1", "20.1") + "</p>", "alvo-painel");
+        "<p class='ajuda'>Memoespírito não tem Tenacidade e não fica Quebrado nem Congelado. O dano se aplica no campo " +
+        "<b>PV " + esc(F.nomeDoMemo(m.p).de) + " agora</b>. " + link("20", "20.1", "20.1") + "</p>", "alvo-painel");
     }
     return "<div class='alvo-painel-pj'>" + cartaoMembro(m) + "</div>";
   }
@@ -1442,8 +1444,8 @@
     m2.p.jogo.memo_ativo = true;
     m2.p.jogo.memo_pv = m2.R.memo.pv;
     G.gravarFicha(m2);
-    EG.toast("Memoespírito de " + esc(G.nome(m2)) + " em campo: Ação Complementar" +
-      (r ? " e −1 PH" : "") + ". Ele ganha casa própria na Fila.");
+    EG.toast("<b>" + esc(F.nomeDoMemo(m2.p).nome) + "</b>, Memoespírito de " + esc(G.nome(m2)) + ", em campo: Ação Complementar" +
+      (r ? " e −1 PH" : "") + ". Ganha casa própria na Fila.");
   };
 
   A["descanso-npc"] = (b) => {

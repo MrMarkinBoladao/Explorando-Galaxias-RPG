@@ -362,8 +362,8 @@
               "<span title='Velocidade'>VEL " + m.R.velocidade + "</span>" +
               "<span title='Defesa'>DEF " + m.R.defesa_com_temporarios + "</span>" +
               "<span title='Energia'>Energia " + (j.energia || 0) + "/100</span>" +
-              (m.R.memo ? "<span>" + (j.memo_ativo ? "<span class='etiqueta pronta'>Memo em campo</span>"
-                : "Memo fora") + "</span>" : "") +
+              (m.R.memo ? "<span>" + (j.memo_ativo ? "<span class='etiqueta pronta'>" + esc(F.nomeDoMemo(m.p).nome) + " em campo</span>"
+                : esc(F.nomeDoMemo(m.p).nome) + " fora") + "</span>" : "") +
               (pv === 0 ? "<span class='etiqueta ruim'>Morrendo</span>" : "") +
               "</div>" +
               "<div class='botoes compactos'>" +
